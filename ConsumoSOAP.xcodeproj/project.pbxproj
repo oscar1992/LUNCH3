@@ -9,10 +9,43 @@
 /* Begin PBXBuildFile section */
 		A102F66B1CA9CCF7001359A5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A102F66A1CA9CCF7001359A5 /* AppDelegate.swift */; };
 		A102F66D1CA9CCF7001359A5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A102F66C1CA9CCF7001359A5 /* ViewController.swift */; };
-		A102F6701CA9CCF7001359A5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A102F66E1CA9CCF7001359A5 /* Main.storyboard */; };
 		A102F6721CA9CCF7001359A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A102F6711CA9CCF7001359A5 /* Assets.xcassets */; };
 		A102F6751CA9CCF7001359A5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A102F6731CA9CCF7001359A5 /* LaunchScreen.storyboard */; };
 		A102F6801CA9CCF8001359A5 /* ConsumoSOAPTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A102F67F1CA9CCF8001359A5 /* ConsumoSOAPTests.swift */; };
+		A107A4D41CE2355A00DC0079 /* CalendarioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A107A4D31CE2355A00DC0079 /* CalendarioViewController.swift */; };
+		A107A4D61CE236AB00DC0079 /* EspacioSemanas.swift in Sources */ = {isa = PBXBuildFile; fileRef = A107A4D51CE236AB00DC0079 /* EspacioSemanas.swift */; };
+		A107A4D81CE236C800DC0079 /* Semana.swift in Sources */ = {isa = PBXBuildFile; fileRef = A107A4D71CE236C800DC0079 /* Semana.swift */; };
+		A13603C61CAEE6580032A19A /* ConsultaProductos.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13603C51CAEE6580032A19A /* ConsultaProductos.swift */; };
+		A13603C81CAEFB3D0032A19A /* Producto.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13603C71CAEFB3D0032A19A /* Producto.swift */; };
+		A13603CF1CAF20770032A19A /* ProductoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13603CE1CAF20770032A19A /* ProductoView.swift */; };
+		A13603D11CB2C50D0032A19A /* Casilla.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13603D01CB2C50D0032A19A /* Casilla.swift */; };
+		A13603D31CB2D4B10032A19A /* Lonchera.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13603D21CB2D4B10032A19A /* Lonchera.swift */; };
+		A13603D51CB2FDD10032A19A /* DeslizadorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13603D41CB2FDD10032A19A /* DeslizadorViewController.swift */; };
+		A139AB8B1CBE8C3900A32EFC /* CargaSecuencia.swift in Sources */ = {isa = PBXBuildFile; fileRef = A139AB8A1CBE8C3900A32EFC /* CargaSecuencia.swift */; };
+		A15BBD041CB425850043CD9B /* DatosC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15BBD031CB425840043CD9B /* DatosC.swift */; };
+		A15BBD0A1CB4452B0043CD9B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A15BBD081CB4452B0043CD9B /* Main.storyboard */; };
+		A17788421CBFEBD200BEF5A5 /* VistaLonchera.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17788411CBFEBD200BEF5A5 /* VistaLonchera.swift */; };
+		A17788441CBFF0C400BEF5A5 /* Contenedor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17788431CBFF0C400BEF5A5 /* Contenedor.swift */; };
+		A17788461CBFF2EF00BEF5A5 /* LoncheraO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17788451CBFF2EF00BEF5A5 /* LoncheraO.swift */; };
+		A17788481CC002CE00BEF5A5 /* SubVista.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17788471CC002CE00BEF5A5 /* SubVista.swift */; };
+		A17982D81CDCEC9F00558C55 /* TipoInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17982D71CDCEC9F00558C55 /* TipoInfo.swift */; };
+		A17982DA1CDCF13100558C55 /* CargaTInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17982D91CDCF13100558C55 /* CargaTInfo.swift */; };
+		A18878B21CBBECB400737085 /* PantallaP.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18878B11CBBECB400737085 /* PantallaP.swift */; };
+		A18878B41CBC03C600737085 /* VistaNino.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18878B31CBC03C600737085 /* VistaNino.swift */; };
+		A18878B61CBC055700737085 /* BotonNino.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18878B51CBC055700737085 /* BotonNino.swift */; };
+		A18878B81CBC266600737085 /* CreaNino.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18878B71CBC266600737085 /* CreaNino.swift */; };
+		A19747821CDA7F9600656813 /* Contador.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19747811CDA7F9600656813 /* Contador.swift */; };
+		A19834F51CBD46030099D815 /* Predeterminadas.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19834F41CBD46020099D815 /* Predeterminadas.swift */; };
+		A19834F71CBD52EB0099D815 /* Caja.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19834F61CBD52EB0099D815 /* Caja.swift */; };
+		A19834F91CBD54460099D815 /* CargaCajas.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19834F81CBD54460099D815 /* CargaCajas.swift */; };
+		A19834FB1CBD7E810099D815 /* CajaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19834FA1CBD7E810099D815 /* CajaView.swift */; };
+		A1A0820D1CBD841A001C0AD2 /* Secuencia.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A0820C1CBD841A001C0AD2 /* Secuencia.swift */; };
+		A1A0820F1CBD845E001C0AD2 /* TItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A0820E1CBD845E001C0AD2 /* TItems.swift */; };
+		A1A082111CBD8F42001C0AD2 /* CargaTItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A082101CBD8F42001C0AD2 /* CargaTItems.swift */; };
+		A1A605C31CC81BD000FE9AC7 /* PestanasProductos.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A605C21CC81BD000FE9AC7 /* PestanasProductos.swift */; };
+		A1A605C51CC8204900FE9AC7 /* VistaPestana.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A605C41CC8204900FE9AC7 /* VistaPestana.swift */; };
+		A1A605C71CC8264200FE9AC7 /* ContenedorProductos.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A605C61CC8264200FE9AC7 /* ContenedorProductos.swift */; };
+		A1D0ADEB1CC5752200B93692 /* PantallaSV.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D0ADEA1CC5752100B93692 /* PantallaSV.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,13 +62,46 @@
 		A102F6671CA9CCF7001359A5 /* ConsumoSOAP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ConsumoSOAP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A102F66A1CA9CCF7001359A5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A102F66C1CA9CCF7001359A5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		A102F66F1CA9CCF7001359A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A102F6711CA9CCF7001359A5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A102F6741CA9CCF7001359A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A102F6761CA9CCF7001359A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A102F67B1CA9CCF8001359A5 /* ConsumoSOAPTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ConsumoSOAPTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A102F67F1CA9CCF8001359A5 /* ConsumoSOAPTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumoSOAPTests.swift; sourceTree = "<group>"; };
 		A102F6811CA9CCF8001359A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A107A4D31CE2355A00DC0079 /* CalendarioViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarioViewController.swift; sourceTree = "<group>"; };
+		A107A4D51CE236AB00DC0079 /* EspacioSemanas.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EspacioSemanas.swift; sourceTree = "<group>"; };
+		A107A4D71CE236C800DC0079 /* Semana.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Semana.swift; sourceTree = "<group>"; };
+		A13603C51CAEE6580032A19A /* ConsultaProductos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsultaProductos.swift; sourceTree = "<group>"; };
+		A13603C71CAEFB3D0032A19A /* Producto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Producto.swift; sourceTree = "<group>"; };
+		A13603CE1CAF20770032A19A /* ProductoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductoView.swift; sourceTree = "<group>"; };
+		A13603D01CB2C50D0032A19A /* Casilla.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Casilla.swift; sourceTree = "<group>"; };
+		A13603D21CB2D4B10032A19A /* Lonchera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lonchera.swift; sourceTree = "<group>"; };
+		A13603D41CB2FDD10032A19A /* DeslizadorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeslizadorViewController.swift; sourceTree = "<group>"; };
+		A139AB8A1CBE8C3900A32EFC /* CargaSecuencia.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CargaSecuencia.swift; sourceTree = "<group>"; };
+		A15BBD031CB425840043CD9B /* DatosC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatosC.swift; sourceTree = "<group>"; };
+		A15BBD091CB4452B0043CD9B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A17788411CBFEBD200BEF5A5 /* VistaLonchera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VistaLonchera.swift; sourceTree = "<group>"; };
+		A17788431CBFF0C400BEF5A5 /* Contenedor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contenedor.swift; sourceTree = "<group>"; };
+		A17788451CBFF2EF00BEF5A5 /* LoncheraO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoncheraO.swift; sourceTree = "<group>"; };
+		A17788471CC002CE00BEF5A5 /* SubVista.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubVista.swift; sourceTree = "<group>"; };
+		A17982D71CDCEC9F00558C55 /* TipoInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TipoInfo.swift; sourceTree = "<group>"; };
+		A17982D91CDCF13100558C55 /* CargaTInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CargaTInfo.swift; sourceTree = "<group>"; };
+		A18878B11CBBECB400737085 /* PantallaP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PantallaP.swift; sourceTree = "<group>"; };
+		A18878B31CBC03C600737085 /* VistaNino.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VistaNino.swift; sourceTree = "<group>"; };
+		A18878B51CBC055700737085 /* BotonNino.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BotonNino.swift; sourceTree = "<group>"; };
+		A18878B71CBC266600737085 /* CreaNino.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreaNino.swift; sourceTree = "<group>"; };
+		A19747811CDA7F9600656813 /* Contador.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contador.swift; sourceTree = "<group>"; };
+		A19834F41CBD46020099D815 /* Predeterminadas.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Predeterminadas.swift; sourceTree = "<group>"; };
+		A19834F61CBD52EB0099D815 /* Caja.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Caja.swift; sourceTree = "<group>"; };
+		A19834F81CBD54460099D815 /* CargaCajas.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CargaCajas.swift; sourceTree = "<group>"; };
+		A19834FA1CBD7E810099D815 /* CajaView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CajaView.swift; sourceTree = "<group>"; };
+		A1A0820C1CBD841A001C0AD2 /* Secuencia.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secuencia.swift; sourceTree = "<group>"; };
+		A1A0820E1CBD845E001C0AD2 /* TItems.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TItems.swift; sourceTree = "<group>"; };
+		A1A082101CBD8F42001C0AD2 /* CargaTItems.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CargaTItems.swift; sourceTree = "<group>"; };
+		A1A605C21CC81BD000FE9AC7 /* PestanasProductos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PestanasProductos.swift; sourceTree = "<group>"; };
+		A1A605C41CC8204900FE9AC7 /* VistaPestana.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VistaPestana.swift; sourceTree = "<group>"; };
+		A1A605C61CC8264200FE9AC7 /* ContenedorProductos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContenedorProductos.swift; sourceTree = "<group>"; };
+		A1D0ADEA1CC5752100B93692 /* PantallaSV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PantallaSV.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,12 +143,45 @@
 		A102F6691CA9CCF7001359A5 /* ConsumoSOAP */ = {
 			isa = PBXGroup;
 			children = (
-				A102F66A1CA9CCF7001359A5 /* AppDelegate.swift */,
+				A15BBD081CB4452B0043CD9B /* Main.storyboard */,
 				A102F66C1CA9CCF7001359A5 /* ViewController.swift */,
-				A102F66E1CA9CCF7001359A5 /* Main.storyboard */,
+				A102F66A1CA9CCF7001359A5 /* AppDelegate.swift */,
 				A102F6711CA9CCF7001359A5 /* Assets.xcassets */,
 				A102F6731CA9CCF7001359A5 /* LaunchScreen.storyboard */,
 				A102F6761CA9CCF7001359A5 /* Info.plist */,
+				A13603C51CAEE6580032A19A /* ConsultaProductos.swift */,
+				A17982D91CDCF13100558C55 /* CargaTInfo.swift */,
+				A13603C71CAEFB3D0032A19A /* Producto.swift */,
+				A13603CE1CAF20770032A19A /* ProductoView.swift */,
+				A13603D01CB2C50D0032A19A /* Casilla.swift */,
+				A13603D21CB2D4B10032A19A /* Lonchera.swift */,
+				A13603D41CB2FDD10032A19A /* DeslizadorViewController.swift */,
+				A18878B11CBBECB400737085 /* PantallaP.swift */,
+				A15BBD031CB425840043CD9B /* DatosC.swift */,
+				A1D0ADEA1CC5752100B93692 /* PantallaSV.swift */,
+				A18878B31CBC03C600737085 /* VistaNino.swift */,
+				A18878B51CBC055700737085 /* BotonNino.swift */,
+				A18878B71CBC266600737085 /* CreaNino.swift */,
+				A19834F41CBD46020099D815 /* Predeterminadas.swift */,
+				A19834F61CBD52EB0099D815 /* Caja.swift */,
+				A19834F81CBD54460099D815 /* CargaCajas.swift */,
+				A19834FA1CBD7E810099D815 /* CajaView.swift */,
+				A1A0820C1CBD841A001C0AD2 /* Secuencia.swift */,
+				A1A0820E1CBD845E001C0AD2 /* TItems.swift */,
+				A1A082101CBD8F42001C0AD2 /* CargaTItems.swift */,
+				A139AB8A1CBE8C3900A32EFC /* CargaSecuencia.swift */,
+				A17788411CBFEBD200BEF5A5 /* VistaLonchera.swift */,
+				A19747811CDA7F9600656813 /* Contador.swift */,
+				A17788431CBFF0C400BEF5A5 /* Contenedor.swift */,
+				A17788451CBFF2EF00BEF5A5 /* LoncheraO.swift */,
+				A17788471CC002CE00BEF5A5 /* SubVista.swift */,
+				A1A605C61CC8264200FE9AC7 /* ContenedorProductos.swift */,
+				A1A605C21CC81BD000FE9AC7 /* PestanasProductos.swift */,
+				A1A605C41CC8204900FE9AC7 /* VistaPestana.swift */,
+				A17982D71CDCEC9F00558C55 /* TipoInfo.swift */,
+				A107A4D31CE2355A00DC0079 /* CalendarioViewController.swift */,
+				A107A4D51CE236AB00DC0079 /* EspacioSemanas.swift */,
+				A107A4D71CE236C800DC0079 /* Semana.swift */,
 			);
 			path = ConsumoSOAP;
 			sourceTree = "<group>";
@@ -177,9 +276,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A15BBD0A1CB4452B0043CD9B /* Main.storyboard in Resources */,
 				A102F6751CA9CCF7001359A5 /* LaunchScreen.storyboard in Resources */,
 				A102F6721CA9CCF7001359A5 /* Assets.xcassets in Resources */,
-				A102F6701CA9CCF7001359A5 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -197,8 +296,41 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A13603D31CB2D4B10032A19A /* Lonchera.swift in Sources */,
+				A17788441CBFF0C400BEF5A5 /* Contenedor.swift in Sources */,
+				A13603D51CB2FDD10032A19A /* DeslizadorViewController.swift in Sources */,
+				A1A0820D1CBD841A001C0AD2 /* Secuencia.swift in Sources */,
+				A1A605C71CC8264200FE9AC7 /* ContenedorProductos.swift in Sources */,
+				A107A4D61CE236AB00DC0079 /* EspacioSemanas.swift in Sources */,
 				A102F66D1CA9CCF7001359A5 /* ViewController.swift in Sources */,
+				A19834FB1CBD7E810099D815 /* CajaView.swift in Sources */,
+				A15BBD041CB425850043CD9B /* DatosC.swift in Sources */,
+				A19834F91CBD54460099D815 /* CargaCajas.swift in Sources */,
+				A17982DA1CDCF13100558C55 /* CargaTInfo.swift in Sources */,
+				A18878B61CBC055700737085 /* BotonNino.swift in Sources */,
+				A1A082111CBD8F42001C0AD2 /* CargaTItems.swift in Sources */,
+				A13603CF1CAF20770032A19A /* ProductoView.swift in Sources */,
+				A13603C81CAEFB3D0032A19A /* Producto.swift in Sources */,
+				A19747821CDA7F9600656813 /* Contador.swift in Sources */,
+				A19834F71CBD52EB0099D815 /* Caja.swift in Sources */,
+				A17788461CBFF2EF00BEF5A5 /* LoncheraO.swift in Sources */,
+				A17788481CC002CE00BEF5A5 /* SubVista.swift in Sources */,
+				A1A605C31CC81BD000FE9AC7 /* PestanasProductos.swift in Sources */,
+				A1D0ADEB1CC5752200B93692 /* PantallaSV.swift in Sources */,
+				A13603C61CAEE6580032A19A /* ConsultaProductos.swift in Sources */,
+				A17788421CBFEBD200BEF5A5 /* VistaLonchera.swift in Sources */,
+				A19834F51CBD46030099D815 /* Predeterminadas.swift in Sources */,
 				A102F66B1CA9CCF7001359A5 /* AppDelegate.swift in Sources */,
+				A1A605C51CC8204900FE9AC7 /* VistaPestana.swift in Sources */,
+				A107A4D81CE236C800DC0079 /* Semana.swift in Sources */,
+				A18878B41CBC03C600737085 /* VistaNino.swift in Sources */,
+				A13603D11CB2C50D0032A19A /* Casilla.swift in Sources */,
+				A139AB8B1CBE8C3900A32EFC /* CargaSecuencia.swift in Sources */,
+				A18878B21CBBECB400737085 /* PantallaP.swift in Sources */,
+				A107A4D41CE2355A00DC0079 /* CalendarioViewController.swift in Sources */,
+				A18878B81CBC266600737085 /* CreaNino.swift in Sources */,
+				A1A0820F1CBD845E001C0AD2 /* TItems.swift in Sources */,
+				A17982D81CDCEC9F00558C55 /* TipoInfo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -221,20 +353,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		A102F66E1CA9CCF7001359A5 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A102F66F1CA9CCF7001359A5 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		A102F6731CA9CCF7001359A5 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				A102F6741CA9CCF7001359A5 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		A15BBD081CB4452B0043CD9B /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A15BBD091CB4452B0043CD9B /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -333,6 +465,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lunch.ConsumoSOAP;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -344,6 +477,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lunch.ConsumoSOAP;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -390,6 +524,7 @@
 				A102F6861CA9CCF8001359A5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A102F6871CA9CCF8001359A5 /* Build configuration list for PBXNativeTarget "ConsumoSOAPTests" */ = {
 			isa = XCConfigurationList;
@@ -398,6 +533,7 @@
 				A102F6891CA9CCF8001359A5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
