@@ -30,7 +30,7 @@ class PantallaP: UIViewController {
         DatosC.contenedor.altoP=altoP;
         botones+=[BotonAnadir];
         ordenaBoton();
-        //print("ancho: ",anchoP);
+        print("ancho: ",anchoP);
         DatosC.contenedor.PantallaP=self;
     }
     

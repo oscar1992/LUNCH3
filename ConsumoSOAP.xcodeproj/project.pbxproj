@@ -12,9 +12,6 @@
 		A102F6721CA9CCF7001359A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A102F6711CA9CCF7001359A5 /* Assets.xcassets */; };
 		A102F6751CA9CCF7001359A5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A102F6731CA9CCF7001359A5 /* LaunchScreen.storyboard */; };
 		A102F6801CA9CCF8001359A5 /* ConsumoSOAPTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A102F67F1CA9CCF8001359A5 /* ConsumoSOAPTests.swift */; };
-		A107A4D41CE2355A00DC0079 /* CalendarioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A107A4D31CE2355A00DC0079 /* CalendarioViewController.swift */; };
-		A107A4D61CE236AB00DC0079 /* EspacioSemanas.swift in Sources */ = {isa = PBXBuildFile; fileRef = A107A4D51CE236AB00DC0079 /* EspacioSemanas.swift */; };
-		A107A4D81CE236C800DC0079 /* Semana.swift in Sources */ = {isa = PBXBuildFile; fileRef = A107A4D71CE236C800DC0079 /* Semana.swift */; };
 		A13603C61CAEE6580032A19A /* ConsultaProductos.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13603C51CAEE6580032A19A /* ConsultaProductos.swift */; };
 		A13603C81CAEFB3D0032A19A /* Producto.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13603C71CAEFB3D0032A19A /* Producto.swift */; };
 		A13603CF1CAF20770032A19A /* ProductoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13603CE1CAF20770032A19A /* ProductoView.swift */; };
@@ -30,10 +27,17 @@
 		A17788481CC002CE00BEF5A5 /* SubVista.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17788471CC002CE00BEF5A5 /* SubVista.swift */; };
 		A17982D81CDCEC9F00558C55 /* TipoInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17982D71CDCEC9F00558C55 /* TipoInfo.swift */; };
 		A17982DA1CDCF13100558C55 /* CargaTInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17982D91CDCF13100558C55 /* CargaTInfo.swift */; };
+		A17B556D1CE3741100FA2353 /* Año.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17B556C1CE3741100FA2353 /* Año.swift */; };
+		A17B556F1CE3A0BB00FA2353 /* Semana.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17B556E1CE3A0BB00FA2353 /* Semana.swift */; };
+		A17B55711CE3D8E500FA2353 /* Dia.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17B55701CE3D8E500FA2353 /* Dia.swift */; };
+		A1857DEC1CE287DF00D6966D /* Calendario.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1857DEB1CE287DF00D6966D /* Calendario.swift */; };
+		A1857DEE1CE28B6200D6966D /* Mes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1857DED1CE28B6200D6966D /* Mes.swift */; };
+		A1857DF01CE28DC800D6966D /* MesScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1857DEF1CE28DC800D6966D /* MesScroll.swift */; };
 		A18878B21CBBECB400737085 /* PantallaP.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18878B11CBBECB400737085 /* PantallaP.swift */; };
 		A18878B41CBC03C600737085 /* VistaNino.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18878B31CBC03C600737085 /* VistaNino.swift */; };
 		A18878B61CBC055700737085 /* BotonNino.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18878B51CBC055700737085 /* BotonNino.swift */; };
 		A18878B81CBC266600737085 /* CreaNino.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18878B71CBC266600737085 /* CreaNino.swift */; };
+		A196B5691CE4D19A00DDD816 /* LoncheraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A196B5681CE4D19A00DDD816 /* LoncheraView.swift */; };
 		A19747821CDA7F9600656813 /* Contador.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19747811CDA7F9600656813 /* Contador.swift */; };
 		A19834F51CBD46030099D815 /* Predeterminadas.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19834F41CBD46020099D815 /* Predeterminadas.swift */; };
 		A19834F71CBD52EB0099D815 /* Caja.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19834F61CBD52EB0099D815 /* Caja.swift */; };
@@ -45,7 +49,7 @@
 		A1A605C31CC81BD000FE9AC7 /* PestanasProductos.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A605C21CC81BD000FE9AC7 /* PestanasProductos.swift */; };
 		A1A605C51CC8204900FE9AC7 /* VistaPestana.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A605C41CC8204900FE9AC7 /* VistaPestana.swift */; };
 		A1A605C71CC8264200FE9AC7 /* ContenedorProductos.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A605C61CC8264200FE9AC7 /* ContenedorProductos.swift */; };
-		A1D0ADEB1CC5752200B93692 /* PantallaSV.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D0ADEA1CC5752100B93692 /* PantallaSV.swift */; };
+		A1ABBFF91CE27ED30098D805 /* PantallaSV.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1ABBFF81CE27ED30098D805 /* PantallaSV.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,9 +72,6 @@
 		A102F67B1CA9CCF8001359A5 /* ConsumoSOAPTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ConsumoSOAPTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A102F67F1CA9CCF8001359A5 /* ConsumoSOAPTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumoSOAPTests.swift; sourceTree = "<group>"; };
 		A102F6811CA9CCF8001359A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A107A4D31CE2355A00DC0079 /* CalendarioViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarioViewController.swift; sourceTree = "<group>"; };
-		A107A4D51CE236AB00DC0079 /* EspacioSemanas.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EspacioSemanas.swift; sourceTree = "<group>"; };
-		A107A4D71CE236C800DC0079 /* Semana.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Semana.swift; sourceTree = "<group>"; };
 		A13603C51CAEE6580032A19A /* ConsultaProductos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsultaProductos.swift; sourceTree = "<group>"; };
 		A13603C71CAEFB3D0032A19A /* Producto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Producto.swift; sourceTree = "<group>"; };
 		A13603CE1CAF20770032A19A /* ProductoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductoView.swift; sourceTree = "<group>"; };
@@ -86,10 +87,17 @@
 		A17788471CC002CE00BEF5A5 /* SubVista.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubVista.swift; sourceTree = "<group>"; };
 		A17982D71CDCEC9F00558C55 /* TipoInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TipoInfo.swift; sourceTree = "<group>"; };
 		A17982D91CDCF13100558C55 /* CargaTInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CargaTInfo.swift; sourceTree = "<group>"; };
+		A17B556C1CE3741100FA2353 /* Año.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Año.swift"; sourceTree = "<group>"; };
+		A17B556E1CE3A0BB00FA2353 /* Semana.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Semana.swift; sourceTree = "<group>"; };
+		A17B55701CE3D8E500FA2353 /* Dia.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dia.swift; sourceTree = "<group>"; };
+		A1857DEB1CE287DF00D6966D /* Calendario.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Calendario.swift; sourceTree = "<group>"; };
+		A1857DED1CE28B6200D6966D /* Mes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mes.swift; sourceTree = "<group>"; };
+		A1857DEF1CE28DC800D6966D /* MesScroll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MesScroll.swift; sourceTree = "<group>"; };
 		A18878B11CBBECB400737085 /* PantallaP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PantallaP.swift; sourceTree = "<group>"; };
 		A18878B31CBC03C600737085 /* VistaNino.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VistaNino.swift; sourceTree = "<group>"; };
 		A18878B51CBC055700737085 /* BotonNino.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BotonNino.swift; sourceTree = "<group>"; };
 		A18878B71CBC266600737085 /* CreaNino.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreaNino.swift; sourceTree = "<group>"; };
+		A196B5681CE4D19A00DDD816 /* LoncheraView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoncheraView.swift; sourceTree = "<group>"; };
 		A19747811CDA7F9600656813 /* Contador.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contador.swift; sourceTree = "<group>"; };
 		A19834F41CBD46020099D815 /* Predeterminadas.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Predeterminadas.swift; sourceTree = "<group>"; };
 		A19834F61CBD52EB0099D815 /* Caja.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Caja.swift; sourceTree = "<group>"; };
@@ -101,7 +109,7 @@
 		A1A605C21CC81BD000FE9AC7 /* PestanasProductos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PestanasProductos.swift; sourceTree = "<group>"; };
 		A1A605C41CC8204900FE9AC7 /* VistaPestana.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VistaPestana.swift; sourceTree = "<group>"; };
 		A1A605C61CC8264200FE9AC7 /* ContenedorProductos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContenedorProductos.swift; sourceTree = "<group>"; };
-		A1D0ADEA1CC5752100B93692 /* PantallaSV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PantallaSV.swift; sourceTree = "<group>"; };
+		A1ABBFF81CE27ED30098D805 /* PantallaSV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PantallaSV.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,7 +166,6 @@
 				A13603D41CB2FDD10032A19A /* DeslizadorViewController.swift */,
 				A18878B11CBBECB400737085 /* PantallaP.swift */,
 				A15BBD031CB425840043CD9B /* DatosC.swift */,
-				A1D0ADEA1CC5752100B93692 /* PantallaSV.swift */,
 				A18878B31CBC03C600737085 /* VistaNino.swift */,
 				A18878B51CBC055700737085 /* BotonNino.swift */,
 				A18878B71CBC266600737085 /* CreaNino.swift */,
@@ -179,9 +186,14 @@
 				A1A605C21CC81BD000FE9AC7 /* PestanasProductos.swift */,
 				A1A605C41CC8204900FE9AC7 /* VistaPestana.swift */,
 				A17982D71CDCEC9F00558C55 /* TipoInfo.swift */,
-				A107A4D31CE2355A00DC0079 /* CalendarioViewController.swift */,
-				A107A4D51CE236AB00DC0079 /* EspacioSemanas.swift */,
-				A107A4D71CE236C800DC0079 /* Semana.swift */,
+				A1ABBFF81CE27ED30098D805 /* PantallaSV.swift */,
+				A1857DEB1CE287DF00D6966D /* Calendario.swift */,
+				A1857DED1CE28B6200D6966D /* Mes.swift */,
+				A17B556E1CE3A0BB00FA2353 /* Semana.swift */,
+				A1857DEF1CE28DC800D6966D /* MesScroll.swift */,
+				A17B556C1CE3741100FA2353 /* Año.swift */,
+				A17B55701CE3D8E500FA2353 /* Dia.swift */,
+				A196B5681CE4D19A00DDD816 /* LoncheraView.swift */,
 			);
 			path = ConsumoSOAP;
 			sourceTree = "<group>";
@@ -301,8 +313,8 @@
 				A13603D51CB2FDD10032A19A /* DeslizadorViewController.swift in Sources */,
 				A1A0820D1CBD841A001C0AD2 /* Secuencia.swift in Sources */,
 				A1A605C71CC8264200FE9AC7 /* ContenedorProductos.swift in Sources */,
-				A107A4D61CE236AB00DC0079 /* EspacioSemanas.swift in Sources */,
 				A102F66D1CA9CCF7001359A5 /* ViewController.swift in Sources */,
+				A17B556D1CE3741100FA2353 /* Año.swift in Sources */,
 				A19834FB1CBD7E810099D815 /* CajaView.swift in Sources */,
 				A15BBD041CB425850043CD9B /* DatosC.swift in Sources */,
 				A19834F91CBD54460099D815 /* CargaCajas.swift in Sources */,
@@ -311,23 +323,27 @@
 				A1A082111CBD8F42001C0AD2 /* CargaTItems.swift in Sources */,
 				A13603CF1CAF20770032A19A /* ProductoView.swift in Sources */,
 				A13603C81CAEFB3D0032A19A /* Producto.swift in Sources */,
+				A1857DEC1CE287DF00D6966D /* Calendario.swift in Sources */,
+				A1ABBFF91CE27ED30098D805 /* PantallaSV.swift in Sources */,
+				A17B556F1CE3A0BB00FA2353 /* Semana.swift in Sources */,
 				A19747821CDA7F9600656813 /* Contador.swift in Sources */,
 				A19834F71CBD52EB0099D815 /* Caja.swift in Sources */,
 				A17788461CBFF2EF00BEF5A5 /* LoncheraO.swift in Sources */,
 				A17788481CC002CE00BEF5A5 /* SubVista.swift in Sources */,
+				A196B5691CE4D19A00DDD816 /* LoncheraView.swift in Sources */,
 				A1A605C31CC81BD000FE9AC7 /* PestanasProductos.swift in Sources */,
-				A1D0ADEB1CC5752200B93692 /* PantallaSV.swift in Sources */,
 				A13603C61CAEE6580032A19A /* ConsultaProductos.swift in Sources */,
 				A17788421CBFEBD200BEF5A5 /* VistaLonchera.swift in Sources */,
 				A19834F51CBD46030099D815 /* Predeterminadas.swift in Sources */,
 				A102F66B1CA9CCF7001359A5 /* AppDelegate.swift in Sources */,
 				A1A605C51CC8204900FE9AC7 /* VistaPestana.swift in Sources */,
-				A107A4D81CE236C800DC0079 /* Semana.swift in Sources */,
 				A18878B41CBC03C600737085 /* VistaNino.swift in Sources */,
 				A13603D11CB2C50D0032A19A /* Casilla.swift in Sources */,
 				A139AB8B1CBE8C3900A32EFC /* CargaSecuencia.swift in Sources */,
+				A1857DF01CE28DC800D6966D /* MesScroll.swift in Sources */,
+				A1857DEE1CE28B6200D6966D /* Mes.swift in Sources */,
 				A18878B21CBBECB400737085 /* PantallaP.swift in Sources */,
-				A107A4D41CE2355A00DC0079 /* CalendarioViewController.swift in Sources */,
+				A17B55711CE3D8E500FA2353 /* Dia.swift in Sources */,
 				A18878B81CBC266600737085 /* CreaNino.swift in Sources */,
 				A1A0820F1CBD845E001C0AD2 /* TItems.swift in Sources */,
 				A17982D81CDCEC9F00558C55 /* TipoInfo.swift in Sources */,

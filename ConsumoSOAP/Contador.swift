@@ -66,19 +66,19 @@ class Contador: UIView {
                 sum += cas.elemeto!.producto!.precio!;
             }
         }
-        print("verdes: ", verdes);
-        print("blancas: ", blancas);
+        //print("verdes: ", verdes);
+        //print("blancas: ", blancas);
 
         if(blancas==0){
             for cas2 in lonc.subVista!.casillas{
                 cas2.backgroundColor=UIColor.greenColor();
             }
-            
+            lonc.saludable=true;
         }else{
             for cas2 in lonc.subVista!.casillas{
                 cas2.backgroundColor=UIColor.whiteColor();
             }
-            
+            lonc.saludable=false;
         }
         pre?.text=String(sum);
         cal?.text=String(sum2);

@@ -85,6 +85,7 @@
                     <connections>
                         <outlet property="BotonAnadir" destination="GJh-Js-LBr" id="7E1-yT-Vjx"/>
                         <segue destination="qPw-xE-pVA" kind="modal" identifier="Seleccion" id="pkJ-Uo-FWi"/>
+                        <segue destination="yyi-nP-QVf" kind="modal" identifier="Calendario" id="mic-NX-EOl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4rg-Ed-lQn" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -116,26 +117,28 @@
                         <outlet property="Lonchera" destination="X4u-h5-uUb" id="18V-1F-fNL"/>
                         <outlet property="PanelElementos" destination="YI0-KU-6kP" id="pdh-kK-OgB"/>
                         <segue destination="OxI-ag-49q" kind="modal" identifier="DevSeleccion" id="MZm-2j-OwY"/>
-                        <segue destination="d02-Ha-l7v" kind="modal" identifier="DevCalendario" id="hp9-BV-pB5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pps-0F-qAx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="10" y="1841"/>
+            <point key="canvasLocation" x="-59" y="1852"/>
         </scene>
-        <!--Calendario View Controller-->
-        <scene sceneID="ZhV-Wx-Jlu">
+        <!--Calendario-->
+        <scene sceneID="qQd-VJ-iT0">
             <objects>
-                <viewController id="d02-Ha-l7v" customClass="CalendarioViewController" customModule="ConsumoSOAP" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="4D5-og-YV4">
+                <viewController id="yyi-nP-QVf" customClass="Calendario" customModule="ConsumoSOAP" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="PtX-Hj-9nJ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <segue destination="OxI-ag-49q" kind="modal" identifier="DevHome" id="3kZ-lg-9cA"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="bEj-7B-hhr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7D7-KR-i9g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="546" y="1847"/>
+            <point key="canvasLocation" x="649" y="1852"/>
         </scene>
         <!--Crea Nino-->
         <scene sceneID="RmZ-uz-cQv">
@@ -259,4 +262,7 @@
     <resources>
         <image name="Cruz" width="313" height="313"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="3kZ-lg-9cA"/>
+    </inferredMetricsTieBreakers>
 </document>

@@ -56,10 +56,10 @@ class CajaView: UIButton {
                 //print(p, " se pasó",caja.secuencia[ordenActual].lista!.count);
             }
             if(casi.elemeto==nil){
-                print("nulo");
+                //print("nulo");
                 
             }else{
-                print("no nulo: ",casi.elemeto?.producto?.nombre);
+                //print("no nulo: ",casi.elemeto?.producto?.nombre);
                 casi.elemeto!.elimina();
                 
             }

@@ -12,6 +12,7 @@ class VistaNino: UIView {
     var titulo:UILabel!;
     var EspacioLoncheras:Predeterminadas!;
     var Lonchera:Contenedor!;
+    var mesActual:Mes?;
     
     override init(frame: CGRect) {
         super.init(frame: frame);
@@ -30,6 +31,11 @@ class VistaNino: UIView {
         bot.backgroundColor=UIColor.blueColor();
         bot.addTarget(self, action: #selector(VistaNino.lee(_:)), forControlEvents: .TouchDown)
         self.addSubview(bot);
+        let calendario = UIButton(frame: CGRectMake(0, (Lonchera.frame.height+Lonchera.frame.origin.y), (DatosC.contenedor.anchoP*0.4), (DatosC.contenedor.altoP*0.1)));
+        calendario.addTarget(self, action: #selector(VistaNino.pasaCalendario(_:)), forControlEvents: .TouchDown);
+        calendario.setTitle("Calendario", forState: .Normal);
+        calendario.backgroundColor=UIColor.cyanColor();
+        self.addSubview(calendario);
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -41,6 +47,10 @@ class VistaNino: UIView {
         for cas in (DatosC.contenedor.loncheras[DatosC.contenedor.iActual].subVista?.casillas)!{
             print("cas: ",cas.elemeto?.producto?.nombre);
         }
+    }
+    
+    func pasaCalendario(sender: AnyObject){
+        DatosC.contenedor.PantallaP.performSegueWithIdentifier("Calendario", sender: nil);
     }
     
 }

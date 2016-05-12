@@ -19,6 +19,7 @@ class LoncheraO: UIViewController {
     var contador : Contador?;
     var fecha: NSDate?;
     var fechaVisible: UILabel?;
+    var saludable:Bool?;
     
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
