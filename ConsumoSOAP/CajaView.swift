@@ -19,7 +19,7 @@ class CajaView: UIButton {
         super.init(frame: frame);
         self.addTarget(self, action: #selector(CajaView.muestra(_:)), forControlEvents: .TouchDown);
         
-            }
+    }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

@@ -26,11 +26,15 @@ class PantallaP: UIViewController {
         self.anchoP=UIScreen.mainScreen().bounds.width;
         self.altoP=UIScreen.mainScreen().bounds.height;
         self.espaciado=anchoP*0.01;
-        DatosC.contenedor.anchoP=anchoP;
-        DatosC.contenedor.altoP=altoP;
-        botones+=[BotonAnadir];
-        ordenaBoton();
         print("ancho: ",anchoP);
+        DatosC.contenedor.anchoP=anchoP;
+        
+        DatosC.contenedor.altoP=altoP;
+        
+        botones+=[BotonAnadir];
+        
+        ordenaBoton();
+        
         DatosC.contenedor.PantallaP=self;
     }
     

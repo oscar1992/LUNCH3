@@ -14,7 +14,7 @@ class VistaNino: UIView {
     var Lonchera:Contenedor!;
     var mesActual:Mes?;
     
-    override init(frame: CGRect) {
+    required override init(frame: CGRect) {
         super.init(frame: frame);
         self.accessibilityIdentifier="VN";
         titulo=UILabel(frame: CGRectMake(10, 10, 100, 20));
@@ -50,6 +50,7 @@ class VistaNino: UIView {
     }
     
     func pasaCalendario(sender: AnyObject){
+        //DatosC.contenedor.mesActual=self.mesActual!;
         DatosC.contenedor.PantallaP.performSegueWithIdentifier("Calendario", sender: nil);
     }
     

@@ -30,7 +30,9 @@ struct keysPrimarias {
     static let casillaF=CGRect();
     static let Pestanas=[PestanasProductos]();
     static let casillasF = [CGRect]();
-    
+    static let mesActual = Mes();
+    static let ninoActual = VistaNino();
+    static let caelendario = Calendario();
     }
 
 class DatosC{
@@ -58,7 +60,9 @@ class DatosC{
     var casillaF=CGRect();
     var Pestanas=[PestanasProductos]();
     var casillasF = [Casilla]();
-    
+    var mesActual = Mes();
+    var ninoActual : VistaNino?;
+    static var calendario = Calendario();
     
     func cambia() {
         vistaP.pageControl.currentPage=iActual;

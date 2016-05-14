@@ -54,9 +54,14 @@ class BotonNino: UIButton {
         }else{
             activo=true;
             self.backgroundColor=UIColor.blueColor();
+            //Cambio de datos niño en el Singleton
+            
             
             DatosC.contenedor.loncheras = panelNino.Lonchera.deslizador.paginas;
             DatosC.contenedor.iActual = panelNino.Lonchera.deslizador.quien;
+            //DatosC.contenedor.mesActual = panelNino!.mesActual!;
+            DatosC.contenedor.ninoActual = panelNino;
+            
             panelNino.hidden=false;
         }
 

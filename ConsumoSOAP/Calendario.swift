@@ -22,11 +22,14 @@ class Calendario: UIViewController {
         subPanel?.backgroundColor=UIColor.blackColor();
         
         let devbot=UIButton(frame: CGRectMake(0,0, frameSubPanel.width/2, frameSubPanel.height));
+        let prueba=UIButton(frame: CGRectMake(frameSubPanel.width/2,0, frameSubPanel.width/2, frameSubPanel.height));
         devbot.addTarget(self, action: #selector(Calendario.devuelve(_:)), forControlEvents: .TouchDown);
+        prueba.addTarget(self, action: #selector(Calendario.leeMes(_:)), forControlEvents: .TouchDown);
         devbot.titleLabel?.text="HOME";
         devbot.backgroundColor=UIColor.orangeColor();
+        prueba.backgroundColor=UIColor.brownColor();
         subPanel?.addSubview(devbot);
-        
+        subPanel?.addSubview(prueba);
         mesScroll = MesScroll(frame: frameScroll);
         mesScroll.backgroundColor=UIColor.blueColor();
         self.view.addSubview(mesScroll);
@@ -68,6 +71,8 @@ class Calendario: UIViewController {
             mes.organizaMes();
             
             if(p==0){
+                DatosC.contenedor.ninoActual!.mesActual=mes;
+                DatosC.contenedor.mesActual=mes;
                 semanaActual(mes);
             }
             
@@ -82,6 +87,7 @@ class Calendario: UIViewController {
         mesScroll.años.append(año);
         mesScroll.ordenaAño();
         //self.view.addSubview(año);
+        DatosC.calendario=self;
         // Do any additional setup after loading the view.
     }
 
@@ -95,7 +101,7 @@ class Calendario: UIViewController {
         let calendar=NSCalendar.currentCalendar();
         let semanaA=calendar.component(.WeekOfMonth, fromDate: fecha);
         //print("semanaA: ",mes.semanas.count);
-        let semanaActual=mes.semanas[semanaA];
+        let semanaActual=mes.semanas[semanaA-1];
         var p=0;
         
         for lonch in DatosC.contenedor.loncheras{
@@ -120,7 +126,15 @@ class Calendario: UIViewController {
         self.dismissViewControllerAnimated(true, completion: nil);
         //self.performSegueWithIdentifier("DevHome", sender: nil);
     }
-
+    
+    func leeMes(sender: AnyObject){
+        /*for semana in (DatosC.contenedor.ninoActual.mesActual?.semanas)!{
+            for dia in semana.dias{
+                print("dd: ",dia.lonchera);
+            }
+        }*/
+    }
+    
     /*
     // MARK: - Navigation
 
