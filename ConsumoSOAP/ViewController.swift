@@ -88,7 +88,7 @@ class ViewController: UIViewController, UITextFieldDelegate, NSURLConnectionDele
         var p=0;
         for coor in DatosC.contenedor.arreglo{
             
-            if(CGRectContainsPoint(arrgeloE[p], posiT!) && coor.activo! && coor.tipo == elemento.tipo && elemento.bloquea!){
+            if(CGRectContainsPoint(arrgeloE[p], posiT!) && coor.activo && coor.tipo == elemento.tipo && elemento.bloquea){
                 print("dentro de: ",coor.lonchera.id);
                 coor.addSubview(elemento);
                 elemento.bloquea=false;

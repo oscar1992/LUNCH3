@@ -52,11 +52,13 @@ class ConsultaProductos: NSObject , NSURLConnectionDelegate, NSXMLParserDelegate
             self.parser=NSXMLParser(data: self.resp)
             self.parser.delegate=self
             self.parser.parse()
-            
+            dispatch_async(dispatch_get_main_queue(),{
+                print("Carga Productos");
+            });
         })
         
         task.resume()
-        print("Carga Productos");
+        
         
     }
     
@@ -69,6 +71,7 @@ class ConsultaProductos: NSObject , NSURLConnectionDelegate, NSXMLParserDelegate
     var flagtipo=false;
     var flagdisponible=false;
     var flagsalud=false;
+    var flagcategoria = false;
     
     var id:Int?;
     var nombre:String?;
@@ -77,6 +80,7 @@ class ConsultaProductos: NSObject , NSURLConnectionDelegate, NSXMLParserDelegate
     var tipo:Int?;
     var disponible:Bool?;
     var salud:Bool?;
+    var categoria: Int?;
     
     func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
         
@@ -111,7 +115,9 @@ class ConsultaProductos: NSObject , NSURLConnectionDelegate, NSXMLParserDelegate
         if(elementName as NSString).isEqualToString("salud"){
             flagsalud=true;
         }
-        
+        if(elementName as NSString).isEqualToString("idCategoria"){
+            flagcategoria=true;
+        }
     }
     
     func parser(parser: NSXMLParser, foundCharacters string: String) {
@@ -154,20 +160,27 @@ class ConsultaProductos: NSObject , NSURLConnectionDelegate, NSXMLParserDelegate
             salud=NSString(string: string).boolValue;
             flagsalud=false;
         }
+        if(flagcategoria){
+            categoria = Int(string);
+            //print("Caregoria: ",categoria);
+            flagcategoria = false;
+        }
         
     }
     
     func parser(parser: NSXMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         //Añade Objs
         if(elementName as NSString).isEqualToString("return"){
-            let prod = Producto(id: id!, nombre: nombre!, precio: precio!, imagen: imagen!, tipo: tipo!, disponible: disponible!, salud: salud!)!;
+            let prod = Producto(id: id!, nombre: nombre!, precio: precio!, imagen: imagen!, tipo: tipo!, disponible: disponible!, salud: salud!, categoria: categoria!)!;
             let cargaTinfo = CargaTInfo();
             
             cargaTinfo.CargaTInfo(prod);
 
             DatosC.contenedor.productos.append(prod);
             objs.append(prod);
-            //print("pasa parser:", prod.nombre);
+            let ctags = CargaTags();
+            ctags.consulta(prod);
+            //print("pasa parser:", prod.categoria);
         }
     }
 }

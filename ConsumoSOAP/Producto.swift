@@ -15,14 +15,15 @@ class Producto: NSObject{
     
     var id:Int?;
     var nombre:String?;
-    var precio:Int?;
+    var precio:Int!;
     var imagen:UIImage;
     var tipo:Int?;
     var disponible:Bool?;
     var salud:Bool?;
     var listaDatos=[TipoInfo]();
+    var categoria: Int?;
     
-    init?(id: Int, nombre: String, precio : Int, imagen: UIImage, tipo: Int, disponible: Bool, salud: Bool) {
+    init?(id: Int, nombre: String, precio : Int, imagen: UIImage, tipo: Int, disponible: Bool, salud: Bool, categoria: Int) {
         self.id=id;
         self.nombre=nombre;
         self.precio=precio;
@@ -30,6 +31,7 @@ class Producto: NSObject{
         self.tipo=tipo;
         self.disponible=disponible;
         self.salud=salud;
+        self.categoria = categoria;
     }
     
     //MARK: Porpiedades

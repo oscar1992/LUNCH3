@@ -16,7 +16,7 @@ struct keysPrimarias {
     static let anchoP = CGFloat();
     static let altoP = CGFloat();
     static let ninos = [BotonNino]();
-    static let PantallaP = UIViewController();
+    static let Pantallap = PantallaP();
     static let pantallaSV = PantallaSV();
     static let cajas = [Caja]();
     static let productos = [Producto]();
@@ -30,7 +30,7 @@ struct keysPrimarias {
     static let casillaF=CGRect();
     static let Pestanas=[PestanasProductos]();
     static let casillasF = [CGRect]();
-    static let mesActual = Mes();
+    //static let mesActual = Mes();
     static let ninoActual = VistaNino();
     static let caelendario = Calendario();
     }
@@ -45,7 +45,7 @@ class DatosC{
     var anchoP = CGFloat(0);
     var altoP = CGFloat(0);
     var ninos = [BotonNino]();
-    var PantallaP = UIViewController();
+    var Pantallap = PantallaP();
     var pantallaSV = PantallaSV();
     var cajas = [Caja]();
     var productos = [Producto]();
@@ -55,12 +55,12 @@ class DatosC{
     var primera=false;
     var tamaLonchera = CGRect();
     var loncheras = [LoncheraO]();
-    static var lonchera = LoncheraO();
+    var lonchera = LoncheraO();
     var tipo = Int?();
     var casillaF=CGRect();
     var Pestanas=[PestanasProductos]();
     var casillasF = [Casilla]();
-    var mesActual = Mes();
+    //static var mesActual = Mes();
     var ninoActual : VistaNino?;
     static var calendario = Calendario();
     

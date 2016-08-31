@@ -59,7 +59,9 @@ class CargaTInfo: NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
             self.parser=NSXMLParser(data: self.resp)
             self.parser.delegate=self
             self.parser.parse()
-            
+            dispatch_async(dispatch_get_main_queue(),{
+                //print("Carga Informacion de Productos");
+            });
         })
         
         task.resume()

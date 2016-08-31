@@ -11,110 +11,105 @@ import UIKit
 
 class Mes: UIView{
     
-    var año: Int?;
-    var numeroMes:Int?;
-    var NombreMes:String?;
-    var mesTit:UILabel?;
-    var semanas = [Semana]();
+    var NumeroMes: Int!;
+    var dias = [Dia]();
+    var nSemanas: Int?;
+    var ano: Int!;
+    var nombreMes: String!;
     
-    override required init(frame: CGRect) {
+    required init(frame: CGRect, nmes: Int, nAño: Int) {
         super.init(frame: frame);
-        self.backgroundColor=UIColor.brownColor();
+        self.NumeroMes = nmes;
+        self.ano = nAño;
+        PoneNombreMes();
+        iniciaDias();
+        //print("nmes: ", nmes);
+        //self.backgroundColor=UIColor.clearColor().colorWithAlphaComponent(0.0);
+        self.backgroundColor=UIColor.darkGrayColor();
+        //self.userInteractionEnabled=false;
+        self.sendSubviewToBack(self);
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func organizaMes(){
-        //print("mid:", self.frame.width);
-        print("Max: ",semanaMax());
-        let fechaCom=NSDateComponents()
-        fechaCom.year=año!;
-        fechaCom.month=numeroMes!;
-        print("Inicio", NombreMes);
-        var semanaCamb=0;
-        let borde = CGFloat(30);
-        let espaciado = CGFloat(10);
-        let altura = (self.frame.height/CGFloat(semanaMax()))-(espaciado*2);
-        var p=CGFloat(0);
-        var sem = Semana();
-        for dia in 1 ..< 32{
-            fechaCom.day=dia;
-            let fechai=NSCalendar.currentCalendar().dateFromComponents(fechaCom);
-            let calendari=NSCalendar.currentCalendar();
-            let semanai=calendari.component(.WeekOfMonth, fromDate: fechai!);
-            let diasemana=calendari.component(.Weekday, fromDate: fechai!);
-            if(fechaCom.isValidDateInCalendar(calendari)){
-                
-                //print("CAMB: ",semanaCamb, "I:", semanai);
-                if(semanaCamb == semanai){
-                    //print("cambia");
-                    self.addSubview(sem);
-                    let dia = Dia();
-                    sem.casillas();
-                    dia.numDia=fechaCom.day;
-                    dia.diaSenama=diasemana;
-                    if(diasemana>=2 && diasemana<=6){
-                        sem.addDia(dia);
-                        //print("semana i: ", semanai, "dia", fechaCom.day, "día: ",diasemana);
-                    }
-
-
-                }else{
-                    //print("nuevo");
-                    sem = Semana();
-                    semanas.append(sem);
-                    sem.numSemanaMes=semanai;
-                    semanaCamb=semanai;
-                    
-                    let semanaFrame=CGRectMake(0, (borde+((altura+espaciado)*p)), self.frame.width, altura);
-                    sem.frame=semanaFrame;
-                    sem.casillas();
-                    self.addSubview(sem);
-                    let dia = Dia();
-                    dia.numDia=fechaCom.day;
-                    dia.diaSenama=diasemana;
-                    if(diasemana>=2 && diasemana<=6){
-                        sem.addDia(dia);
-                        //print("semana i: ", semanai, "dia", fechaCom.day, "día: ",diasemana);
-                    }
-                    
-                    p += 1;
-                }
-                
-                
-                
-            }
-            
-        }
-        print("Fin", NombreMes);
-        mesTit = UILabel(frame: CGRectMake((self.frame.width/2-50), 0, 100, 30));
-        mesTit?.textAlignment = NSTextAlignment.Center;
-        
-        self.addSubview(mesTit!);
-
+    func BloqueaDias(bloquea: Bool){
+        //print("BLoquea");
+        //self.ano.BloqueaDias(bloquea);
     }
     
-    func semanaMax()->Int{
-        let fechaCom=NSDateComponents()
-        fechaCom.year=año!;
-        fechaCom.month=numeroMes!;
-        fechaCom.day=31;
-        var valida=true;
-        var semanaf=0;
-        while(valida){
-            let calendari=NSCalendar.currentCalendar();
-            let fechai=NSCalendar.currentCalendar().dateFromComponents(fechaCom);
-            if(fechaCom.isValidDateInCalendar(calendari)){
-                semanaf=calendari.component(.WeekOfMonth, fromDate: fechai!);
-                valida=false;
+    func iniciaDias(){
+        let calendar = NSCalendar.currentCalendar();
+        let fecha = NSDateComponents();
+        var aux : NSDateComponents!;
+        fecha.year=ano;
+        fecha.month=NumeroMes;
+        var pases = 0;
+        for nDia in 1 ... 31{
+            aux = fecha;
+            fecha.day = nDia;
+            if(fecha.isValidDateInCalendar(calendar)){
+                let dia = Dia(frame: CGRectMake(0, 0, 10, 10), nDia: fecha.day, mes: self);
+                dia.activo=true;
+                //rprint("dia: ", dia.numDia);
+                dias.append(dia);
+                
             }else{
-                fechaCom.day -= 1;
+                pases += 1;
+                //print("erronea")
+                aux.day = aux.day - pases;
             }
         }
-        return semanaf;
+        //print("aux: ", aux);
+        let fecha2 = calendar.dateFromComponents(aux);
+        //print("fevha final: ", fecha2);
+        nSemanas = calendar.component(.WeekOfMonth, fromDate: fecha2!);
+        
     }
     
     
+    
+    func PoneNombreMes(){
+        switch NumeroMes {
+        case 1:
+            nombreMes = "Enero";
+            break;
+        case 2:
+            nombreMes = "Febrero";
+            break;
+        case 3:
+            nombreMes = "Marzo";
+            break;
+        case 4:
+            nombreMes = "Abril";
+            break;
+        case 5:
+            nombreMes = "Mayo";
+            break;
+        case 6:
+            nombreMes = "Junio";
+            break;
+        case 7:
+            nombreMes = "Julio";
+            break;
+        case 8:
+            nombreMes = "Agosto";
+            break;
+        case 9:
+            nombreMes = "Septiembre";
+            break;
+        case 10:
+            nombreMes = "Octubre";
+            break;
+        case 11:
+            nombreMes = "Noviembre";
+            break;
+        case 12:
+            nombreMes = "Diciembre";
+            break;
+        default:
+            break;
+        }
+    }
 }

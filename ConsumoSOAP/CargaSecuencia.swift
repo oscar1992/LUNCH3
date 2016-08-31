@@ -50,11 +50,16 @@ class CargaSecuencia: NSObject, NSURLConnectionDelegate, NSXMLParserDelegate {
             self.parser=NSXMLParser(data: self.resp)
             self.parser.delegate=self
             self.parser.parse()
-            
+            dispatch_async(dispatch_get_main_queue(),{
+                print("Carga Secuencias");
+                
+
+                
+            });
         })
         
         task.resume()
-        print("Carga Secuencias");
+        
     }
     
     //MARK: Delegados Parser
@@ -100,6 +105,7 @@ class CargaSecuencia: NSObject, NSURLConnectionDelegate, NSXMLParserDelegate {
     func parser(parser: NSXMLParser, foundCharacters string: String) {
         if(flagId){
             id=Int(string);
+            //print("id secu: ", id)
             flagId=false;
         }
         if(flagNombre){
@@ -112,6 +118,7 @@ class CargaSecuencia: NSObject, NSURLConnectionDelegate, NSXMLParserDelegate {
         }
         if(flagIdCaja){
             idCaja=Int(string);
+            //print("id caja: ");
             flagIdCaja=false;
         }
     }

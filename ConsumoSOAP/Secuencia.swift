@@ -11,13 +11,13 @@ import Foundation
 class Secuencia: NSObject {
     
     var id:Int!;
-    var lista : [TItems]?;
+    var lista : [TItems]!;
     var caja : Int?;
     var nombre:String?;
     
     init(id: Int) {
         self.id=id;
-        
+        lista = [TItems]();
     }
     
 }

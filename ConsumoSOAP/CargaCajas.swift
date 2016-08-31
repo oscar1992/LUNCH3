@@ -19,7 +19,7 @@ class CargaCajas: NSObject ,NSURLConnectionDelegate, NSXMLParserDelegate{
     var eeleDiccio=NSMutableDictionary()
     var element=NSString()
     
-    func CargaCajas(sender: UIButton){
+    func CargaCajas(Plogin: LoginView){
         let is_URL: String = "http://93.188.163.97:8080/Lunch2/adminEndpoint"
         
         let lobj_Request = NSMutableURLRequest(URL: NSURL(string: is_URL)!)
@@ -49,8 +49,16 @@ class CargaCajas: NSObject ,NSURLConnectionDelegate, NSXMLParserDelegate{
             self.parser=NSXMLParser(data: self.resp)
             self.parser.delegate=self
             self.parser.parse()
-            print("Consumo Cajas");
-            sender.enabled=true;
+            
+            dispatch_async(dispatch_get_main_queue(),{
+                print("Consumo Cajas");
+                //print("aprueba: ");
+                
+                Plogin.pasa();
+                
+                }
+            );
+            //sender.enabled=true;
         })
         
         task.resume()
@@ -58,8 +66,8 @@ class CargaCajas: NSObject ,NSURLConnectionDelegate, NSXMLParserDelegate{
     }
     
     var id:Int?;
-    var Nombre:String?;
-    var Color: UIColor?;
+    var Nombre="";
+    var Color: String?;
     
     var flagID=false;
     var flagNombre=false;
@@ -74,7 +82,8 @@ class CargaCajas: NSObject ,NSURLConnectionDelegate, NSXMLParserDelegate{
             estado=NSMutableString();
             estado="";
         }
-        switch (elementName as NSString) {
+        
+        switch (elementName as String) {
             case "idCaja":
                 flagID=true;
                 break;
@@ -82,6 +91,7 @@ class CargaCajas: NSObject ,NSURLConnectionDelegate, NSXMLParserDelegate{
                 flagColor=true;
                 break;
             case "nombre":
+                
                 flagNombre=true;
                 break;
             default:
@@ -91,26 +101,38 @@ class CargaCajas: NSObject ,NSURLConnectionDelegate, NSXMLParserDelegate{
     }
     
     func parser(parser: NSXMLParser, foundCharacters string: String) {
+        //print("etiqueta: ", element);
+        //print("texto:: ", string);
         if(flagID){
             id=Int(string)!;
             flagID=false;
         }
         if(flagColor){
+            /*
             let RGB=string.componentsSeparatedByString(",");
             let rojo:Float=(1/255)*Float(RGB[0])!;
             let verde:Float=(1/255)*Float(RGB[1])!;
             let azul:Float=(1/255)*Float(RGB[2])!;
             Color=UIColor.init(colorLiteralRed: rojo, green: verde, blue: azul, alpha: 1);
             flagColor=false;
+            */
+            //print("Color: ", string);
+            Color=string;
+            flagColor=false;
         }
         if(flagNombre){
-            Nombre=string;
-            flagNombre=false;
+            Nombre+=string;
+            //print("NOmbre Caja: ", string);
+            //flagNombre=false;
         }
     }
     
     func parser(parser: NSXMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
-        
+        //print("cierra: ", elementName)
+        if(elementName == "nombre"){
+            flagNombre=false;
+            
+        }
         if(elementName as NSString).isEqualToString("return"){
                         var listaSecu = [Secuencia]();
             for secu in DatosC.contenedor.secuencia{
@@ -118,10 +140,12 @@ class CargaCajas: NSObject ,NSURLConnectionDelegate, NSXMLParserDelegate{
                     listaSecu.append(secu);
                 }
             }
-            let caja=Caja(id: id!, nombre: Nombre!, color: Color!, secuencia: listaSecu);
+            let caja=Caja(id: id!, nombre: Nombre, color: Color!, secuencia: listaSecu);
             objs.append(caja);
             DatosC.contenedor.cajas.append(caja);
+            //print("añade caja: ",caja.Color);
             //print("añade caja: ",caja.Nombre);
+            Nombre = "";
         }
     }
 }
