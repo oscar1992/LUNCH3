@@ -35,7 +35,7 @@ class PestanasProductos: UIButton {
     }
     
     func cambia(sender: UIButton){
-        print("cambia: ", self.tipo);
+        //print("cambia: ", self.tipo);
         
         for pest in DatosC.contenedor.Pestanas{
             //if(pest.activo==true){
@@ -45,7 +45,7 @@ class PestanasProductos: UIButton {
             pest.subVista!.view.hidden=true;
             pest.Fondo();
             //pest.superview?.bringSubviewToFront(pest);
-                print("Activo: ",pest.frame);
+                //print("Activo: ",pest.frame);
             //}
             
         }

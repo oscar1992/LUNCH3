@@ -42,7 +42,7 @@ class ProductoView: UIButton {
     var bloqueo5 = false;
     
     var ultToque : UITouch!;
-    
+    var acumula : CGPoint?;
     
     required init(frame: CGRect, imagen:UIImage) {
         super.init(frame: frame);
@@ -61,7 +61,7 @@ class ProductoView: UIButton {
         espacioPadre=self.frame;
         bloquea=false;
         Natural=true;
-        
+        acumula = CGPointZero;
         
         //print("tt: ",vista.frame.width," ee: ",vista.image);
         
@@ -159,31 +159,9 @@ class ProductoView: UIButton {
     }
     
     override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        
-        //bloqueo2=false;
-        if(Panel2==nil && PanelOrigen==nil){
-            //print("posAccHOme: ", self.center);
-            /*
-            if(self.center.y < (ultimaPosicion.y-20)||self.center.y>(ultimaPosicion.y+20)){
-                print("Borra");
-            }else if(self.center.x < (ultimaPosicion.x-20)||self.center.x>(ultimaPosicion.x+20)){
-                print("Mueve Lonchera");
-                self.userInteractionEnabled=false;
-                self.center=ultimaPosicion;
-                self.touchesBegan(touches, withEvent: event);
-                bloquea = true;
-            }
-             */
-            //self.center = (touches.first?.locationInView(espacio))!;
-            //print("movi",self.superview);
-        }else{
-            //print("posAcc: ", self.center);
-            //moviendo = true;
-            //self.center=CGPoint(x: self.center.x, y: self.center.y+(cc!.origin.y+(self.frame.height/2)));
-            //self.center = (touches.first?.locationInView(espacio))!;
-            //print("dd", touches.first?.locationInView(espacio));
-            //print("select: ",self.center);
-        }
+        acumula!.x = abs(ultimaPosicion.x-self.center.x);
+        acumula!.y = abs(ultimaPosicion.y-self.center.y);
+        //print("acu: ", acumula);
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -380,14 +358,14 @@ class ProductoView: UIButton {
         */
         //print("self: ", self.superview);
         //print("ded: ", ultToque.locationInView(padre));
-        //print("espacio: ", espacio);
+        print("acumula: ", acumula);
         var mov = false;
-        if((self.superview?.frame.contains(ultToque.locationInView(padre))) == true){
+        if((acumula!.x < 15 && acumula!.y < 15)){
             print("adentro");
             mov = true;
             
         }
-        if(bloqueo4 == true && ultToque.phase.rawValue==2){
+        if(bloqueo4 == true && ultToque.phase.rawValue==2 && mov == true){
             print("Muestra: ", DatosC.contenedor.pantallaSV);
             DatosC.contenedor.pantallaSV.iniciaPanelInfo(self.producto!);
         }

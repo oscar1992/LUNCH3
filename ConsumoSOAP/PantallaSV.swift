@@ -132,6 +132,8 @@ class PantallaSV: UIViewController {
         //self.view.bringSubviewToFront(PanelElementos);
         //self.view.addSubview(volver);
         PanelElementos.addSubview(contenedor)
+        self.view.bringSubviewToFront(PanelElementos);
+        PanelElementos.bringSubviewToFront(contenedor);
         //PanelElementos.addSubview(lonch!.subVista!);
          //cargaElementos();
         self.view.bringSubviewToFront(LaBarra);
