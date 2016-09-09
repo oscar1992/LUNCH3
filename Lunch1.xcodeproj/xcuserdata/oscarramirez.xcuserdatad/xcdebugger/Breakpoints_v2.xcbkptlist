@@ -489,60 +489,12 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ConsumoSOAP/ProductoView.swift"
-            timestampString = "494373492.862673"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "285"
-            endingLineNumber = "285"
-            landmarkName = "panelElementos(_:)"
-            landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "ConsumoSOAP.ProductoView.panelElementos (Swift.Int) -&gt; ()"
-                  moduleName = "ConsumoSOAP"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/oscarramirez/Desktop/playgrond/ConsumoSOAP/ConsumoSOAP/ProductoView.swift"
-                  timestampString = "484845193.038779"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "290"
-                  endingLineNumber = "290"
-                  offsetFromSymbolStart = "107">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "ConsumoSOAP.ProductoView.panelElementos (Swift.Int) -&gt; ()"
-                  moduleName = "ConsumoSOAP"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/oscarramirez/Desktop/playgrond/ConsumoSOAP/ConsumoSOAP/ProductoView.swift"
-                  timestampString = "484845193.228532"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "290"
-                  endingLineNumber = "290"
-                  offsetFromSymbolStart = "2065">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "ConsumoSOAP/DatosC.swift"
-            timestampString = "484865527.497558"
+            timestampString = "494442169.342701"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70"
+            startingLineNumber = "75"
+            endingLineNumber = "75"
             landmarkName = "cambia()"
             landmarkType = "5">
          </BreakpointContent>
@@ -650,7 +602,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ConsumoSOAP/ConsultaLogin.swift"
-            timestampString = "486069529.53234"
+            timestampString = "495062654.981896"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "77"
@@ -775,22 +727,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ConsumoSOAP/ProductoView.swift"
-            timestampString = "494373492.862673"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "307"
-            endingLineNumber = "307"
-            landmarkName = "panelElementos(_:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "ConsumoSOAP/VistaPestana.swift"
             timestampString = "493139496.354273"
             startingColumnNumber = "9223372036854775807"
@@ -808,11 +744,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ConsumoSOAP/CargaFavoritos.swift"
-            timestampString = "488317285.761794"
+            timestampString = "495147380.786802"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "77"
-            endingLineNumber = "77"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
             landmarkName = "consulta(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -903,11 +839,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ConsumoSOAP/CargaFavoritos.swift"
-            timestampString = "488317285.761794"
+            timestampString = "495150899.541875"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "128"
-            endingLineNumber = "128"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
             landmarkName = "CargaFavoritos"
             landmarkType = "3">
          </BreakpointContent>
@@ -919,12 +855,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ConsumoSOAP/IngresaFavoritos.swift"
-            timestampString = "488319508.711833"
+            timestampString = "495147380.786802"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
-            landmarkName = "envia(_:)"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
+            landmarkName = "envia(_:id:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1015,11 +951,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ConsumoSOAP/LoncheraO.swift"
-            timestampString = "493756072.967166"
+            timestampString = "495061541.254677"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "297"
-            endingLineNumber = "297"
+            startingLineNumber = "290"
+            endingLineNumber = "290"
             landmarkName = "iniciaBotonFav()"
             landmarkType = "5">
          </BreakpointContent>
@@ -1095,11 +1031,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ConsumoSOAP/PantallaSV.swift"
-            timestampString = "494375348.198393"
+            timestampString = "494800603.663924"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "477"
-            endingLineNumber = "477"
+            startingLineNumber = "301"
+            endingLineNumber = "301"
             landmarkName = "fondoCasilla(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -1111,11 +1047,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ConsumoSOAP/PantallaSV.swift"
-            timestampString = "494375348.198393"
+            timestampString = "494800603.663924"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "478"
-            endingLineNumber = "478"
+            startingLineNumber = "302"
+            endingLineNumber = "302"
             landmarkName = "fondoCasilla(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -1159,11 +1095,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ConsumoSOAP/SubVista.swift"
-            timestampString = "490904653.133911"
+            timestampString = "494796775.315607"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "487"
-            endingLineNumber = "487"
+            startingLineNumber = "490"
+            endingLineNumber = "490"
             landmarkName = "CasillasColores(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -1207,11 +1143,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ConsumoSOAP/AnoScroll.swift"
-            timestampString = "493836188.093679"
+            timestampString = "494377368.114909"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "191"
-            endingLineNumber = "191"
+            startingLineNumber = "193"
+            endingLineNumber = "193"
             landmarkName = "traeDia(_:Mes:DiaN:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -1223,11 +1159,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ConsumoSOAP/AnoScroll.swift"
-            timestampString = "493836188.093679"
+            timestampString = "494377368.114909"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "202"
-            endingLineNumber = "202"
+            startingLineNumber = "204"
+            endingLineNumber = "204"
             landmarkName = "traeDia(_:Mes:DiaN:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -1383,11 +1319,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ConsumoSOAP/AnoScroll.swift"
-            timestampString = "493836188.093679"
+            timestampString = "494377368.114909"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "108"
-            endingLineNumber = "108"
+            startingLineNumber = "110"
+            endingLineNumber = "110"
             landmarkName = "AnoScroll"
             landmarkType = "3">
          </BreakpointContent>
@@ -1517,6 +1453,38 @@
             endingLineNumber = "49"
             landmarkName = "iniciaFecha(_:Mes:Dia:)"
             landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ConsumoSOAP/Lonchera2.swift"
+            timestampString = "495125498.575898"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
+            landmarkName = "setCasilla(_:prod:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ConsumoSOAP/SubeFavorito.swift"
+            timestampString = "495127566.403129"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "19"
+            endingLineNumber = "19"
+            landmarkName = "SubeFavorito"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

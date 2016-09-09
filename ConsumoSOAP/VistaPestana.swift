@@ -42,7 +42,7 @@ class VistaPestana: UIPageViewController, UIPageViewControllerDelegate, UIPageVi
                 //print("scroll");
                 subView.frame = self.view.bounds
             } else if subView is UIPageControl {
-                control = subView as! UIPageControl;
+                control = subView as? UIPageControl;
                 //print("pagecontrol");
                 //subView.frame=CGRectZero;
                 //subView.hidden=true;
@@ -234,9 +234,9 @@ class VistaPestana: UIPageViewController, UIPageViewControllerDelegate, UIPageVi
                 //print("TamaV: ", seteProductos(elementos).count);
                 var vistaInt : UIViewController!;
                 for casi in seteProductos(elementos){
-                    print("p: ", p);
+                    //print("p: ", p);
                     if(p == 0){
-                        print("nuevo");
+                        //print("nuevo");
                         
                         vistaInt=UIViewController();
                         FondoPanel(vistaInt);
@@ -250,7 +250,7 @@ class VistaPestana: UIPageViewController, UIPageViewControllerDelegate, UIPageVi
                         contadorVistas += 1;
                         paginas.append(vistaInt);
                     }else if(p >= 6){
-                        print("se pasa: ", p);
+                        //print("se pasa: ", p);
                         p = 0;
                         fila = 0;
                         m = 0
@@ -348,7 +348,7 @@ class VistaPestana: UIPageViewController, UIPageViewControllerDelegate, UIPageVi
         var p=CGFloat(0);
         var m = CGFloat(0);
         var fila = CGFloat(0);
-        print("elementos: ", elementos.count);
+        //print("elementos: ", elementos.count);
         for ele in elementos{
             let casill=Casilla();
             if(m>=CGFloat(cant)){
@@ -360,7 +360,7 @@ class VistaPestana: UIPageViewController, UIPageViewControllerDelegate, UIPageVi
             casill.activo = false;
             ele.padre=casill;
             ele.espacio=self.Panel!.view;
-            ele.Panel2=self.Panel?.lonch.subVista;
+            ele.Panel2=self.Panel?.lonch
             casill.seteaElemento(ele, tipo: self.tipo!, ima: ele.producto!.imagen, prod: ele.producto!);
             ///////
             

@@ -10,6 +10,53 @@
         </mutableArray>
     </customFonts>
     <scenes>
+        <!--Home2-->
+        <scene sceneID="NhN-Fb-kcc">
+            <objects>
+                <viewController id="Neg-Ks-fCf" customClass="Home2" customModule="Lunch1" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="b20-Uh-eML">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" id="e6j-Dz-vbu" userLabel="LaBarra" customClass="LaBarra" customModule="Lunch1" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="54"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="laBarra" destination="e6j-Dz-vbu" id="uPD-SL-wmp"/>
+                        <segue destination="qPw-xE-pVA" kind="modal" identifier="Seleccion" id="Ee2-os-9ZT"/>
+                        <segue destination="hb5-TO-jQJ" kind="modal" identifier="Carrito" id="BkF-8r-kaq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5ts-Zr-Cwv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="533" y="481"/>
+        </scene>
+        <!--Carrito-->
+        <scene sceneID="3LJ-R2-0ht">
+            <objects>
+                <viewController id="hb5-TO-jQJ" customClass="Carrito" customModule="Lunch1" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cOi-aO-BDa">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" id="yZ6-gP-mSE" userLabel="LaBarra" customClass="LaBarra" customModule="Lunch1" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="54"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3Tv-OO-z6c" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1039" y="481"/>
+        </scene>
         <!--PantallaP-->
         <scene sceneID="17c-PQ-rYs">
             <objects>
@@ -46,7 +93,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4rg-Ed-lQn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-59" y="1139"/>
+            <point key="canvasLocation" x="-1393" y="2487"/>
         </scene>
         <!--PantallaSV-->
         <scene sceneID="P9g-5y-xpz">
@@ -80,7 +127,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pps-0F-qAx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-59" y="1852"/>
+            <point key="canvasLocation" x="935" y="2248"/>
         </scene>
         <!--Calendario-->
         <scene sceneID="qQd-VJ-iT0">
@@ -106,7 +153,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7D7-KR-i9g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="649" y="1852"/>
+            <point key="canvasLocation" x="-685" y="3200"/>
         </scene>
         <!--Factura-->
         <scene sceneID="Qiq-CK-C7X">
@@ -128,7 +175,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vay-No-f5M" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1310" y="1852"/>
+            <point key="canvasLocation" x="-24" y="3200"/>
         </scene>
         <!--Login View-->
         <scene sceneID="AMa-fE-9PM">
@@ -164,10 +211,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CaritaFeliz" id="Nzk-mf-EHO">
-                                <rect key="frame" x="20" y="20" width="280" height="199"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="9Yi-HB-DnK">
                                 <rect key="frame" x="123" y="227" width="85" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -178,6 +221,10 @@
                                     <action selector="ingresa:" destination="2QL-vC-9bR" eventType="touchUpInside" id="XOr-2T-dKU"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CaritaFeliz" id="Nzk-mf-EHO">
+                                <rect key="frame" x="20" y="20" width="280" height="199"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -185,13 +232,14 @@
                         <outlet property="email" destination="UVm-o9-X5h" id="FeD-s7-YJB"/>
                         <outlet property="ingresa" destination="9Yi-HB-DnK" id="sQY-AX-a6l"/>
                         <outlet property="pass" destination="qaQ-TU-PWZ" id="20o-4B-YkU"/>
-                        <segue destination="OxI-ag-49q" kind="modal" identifier="Ingresa" animates="NO" id="SbS-h1-chq"/>
+                        <segue destination="OxI-ag-49q" kind="modal" identifier="Ingresa2" animates="NO" id="SbS-h1-chq"/>
                         <segue destination="xyL-xU-Na2" kind="modal" identifier="Ingresa2" id="ie1-xu-HA5"/>
+                        <segue destination="Neg-Ks-fCf" kind="modal" identifier="Ingresa" id="tbC-0r-QKh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8in-lT-jvl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="262" y="327"/>
+            <point key="canvasLocation" x="456" y="1286"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="Rd9-2s-YsX">
@@ -214,7 +262,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ljy-E6-XRT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="759" y="326"/>
+            <point key="canvasLocation" x="999" y="1286"/>
         </scene>
         <!--Crea Nino-->
         <scene sceneID="RmZ-uz-cQv">
@@ -335,13 +383,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n1P-Aq-Y3C" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="463" y="1085"/>
+            <point key="canvasLocation" x="-871" y="2433"/>
         </scene>
     </scenes>
     <resources>
         <image name="CaritaFeliz" width="320" height="229"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="Ee2-os-9ZT"/>
         <segue reference="MZm-2j-OwY"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -81,7 +81,7 @@ class Calendario: UIViewController {
         fechaActual = NSCalendar.currentCalendar().dateFromComponents(fecha2);
         */
         
-        let calendar=NSCalendar.currentCalendar();
+        //let calendar=NSCalendar.currentCalendar();
         //LΩos años deben empesar en la primera compra del cliente en el historial
         //let añoActual=calendar.component(.Year, fromDate: fechaActual!);
         //let mesActual=calendar.component(.Month, fromDate: fechaActual!);

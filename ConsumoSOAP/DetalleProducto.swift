@@ -117,7 +117,7 @@ class DetalleProducto: UIView {
         let OX = DatosC.contenedor.anchoP*0.06;
         let OY = DatosC.contenedor.altoP*0.58;
         let ancho = DatosC.contenedor.anchoP*0.6666;
-        let alto = DatosC.contenedor.altoP*0.07;
+        _ = DatosC.contenedor.altoP*0.07;
         //let frameDatos = CGRectMake(OX, OY, ancho, alto);
         var itera = 0;
         for fila in 0...2{
@@ -181,7 +181,7 @@ class DetalleProducto: UIView {
     func BotonCerrar(){
         let rad = DatosC.contenedor.anchoP*0.09;
         let OX = self.frame.width-(rad);
-        let OY = (0);
+        _ = (0);
         let frameBot = CGRectMake(OX, 0, rad, rad);
         let botCerrar = UIButton(frame: frameBot);
         let ima=UIImage(named: "BotonCerrar");

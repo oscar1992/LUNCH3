@@ -15,6 +15,7 @@ class LaBarra: UIView {
         //print("frame barra: ", self.frame);
         self.frame = frame;
         setFondo2();
+        self.superview?.sendSubviewToBack(self);
     }
     
     required init?(coder aDecoder: NSCoder) {

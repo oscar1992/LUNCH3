@@ -17,10 +17,18 @@ class CargaItemsFavoritos: NSObject, NSURLConnectionDelegate, NSXMLParserDelegat
     var eeleDiccio=NSMutableDictionary()
     var element=NSString()
     var items = [TItems]();
+    var productos = [Producto]();
     var carg : CargaFavoritos?;
     var idN : String?;
+    var favo:Favoritos!;
+    
+    init(favo: Favoritos) {
+        self.favo=favo;
+        
+    }
     
     func carga(idNum: Int!){
+        
         idN = String(idNum);
         //print("idN: ", idN);
         let mensajeEnviado:String = "<soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/' xmlns:enp='http://enpoint.lunch.com.co/'><soapenv:Header/><soapenv:Body><enp:favoritosPorLonchera><padre>"+idN!+"</padre></enp:favoritosPorLonchera></soapenv:Body></soapenv:Envelope>";
@@ -55,8 +63,8 @@ class CargaItemsFavoritos: NSObject, NSURLConnectionDelegate, NSXMLParserDelegat
             self.parser.delegate=self
             self.parser.parse();
             dispatch_async(dispatch_get_main_queue(),{
-                self.carg!.pideItems(self.items);
-                
+                //self.carg!.pideItems(self.items);
+                print("Carga Items Favo");
             });
         })
         
@@ -114,38 +122,23 @@ class CargaItemsFavoritos: NSObject, NSURLConnectionDelegate, NSXMLParserDelegat
         }
     }
     
-    var anterior: Producto?;
+    
     
     func parser(parser: NSXMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         if(elementName == "return"){
-            //print("UUU: ", DatosC.contenedor.productos.count);
             
+            //print("UUU: ", DatosC.contenedor.productos.count);
             for prod in DatosC.contenedor.productos{
-                
+                //print("prod.id: ", prod.id, "producto: ", producto);
                 if(prod.id == producto){
-                    
                     let item = TItems(id: id!);
-                    
                     item.productos = prod;
-                    item.idProducto=prod.id;
-                    
-                    /*
-                    print("p: ", anterior?.tipo," actual: ", item.productos?.tipo);
-                    
-                    if(anterior != nil && anterior?.id == item.productos?.id){
-                        if(item.productos!.tipo <= 4){
-                            item.productos!.tipo = (item.productos?.tipo)! + 1;
-                        }else{
-                            item.productos?.tipo = 1;
-                        }
-                        print("duplicado: ", item.productos?.tipo);
-                    }
-                    */
-                    //item.productos?.tipo = p;
-                    
+                    productos.append(prod);
                     items.append(item);
-                    anterior = item.productos;
-                    //print("Prod: ",prod.nombre);
+                    //print("añade item favorito");
+                    DatosB.cont.itemsFavo.append(item);
+                    
+                    
                     
                 }
             }

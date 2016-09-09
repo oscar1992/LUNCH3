@@ -164,18 +164,21 @@ class ConsultaNinos: NSObject , NSURLConnectionDelegate, NSXMLParserDelegate{
     
     func consume(Plogin: LoginView){
         let cargaI=ConsultaProductos();
-        let cargaII=CargaTItems();
+        //let cargaII=CargaTItems();
         let cargaIII=CargaSecuencia();
         let cargaIV=CargaCajas();
         let cargaV=ConsultaCatergorias();
+        //let cargaVI=CargaSalud();
+        
         
         //let cargaVI=CargaFavoritos();
-        
+        //print("cargs")
         cargaI.consulta();
-        cargaII.CargaTItems();
+        //cargaII.CargaTItems();
         cargaIII.CargaSecuencia();
         cargaIV.CargaCajas(Plogin);
         cargaV.consulta();
+        //cargaVI.cargaSaludables();
         
         //cargaVI.consulta(DatosD.contenedor.padre.id);
         

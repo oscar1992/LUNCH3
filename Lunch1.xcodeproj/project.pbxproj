@@ -17,6 +17,7 @@
 		A10671E31D3D596600D0F0B5 /* ScrollResultados.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10671E21D3D596600D0F0B5 /* ScrollResultados.swift */; };
 		A10671E51D3D5AF500D0F0B5 /* BotonResultado.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10671E41D3D5AF500D0F0B5 /* BotonResultado.swift */; };
 		A10671E71D3E84DF00D0F0B5 /* DetalleProducto.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10671E61D3E84DD00D0F0B5 /* DetalleProducto.swift */; };
+		A11838B71D8206C100201A96 /* SubeFavorito.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11838B61D8206B900201A96 /* SubeFavorito.swift */; };
 		A12C04261D106B9700BA72E1 /* CalendarioNinos.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12C04251D106B9700BA72E1 /* CalendarioNinos.swift */; };
 		A12C04281D107EBB00BA72E1 /* NinoCalendarioBot.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12C04271D107EBB00BA72E1 /* NinoCalendarioBot.swift */; };
 		A12C042A1D109E3500BA72E1 /* AnoScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12C04291D109E3500BA72E1 /* AnoScroll.swift */; };
@@ -36,6 +37,10 @@
 		A14296281D2580C100A0905B /* SubeNino.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14296271D2580C100A0905B /* SubeNino.swift */; };
 		A15BBD041CB425850043CD9B /* DatosC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15BBD031CB425840043CD9B /* DatosC.swift */; };
 		A15BBD0A1CB4452B0043CD9B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A15BBD081CB4452B0043CD9B /* Main.storyboard */; };
+		A16710A31D79C545004CB71D /* CargaSalud.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16710A21D79C545004CB71D /* CargaSalud.swift */; };
+		A16710A51D79C68B004CB71D /* Saludable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16710A41D79C68B004CB71D /* Saludable.swift */; };
+		A16710A71D79E6B0004CB71D /* CargaProductoSalud.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16710A61D79E6B0004CB71D /* CargaProductoSalud.swift */; };
+		A16710A91D79E812004CB71D /* ProductoSaludable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16710A81D79E812004CB71D /* ProductoSaludable.swift */; };
 		A16EBC571D382AA2001D0B09 /* BusquedaProductos.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16EBC561D382AA0001D0B09 /* BusquedaProductos.swift */; };
 		A17788421CBFEBD200BEF5A5 /* VistaLonchera.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17788411CBFEBD200BEF5A5 /* VistaLonchera.swift */; };
 		A17788441CBFF0C400BEF5A5 /* Contenedor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17788431CBFF0C400BEF5A5 /* Contenedor.swift */; };
@@ -46,6 +51,10 @@
 		A17B556D1CE3741100FA2353 /* Año.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17B556C1CE3741100FA2353 /* Año.swift */; };
 		A17B556F1CE3A0BB00FA2353 /* Semana.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17B556E1CE3A0BB00FA2353 /* Semana.swift */; };
 		A17B55711CE3D8E500FA2353 /* Dia.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17B55701CE3D8E500FA2353 /* Dia.swift */; };
+		A183B4F41D787C6A0080DBA9 /* Home2.swift in Sources */ = {isa = PBXBuildFile; fileRef = A183B4F31D787C6A0080DBA9 /* Home2.swift */; };
+		A183B4F61D7893090080DBA9 /* DatosB.swift in Sources */ = {isa = PBXBuildFile; fileRef = A183B4F51D7893090080DBA9 /* DatosB.swift */; };
+		A183B4F81D7898010080DBA9 /* BotonCarrito.swift in Sources */ = {isa = PBXBuildFile; fileRef = A183B4F71D7898010080DBA9 /* BotonCarrito.swift */; };
+		A183B4FA1D78A9D90080DBA9 /* Pred2.swift in Sources */ = {isa = PBXBuildFile; fileRef = A183B4F91D78A9D90080DBA9 /* Pred2.swift */; };
 		A1857DEC1CE287DF00D6966D /* Calendario.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1857DEB1CE287DF00D6966D /* Calendario.swift */; };
 		A1857DEE1CE28B6200D6966D /* Mes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1857DED1CE28B6200D6966D /* Mes.swift */; };
 		A1857DF01CE28DC800D6966D /* MesScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1857DEF1CE28DC800D6966D /* MesScroll.swift */; };
@@ -78,6 +87,11 @@
 		A1D1116F1D494E3A00B97F22 /* EliminaFavoritos.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D1116E1D494E3800B97F22 /* EliminaFavoritos.swift */; };
 		A1D111711D4AAAF300B97F22 /* BarraOpciones.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D111701D4AAAF300B97F22 /* BarraOpciones.swift */; };
 		A1D111731D4AC4C800B97F22 /* Circulo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D111721D4AC4C800B97F22 /* Circulo.swift */; };
+		A1D877901D7A2D5C000DA798 /* Lonchera2.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D8778F1D7A2D59000DA798 /* Lonchera2.swift */; };
+		A1D877921D7DCD35000DA798 /* Contador2.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D877911D7DCD35000DA798 /* Contador2.swift */; };
+		A1D877941D7F4814000DA798 /* Caja2.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D877931D7F4812000DA798 /* Caja2.swift */; };
+		A1D877971D7F609D000DA798 /* Carrito.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D877961D7F609C000DA798 /* Carrito.swift */; };
+		A1D877991D7F725A000DA798 /* Favoritos.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D877981D7F725A000DA798 /* Favoritos.swift */; };
 		A1F1F56D1D19D78E00B4BFBE /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = A1F1F56C1D19D78E00B4BFBE /* Fonts */; };
 		A1F1F5701D19DA3B00B4BFBE /* Albertino.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A1F1F56E1D19DA3B00B4BFBE /* Albertino.ttf */; };
 		A1F1F5711D19DA3B00B4BFBE /* Sans-Beam-Head-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = A1F1F56F1D19DA3B00B4BFBE /* Sans-Beam-Head-Medium.otf */; };
@@ -111,6 +125,7 @@
 		A10671E21D3D596600D0F0B5 /* ScrollResultados.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollResultados.swift; sourceTree = "<group>"; };
 		A10671E41D3D5AF500D0F0B5 /* BotonResultado.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BotonResultado.swift; sourceTree = "<group>"; };
 		A10671E61D3E84DD00D0F0B5 /* DetalleProducto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetalleProducto.swift; sourceTree = "<group>"; };
+		A11838B61D8206B900201A96 /* SubeFavorito.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubeFavorito.swift; sourceTree = "<group>"; };
 		A12C04251D106B9700BA72E1 /* CalendarioNinos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarioNinos.swift; sourceTree = "<group>"; };
 		A12C04271D107EBB00BA72E1 /* NinoCalendarioBot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NinoCalendarioBot.swift; sourceTree = "<group>"; };
 		A12C04291D109E3500BA72E1 /* AnoScroll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnoScroll.swift; sourceTree = "<group>"; };
@@ -130,6 +145,10 @@
 		A14296271D2580C100A0905B /* SubeNino.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubeNino.swift; sourceTree = "<group>"; };
 		A15BBD031CB425840043CD9B /* DatosC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatosC.swift; sourceTree = "<group>"; };
 		A15BBD091CB4452B0043CD9B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A16710A21D79C545004CB71D /* CargaSalud.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CargaSalud.swift; sourceTree = "<group>"; };
+		A16710A41D79C68B004CB71D /* Saludable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Saludable.swift; sourceTree = "<group>"; };
+		A16710A61D79E6B0004CB71D /* CargaProductoSalud.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CargaProductoSalud.swift; sourceTree = "<group>"; };
+		A16710A81D79E812004CB71D /* ProductoSaludable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductoSaludable.swift; sourceTree = "<group>"; };
 		A16EBC561D382AA0001D0B09 /* BusquedaProductos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusquedaProductos.swift; sourceTree = "<group>"; };
 		A17788411CBFEBD200BEF5A5 /* VistaLonchera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VistaLonchera.swift; sourceTree = "<group>"; };
 		A17788431CBFF0C400BEF5A5 /* Contenedor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contenedor.swift; sourceTree = "<group>"; };
@@ -140,6 +159,10 @@
 		A17B556C1CE3741100FA2353 /* Año.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Año.swift"; sourceTree = "<group>"; };
 		A17B556E1CE3A0BB00FA2353 /* Semana.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Semana.swift; sourceTree = "<group>"; };
 		A17B55701CE3D8E500FA2353 /* Dia.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dia.swift; sourceTree = "<group>"; };
+		A183B4F31D787C6A0080DBA9 /* Home2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Home2.swift; sourceTree = "<group>"; };
+		A183B4F51D7893090080DBA9 /* DatosB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatosB.swift; sourceTree = "<group>"; };
+		A183B4F71D7898010080DBA9 /* BotonCarrito.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BotonCarrito.swift; sourceTree = "<group>"; };
+		A183B4F91D78A9D90080DBA9 /* Pred2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pred2.swift; sourceTree = "<group>"; };
 		A1857DEB1CE287DF00D6966D /* Calendario.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Calendario.swift; sourceTree = "<group>"; };
 		A1857DED1CE28B6200D6966D /* Mes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mes.swift; sourceTree = "<group>"; };
 		A1857DEF1CE28DC800D6966D /* MesScroll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MesScroll.swift; sourceTree = "<group>"; };
@@ -172,6 +195,11 @@
 		A1D1116E1D494E3800B97F22 /* EliminaFavoritos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EliminaFavoritos.swift; sourceTree = "<group>"; };
 		A1D111701D4AAAF300B97F22 /* BarraOpciones.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarraOpciones.swift; sourceTree = "<group>"; };
 		A1D111721D4AC4C800B97F22 /* Circulo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Circulo.swift; sourceTree = "<group>"; };
+		A1D8778F1D7A2D59000DA798 /* Lonchera2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lonchera2.swift; sourceTree = "<group>"; };
+		A1D877911D7DCD35000DA798 /* Contador2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contador2.swift; sourceTree = "<group>"; };
+		A1D877931D7F4812000DA798 /* Caja2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Caja2.swift; sourceTree = "<group>"; };
+		A1D877961D7F609C000DA798 /* Carrito.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Carrito.swift; sourceTree = "<group>"; };
+		A1D877981D7F725A000DA798 /* Favoritos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Favoritos.swift; sourceTree = "<group>"; };
 		A1F1F56C1D19D78E00B4BFBE /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Fonts; path = Resources/Fonts; sourceTree = "<group>"; };
 		A1F1F56E1D19DA3B00B4BFBE /* Albertino.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Albertino.ttf; path = ConsumoSOAP/Resources/Fonts/Albertino.ttf; sourceTree = "<group>"; };
 		A1F1F56F1D19DA3B00B4BFBE /* Sans-Beam-Head-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Sans-Beam-Head-Medium.otf"; path = "ConsumoSOAP/Resources/Fonts/Sans-Beam-Head-Medium.otf"; sourceTree = "<group>"; };
@@ -224,6 +252,8 @@
 		A102F6691CA9CCF7001359A5 /* ConsumoSOAP */ = {
 			isa = PBXGroup;
 			children = (
+				A1D877951D7F6062000DA798 /* Carrito */,
+				A183B4F21D787C430080DBA9 /* Home2 */,
 				A10671DC1D3974E900D0F0B5 /* Singleton */,
 				A10671DB1D39744D00D0F0B5 /* CreaNino */,
 				A10671DA1D39743300D0F0B5 /* Home */,
@@ -288,6 +318,9 @@
 				A13603C51CAEE6580032A19A /* ConsultaProductos.swift */,
 				A10671DE1D397A7700D0F0B5 /* CargaTags.swift */,
 				A1D1116E1D494E3800B97F22 /* EliminaFavoritos.swift */,
+				A16710A21D79C545004CB71D /* CargaSalud.swift */,
+				A16710A61D79E6B0004CB71D /* CargaProductoSalud.swift */,
+				A11838B61D8206B900201A96 /* SubeFavorito.swift */,
 			);
 			name = Cargas;
 			sourceTree = "<group>";
@@ -319,6 +352,9 @@
 				A13603D01CB2C50D0032A19A /* Casilla.swift */,
 				A13603C71CAEFB3D0032A19A /* Producto.swift */,
 				A10671E01D398AD900D0F0B5 /* Tag.swift */,
+				A16710A41D79C68B004CB71D /* Saludable.swift */,
+				A16710A81D79E812004CB71D /* ProductoSaludable.swift */,
+				A1D877981D7F725A000DA798 /* Favoritos.swift */,
 			);
 			name = ClasesDatos;
 			sourceTree = "<group>";
@@ -350,6 +386,7 @@
 			children = (
 				A15BBD031CB425840043CD9B /* DatosC.swift */,
 				A19180DA1CF662DB000FBD31 /* DatosD.swift */,
+				A183B4F51D7893090080DBA9 /* DatosB.swift */,
 			);
 			name = Singleton;
 			sourceTree = "<group>";
@@ -371,6 +408,27 @@
 				A1AF82441D59994D00085408 /* Año2.swift */,
 			);
 			name = Calendario;
+			sourceTree = "<group>";
+		};
+		A183B4F21D787C430080DBA9 /* Home2 */ = {
+			isa = PBXGroup;
+			children = (
+				A183B4F31D787C6A0080DBA9 /* Home2.swift */,
+				A183B4F71D7898010080DBA9 /* BotonCarrito.swift */,
+				A183B4F91D78A9D90080DBA9 /* Pred2.swift */,
+				A1D8778F1D7A2D59000DA798 /* Lonchera2.swift */,
+				A1D877911D7DCD35000DA798 /* Contador2.swift */,
+				A1D877931D7F4812000DA798 /* Caja2.swift */,
+			);
+			name = Home2;
+			sourceTree = "<group>";
+		};
+		A1D877951D7F6062000DA798 /* Carrito */ = {
+			isa = PBXGroup;
+			children = (
+				A1D877961D7F609C000DA798 /* Carrito.swift */,
+			);
+			name = Carrito;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -486,6 +544,7 @@
 			files = (
 				A17788441CBFF0C400BEF5A5 /* Contenedor.swift in Sources */,
 				A1A0820D1CBD841A001C0AD2 /* Secuencia.swift in Sources */,
+				A16710A31D79C545004CB71D /* CargaSalud.swift in Sources */,
 				A13A2BD31D08C2590008E22E /* CargaItemsFavoritos.swift in Sources */,
 				A13A2BD51D0A2A750008E22E /* IngresaFavoritos.swift in Sources */,
 				A19180D51CF60AAE000FBD31 /* ConsultaLogin.swift in Sources */,
@@ -497,13 +556,16 @@
 				A19834FB1CBD7E810099D815 /* CajaView.swift in Sources */,
 				A13A2BD11D08AFF50008E22E /* CargaFavoritos.swift in Sources */,
 				A15BBD041CB425850043CD9B /* DatosC.swift in Sources */,
+				A183B4F41D787C6A0080DBA9 /* Home2.swift in Sources */,
 				A10671E51D3D5AF500D0F0B5 /* BotonResultado.swift in Sources */,
 				A13A2BCF1D071ADC0008E22E /* Categoria.swift in Sources */,
 				A19834F91CBD54460099D815 /* CargaCajas.swift in Sources */,
 				A17982DA1CDCF13100558C55 /* CargaTInfo.swift in Sources */,
 				A12C042A1D109E3500BA72E1 /* AnoScroll.swift in Sources */,
+				A16710A91D79E812004CB71D /* ProductoSaludable.swift in Sources */,
 				A18878B61CBC055700737085 /* BotonNino.swift in Sources */,
 				A1A082111CBD8F42001C0AD2 /* CargaTItems.swift in Sources */,
+				A1D877991D7F725A000DA798 /* Favoritos.swift in Sources */,
 				A13603CF1CAF20770032A19A /* ProductoView.swift in Sources */,
 				A13A2BCD1D0717CC0008E22E /* ConsultaCategorias.swift in Sources */,
 				A19FDD3F1CEE1A1C00CCB1F1 /* FacturaNino.swift in Sources */,
@@ -514,6 +576,7 @@
 				A12C04261D106B9700BA72E1 /* CalendarioNinos.swift in Sources */,
 				A17B556F1CE3A0BB00FA2353 /* Semana.swift in Sources */,
 				A19FDD411CEE33E100CCB1F1 /* DiaNino.swift in Sources */,
+				A1D877941D7F4814000DA798 /* Caja2.swift in Sources */,
 				A197755E1CF7627600508A4B /* Ninos.swift in Sources */,
 				A19747821CDA7F9600656813 /* Contador.swift in Sources */,
 				A12C042C1D1496C300BA72E1 /* LaBarra.swift in Sources */,
@@ -523,11 +586,15 @@
 				A17788481CC002CE00BEF5A5 /* SubVista.swift in Sources */,
 				A19180D71CF65021000FBD31 /* ConsultaNinos.swift in Sources */,
 				A1D1116F1D494E3A00B97F22 /* EliminaFavoritos.swift in Sources */,
+				A16710A51D79C68B004CB71D /* Saludable.swift in Sources */,
+				A16710A71D79E6B0004CB71D /* CargaProductoSalud.swift in Sources */,
 				A1A605C31CC81BD000FE9AC7 /* PestanasProductos.swift in Sources */,
 				A13603C61CAEE6580032A19A /* ConsultaProductos.swift in Sources */,
+				A1D877971D7F609D000DA798 /* Carrito.swift in Sources */,
 				A17788421CBFEBD200BEF5A5 /* VistaLonchera.swift in Sources */,
 				A19834F51CBD46030099D815 /* Predeterminadas.swift in Sources */,
 				A10671E31D3D596600D0F0B5 /* ScrollResultados.swift in Sources */,
+				A183B4F61D7893090080DBA9 /* DatosB.swift in Sources */,
 				A19180D31CF609C6000FBD31 /* LoginView.swift in Sources */,
 				A1D111711D4AAAF300B97F22 /* BarraOpciones.swift in Sources */,
 				A19180D91CF654D4000FBD31 /* Padre.swift in Sources */,
@@ -537,16 +604,21 @@
 				A18878B41CBC03C600737085 /* VistaNino.swift in Sources */,
 				A13603D11CB2C50D0032A19A /* Casilla.swift in Sources */,
 				A139AB8B1CBE8C3900A32EFC /* CargaSecuencia.swift in Sources */,
+				A11838B71D8206C100201A96 /* SubeFavorito.swift in Sources */,
 				A14296281D2580C100A0905B /* SubeNino.swift in Sources */,
+				A1D877921D7DCD35000DA798 /* Contador2.swift in Sources */,
 				A1857DF01CE28DC800D6966D /* MesScroll.swift in Sources */,
 				A10671DF1D397A7700D0F0B5 /* CargaTags.swift in Sources */,
+				A183B4FA1D78A9D90080DBA9 /* Pred2.swift in Sources */,
 				A1857DEE1CE28B6200D6966D /* Mes.swift in Sources */,
+				A1D877901D7A2D5C000DA798 /* Lonchera2.swift in Sources */,
 				A18878B21CBBECB400737085 /* PantallaP.swift in Sources */,
 				A17B55711CE3D8E500FA2353 /* Dia.swift in Sources */,
 				A1F1F5731D1DC09800B4BFBE /* BotonDias.swift in Sources */,
 				A10671E71D3E84DF00D0F0B5 /* DetalleProducto.swift in Sources */,
 				A18878B81CBC266600737085 /* CreaNino.swift in Sources */,
 				A1A0820F1CBD845E001C0AD2 /* TItems.swift in Sources */,
+				A183B4F81D7898010080DBA9 /* BotonCarrito.swift in Sources */,
 				A1D111731D4AC4C800B97F22 /* Circulo.swift in Sources */,
 				A17982D81CDCEC9F00558C55 /* TipoInfo.swift in Sources */,
 				A1AF82451D59994D00085408 /* Año2.swift in Sources */,

@@ -19,7 +19,7 @@ class PantallaSV: UIViewController {
     var CasillaF:CGRect?;
     var FrameOriginal:CGRect?;
     var CasiillaOriginal:CGRect?;
-    var lonch:LoncheraO!;
+    var lonch:Lonchera2!;
     var padreLonch:UIView?;
     var panelInfo:UIView?;
     let reductor = CGFloat(0.5);
@@ -33,8 +33,8 @@ class PantallaSV: UIViewController {
         iniciaEspacioIntercambio();
         DatosC.contenedor.pantallaSV=self;
         PanelElementos!.frame=CGRectMake(0, (LaBarra.frame.height+LaBarra.frame.origin.y), DatosC.contenedor.anchoP, (DatosC.contenedor.altoP));
-        lonch=DatosC.contenedor.lonchera;
-        print("LONC ATT: ", lonch.fechaVisible?.text);
+        lonch=DatosB.cont.home2.lonchera;
+        print("LONC ATT: ", lonch);
          if(lonch != nil){
             print("Lleno")
          }else{
@@ -42,89 +42,12 @@ class PantallaSV: UIViewController {
          }
          //lonch.ordena();
          //Lonchera.addSubview(lonch.view);
-         padreLonch=lonch!.view.superview;
+         padreLonch=lonch!.superview;
         let framePanelElementos = CGRectMake(0, 0, PanelElementos.frame.width, PanelElementos.frame.height);
         contenedor=ContenedorProductos(frame: framePanelElementos);
-        //Lonchera?.frame=CGRectMake(0, framePanelElementos.height, (DatosC.contenedor.anchoP-20), (DatosC.contenedor.altoP*0.4));
+        //Lonchera?.frame=CGRectMake(0, framePanelElementos.height, (DatosC.contenedor.anchoP-20),
         
-         
-        FrameOriginal=lonch!.subVista?.frame;
-         //lonch.subVista?.escala();
-         //CasiillaOriginal=lonch.subVista?.casillas[0].frame;
-         
-        
-        //print("Frame: ", FrameOriginal);
-        let frameSubvista = CGRectMake(0, DatosC.contenedor.altoP*0.7, DatosC.contenedor.anchoP, contenedor.frame.height);
-        lonch!.subVista!.frame = frameSubvista;
-        lonch!.subVista?.tamañoFondo(frameSubvista);
-         
-         
-        //let sum=(DatosC.contenedor.anchoP/2)-(((lonch!.subVista?.frameLonchera?.width)!*0.5)/2);//Desplazamiento horizontal de las casillas en la alacena
-        let anchoCasilla = lonch!.subVista?.casillas[0].frame.width;
-        let sum=(DatosC.contenedor.anchoP*(1-reductor))-((anchoCasilla!*reductor));
-        //print("sum", sum);
-         for cass in lonch.subVista!.casillas{
-            print("pos: ",cass.frame);
-            let bot = UIButton(frame: CGRectMake(10, 10, 30, 30));
-            bot.addTarget(self, action: #selector(PantallaSV.boto(_:)), forControlEvents: .TouchDown);
-            bot.backgroundColor=UIColor.redColor();
-            let nf=CGRectMake((cass.frame.origin.x*reductor)+sum, cass.frame.origin.y*reductor, (cass.frame.width*reductor), (cass.frame.height*reductor))
-            
-            cass.frame=nf;
-            cass.setFondo(true);
-            print("nf", cass.frame);
-            //print("nima: ",cass.elemeto?.producto?.nombre);
-            
-            if(cass.elemeto?.producto != nil){
-                cass.elemeto!.frame=CGRectMake(0, 0, nf.width, nf.height);
-         
-                //print("nn: ",cass.elemeto!.producto?.nombre);
-         
-                let pv=ProductoView(frame: CGRectMake(0, 0, nf.width, nf.height), imagen: cass.elemeto!.producto!.imagen);
-                let prod=cass.elemeto!.producto;
-                let tipo=cass.tipo;
-                let ima=cass.elemeto!.producto!.imagen;
-                cass.elemeto?.backgroundColor=UIColor.clearColor().colorWithAlphaComponent(0.6);
-                cass.elemeto!.removeFromSuperview();
-                //cass.elemeto!.elimina();
-                pv.espacio=lonch.subVista;
-                pv.Natural=false;
-                cass.seteaElemento(pv, tipo: tipo!, ima: ima, prod: prod!);
-                if(lonch.saludable == true){
-                    cass.setFondo(cass.elemeto!.producto!.salud!)
-                }else{
-                    cass.setFondo(false);
-                }
-                
-                //cass.elemeto=pv;
-                //cass.addSubview(pv);
-                /*
-                cass.tipo=tipo;
-                cass.elemeto!.producto=prod;
-                cass.elemeto!.producto!.imagen=ima;
-                */
-                //cass.backgroundColor = UIColor.grayColor();
-                self.view.bringSubviewToFront(cass.elemeto!);
-            }else{
-                //print("cass: ", lonch.saludable);
-                if(lonch.saludable != nil){
-                    cass.setFondo(lonch.saludable!);
-                }
-                
-                //print("no posee: ", cass.elemeto?.producto?.nombre);
-            }
-            cass.activo = false;
-            
-            //cass.addSubview(bot);
-            //self.view.bringSubviewToFront(bot);
-            cass.addTarget(cass, action: #selector(Casilla.toca(_:)), forControlEvents: .TouchDown);
-         //print("pos2: ",nf);
-         
-         }
-        
-        lonch.view.bringSubviewToFront(lonch.subVista!);
-        
-        DatosC.contenedor.casillasF=lonch.subVista!.casillas;
+        //DatosC.contenedor.casillasF=lonch.subVista!.casillas;
         let volver = UIButton(frame: CGRectMake(0, (DatosC.contenedor.altoP*0.5), (DatosC.contenedor.anchoP*0.3), (DatosC.contenedor.altoP*0.07)));
         volver.addTarget(self, action: #selector(PantallaSV.devuelve(_:)), forControlEvents: .TouchDown)
         volver.setTitle("Volver", forState: .Normal);
@@ -195,114 +118,15 @@ class PantallaSV: UIViewController {
     }
     
     func actuaLonch(pasa: Bool){
-        padreLonch?.addSubview(lonch.view);
-        let anchoCasilla = lonch!.subVista?.casillas[0].frame.width;
-        let sum=((DatosC.contenedor.anchoP*(1-reductor))-((anchoCasilla!)));
-        //print("Espaceado ", (DatosC.contenedor.anchoP*(1-reductor)));
-        //print("casilla: ", anchoCasilla!);
-        //print("sum 2: ", sum);
-        lonch=DatosC.contenedor.lonchera;
-        print("LONC ATT: ", lonch.fechaVisible?.text);
-        for cas in (lonch.subVista?.casillas)!{
-            print("cas: ", cas.elemeto?.producto?.nombre);
-        }
-        //lonch=DatosC.contenedor.loncheras[DatosC.contenedor.iActual]; //Lonchera que se va a actualizar
-        //print("Lonch ID: ", lonch.id);
         
-        for cass in lonch.subVista!.casillas{
-            //
-            if(pasa){
-                cass.frame=CGRectMake(((cass.frame.origin.x))/reductor-(sum*2), cass.frame.origin.y/reductor, cass.frame.width/reductor, cass.frame.height/reductor);
-            }
-            //print("nima: ",cass.frame);
-            if(cass.elemeto?.producto != nil){
-                cass.elemeto!.frame=CGRectMake(0, 0, cass.frame.width, cass.frame.height)
-                
-                //print("nn: ",cass.elemeto!.frame);
-                
-                let pv=ProductoView(frame: CGRectMake(0, 0, cass.frame.width, cass.frame.height), imagen: cass.elemeto!.producto!.imagen);
-                let prod=cass.elemeto!.producto;
-                
-                var tipo=cass.tipo;
-                if(tipo == nil){
-                    tipo = -1;
-                }
-                pv.tipo=tipo;
-                pv.producto=prod;
-                
-                print("Nuevo: ",pv.producto?.nombre);
-                let ima=cass.elemeto!.producto!.imagen;
-                //pv.imagen?.contentMode=UIViewContentMode.ScaleAspectFit;
-                //cass.elemeto!.backgroundColor=UIColor.clearColor().colorWithAlphaComponent(0.6);
-                cass.elemeto!.removeFromSuperview();
-                //cass.elemeto!.elimina();
-                
-                
-                /*
-                 let Cas = cass;
-                 Cas.elemeto=nil;
-                 cass.elemeto=nil;
-                 */
-                pv.espacio=lonch.subVista;
-                
-                cass.seteaElemento(pv, tipo: tipo!, ima: ima, prod: prod!);
-                /*
-                cass.elemeto=pv;
-                cass.tipo=tipo;
-                */
-                cass.elemeto?.Natural=pasa;
-                cass.elemeto?.padre=cass;
-                /*
-                 for ele in cass.elemeto!.subviews{
-                 print("subvv: ", ele);
-                 }
-                 */
-                cass.addSubview(pv);
-                cass.elemeto!.producto=prod;
-                //print("PV: ",cass.elemeto?.producto!.nombre);
-                cass.elemeto!.producto!.imagen=ima;
-                cass.bringSubviewToFront(pv);
-                
-            }else{
-                //print("no posee: ", cass.elemeto?.producto?.nombre);
-            }
-            cass.activo=pasa;
-            //print("salud: ", lonch.saludable);
-            if(lonch.saludable == nil){
-                cass.setFondo(true);
-            }else{
-                cass.setFondo(lonch.saludable!);
-            }
-            
-         //cs.elemeto?.Natural=true;
-        }
         if(pasa){
-            lonch!.subVista?.frame=FrameOriginal!;
-            lonch!.subVista?.setFondo2();
             
-        }
-        DatosC.contenedor.lonchera=lonch;
-        //padreLonch?.addSubview(lonch!.subVista!);
-        
-        //print("iActual:", DatosC.contenedor.iActual);
-        //scrol?.paginas[DatosC.contenedor.iActual].removeFromParentViewController();
-        
-        
-        //print("sup:", scrol);
-        //print("Frame: ", lonch!.subVista?.frame);
-        if(pasa){
-            let scrol=lonch?.padre;
-            let sub=lonch?.subVista;
-            scrol?.paginas[DatosC.contenedor.iActual].subVista=lonch!.subVista;
-            scrol?.paginas[DatosC.contenedor.iActual].view!.addSubview(sub!);
-            lonch!.view.bringSubviewToFront(lonch!.botadd!);
-            lonch!.view.bringSubviewToFront(lonch!.botfavo!);
-            lonch!.view.bringSubviewToFront(lonch!.botrem!);
             self.dismissViewControllerAnimated(true, completion: nil);
         }else{
             
         }
     }
+    
     
     func bajaLonch()-> LoncheraO{
         return DatosC.contenedor.lonchera;
@@ -317,7 +141,7 @@ class PantallaSV: UIViewController {
         
         let frame = CGRectMake(bordeL, bordeA, self.view.frame.width*0.79, self.view.frame.height*0.8);
         //0.77let frameImagen = CGRectMake(bordeA, bordeA, frame.width-(2*bordeA), frame.height*0.4);
-        let frameBoton = CGRectMake(0, frame.height*0.9, frame.width, frame.height*0.1);
+        _ = CGRectMake(0, frame.height*0.9, frame.width, frame.height*0.1);
         //let frameInfo = CGRectMake(0, frameImagen.height+frame.origin.y, frame.width, frame.height*0.4);
         panelInfo=DetalleProducto(frame: frame, prdo: prod);
         /*
@@ -421,7 +245,7 @@ class PantallaSV: UIViewController {
         
         let frame = CGRectMake(OX, OY, ancho, alto);
         
-        //print("LoncherActual: ", DatosC.contenedor.tipo!);
+        print("LoncherActual: ", DatosC.contenedor.tipo!);
         var color = "";
         var cant = "";
         var pos = "";
@@ -456,7 +280,7 @@ class PantallaSV: UIViewController {
             }
         }
         */
-        cant = String(DatosC.contenedor.lonchera.subVista!.casillas.count);
+        cant = String(DatosB.cont.home2.lonchera.casillas.count);
         pos = String(DatosC.contenedor.tipo!);
         
         let nomText = color+"-"+cant+"-"+pos;

@@ -135,8 +135,8 @@ class ProductoView: UIButton {
             eva4();
             timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(ProductoView.informacion), userInfo: nil, repeats: false);
             cc = convertRect(padre!.frame, toView: espacio!);
-            var sigue = true;
-            var superP = self.superview;
+            _ = true;
+            _ = self.superview;
             /*
             while sigue {
                 if(superP != nil){
@@ -168,27 +168,27 @@ class ProductoView: UIButton {
         //timer2 = NSTimer.scheduledTimerWithTimeInterval(0.4, target: self, selector: #selector(ProductoView.evaMov2), userInfo: nil, repeats: false);
         evaMov2();
         moviendo = false;
-        print("sale????")
+        //print("sale????")
         let objetivo = DatosC.contenedor.pantallaSV.casillaBaja;
         var copia : ProductoView?;
         
         if(Panel2==nil && PanelOrigen==nil){        // Sale del touch normal
-            print("Sale normal");
-            
+            //print("Sale normal");
+            //print("espacio P: ", espacioPadre, " centro: ", self.center);
             if(CGRectContainsPoint(espacioPadre, self.center)){
-                print("punto: ", self.center, tipo);
-                print("Esta adentro", espacioPadre, self.center);
+                //print("punto: ", self.center, tipo);
+                //print("Esta adentro", espacioPadre, self.center);
                 if(self.center==CGPoint(x: espacioPadre.width/2, y: espacioPadre.height/2)){
                     if(self.tipo != nil){ // Paso a la alacena
-                        print("eeeeee", self.tipo)
+                        //print("eeeeee", self.tipo)
                         if(bloqueo2){
-                            print("bloqueado");
+                            //print("bloqueado");
                         }else{
-                            print("NO bloqueado");
+                            //print("NO bloqueado");
                         }
                         //
                     }else{
-                        print("oooooo: ");
+                        //print("oooooo: ");
                         self.center=ultimaPosicion;
                     }
                 }
@@ -203,8 +203,9 @@ class ProductoView: UIButton {
                         
                     //}
                 }
-                print("elimina?");
-                DatosC.contenedor.lonchera.contador?.actua();
+                //print("elimina?");
+                //DatosC.contenedor.lonchera.contador?.actua();
+                DatosB.cont.home2.lonchera.actualizaContador();
             }
         }else{
             
@@ -277,46 +278,18 @@ class ProductoView: UIButton {
     }
     
     func panelElementos(tipo: Int){
-        //print("toca");
+        
         if(Natural==true){
-        //print("pasa>?", Natural);
-            //DatosC.contenedor.lonchera=DatosC.contenedor.loncheras[DatosC.contenedor.iActual];
-            /*
-            let loncheraActual=DatosC.contenedor.loncheras[DatosC.contenedor.iActual];
-            for cass in (loncheraActual.subVista?.casillas)!{
-                print("ca: ", cass.elemeto?.producto?.nombre);
-            }
-            print("LA: ",loncheraActual.subVista?.casillas.count);
-            */
-            //print("Origen Padre: ", self.padre?.lonchera);
-            //print("Origen: ", self.padre?.lonchera.id);
-            for BotNino in DatosC.contenedor.ninos{
-                if(BotNino.activo == true){
-                    //print("iact: ", DatosC.contenedor.iActual);
-                    //print("lons: ", BotNino.loncheras.count);
-                    if(BotNino.loncheras.count == 0){
-                        BotNino.loncheras = DatosC.contenedor.loncheras;
-                    }
-                    DatosC.contenedor.lonchera = BotNino.loncheras[DatosC.contenedor.iActual];
-                    //print("Cambia: ");
-                }
-                
-            }
-            //DatosC.contenedor.lonchera=DatosC.contenedor.loncheras[DatosC.contenedor.iActual];
-            
-            for _ in DatosC.contenedor.loncheras{
-                //print("Posi: ", ll.id);
+            if(self.producto!.tipo != nil){
+                print("toca prod: ", self.producto?.tipo);
+                DatosC.contenedor.tipo=self.producto!.tipo;
+            }else{
+                print("toca cas: ", tipo);
+                DatosC.contenedor.tipo=tipo;
             }
             
-        let posi=convertRect((self.superview!.frame), toView: DatosC.contenedor.Pantallap.view);
-            //print("Posi: ",posi);
-            DatosC.contenedor.casillaF=posi;
-            DatosC.contenedor.tipo=tipo;
-            //DatosC.contenedor.lonchera=DatosC.contenedor.loncheras[DatosC.contenedor.iActual];
-            for cs in (DatosC.contenedor.lonchera.subVista?.casillas)!{
-                cs.elemeto?.Natural=false;
-            }
-            DatosC.contenedor.Pantallap.performSegueWithIdentifier("Seleccion", sender: nil);
+            DatosB.cont.home2.performSegueWithIdentifier("Seleccion", sender: nil);
+            
         }
     }
     
@@ -358,15 +331,15 @@ class ProductoView: UIButton {
         */
         //print("self: ", self.superview);
         //print("ded: ", ultToque.locationInView(padre));
-        print("acumula: ", acumula);
+        //print("acumula: ", acumula);
         var mov = false;
         if((acumula!.x < 15 && acumula!.y < 15)){
-            print("adentro");
+            //print("adentro");
             mov = true;
             
         }
         if(bloqueo4 == true && ultToque.phase.rawValue==2 && mov == true){
-            print("Muestra: ", DatosC.contenedor.pantallaSV);
+            //print("Muestra: ", DatosC.contenedor.pantallaSV);
             DatosC.contenedor.pantallaSV.iniciaPanelInfo(self.producto!);
         }
         //bloqueo4 = false;
@@ -376,22 +349,29 @@ class ProductoView: UIButton {
     func cierraAlacena(pasa: Bool){
         
         if(pasa){
-            //print("iAct: ", DatosC.contenedor.iActual);
-            print("QQ: ", DatosC.contenedor.lonchera.fechaVisible?.text);
-            for cas in (DatosC.contenedor.lonchera.subVista?.casillas)!{
+            /*
+            //
+            //print("QQ: ", DatosC.contenedor.lonchera.fechaVisible?.text);
+            for cas in (DatosB.cont.home2.lonchera.casillas){
                 //print("cas: ", cas.tipo, " cont: ", DatosC.contenedor.tipo);
                 if (cas.tipo == DatosC.contenedor.tipo){
                     let cc = copiarse();
                     
                     cc.frame = CGRectMake(0, 0, cas.frame.width, cas.frame.height);
+                    print("casilla: ", cas.frame);
+                    print("frame: ", cc.frame);
                     cas.addSubview(cc);
                     cas.elemeto=cc;
                     print("cas: ", cas.elemeto?.producto?.nombre);
                 }
             }
+            */
+            //print("iAct: ", DatosC.contenedor.tipo);
+            DatosB.cont.home2.lonchera.setCasilla(DatosC.contenedor.tipo!, prod: self.producto!);
+            self.Natural=true;
             
             DatosC.contenedor.lonchera.color = nil;
-            DatosC.contenedor.lonchera.contador?.actua(); 
+            //DatosC.contenedor.lonchera.contador?.actua();
             DatosC.contenedor.pantallaSV.actuaLonch(true);
             
         }else{
@@ -404,6 +384,8 @@ class ProductoView: UIButton {
         
         var copia :ProductoView;
         copia = ProductoView(frame: padre!.frame, imagen: (padre?.elemeto!.producto!.imagen)!);
+        //print("padre frame: ", padre?.frame);
+        //copia.frame = (padre?.frame)!;
         copia.tipo=self.tipo;
         copia.producto=self.producto;
         copia.producto?.imagen=self.producto!.imagen;
@@ -436,12 +418,12 @@ class ProductoView: UIButton {
         
         if(CGRectContainsPoint(self.frame, ultToque.locationInView(self)) ){
             if(ultToque.phase.rawValue==2){
-                print("Mueve");
+                //print("Mueve");
                 bloqueo2 = true;
                 bloqueo5 = true;
                 self.center=ultimaPosicion;
             }else if(ultToque.phase.rawValue==3){
-                print("Panel");
+                //print("Panel");
                 bloqueo2=false;
                 if(DatosC.contenedor.pantallaSV.contenedor != nil){
                     DatosC.contenedor.pantallaSV.contenedor.cierraBusqueda(self);
@@ -449,11 +431,11 @@ class ProductoView: UIButton {
                 
                 if(Panel2 == nil && PanelOrigen == nil){
                     //if(ultToque.phase.rawValue==2){
-                        print("Pasa");
+                        //print("Pasa");
                         panelElementos(self.padre!.tipo!);
                     //}else{
                         
-                        print("Retorna");
+                        //print("Retorna");
                         self.center=CGPoint(x: padre!.frame.width/2, y: padre!.frame.height/2);
                     //}
                 }

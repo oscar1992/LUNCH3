@@ -53,6 +53,13 @@ class ConsultaProductos: NSObject , NSURLConnectionDelegate, NSXMLParserDelegate
             self.parser.delegate=self
             self.parser.parse()
             dispatch_async(dispatch_get_main_queue(),{
+                let cargaS = CargaSalud();
+                cargaS.cargaSaludables();
+                let cargaF = CargaFavoritos();
+                cargaF.consulta(DatosD.contenedor.padre.id);
+                
+                //let cargaF = CargaFavoritos();
+                //cargaF.consulta(DatosD.contenedor.padre.id);
                 print("Carga Productos");
             });
         })

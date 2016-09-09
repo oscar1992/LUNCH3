@@ -21,21 +21,26 @@ class IngresaFavoritos: NSObject , NSURLConnectionDelegate, NSXMLParserDelegate{
     var prodid : String!;
     var bot : UIButton?;
     var predeter: Predeterminadas?;
+    var favorita: Favoritos!;
     
     //Método que permite evaluar si la caja viene vacía, de ser así no ejecuta la carga
-    func evalua(prods: [Producto]){
+    func evalua(prods: [Producto], id:Int){
+        bot = DatosB.cont.home2.lonchera.botfavo;
         print("cuenta: ", prods.count);
         if(prods.count == 0){
             
         }else{
             bot?.enabled = false;
+            favorita=Favoritos(id: id, nombre: "Nueva");
+            favorita.items=prods;
             //bot?.backgroundColor = UIColor.grayColor();
-            envia(prods);
+            envia(prods, id: id);
             print("Envia");
         }
     }
     
-    func envia(prods: [Producto]){
+    func envia(prods: [Producto], id: Int){
+        
         
         
         var intermedio:String = "";
@@ -45,11 +50,11 @@ class IngresaFavoritos: NSObject , NSURLConnectionDelegate, NSXMLParserDelegate{
             prodid = String(prod.id!);
             print("pad: ", padre!);
             print("prod: ", prodid!);
-            intermedio += "<lista><idFavorito>?</idFavorito><nlonchera><padre><idPadre>"+padre!+"</idPadre></padre></nlonchera><producto><idProducto>"+prodid!+"</idProducto></producto></lista>";
+            intermedio += "<lista><idFavorito>?</idFavorito><nlonchera><idNumeroLonchera>"+String(id)+"</idNumeroLonchera><padre><idPadre>"+padre!+"</idPadre></padre></nlonchera><producto><idProducto>"+prodid!+"</idProducto></producto></lista>";
         }
-        print("INT: ", intermedio);
+        //print("INT: ", intermedio);
         let mensajeEnviado:String = "<soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/' xmlns:enp='http://enpoint.lunch.com.co/'><soapenv:Header/><soapenv:Body><enp:ingresaFavoritos>"+intermedio+"</enp:ingresaFavoritos></soapenv:Body></soapenv:Envelope>";
-        
+        print("Envia: ", mensajeEnviado);
         let is_URL: String = "http://93.188.163.97:8080/Lunch2/clienteEndpoint"
         
         let lobj_Request = NSMutableURLRequest(URL: NSURL(string: is_URL)!)
@@ -83,9 +88,7 @@ class IngresaFavoritos: NSObject , NSURLConnectionDelegate, NSXMLParserDelegate{
                 self.bot?.enabled = true;
                 //self.bot?.backgroundColor = UIColor.yellowColor();
                 self.poneDorada();
-                let cargaF = CargaFavoritos();
-                cargaF.pred=self.predeter;
-                cargaF.consulta(DatosD.contenedor.padre.id);
+                print("Sube OK")
                 
             });
             
@@ -106,5 +109,14 @@ class IngresaFavoritos: NSObject , NSURLConnectionDelegate, NSXMLParserDelegate{
         let backImg = UIImageView(frame: frameImagen);
         backImg.image=ima;
         bot!.addSubview(backImg);
+        
+        /*
+        let cargaF = CargaFavoritos();
+        cargaF.pred=self.predeter;
+        cargaF.consulta(DatosD.contenedor.padre.id);
+        */
+        DatosB.cont.favoritos.append(favorita);
+        DatosB.cont.home2.predeterminadas.cini=true;
+        DatosB.cont.home2.predeterminadas.cargaSaludables();
     }
 }

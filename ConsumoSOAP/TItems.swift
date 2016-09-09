@@ -12,8 +12,7 @@ class TItems: NSObject {
     
     var id:Int;
     var productos : Producto?;
-    var Combinacion:Int?;
-    var idProducto:Int?;
+    //var favo : Favoritos!;
     
     init(id: Int) {
         self.id=id;

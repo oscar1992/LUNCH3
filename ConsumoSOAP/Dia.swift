@@ -530,7 +530,7 @@ class Dia: UIButton{
             fechaArma.day = ultimoDia!.numDia! - (diasemana.weekday-2);
             //print("Dia: ", fechaArma.day);
             //print("Week day: ", diasemana.weekday);
-            for rest in 0 ... diasemana.weekday-2{
+            for _ in 0 ... diasemana.weekday-2{
                 fechaCompara = NSCalendar.currentCalendar().dateFromComponents(fechaArma)!;
                 let recuDia = ano!.traeDia(fechaArma.year, Mes: fechaArma.month, DiaN: (fechaArma.day));
                 let loncheraVacia = LoncheraO();

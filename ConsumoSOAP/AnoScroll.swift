@@ -31,11 +31,13 @@ class AnoScroll: UIScrollView, UIScrollViewDelegate {
             iniciaEspacioDias();
             primera = false;
         }
+        CalposMeses();
         cargaSemanaActual();
         cargaDiasPosteriores();
         diaActual();
         diaEntrega();
         offsetVisible();
+        self.contentOffset.y=posicionaDiaActual();
         //DatosD.contenedor.calendario.iniciaTextoMes();
     }
     
@@ -319,6 +321,7 @@ class AnoScroll: UIScrollView, UIScrollViewDelegate {
             }
         }
         */
+        
         let año = NSCalendar.currentCalendar().component(.Year, fromDate: NSDate());
         let mes = NSCalendar.currentCalendar().component(.Month, fromDate: NSDate());
         let dia = NSCalendar.currentCalendar().component(.Day, fromDate: NSDate());
@@ -418,6 +421,15 @@ class AnoScroll: UIScrollView, UIScrollViewDelegate {
         //self.layer.mask?.bounds = CGRectMake(0, self.frame.origin.y, DatosC.contenedor.anchoP, self.frame.height);
         //print("mak: ", self.layer.mask!.bounds);
         //self.layer.masksToBounds = false;
+    }
+    
+    //Método que ubica el scroll en el día Actual
+    func posicionaDiaActual()->CGFloat{
+        let año = NSCalendar.currentCalendar().component(.Year, fromDate: NSDate());
+        let mes = NSCalendar.currentCalendar().component(.Month, fromDate: NSDate());
+        let dia = NSCalendar.currentCalendar().component(.Day, fromDate: NSDate());
+        print("tt: ",self.traeDia(año, Mes: mes, DiaN: dia)?.fecha);
+        return (self.traeDia(año, Mes: mes, DiaN: dia)?.frame.origin.y)!
     }
     /*
     // Only override drawRect: if you perform custom drawing.

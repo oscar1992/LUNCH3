@@ -64,6 +64,11 @@ class DatosC{
     var ninoActual : VistaNino?;
     static var calendario = Calendario();
     
+    init(){
+        self.anchoP=UIScreen.mainScreen().bounds.width;
+        self.altoP=UIScreen.mainScreen().bounds.height;
+    }
+    
     func cambia() {
         vistaP.pageControl.currentPage=iActual;
         for obj in arreglo{

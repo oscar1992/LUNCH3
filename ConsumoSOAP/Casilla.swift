@@ -52,7 +52,7 @@ class Casilla: UIButton {
     func toca(sender: AnyObject){
         //print("activo: ", activo);
         if(activo == true){
-            print("IACTUAL: ", DatosC.contenedor.iActual);
+            
             for BotNino in DatosC.contenedor.ninos{
                 if(BotNino.activo == true){
                     //print("iact: ", DatosC.contenedor.iActual);
@@ -66,12 +66,14 @@ class Casilla: UIButton {
                 
             }
             DatosC.contenedor.tipo=tipo;
-            print("QQ: ", DatosC.contenedor.lonchera.fechaVisible?.text);
+            //print("tipo: ", DatosC.contenedor.tipo);
+            print("cas frame: ", self.frame);
+            //print("QQ: ", DatosC.contenedor.lonchera.fechaVisible?.text);
             //DatosC.contenedor.lonchera=DatosC.contenedor.loncheras[DatosC.contenedor.iActual];
             for cs in (DatosC.contenedor.lonchera.subVista?.casillas)!{
                 cs.elemeto?.Natural=false;
             }
-            DatosC.contenedor.Pantallap.performSegueWithIdentifier("Seleccion", sender: nil);
+            DatosB.cont.home2.performSegueWithIdentifier("Seleccion", sender: nil);
             //print("fin tocado2");
         }
     }
@@ -81,9 +83,14 @@ class Casilla: UIButton {
         activo = false;
         elemeto = ele;
         elemeto!.producto=prod;
-        elemeto!.imagen = UIImageView(frame: self.frame);
-        elemeto!.imagen!.image = ima;
+        //elemeto!.imagen = UIImageView(frame: self.frame);
+        //elemeto!.imagen!.image = ima;
         elemeto!.padre=self;
+        
+        let pv = UIImageView(frame: self.frame);
+        pv.image=elemeto!.producto?.imagen;
+        self.addSubview(pv);
+        elemeto?.imagen=pv;
         //print("SETEA: ", elemeto!.producto?.nombre);
         
         self.tipo=tipo;
@@ -112,6 +119,7 @@ class Casilla: UIButton {
     
     //Método que establece el fondo de una casilla
     func setFondo(verde: Bool){
+        
         for vista in self.subviews{
             if vista is UIImageView{
                 vista.removeFromSuperview();
@@ -129,6 +137,49 @@ class Casilla: UIButton {
         //backImg.contentMode = UIViewContentMode.ScaleAspectFit;
         backImg.image = imagen;
         self.addSubview(backImg);
+        
+        if(self.elemeto == nil && self.tipo != nil){
+            var imagen2: UIImage;
+            //print("aguas");
+            switch self.tipo! {
+            case 1:
+                if(!verde){
+                    imagen2 = UIImage(named: "ICOEnergíaV")!;
+                }else{
+                    imagen2 = UIImage(named: "ICOEnergíaB")!;
+                }
+                break;
+            case 2:
+                if(!verde){
+                    imagen2 = UIImage(named: "ICOVitaminasV")!;
+                }else{
+                    imagen2 = UIImage(named: "ICOVitaminasB")!;
+                }
+                break;
+            case 3:
+                if(!verde){
+                    imagen2 = UIImage(named: "ICOCrecimientoV")!;
+                }else{
+                    imagen2 = UIImage(named: "ICOCrecimientoB")!;
+                }
+                break;
+            case 4:
+                if(!verde){
+                    imagen2 = UIImage(named: "ICOBebidasV")!;
+                }else{
+                    imagen2 = UIImage(named: "ICOBebidasB")!;
+                }
+                break;
+            default:
+                imagen2 = UIImage(named: "CasillaVerde")!;
+                break;
+            }
+            let backImg2 = UIImageView(frame: frame);
+            backImg2.image=imagen2;
+            backImg2.contentMode=UIViewContentMode.ScaleAspectFit;
+            self.addSubview(backImg2);
+            self.sendSubviewToBack(backImg2);
+        }
         self.sendSubviewToBack(backImg);
 
     }

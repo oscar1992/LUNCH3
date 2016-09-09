@@ -58,19 +58,9 @@ class CargaFavoritos: NSObject , NSURLConnectionDelegate, NSXMLParserDelegate{
             self.parser.delegate=self
             self.parser.parse();
             dispatch_async(dispatch_get_main_queue(),{
-                //print("tfin: ", self.ids.count);
-                
-                let cargaFav = CargaItemsFavoritos();
-                cargaFav.carg=self;
-                cargaFav.carga(idPadre);
-                
-                for id in self.ids{
-                    //print("id: ", id);
-                    let secu = Secuencia(id: id);
-                    //print("secus: ", self.secus.count);
-                    self.secus.append(secu);
-                }
                 print("Upd Favoritas OK");
+                
+                
                 
             });
             
@@ -120,6 +110,14 @@ class CargaFavoritos: NSObject , NSURLConnectionDelegate, NSXMLParserDelegate{
     
     func parser(parser: NSXMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         if(elementName == "return"){
+            DatosB.cont.itemsFavo.removeAll();
+            let favorito = Favoritos(id: idNumero!, nombre: nombre!);
+            let cargaFav = CargaItemsFavoritos(favo: favorito);
+            cargaFav.carg=self;
+            cargaFav.carga(DatosD.contenedor.padre.id);
+            cargaFav.favo=favorito;
+            //favorito.items=cargaFav.productos;
+            DatosB.cont.favoritos.append(favorito);
             //print("llena: ", nombre);
             ids.append(idNumero!);
             

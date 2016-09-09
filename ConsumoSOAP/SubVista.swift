@@ -405,6 +405,8 @@ class SubVista: UIView {
     }
     
     //Método qye cambia el tamaño del fondo
+    
+    /*
     func tamañoFondo(frame: CGRect){
         //print("se tama2. ", self.frame)
         //print("flon: ", frameLonchera!);
@@ -429,6 +431,7 @@ class SubVista: UIView {
         }
         
     }
+    */
 
     // Método que cambia entre os dos fondos dependeindo del parámetro
     

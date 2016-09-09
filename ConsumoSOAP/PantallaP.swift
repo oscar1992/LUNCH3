@@ -81,7 +81,7 @@ class PantallaP: UIViewController {
                         for titem in DatosC.contenedor.titems{
                             
                             //print(titem.Combinacion," eq ",secu.id);
-                            if(titem.Combinacion==secu.id){
+                            /*if(titem.Combinacion==secu.id){
                                 //print("titem-m: ",titem.productos?.nombre);
                                 
                                 for prod in DatosC.contenedor.productos{
@@ -92,7 +92,7 @@ class PantallaP: UIViewController {
                                 }
                                 sublista.append(titem);
                                 
-                            }
+                            }*/
                             //print("titem", titem.productos?.id);
                         }
                         secu.lista=sublista;

@@ -1,25 +1,25 @@
 //
-//  CargaTItems.swift
-//  ConsumoSOAP
+//  CargaSalud.swift
+//  Lunch1
 //
-//  Created by Oscar Ramirez on 12/04/16.
+//  Created by Oscar Ramirez on 2/09/16.
 //  Copyright © 2016 Edumedio. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
-class CargaTItems: NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
+class CargaSalud: NSObject , NSURLConnectionDelegate, NSXMLParserDelegate{
     
-    var objs=[TItems]();
-    var mensajeEnviado:String="<soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/' xmlns:enp='http://enpoint.lunch.com.co/'><soapenv:Header/><soapenv:Body><enp:listaItemEntity/></soapenv:Body></soapenv:Envelope>";
     var resp: NSData! = nil
     var estado:NSMutableString!
     var parser=NSXMLParser()
     var eeleDiccio=NSMutableDictionary()
     var element=NSString()
     
-    func CargaTItems(){
+    func cargaSaludables(){
+        
+        let mensajeEnviado:String = "<soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/' xmlns:enp='http://enpoint.lunch.com.co/'><soapenv:Header/><soapenv:Body><enp:listaSalud/></soapenv:Body></soapenv:Envelope>";
+        
         let is_URL: String = "http://93.188.163.97:8080/Lunch2/adminEndpoint"
         
         let lobj_Request = NSMutableURLRequest(URL: NSURL(string: is_URL)!)
@@ -32,7 +32,7 @@ class CargaTItems: NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
         lobj_Request.addValue("text/xml; charset=utf-8", forHTTPHeaderField: "Content-Type")
         lobj_Request.addValue(String(mensajeEnviado.characters.count), forHTTPHeaderField: "Content-Length")
         //lobj_Request.addValue("223", forHTTPHeaderField: "Content-Length")
-        lobj_Request.addValue("\"listaItemsEntity\"", forHTTPHeaderField: "SOAPAction")
+        lobj_Request.addValue("\"bool\"", forHTTPHeaderField: "SOAPAction")
         
         let task = session.dataTaskWithRequest(lobj_Request, completionHandler: {data, response, error -> Void in
             //print("Response: \(response)")
@@ -48,45 +48,36 @@ class CargaTItems: NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
             //print(self.resp)
             self.parser=NSXMLParser(data: self.resp)
             self.parser.delegate=self
-            self.parser.parse()
+            self.parser.parse();
             dispatch_async(dispatch_get_main_queue(),{
-                print("Carga Items");
+                let cargaIt = CargaProductoSalud();
+                cargaIt.cargaSaludables();
+                print("Carga Saludables OK");
                 
             });
+            
         })
-        
-        task.resume()
-        
-
+        task.resume();
     }
     
-    //MARK: Delegados Parser
+    var bidSalud = false;
+    var bnombre = false;
     
-    var id:Int?;
-    var idProducto:Int?;
-    var idCombinacion:Int?;
-    
-    var flagId=false;
-    var flagProducto=false;
-    var flagIdCombinacion=false;
+    var idSalud:Int!;
+    var nombre:String!;
     
     func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
-        element=elementName;
-        //print("eleNA: ",element);
-        if(elementName as NSString).isEqualToString("listaItemEntityResponse"){
+        if(elementName as NSString).isEqualToString("listaSaludResponse"){
             estado=NSMutableString();
             estado="";
         }
-        switch (elementName as NSString) {
-        
-        case "idItem":
-            flagId=true;
+        //print("prle: ", elementName);
+        switch(elementName as NSString){
+        case "idSalud":
+            bidSalud=true;
             break;
-        case "idProducto":
-            flagProducto=true;
-            break;
-        case "idCombinaciones":
-            flagIdCombinacion=true;
+        case "nombreSalud":
+            bnombre=true;
             break;
         default:
             break;
@@ -94,35 +85,24 @@ class CargaTItems: NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
     }
     
     func parser(parser: NSXMLParser, foundCharacters string: String) {
-        
-        if(flagProducto){
-            //print("idProducto: ",string);
-            idProducto=Int(string);
-            flagProducto=false;
+        if(bidSalud){
+            idSalud = Int(string);
+            bidSalud=false;
         }
-        if(flagId){
-            //print("id; ",string);
-            id=Int(string);
-            flagId=false;
-        }
-        if(flagIdCombinacion){
-            //print("Id combina: ",string);
-            idCombinacion=Int(string);
-            flagIdCombinacion=false;
+        if(bnombre){
+            nombre=string;
+            bnombre=false;
         }
     }
     
-     func parser(parser: NSXMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
-        if(elementName as NSString).isEqualToString("return"){
+    func parser(parser: NSXMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
+        //print("ele: ", elementName);
+        if(elementName == "return"){
+            //print("carga uno: ",idSalud);
+            let salu = Saludable(idSalud: idSalud, nombre: nombre);
+            DatosB.cont.saludables.append(salu);
             
-            let titem=TItems(id: id!);
-            //titem.Combinacion=idCombinacion;
-            //titem.idProducto=idProducto;
-            DatosC.contenedor.titems.append(titem);
-            //print("ingreso Ok: ", titem.idProducto);
             
         }
-        
     }
-    
 }

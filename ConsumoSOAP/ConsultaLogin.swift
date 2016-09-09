@@ -63,11 +63,11 @@ class ConsultaLogin : NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
             self.PLogin?.aprueba = self.aprueba;
             
             if(self.PLogin!.aprueba == true){
-                
                 consNinos.consulta(self.PLogin!, aprueba: self.aprueba);
             }else{
                 dispatch_async(dispatch_get_main_queue(),{
                     //print("aprueba: ",self.aprueba);
+                    
                     self.PLogin!.pasa();
                     
                     }

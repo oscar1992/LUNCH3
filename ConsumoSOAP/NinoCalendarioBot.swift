@@ -110,11 +110,13 @@ class NinoCalendarioBot: UIButton {
         let OY = DatosC.contenedor.altoP*0.22;
         let frameScroll = CGRectMake(OX, OY, ancho, alto);
         //print("reinicia: ", Ano);
-        print("tama: ", DatosD.contenedor.calendario.pestañasNinos!.ninos.count);
+        //print("tama: ", DatosD.contenedor.calendario.pestañasNinos!.ninos.count);
         for nino in (DatosD.contenedor.calendario.pestañasNinos!.ninos){
             print("na: ", nino.activo," nomb: ", nino.ninoInt?.nombreNino);
+            //print("UU: ", nino.Ano?.posicionaDiaActual());
             if(nino.activo==true){
-                print("nino: ", nino.Ano);
+                //print("nino: ", nino.Ano);
+                
                 //
                 //nino.Ano!.diaActual();
             }

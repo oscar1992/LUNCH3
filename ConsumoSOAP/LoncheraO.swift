@@ -221,7 +221,7 @@ class LoncheraO: UIViewController {
             let cargaFav=(self.view.superview?.superview?.superview?.superview?.superview as! VistaNino);
             cargaFav.EspacioLoncheras.cargaFavoritos();
             sube.predeter = cargaFav.EspacioLoncheras;
-            sube.evalua(prodos);
+            //sube.evalua(prodos);
             mensajeFavorito(true);
         }else{
             print("Borra? ", nfavorita);
@@ -283,13 +283,6 @@ class LoncheraO: UIViewController {
     //Método que inicia el botón de añadir favoritos
     func iniciaBotonFav(){
         
-        /*
-        for vista in botfavo!.subviews{
-            if vista is UIImageView{
-                vista.removeFromSuperview();
-            }
-            }
-         */
         var imagen: UIImage;
         imagen = UIImage(named: "BotonF")!;
         
