@@ -17,9 +17,10 @@ class EliminaFavoritos: NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
     var eeleDiccio=NSMutableDictionary()
     var element=NSString()
     var bot : UIButton?;
+    var idCaja : Int!;
     
     func elimina(idCaja: Int){
-        
+        self.idCaja=idCaja;
         let idPadre=DatosD.contenedor.padre.id;
         self.bot?.enabled=false;
         
@@ -55,20 +56,8 @@ class EliminaFavoritos: NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
             self.parser.delegate=self
             self.parser.parse();
             dispatch_async(dispatch_get_main_queue(),{
-                self.bot?.enabled=true;
-                if(self.eliminado){
-                    self.quitaDorada();
-                    print("Del Favoritas OK");
-                    var idex = 0;
-                    for secu in DatosD.contenedor.favoritas.secuencia{
-                        if(secu.id == idCaja){
-                            DatosD.contenedor.favoritas.secuencia.removeAtIndex(idex);
-                        }
-                        idex += 1;
-                    }
-                }else{
-                    print("Del Favoritas XXXX");
-                }
+                
+                self.quitaDorada();
                 
             });
             
@@ -111,15 +100,32 @@ class EliminaFavoritos: NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
     
     //Método que quita la estrella dorada si el borrado fue exitoso
     func quitaDorada(){
-        for vista in bot!.subviews{
-            if(vista is UIImageView){
-                vista.removeFromSuperview();
+        //DatosB.cont.poneFondoTot(bot!, fondoStr: "BotonF", framePers: nil, identi: nil, scala: true);
+        //DatosB.cont.favoritos.append(favorita);
+        var p = 0;
+        
+        for favo in DatosB.cont.favoritos{
+            if(favo.id == idCaja){
+                DatosB.cont.favoritos.removeAtIndex(p);
+                /*
+                var j = 0;
+                for item in DatosB.cont.itemsFavo{
+                    if(item.id == idCaja){
+                        DatosB.cont.itemsFavo.removeAtIndex(j);
+                        print("Remueve Item");
+                    }
+                    j += 1;
+                }*/
+                //favo.items.removeAll();
             }
+            p += 1;
         }
-        let frameImagen = CGRectMake(0, 0, self.bot!.frame.width, self.bot!.frame.height);
-        let ima = UIImage(named: "BotonF");
-        let backImg = UIImageView(frame: frameImagen);
-        backImg.image=ima;
-        bot!.addSubview(backImg);
+        
+        
+        DatosB.cont.home2.lonchera.botfavo.enabled=true;
+        DatosB.cont.home2.predeterminadas.cini=true;
+        DatosB.cont.home2.predeterminadas.cargaSaludables();
+        DatosB.cont.home2.lonchera.actualizaContador();
+
     }
 }

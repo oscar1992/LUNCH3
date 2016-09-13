@@ -36,6 +36,7 @@ class Caja2: UIButton {
             DatosB.cont.home2.lonchera.setCasilla(p, prod: item);
             p += 1;
         }
+        DatosB.cont.home2.lonchera.nombr=self.nombre;
         DatosB.cont.home2.lonchera.actualizaContador();
     }
 

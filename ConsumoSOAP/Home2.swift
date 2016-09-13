@@ -25,8 +25,8 @@ class Home2: UIViewController {
         iniciaLonchera();
         iniciaBotonAgregar();
         
-        
-        DatosB.cont.poneFondoTot(self.view, fondoStr: "FondoHome", framePers: nil, identi: "FondoTot", scala: false);
+        let fondo = CGRectMake(0, laBarra.frame.height, self.view.frame.width, (self.view.frame.height-laBarra.frame.height));
+        DatosB.cont.poneFondoTot(self.view, fondoStr: "FondoHome", framePers: fondo, identi: "FondoTot", scala: false);
         print("carga home");
         DatosB.cont.home2=self;
         // Do any additional setup after loading the view.
@@ -66,7 +66,7 @@ class Home2: UIViewController {
     func iniciaPredeterminadas(){
         let frame = CGRectMake(0, DatosC.contenedor.altoP * 0.0922, DatosC.contenedor.anchoP, (DatosC.contenedor.altoP*0.16866));
         predeterminadas = Pred2(frame: frame);
-        DatosB.cont.poneFondoTot(self.view, fondoStr: "FondoPredeterminadas", framePers: frame, identi: "FondoPred" , scala: false);
+        //DatosB.cont.poneFondoTot(self.view, fondoStr: "FondoPredeterminadas", framePers: frame, identi: "FondoPred" , scala: false);
         self.view.addSubview(predeterminadas);
         
     }
@@ -86,11 +86,12 @@ class Home2: UIViewController {
     //Método que inicia el boton de agregar al carrito
     func iniciaBotonAgregar(){
         let ancho = DatosC.contenedor.anchoP*0.7;
-        let alto = DatosC.contenedor.altoP*0.07
+        let alto = DatosC.contenedor.altoP*0.1
         let OX = (DatosC.contenedor.anchoP/2)-(ancho/2);
         let OY = DatosC.contenedor.altoP*0.85;
         let frameBoton = CGRectMake(OX, OY, ancho, alto);
         let boton = UIButton(frame: frameBoton);
+        /*
         let frameLabel = CGRectMake(0, 0, ancho, alto);
         let label = UILabel(frame: frameLabel);
         label.text="Agregar al Carrito";
@@ -98,8 +99,9 @@ class Home2: UIViewController {
         label.textColor=UIColor.whiteColor();
         label.font=UIFont(name: "SansBeamBody-Heavy", size: (label.frame.height/2));
         boton.addSubview(label);
+         */
         boton.addTarget(self, action: #selector(Home2.anade), forControlEvents: .TouchDown);
-        DatosB.cont.poneFondoTot(boton, fondoStr: "BotonOrdenar", framePers: nil, identi: nil, scala: false);
+        DatosB.cont.poneFondoTot(boton, fondoStr: "BotonOrdenar2", framePers: nil, identi: nil, scala: false);
         self.view.addSubview(boton);
     }
     

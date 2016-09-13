@@ -10,6 +10,8 @@ import UIKit
 
 class Carrito: UIViewController {
 
+    var loncherasTipos = ([Lonchera2](), [Int]());
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         iniciaBotonVolver();
@@ -42,6 +44,13 @@ class Carrito: UIViewController {
     //Método que cierra la ventana
     func vuelve(){
         self.dismissViewControllerAnimated(true, completion: nil);
+    }
+    
+    //Método que organiza las loncheras por su contenido
+    func tipificaLoncheras(){
+        for lonc in DatosB.cont.loncheras{
+            
+        }
     }
     
     /*

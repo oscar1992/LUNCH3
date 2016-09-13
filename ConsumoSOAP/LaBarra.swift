@@ -19,15 +19,17 @@ class LaBarra: UIView {
     }
     
     required init?(coder aDecoder: NSCoder) {
-        let frame = CGRectMake(0, 0, UIScreen.mainScreen().bounds.width, (UIScreen.mainScreen().bounds.height*0.049475));
+        let frame = CGRectMake(0, 0, UIScreen.mainScreen().bounds.width, (UIScreen.mainScreen().bounds.height*0.0922));
         super.init(frame: frame);
         self.inicia();
     }
     
     //Método que establece el fondo de desta vista
     func setFondo2(){
-            let fondo = UIImage(named: "LaLonchera");
-            let backImg = UIImageView(frame: CGRectMake(0,self.frame.height*0.1,self.frame.width,(self.frame.height-self.frame.height*0.2)));
+            let fondo = UIImage(named: "LaLonchera2");
+        let ancho = self.frame.width*0.3;
+        let OX = (self.frame.width/2)-(ancho/2);
+            let backImg = UIImageView(frame: CGRectMake(OX,self.frame.height*0.1,ancho,(self.frame.height-self.frame.height*0.25)));
             backImg.contentMode = UIViewContentMode.ScaleAspectFit;
             backImg.image = fondo;
             self.addSubview(backImg);

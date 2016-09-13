@@ -31,10 +31,7 @@ class LoncheraO: UIViewController {
         
         subVista = SubVista();
         subVista!.padre=self.view;
-        
         botrem=UIButton();
-        
-        
         botrem?.titleLabel?.text="REM";
         saludable = true;
         botrem?.addTarget(self, action: #selector(self.remcasilla(_:)), forControlEvents: .TouchDown);

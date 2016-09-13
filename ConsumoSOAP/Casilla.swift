@@ -143,28 +143,28 @@ class Casilla: UIButton {
             //print("aguas");
             switch self.tipo! {
             case 1:
-                if(!verde){
+                if(verde){
                     imagen2 = UIImage(named: "ICOEnergíaV")!;
                 }else{
                     imagen2 = UIImage(named: "ICOEnergíaB")!;
                 }
                 break;
             case 2:
-                if(!verde){
+                if(verde){
                     imagen2 = UIImage(named: "ICOVitaminasV")!;
                 }else{
                     imagen2 = UIImage(named: "ICOVitaminasB")!;
                 }
                 break;
             case 3:
-                if(!verde){
+                if(verde){
                     imagen2 = UIImage(named: "ICOCrecimientoV")!;
                 }else{
                     imagen2 = UIImage(named: "ICOCrecimientoB")!;
                 }
                 break;
             case 4:
-                if(!verde){
+                if(verde){
                     imagen2 = UIImage(named: "ICOBebidasV")!;
                 }else{
                     imagen2 = UIImage(named: "ICOBebidasB")!;
@@ -174,7 +174,11 @@ class Casilla: UIButton {
                 imagen2 = UIImage(named: "CasillaVerde")!;
                 break;
             }
-            let backImg2 = UIImageView(frame: frame);
+            let ancho = frame.width*0.4;
+            let OX = (frame.width/2)-(ancho/2);
+            let OY = (frame.height/2)-(ancho/2);
+            let frame2 = CGRectMake(OX, OY, ancho, ancho);
+            let backImg2 = UIImageView(frame: frame2);
             backImg2.image=imagen2;
             backImg2.contentMode=UIViewContentMode.ScaleAspectFit;
             self.addSubview(backImg2);

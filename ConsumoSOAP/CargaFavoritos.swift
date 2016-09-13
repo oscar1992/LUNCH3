@@ -26,7 +26,7 @@ class CargaFavoritos: NSObject , NSURLConnectionDelegate, NSXMLParserDelegate{
         
         let idP = String(idPadre);
         //print("idp: ", idP);
-        let mensajeEnviado:String = "<soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/' xmlns:enp='http://enpoint.lunch.com.co/'><soapenv:Header/><soapenv:Body><enp:listaFavoritasPorPadre><!--Optional:--><padre>"+idP+"</padre></enp:listaFavoritasPorPadre></soapenv:Body></soapenv:Envelope>";
+        let mensajeEnviado:String = "<soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/' xmlns:enp='http://enpoint.lunch.com.co/'><soapenv:Header/><soapenv:Body><enp:listaFavoritasPorPadre><padre>"+idP+"</padre></enp:listaFavoritasPorPadre></soapenv:Body></soapenv:Envelope>";
         
         let is_URL: String = "http://93.188.163.97:8080/Lunch2/clienteEndpoint"
         
@@ -60,8 +60,8 @@ class CargaFavoritos: NSObject , NSURLConnectionDelegate, NSXMLParserDelegate{
             dispatch_async(dispatch_get_main_queue(),{
                 print("Upd Favoritas OK");
                 
-                
-                
+                let cargaFav = CargaItemsFavoritos();
+                cargaFav.carga();
             });
             
             })
@@ -110,15 +110,13 @@ class CargaFavoritos: NSObject , NSURLConnectionDelegate, NSXMLParserDelegate{
     
     func parser(parser: NSXMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         if(elementName == "return"){
-            DatosB.cont.itemsFavo.removeAll();
+            //DatosB.cont.itemsFavo.removeAll();
             let favorito = Favoritos(id: idNumero!, nombre: nombre!);
-            let cargaFav = CargaItemsFavoritos(favo: favorito);
-            cargaFav.carg=self;
-            cargaFav.carga(DatosD.contenedor.padre.id);
-            cargaFav.favo=favorito;
+            
+            
             //favorito.items=cargaFav.productos;
             DatosB.cont.favoritos.append(favorito);
-            //print("llena: ", nombre);
+            print("llena: ", nombre);
             ids.append(idNumero!);
             
         }

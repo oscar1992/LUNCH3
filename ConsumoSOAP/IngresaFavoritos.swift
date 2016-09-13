@@ -24,14 +24,15 @@ class IngresaFavoritos: NSObject , NSURLConnectionDelegate, NSXMLParserDelegate{
     var favorita: Favoritos!;
     
     //Método que permite evaluar si la caja viene vacía, de ser así no ejecuta la carga
-    func evalua(prods: [Producto], id:Int){
+    func evalua(prods: [Producto], id:Int, nomb: String){
         bot = DatosB.cont.home2.lonchera.botfavo;
-        print("cuenta: ", prods.count);
+        //print("cuenta: ", prods.count);
         if(prods.count == 0){
             
         }else{
             bot?.enabled = false;
-            favorita=Favoritos(id: id, nombre: "Nueva");
+            print("nomb: ", nomb);
+            favorita=Favoritos(id: id, nombre: nomb);
             favorita.items=prods;
             //bot?.backgroundColor = UIColor.grayColor();
             envia(prods, id: id);
@@ -85,7 +86,7 @@ class IngresaFavoritos: NSObject , NSURLConnectionDelegate, NSXMLParserDelegate{
             self.parser.delegate=self
             self.parser.parse();
             dispatch_async(dispatch_get_main_queue(),{
-                self.bot?.enabled = true;
+                self.bot!.enabled = true;
                 //self.bot?.backgroundColor = UIColor.yellowColor();
                 self.poneDorada();
                 print("Sube OK")
@@ -99,24 +100,18 @@ class IngresaFavoritos: NSObject , NSURLConnectionDelegate, NSXMLParserDelegate{
     
     //Método que pone la estrella dorada si la carga fue exitosa
     func poneDorada(){
-        for vista in bot!.subviews{
-            if(vista is UIImageView){
-                vista.removeFromSuperview();
-            }
-        }
-        let frameImagen = CGRectMake(0, 0, self.bot!.frame.width, self.bot!.frame.height);
-        let ima = UIImage(named: "BotonFF");
-        let backImg = UIImageView(frame: frameImagen);
-        backImg.image=ima;
-        bot!.addSubview(backImg);
+        //DatosB.cont.poneFondoTot(bot!, fondoStr: "BotonFF", framePers: nil, identi: nil, scala: true);
         
         /*
         let cargaF = CargaFavoritos();
         cargaF.pred=self.predeter;
         cargaF.consulta(DatosD.contenedor.padre.id);
         */
+        //print("Favorita?: ", favorita.items.count);
         DatosB.cont.favoritos.append(favorita);
+        
         DatosB.cont.home2.predeterminadas.cini=true;
         DatosB.cont.home2.predeterminadas.cargaSaludables();
+        DatosB.cont.home2.lonchera.actualizaContador();
     }
 }

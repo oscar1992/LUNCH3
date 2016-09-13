@@ -18,21 +18,17 @@ class CargaItemsFavoritos: NSObject, NSURLConnectionDelegate, NSXMLParserDelegat
     var element=NSString()
     var items = [TItems]();
     var productos = [Producto]();
-    var carg : CargaFavoritos?;
-    var idN : String?;
-    var favo:Favoritos!;
     
-    init(favo: Favoritos) {
-        self.favo=favo;
-        
-    }
     
-    func carga(idNum: Int!){
+    
+    
+    
+    
+    func carga(){
         
-        idN = String(idNum);
-        //print("idN: ", idN);
-        let mensajeEnviado:String = "<soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/' xmlns:enp='http://enpoint.lunch.com.co/'><soapenv:Header/><soapenv:Body><enp:favoritosPorLonchera><padre>"+idN!+"</padre></enp:favoritosPorLonchera></soapenv:Body></soapenv:Envelope>";
         
+        let mensajeEnviado:String = "<soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/' xmlns:enp='http://enpoint.lunch.com.co/'><soapenv:Header/><soapenv:Body><enp:listaItemsFavoritos/></soapenv:Body></soapenv:Envelope>";
+        print("Envia: ", mensajeEnviado);
         let is_URL: String = "http://93.188.163.97:8080/Lunch2/clienteEndpoint"
         
         let lobj_Request = NSMutableURLRequest(URL: NSURL(string: is_URL)!)
@@ -52,7 +48,7 @@ class CargaItemsFavoritos: NSObject, NSURLConnectionDelegate, NSXMLParserDelegat
             let strData = NSString(data: data!, encoding: NSUTF8StringEncoding)
             self.resp=strData?.dataUsingEncoding(NSUTF8StringEncoding)
             
-            //print("Body: \(strData)")
+            print("ItemF: \(strData)")
             
             if error != nil
             {
@@ -64,6 +60,7 @@ class CargaItemsFavoritos: NSObject, NSURLConnectionDelegate, NSXMLParserDelegat
             self.parser.parse();
             dispatch_async(dispatch_get_main_queue(),{
                 //self.carg!.pideItems(self.items);
+                DatosB.cont.home2.predeterminadas.cargaSaludables();
                 print("Carga Items Favo");
             });
         })
@@ -135,7 +132,7 @@ class CargaItemsFavoritos: NSObject, NSURLConnectionDelegate, NSXMLParserDelegat
                     item.productos = prod;
                     productos.append(prod);
                     items.append(item);
-                    //print("añade item favorito");
+                    print("añade item favorito");
                     DatosB.cont.itemsFavo.append(item);
                     
                     

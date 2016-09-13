@@ -24,31 +24,24 @@ class Pred2: UIScrollView, UIScrollViewDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
-    //Método que evalua los elementos den el singleton
-    func evaluaElementos(){
-        print("prodSa: ", DatosB.cont.prodSaludables.count);
-        print("Titems: ", DatosB.cont.itemsFavo.count);
-        if(DatosB.cont.prodSaludables.count==0){
-            
-            for salu in DatosB.cont.saludables{
-                let cargaS = CargaProductoSalud();
-                cargaS.cargaSaludables();
-            }
-        }
-        if(DatosB.cont.itemsFavo.count==0){
-            print("Vacio");
-            
-            for favo in DatosB.cont.favoritos{
-                let cargaF = CargaItemsFavoritos(favo: favo)
-                cargaF.carga(favo.id);
-            }
-            cini = true;
-        }
-    }
     
+    //Método que carga las loncheras saludables y las favoritas
     func cargaSaludables(){
         //evaluaElementos();
+        
         if(cini){
+            if(cajas.count>0){
+                for caja in cajas{
+                    caja.removeFromSuperview();
+                    //print("remueve");
+                }
+                cajas.removeAll();
+            }
+            for vista in self.subviews{
+                if vista is UILabel{
+                    vista.removeFromSuperview();
+                }
+            }
             print("PREDE")
             let tot = Double(DatosB.cont.saludables.count)+0.5;
             let ancho = self.frame.width/CGFloat(tot);
@@ -78,7 +71,7 @@ class Pred2: UIScrollView, UIScrollViewDelegate {
                     }
                 }
                 let caja = Caja2(frame : frameCaja, id: cajaS.idSalud, nombre: cajaS.nombre, items: produs);
-                DatosB.cont.poneFondoTot(caja, fondoStr: "L1", framePers: nil, identi: "Caja", scala: true);
+                DatosB.cont.poneFondoTot(caja, fondoStr: "LoncheraVerde2", framePers: nil, identi: "Caja", scala: true);
                 cajas.append(caja);
                 self.addSubview(caja);
                 self.addSubview(nombre);
@@ -111,7 +104,7 @@ class Pred2: UIScrollView, UIScrollViewDelegate {
                 nombre.textColor=UIColor.whiteColor();
                 nombre.font=UIFont(name: "SansBeam Head", size: nombre.frame.height/2);
                 let caja = Caja2(frame: frameCaja, id: favo.id, nombre: favo.nombre, items: favo.items);
-                DatosB.cont.poneFondoTot(caja, fondoStr: "L4", framePers: nil, identi: "Caja", scala: true);
+                DatosB.cont.poneFondoTot(caja, fondoStr: "LoncheraAzul2", framePers: nil, identi: "Caja", scala: true);
                 cajas.append(caja);
                 self.addSubview(caja);
                 self.addSubview(nombre);
@@ -120,8 +113,29 @@ class Pred2: UIScrollView, UIScrollViewDelegate {
                 //print("favoitts: ", favo.items.count);
                 
             }
-            //print("tot2: ", tot2);
-            self.contentSize = CGSizeMake(((ancho)*(CGFloat(tot+tot2))), self.frame.height);
+            if(DatosB.cont.favoritos.count < 5){
+                let cc = 5 - DatosB.cont.favoritos.count;
+                print("espacio: ", cc);
+                for _ in 0..<cc{
+                    let ultFrame = cajas.last?.frame;
+                    let OX = ((ancho) * p);
+                    let frameN = CGRectMake(OX, 0, ancho, alto);
+                    let frameNombre = CGRectMake(OX, alto, ancho, (ancho*0.2));
+                    let nombre = UILabel(frame: frameNombre);
+                    nombre.text="Vacio";
+                    nombre.textAlignment=NSTextAlignment.Center;
+                    nombre.textColor=UIColor.whiteColor();
+                    nombre.font=UIFont(name: "SansBeam Head", size: nombre.frame.height/2);
+                    let vacia = UIButton(frame: frameN);
+                    DatosB.cont.poneFondoTot(vacia, fondoStr: "LoncheraGris2", framePers: nil, identi: "Caja", scala: true);
+                    cajas.append(vacia);
+                    self.addSubview(vacia);
+                    self.addSubview(nombre);
+                    p += 1;
+                }
+            }
+            print("tot2: ", cajas.count);
+            self.contentSize = CGSizeMake(((ancho)*(CGFloat(10))), self.frame.height);
             cini=false;
         }
         
@@ -129,16 +143,21 @@ class Pred2: UIScrollView, UIScrollViewDelegate {
     
     //Método que llena los productos de una caja favorita
     func llenaFavorito(favo: Favoritos){
+        /*
         print("dispo");
         for items in DatosB.cont.itemsFavo{
             print("prod: ", items.productos?.nombre)
         }
-        
-        for items in DatosB.cont.itemsFavo{
-            if(favo.id == items.id){
-                favo.items.append(items.productos!);
+        */
+        if(favo.items.isEmpty){
+            for items in DatosB.cont.itemsFavo{
+                if(favo.id == items.id){
+                    favo.items.append(items.productos!);
+                }
             }
         }
+        
+        
     }
     
     

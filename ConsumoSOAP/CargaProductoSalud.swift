@@ -43,7 +43,7 @@ class CargaProductoSalud: NSObject ,NSURLConnectionDelegate, NSXMLParserDelegate
             let strData = NSString(data: data!, encoding: NSUTF8StringEncoding)
             self.resp=strData?.dataUsingEncoding(NSUTF8StringEncoding)
             
-            print("Body: \(strData)")
+            //print("Body: \(strData)")
             
             if error != nil
             {
@@ -54,17 +54,9 @@ class CargaProductoSalud: NSObject ,NSURLConnectionDelegate, NSXMLParserDelegate
             self.parser.delegate=self
             self.parser.parse();
             dispatch_async(dispatch_get_main_queue(),{
-                
-                
-                
-                DatosB.cont.home2.predeterminadas.cargaSaludables();
                 if(self.ultimo){
                     print("Carga ProductoSaludables OK");
-                    
                 }
-                
-                
-                
             });
             
         })
@@ -117,7 +109,7 @@ class CargaProductoSalud: NSObject ,NSURLConnectionDelegate, NSXMLParserDelegate
             let idS=Int(string);
             
             for salu in DatosB.cont.saludables{
-                print("idS: ", idS, " salu: ", salu);
+                //print("idS: ", idS, " salu: ", salu);
                 if(salu.idSalud==idS){
                     self.salu=salu;
                 }
@@ -130,7 +122,7 @@ class CargaProductoSalud: NSObject ,NSURLConnectionDelegate, NSXMLParserDelegate
         if(elementName == "return"){
             
             let prodSalud=ProductoSaludable(id: id, salu: salu, produ: produ);
-            print("ProdSa: ", prodSalud.produ.nombre);
+            //print("ProdSa: ", prodSalud.produ.nombre);
             DatosB.cont.prodSaludables.append(prodSalud);
         }
     }

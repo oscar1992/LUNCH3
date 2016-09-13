@@ -60,7 +60,7 @@ class SubeFavorito: NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
             dispatch_async(dispatch_get_main_queue(),{
                 print("Sube Favorito: ", self.id);
                 let cargaL = IngresaFavoritos();
-                cargaL.evalua(self.produc, id: self.id);
+                cargaL.evalua(self.produc, id: self.id, nomb: self.nombre);
                 
             });
             
