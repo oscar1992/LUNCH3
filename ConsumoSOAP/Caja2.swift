@@ -28,7 +28,7 @@ class Caja2: UIButton {
     
     //Método que llena la lonchera con los items de la caja saludable
     func llena(){
-        print("Llena: ", items.count);
+        //print("Llena: ", items.count);
         var p = 1;
         DatosB.cont.home2.lonchera.limpia();
         for item in items{

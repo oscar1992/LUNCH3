@@ -29,6 +29,7 @@
 	</dict>
 	<key>UIAppFonts</key>
 	<array>
+		<string>Sans-Beam-Body Book.otf</string>
 		<string>Sans Beam Head SemiBold.otf</string>
 		<string>Sans-Beam-Body-Heavy.otf</string>
 		<string>Sans-Beam-Head-Bold.otf</string>

@@ -42,6 +42,11 @@
 		A16710A71D79E6B0004CB71D /* CargaProductoSalud.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16710A61D79E6B0004CB71D /* CargaProductoSalud.swift */; };
 		A16710A91D79E812004CB71D /* ProductoSaludable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16710A81D79E812004CB71D /* ProductoSaludable.swift */; };
 		A16EBC571D382AA2001D0B09 /* BusquedaProductos.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16EBC561D382AA0001D0B09 /* BusquedaProductos.swift */; };
+		A17344091D89E0E9003B467C /* ScrollTipos.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17344081D89E0E4003B467C /* ScrollTipos.swift */; };
+		A173440B1D89E3CB003B467C /* VistaTipo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A173440A1D89E3CB003B467C /* VistaTipo.swift */; };
+		A17344131D8AF9B5003B467C /* Sans-Beam-Body-Book.otf in Resources */ = {isa = PBXBuildFile; fileRef = A17344121D8AF9B5003B467C /* Sans-Beam-Body-Book.otf */; };
+		A17344151D8AFD4A003B467C /* Sumador.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17344141D8AFD4A003B467C /* Sumador.swift */; };
+		A17344181D8B321D003B467C /* DatosPadre.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17344171D8B321D003B467C /* DatosPadre.swift */; };
 		A17788421CBFEBD200BEF5A5 /* VistaLonchera.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17788411CBFEBD200BEF5A5 /* VistaLonchera.swift */; };
 		A17788441CBFF0C400BEF5A5 /* Contenedor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17788431CBFF0C400BEF5A5 /* Contenedor.swift */; };
 		A17788461CBFF2EF00BEF5A5 /* LoncheraO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17788451CBFF2EF00BEF5A5 /* LoncheraO.swift */; };
@@ -150,6 +155,11 @@
 		A16710A61D79E6B0004CB71D /* CargaProductoSalud.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CargaProductoSalud.swift; sourceTree = "<group>"; };
 		A16710A81D79E812004CB71D /* ProductoSaludable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductoSaludable.swift; sourceTree = "<group>"; };
 		A16EBC561D382AA0001D0B09 /* BusquedaProductos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusquedaProductos.swift; sourceTree = "<group>"; };
+		A17344081D89E0E4003B467C /* ScrollTipos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollTipos.swift; sourceTree = "<group>"; };
+		A173440A1D89E3CB003B467C /* VistaTipo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VistaTipo.swift; sourceTree = "<group>"; };
+		A17344121D8AF9B5003B467C /* Sans-Beam-Body-Book.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Sans-Beam-Body-Book.otf"; path = "ConsumoSOAP/Resources/Fonts/Sans-Beam-Body-Book.otf"; sourceTree = "<group>"; };
+		A17344141D8AFD4A003B467C /* Sumador.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sumador.swift; sourceTree = "<group>"; };
+		A17344171D8B321D003B467C /* DatosPadre.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatosPadre.swift; sourceTree = "<group>"; };
 		A17788411CBFEBD200BEF5A5 /* VistaLonchera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VistaLonchera.swift; sourceTree = "<group>"; };
 		A17788431CBFF0C400BEF5A5 /* Contenedor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contenedor.swift; sourceTree = "<group>"; };
 		A17788451CBFF2EF00BEF5A5 /* LoncheraO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoncheraO.swift; sourceTree = "<group>"; };
@@ -229,6 +239,7 @@
 		A102F65E1CA9CCF7001359A5 = {
 			isa = PBXGroup;
 			children = (
+				A17344121D8AF9B5003B467C /* Sans-Beam-Body-Book.otf */,
 				A14296251D230B7C00A0905B /* Sans Beam Head SemiBold.otf */,
 				A14296231D23064100A0905B /* Sans-Beam-Body-Heavy.otf */,
 				A1F1F5771D21A81100B4BFBE /* Sans-Beam-Head-Bold.otf */,
@@ -252,6 +263,7 @@
 		A102F6691CA9CCF7001359A5 /* ConsumoSOAP */ = {
 			isa = PBXGroup;
 			children = (
+				A17344161D8B3201003B467C /* Padre */,
 				A1D877951D7F6062000DA798 /* Carrito */,
 				A183B4F21D787C430080DBA9 /* Home2 */,
 				A10671DC1D3974E900D0F0B5 /* Singleton */,
@@ -410,6 +422,14 @@
 			name = Calendario;
 			sourceTree = "<group>";
 		};
+		A17344161D8B3201003B467C /* Padre */ = {
+			isa = PBXGroup;
+			children = (
+				A17344171D8B321D003B467C /* DatosPadre.swift */,
+			);
+			name = Padre;
+			sourceTree = "<group>";
+		};
 		A183B4F21D787C430080DBA9 /* Home2 */ = {
 			isa = PBXGroup;
 			children = (
@@ -427,6 +447,9 @@
 			isa = PBXGroup;
 			children = (
 				A1D877961D7F609C000DA798 /* Carrito.swift */,
+				A17344081D89E0E4003B467C /* ScrollTipos.swift */,
+				A173440A1D89E3CB003B467C /* VistaTipo.swift */,
+				A17344141D8AFD4A003B467C /* Sumador.swift */,
 			);
 			name = Carrito;
 			sourceTree = "<group>";
@@ -516,6 +539,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A17344131D8AF9B5003B467C /* Sans-Beam-Body-Book.otf in Resources */,
 				A14296261D230B7C00A0905B /* Sans Beam Head SemiBold.otf in Resources */,
 				A14296241D23064100A0905B /* Sans-Beam-Body-Heavy.otf in Resources */,
 				A1F1F5781D21A81100B4BFBE /* Sans-Beam-Head-Bold.otf in Resources */,
@@ -561,10 +585,12 @@
 				A13A2BCF1D071ADC0008E22E /* Categoria.swift in Sources */,
 				A19834F91CBD54460099D815 /* CargaCajas.swift in Sources */,
 				A17982DA1CDCF13100558C55 /* CargaTInfo.swift in Sources */,
+				A17344151D8AFD4A003B467C /* Sumador.swift in Sources */,
 				A12C042A1D109E3500BA72E1 /* AnoScroll.swift in Sources */,
 				A16710A91D79E812004CB71D /* ProductoSaludable.swift in Sources */,
 				A18878B61CBC055700737085 /* BotonNino.swift in Sources */,
 				A1A082111CBD8F42001C0AD2 /* CargaTItems.swift in Sources */,
+				A173440B1D89E3CB003B467C /* VistaTipo.swift in Sources */,
 				A1D877991D7F725A000DA798 /* Favoritos.swift in Sources */,
 				A13603CF1CAF20770032A19A /* ProductoView.swift in Sources */,
 				A13A2BCD1D0717CC0008E22E /* ConsultaCategorias.swift in Sources */,
@@ -575,9 +601,11 @@
 				A1ABBFF91CE27ED30098D805 /* PantallaSV.swift in Sources */,
 				A12C04261D106B9700BA72E1 /* CalendarioNinos.swift in Sources */,
 				A17B556F1CE3A0BB00FA2353 /* Semana.swift in Sources */,
+				A17344181D8B321D003B467C /* DatosPadre.swift in Sources */,
 				A19FDD411CEE33E100CCB1F1 /* DiaNino.swift in Sources */,
 				A1D877941D7F4814000DA798 /* Caja2.swift in Sources */,
 				A197755E1CF7627600508A4B /* Ninos.swift in Sources */,
+				A17344091D89E0E9003B467C /* ScrollTipos.swift in Sources */,
 				A19747821CDA7F9600656813 /* Contador.swift in Sources */,
 				A12C042C1D1496C300BA72E1 /* LaBarra.swift in Sources */,
 				A19834F71CBD52EB0099D815 /* Caja.swift in Sources */,

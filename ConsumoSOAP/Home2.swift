@@ -18,7 +18,7 @@ class Home2: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        //leefuentes()
         iniciaBotonMenu();
         iniciaBotonCarrito();
         iniciaPredeterminadas();
@@ -27,7 +27,7 @@ class Home2: UIViewController {
         
         let fondo = CGRectMake(0, laBarra.frame.height, self.view.frame.width, (self.view.frame.height-laBarra.frame.height));
         DatosB.cont.poneFondoTot(self.view, fondoStr: "FondoHome", framePers: fondo, identi: "FondoTot", scala: false);
-        print("carga home");
+        //print("carga home");
         DatosB.cont.home2=self;
         // Do any additional setup after loading the view.
     }
@@ -59,6 +59,7 @@ class Home2: UIViewController {
         let frameBoton = CGRectMake(OX, 0, ancho, ancho);
         botonCarrito = BotonCarrito(frame: frameBoton);
         //botonCarrito.backgroundColor=UIColor.blueColor();
+        self.view.bringSubviewToFront(botonCarrito);
         self.view.addSubview(botonCarrito);
     }
     
@@ -109,9 +110,10 @@ class Home2: UIViewController {
     func anade(){
         if(lonchera.estaLLena()){
             print("añade");
+            DatosB.cont.agregaLonchera(lonchera);
             DatosB.cont.loncheras.append(lonchera);
             for cas in lonchera.casillas{
-                print("ele: ", cas.elemeto?.producto?.nombre);
+                //print("ele: ", cas.elemeto?.producto?.nombre);
                 cas.elemeto?.elimina();
             }
             lonchera.actualizaContador();
@@ -120,6 +122,13 @@ class Home2: UIViewController {
             print("Vacía");
         }
         
+    }
+    
+    func leefuentes(){
+        let ff = UIFont.familyNames();
+        for nn in ff{
+            print(nn);
+        }
     }
     
     /*

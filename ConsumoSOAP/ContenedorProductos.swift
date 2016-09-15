@@ -96,8 +96,7 @@ class ContenedorProductos: UIView {
         barraInformacion.addSubview(lupa);
         //pestaña.backgroundColor=UIColor.orangeColor();
         barraInformacion.addSubview(pestaña);
-        
-        //self.addSubview(barraInformacion);
+        self.addSubview(barraInformacion);
     }
     //Método que establece el fondo de la pestaña
     func fondoPestaña(pest: UIView){
@@ -149,7 +148,8 @@ class ContenedorProductos: UIView {
         let frameCerrar = CGRectMake(DatosC.contenedor.anchoP*0.9, 0, DatosC.contenedor.anchoP*0.1, frameBarra.height);
         let cierra = UIButton(frame: frameCerrar);
         cierra.addTarget(self, action: #selector(ContenedorProductos.cierraBusqueda(_:)), forControlEvents: .TouchDown);
-        cierra.backgroundColor=UIColor.redColor();
+        DatosB.cont.poneFondoTot(cierra, fondoStr: "BotonCerrar", framePers: nil, identi: nil, scala: true);
+        //cierra.backgroundColor=UIColor.redColor();
         barraBusqueda!.addSubview(bacImg);
         barraBusqueda!.addSubview(inputT);
         barraBusqueda!.addSubview(cierra);
@@ -198,7 +198,7 @@ class ContenedorProductos: UIView {
         }
         
         scrol = ScrollResultados(frame: frameScroll);
-        scrol!.backgroundColor = UIColor.init(red: 0.5, green: 0.5, blue: 0.2, alpha: 0.5);
+        scrol!.backgroundColor = UIColor.init(red: 0.2, green: 0.5, blue: 0.2, alpha: 0.5);
         //scrol.backgroundColor!.colorWithAlphaComponent(0.5);
         self.addSubview(scrol!);
         var p = CGFloat(0);
@@ -216,7 +216,7 @@ class ContenedorProductos: UIView {
             }
             let bot=BotonResultado(frame: frameBoton, producto:  prod, pestañas: pestañaBoton);
             
-            bot.backgroundColor=UIColor.yellowColor();
+            bot.backgroundColor=UIColor.whiteColor();
             //print("Prod: ",prod.nombre);
             scrol!.addSubview(bot);
             p += 1;

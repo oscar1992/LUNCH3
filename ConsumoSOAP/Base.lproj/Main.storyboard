@@ -5,6 +5,9 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <customFonts key="customFonts">
+        <mutableArray key="Sans-Beam-Body-Book.otf">
+            <string>SansBeamBody-Book</string>
+        </mutableArray>
         <mutableArray key="Sans-Beam-Head-Bold.otf">
             <string>SansBeamHead-Bold</string>
         </mutableArray>
@@ -47,15 +50,52 @@
                             <view contentMode="scaleToFill" id="yZ6-gP-mSE" userLabel="LaBarra" customClass="LaBarra" customModule="Lunch1" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="54"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dVy-hG-WpU">
+                                        <rect key="frame" x="25" y="16" width="152" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="SansBeamBody-Book" family="SansBeam Body" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="laBarra" destination="yZ6-gP-mSE" id="XuI-11-qGz"/>
+                        <segue destination="3LK-co-lmX" kind="modal" identifier="Datos" id="JlK-Ut-RO7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Tv-OO-z6c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1039" y="481"/>
+        </scene>
+        <!--Datos Padre-->
+        <scene sceneID="MZR-v6-5WI">
+            <objects>
+                <viewController id="3LK-co-lmX" customClass="DatosPadre" customModule="Lunch1" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="JDf-ES-z9L">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" id="Gkx-Pp-FEh" userLabel="LaBarra" customClass="LaBarra" customModule="Lunch1" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="54"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="laBarra" destination="Gkx-Pp-FEh" id="SRR-Pv-Iq6"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vuI-XU-d82" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1601" y="481"/>
         </scene>
         <!--PantallaP-->
         <scene sceneID="17c-PQ-rYs">

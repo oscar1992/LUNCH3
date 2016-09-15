@@ -32,7 +32,7 @@ class PantallaSV: UIViewController {
         super.viewDidLoad()
         iniciaEspacioIntercambio();
         DatosC.contenedor.pantallaSV=self;
-        PanelElementos!.frame=CGRectMake(0, (LaBarra.frame.height+LaBarra.frame.origin.y), DatosC.contenedor.anchoP, (DatosC.contenedor.altoP));
+        PanelElementos!.frame=CGRectMake(0, DatosC.contenedor.altoP*0.1, DatosC.contenedor.anchoP, (DatosC.contenedor.altoP));
         lonch=DatosB.cont.home2.lonchera;
         print("LONC ATT: ", lonch);
          if(lonch != nil){
@@ -334,6 +334,7 @@ class PantallaSV: UIViewController {
     
     //Método que cierra la alacenna
     func cierraPantallaSV(sender: UIButton){
+        
         DatosC.contenedor.pantallaSV.devuelve(sender);
     }
     /*

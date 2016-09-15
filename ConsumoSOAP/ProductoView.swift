@@ -369,7 +369,7 @@ class ProductoView: UIButton {
             //print("iAct: ", DatosC.contenedor.tipo);
             DatosB.cont.home2.lonchera.setCasilla(DatosC.contenedor.tipo!, prod: self.producto!);
             self.Natural=true;
-            
+            DatosB.cont.home2.lonchera.nombr="Personalizada";
             DatosC.contenedor.lonchera.color = nil;
             //DatosC.contenedor.lonchera.contador?.actua();
             DatosC.contenedor.pantallaSV.actuaLonch(true);

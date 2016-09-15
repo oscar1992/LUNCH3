@@ -1,0 +1,38 @@
+//
+//  ScrollTipos.swift
+//  Lunch1
+//
+//  Created by Oscar Ramirez on 14/09/16.
+//  Copyright © 2016 Edumedio. All rights reserved.
+//
+
+import UIKit
+
+class ScrollTipos: UIScrollView, UIScrollViewDelegate {
+    
+    var vistas = [VistaTipo]();
+    
+    override init(frame: CGRect){
+        super.init(frame: frame);
+        //self.backgroundColor=UIColor.blueColor();
+        self.delegate=self;
+        cargaTipos();
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func cargaTipos(){
+        let alto = DatosC.contenedor.altoP*0.2;
+        var p = 0;
+        for tipo in DatosB.cont.listaLoncheras{
+            let frameVista = CGRectMake(0, alto*CGFloat(p), self.frame.width, alto);
+            let vv = VistaTipo(frame: frameVista, lonc: tipo.0, cant: tipo.1, indi: p);
+            self.addSubview(vv);
+            p += 1;
+        }
+        self.contentSize=CGSizeMake(self.frame.width, alto*CGFloat(p));
+    }
+    
+}

@@ -115,7 +115,7 @@ class Pred2: UIScrollView, UIScrollViewDelegate {
             }
             if(DatosB.cont.favoritos.count < 5){
                 let cc = 5 - DatosB.cont.favoritos.count;
-                print("espacio: ", cc);
+                //print("espacio: ", cc);
                 for _ in 0..<cc{
                     let ultFrame = cajas.last?.frame;
                     let OX = ((ancho) * p);
@@ -134,7 +134,7 @@ class Pred2: UIScrollView, UIScrollViewDelegate {
                     p += 1;
                 }
             }
-            print("tot2: ", cajas.count);
+            //print("tot2: ", cajas.count);
             self.contentSize = CGSizeMake(((ancho)*(CGFloat(10))), self.frame.height);
             cini=false;
         }

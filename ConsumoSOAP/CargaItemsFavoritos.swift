@@ -28,7 +28,7 @@ class CargaItemsFavoritos: NSObject, NSURLConnectionDelegate, NSXMLParserDelegat
         
         
         let mensajeEnviado:String = "<soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/' xmlns:enp='http://enpoint.lunch.com.co/'><soapenv:Header/><soapenv:Body><enp:listaItemsFavoritos/></soapenv:Body></soapenv:Envelope>";
-        print("Envia: ", mensajeEnviado);
+        //print("Envia: ", mensajeEnviado);
         let is_URL: String = "http://93.188.163.97:8080/Lunch2/clienteEndpoint"
         
         let lobj_Request = NSMutableURLRequest(URL: NSURL(string: is_URL)!)
@@ -48,7 +48,7 @@ class CargaItemsFavoritos: NSObject, NSURLConnectionDelegate, NSXMLParserDelegat
             let strData = NSString(data: data!, encoding: NSUTF8StringEncoding)
             self.resp=strData?.dataUsingEncoding(NSUTF8StringEncoding)
             
-            print("ItemF: \(strData)")
+            //print("ItemF: \(strData)")
             
             if error != nil
             {
@@ -132,7 +132,7 @@ class CargaItemsFavoritos: NSObject, NSURLConnectionDelegate, NSXMLParserDelegat
                     item.productos = prod;
                     productos.append(prod);
                     items.append(item);
-                    print("añade item favorito");
+                    //print("añade item favorito");
                     DatosB.cont.itemsFavo.append(item);
                     
                     

@@ -116,7 +116,7 @@ class CargaFavoritos: NSObject , NSURLConnectionDelegate, NSXMLParserDelegate{
             
             //favorito.items=cargaFav.productos;
             DatosB.cont.favoritos.append(favorito);
-            print("llena: ", nombre);
+            //print("llena: ", nombre);
             ids.append(idNumero!);
             
         }

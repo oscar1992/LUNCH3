@@ -19,7 +19,7 @@ class Lonchera2: UIView {
     var nombr:String!;
     var vista : UIView!;
     var nomb : UITextField!;
-    
+    var valor: Int!;
     
     override init(frame: CGRect){
         super.init(frame: frame);
@@ -27,10 +27,10 @@ class Lonchera2: UIView {
         iniciaTablaDatos();
         iniciaBotonFav();
         DatosB.cont.poneFondoTot(self, fondoStr: "LoncheraVerde", framePers: nil, identi: "loncheraB", scala: false);
-        print("ini lonch")
+        //print("ini lonch")
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -105,7 +105,7 @@ class Lonchera2: UIView {
     //Método que evalua los valores de los productos y el color de la lonchera
     func actualizaContador(){
         //print("actua")
-        var valor:Int=0;
+        var valor2=0;
         var calorias:Int=0;
         var azucar:Int=0;
         var proteina:Int=0;
@@ -129,7 +129,8 @@ class Lonchera2: UIView {
                     }
                     
                 }
-                valor += (cas.elemeto?.producto?.precio)!;
+                valor2 += cas.elemeto!.producto!.precio;
+                valor = valor2;
                 //print("val: ", valor);
                 if(cas.elemeto?.producto?.salud==false){
                     salud = false;
@@ -150,7 +151,7 @@ class Lonchera2: UIView {
             favorita = false;
         }
         cambiaFavorita();
-        print("favorita?: ", favorita);
+        //print("favorita?: ", favorita);
         //print("salud: ", salud);
     }
     
@@ -291,14 +292,14 @@ class Lonchera2: UIView {
         }
         var p = 0;
         for prod in lista{
-            print("pp: ", prod.nombre, " camt: ", cuenta[p]);
+            //print("pp: ", prod.nombre, " camt: ", cuenta[p]);
             p += 1;
         }
         
         for lon in DatosB.cont.favoritos{
             var lista2 = [Producto]()
             var cuenta2 = [Int]();
-            print("lon: ",lon.items.count, " cant: ", cant);
+            //print("lon: ",lon.items.count, " cant: ", cant);
             if(lon.items.count==cant){
                 for pfavo in lon.items{
                     if(lista2.count==0){
@@ -332,7 +333,7 @@ class Lonchera2: UIView {
             }
             p = 0;
             for prod in lista2{
-                print("pp2: ", prod.nombre, " camt2: ", cuenta2[p]);
+                //print("pp2: ", prod.nombre, " camt2: ", cuenta2[p]);
                 p += 1;
             }
             //print("lista1: ",lista.count, "lista2: ", lista2.count);
