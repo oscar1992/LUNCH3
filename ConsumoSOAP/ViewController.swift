@@ -21,7 +21,7 @@ class ViewController: UIViewController, UITextFieldDelegate, NSURLConnectionDele
     
     
     
-    let cc=ConsultaProductos();
+    //let cc=ConsultaProductos();
     var posiT:CGPoint?;
     var posiS:[CGRect]?;
     var arrgeloE=[CGRect]();
@@ -35,7 +35,7 @@ class ViewController: UIViewController, UITextFieldDelegate, NSURLConnectionDele
         
         pageControl.numberOfPages=5;
         print("CONTENEDOR: ",Contenedor.frame.height);
-        cc.consulta();
+        //cc.consulta();
         setTamamnos();
         for cg in DatosC.contenedor.arreglo{
             let pos=pad_inicial!+CGFloat((CGFloat(cg.tipo!-1)*(ancho_casillas!+espaciado!)));
@@ -61,6 +61,7 @@ class ViewController: UIViewController, UITextFieldDelegate, NSURLConnectionDele
 
     @IBAction func Conusltar(sender: UIButton) {
         var p=0;
+        /*
         for a in cc.objs{
             
             let pos=CGFloat(90*p);
@@ -76,6 +77,7 @@ class ViewController: UIViewController, UITextFieldDelegate, NSURLConnectionDele
             //self.view.addSubview(imageView);
             p += 1;
         }
+ */
     }
     
     func actualizaPageConttroler(){

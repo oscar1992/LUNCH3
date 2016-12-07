@@ -79,6 +79,7 @@ class IngresaFavoritos: NSObject , NSURLConnectionDelegate, NSXMLParserDelegate{
             
             if error != nil
             {
+                print("OOOOOOOOO");
                 print("Error: " + error!.description)
             }
             //print(self.resp)

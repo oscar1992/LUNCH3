@@ -62,6 +62,7 @@ class CargaFavoritos: NSObject , NSURLConnectionDelegate, NSXMLParserDelegate{
                 
                 let cargaFav = CargaItemsFavoritos();
                 cargaFav.carga();
+                lobj_Request.setValue("Connection", forHTTPHeaderField: "close");
             });
             
             })

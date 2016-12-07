@@ -107,9 +107,9 @@ class CajaView: UIButton {
                         tit = caja.secuencia[ordenActual].lista[casi.tipo!-1];
                     }
                     
-                    let icono=ProductoView(frame: nn, imagen: tit.productos!.imagen);
+                    let icono=ProductoView(frame: nn, imagen: tit.productos!.imagen!);
                     icono.padre=casi;
-                    casi.seteaElemento(icono, tipo: (tit.productos!.tipo)!, ima: tit.productos!.imagen, prod: tit.productos!);
+                    casi.seteaElemento(icono, tipo: (tit.productos!.tipo)!, ima: tit.productos!.imagen!, prod: tit.productos!);
                     //print("pre casilla: ", casi.elemeto?.producto?.nombre);
                     casi.activo=true;
                     casi.elemeto?.Natural = true;
@@ -129,7 +129,7 @@ class CajaView: UIButton {
                 if(Titem.productos?.tipo==casi.tipo){
                     
                     let nn=CGRectMake(0, 0, ancho!, alto!);
-                    let icono=ProductoView(frame: nn, imagen: Titem.productos!.imagen);
+                    let icono=ProductoView(frame: nn, imagen: Titem.productos!.imagen!);
                     icono.tipo=casi.tipo;
                     icono.producto=Titem.productos;
                     icono.padre=casi;
@@ -140,7 +140,7 @@ class CajaView: UIButton {
                     casi.activo=true;
                     casi.bringSubviewToFront(icono);*/
                     
-                    casi.seteaElemento(icono, tipo: icono.tipo!, ima: Titem.productos!.imagen, prod: Titem.productos!);
+                    casi.seteaElemento(icono, tipo: icono.tipo!, ima: Titem.productos!.imagen!, prod: Titem.productos!);
                     //print("casi: ", casi.elemeto?.producto?.nombre);
                     //print("padre: ", casi.elemeto?.padre);
                     DatosC.contenedor.lonchera.subVista!.casillas[p]=casi;

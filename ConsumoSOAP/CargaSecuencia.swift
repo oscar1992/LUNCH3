@@ -37,22 +37,19 @@ class CargaSecuencia: NSObject, NSURLConnectionDelegate, NSXMLParserDelegate {
         
         let task = session.dataTaskWithRequest(lobj_Request, completionHandler: {data, response, error -> Void in
             //print("Response: \(response)")
-            let strData = NSString(data: data!, encoding: NSUTF8StringEncoding)
-            self.resp=strData?.dataUsingEncoding(NSUTF8StringEncoding)
-            
-            //print("Body: \(strData)")
-            
-            if error != nil
-            {
-                print("Error: " + error!.description)
+            if(data == nil){
+                print("nulo en secuencias");
+            }else{
+                let strData = NSString(data: data!, encoding: NSUTF8StringEncoding)
+                self.resp=strData?.dataUsingEncoding(NSUTF8StringEncoding)
+                self.parser=NSXMLParser(data: self.resp)
+                self.parser.delegate=self
+                self.parser.parse()
             }
-            //print(self.resp)
-            self.parser=NSXMLParser(data: self.resp)
-            self.parser.delegate=self
-            self.parser.parse()
+            
             dispatch_async(dispatch_get_main_queue(),{
                 print("Carga Secuencias");
-                
+                lobj_Request.setValue("Connection", forHTTPHeaderField: "close");
 
                 
             });

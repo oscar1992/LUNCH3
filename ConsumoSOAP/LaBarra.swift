@@ -16,6 +16,8 @@ class LaBarra: UIView {
         self.frame = frame;
         setFondo2();
         self.superview?.sendSubviewToBack(self);
+        self.userInteractionEnabled=false;
+        //self.backgroundColor=UIColor.blueColor();
     }
     
     required init?(coder aDecoder: NSCoder) {

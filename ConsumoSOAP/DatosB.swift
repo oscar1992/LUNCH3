@@ -17,10 +17,24 @@ struct keysPrimariasB{
     static let favoritos = [Favoritos]();
     static let itemsFavo = [TItems]();
     static var listaLoncheras = [(Lonchera2, Int)]();
+    static var envia:Int!;
+    static var FechasEntrega = [FechaEntrega]();
+    static var HorasEntrega = [HoraEntrega]();
+    static let loginView = LoginView();
+    static let olvida1 = Olvida1();
+    static let olvida2 = Olvida2();
+    static let nodos = CargaNodos();
+    static let datosPadre = DatosPadre();
+    static let primeraVezCarrito = true;
+    static let historial = Historial();
+    static let tipos = Tipos();
+    static let cargaProductos = false;
+    static let listaTInfo = [TipoInfo]();
+    
 }
 
 class DatosB: NSObject {
-    static let cont = DatosB();
+    static var cont = DatosB();
     var saludables = [Saludable]();
     var prodSaludables = [ProductoSaludable]();
     var home2 = Home2();
@@ -29,14 +43,35 @@ class DatosB: NSObject {
     var itemsFavo = [TItems]();
     var listaLoncheras = [(Lonchera2, Int)]();
     var carrito = Carrito();
+    var envia:Int!;
+    var FechasEntrega = [FechaEntrega]();
+    var HorasEntrega = [HoraEntrega]();
+    var loginView = LoginView();
+    var olvida1 = Olvida1();
+    var olvida2 = Olvida2();
+    var nodos = CargaNodos();
+    var datosPadre = DatosPadre();
+    var primeraVezCarrito = true;
+    var historial = Historial();
+    var tipos = Tipos();
+    var cargaProductos : Bool?;
+    var listaTInfo = [TipoInfo]();
+    
+
+    static func elimina(){
+        cont = DatosB();
+    }
     
     //Método que pone el fondo de TODO!
     func poneFondoTot(vista: UIView, fondoStr: String, framePers: CGRect?, identi: String?, scala: Bool){
         //print("PoneFondo: ", fondoStr);
         
         if(identi != nil){
+            //print("identi: ", identi, "subs: ", vista.subviews.count);
             for sub in vista.subviews{
-                if sub.accessibilityIdentifier==identi{
+                //print("ssss: ", sub.accessibilityIdentifier);
+                if sub.accessibilityIdentifier==identi!{
+                    
                     sub.removeFromSuperview();
                 }
             }
@@ -56,6 +91,7 @@ class DatosB: NSObject {
         
         backImg.image=img;
         if(identi != nil){
+            //print("asigna: ", identi);
             backImg.accessibilityIdentifier=identi;
         }
         vista.addSubview(backImg);
@@ -66,27 +102,36 @@ class DatosB: NSObject {
     func agregaLonchera(lonc: Lonchera2){
         let nlon = Lonchera2(frame: lonc.frame);
         nlon.nombr=lonc.nombr;
+
+        for cas in lonc.casillas{
+            print("casT: ", cas.elemeto?.producto?.nombre);
+        }
         for ncas in 0..<4{
-            //print("ncas: ", ncas);
+            print("ncas: ", ncas);
             if(lonc.casillas[ncas].elemeto != nil){
+                //print("ncas: ", ncas);
+                print("elecopia: ", lonc.casillas[ncas].elemeto!.producto!.nombre);
                 let pv = lonc.casillas[ncas].elemeto;
                 nlon.casillas[ncas]=Casilla(frame: lonc.casillas[ncas].frame);
                 pv?.tipo=lonc.casillas[ncas].tipo;
                 nlon.casillas[ncas].elemeto = lonc.casillas[ncas].elemeto!
-                nlon.setCasilla(ncas, prod: lonc.casillas[ncas].elemeto!.producto!);
+                //nlon.setCasilla(ncas, prod: lonc.casillas[ncas].elemeto!.producto!);
                 //nlon.casillas[ncas].seteaElemento(pv!, tipo: pv!.tipo!, ima: pv!.producto!.imagen, prod: pv!.producto!);
-                //print(nlon.casillas[ncas].elemeto);
+                //print("ele: ",nlon.casillas[ncas].elemeto!.producto!.nombre);
             }
             
         }
+        nlon.valor=lonc.valor;
         nlon.contador=lonc.contador;
-        print("lon entra: ", nlon.nombr);
+        //print("lon entra: ", nlon.nombr);
         /*
         listaLoncheras.append((nlon, 1));
         for ll in listaLoncheras{
             print("nom: ", ll.0.nombr);
         }*/
-        
+        for cas in nlon.casillas{
+            print("cas: ", cas.elemeto?.producto?.nombre);
+        }
         if (listaLoncheras.isEmpty){
             listaLoncheras.append((nlon, 1));
             //print("Nuevo");
@@ -115,9 +160,10 @@ class DatosB: NSObject {
             }
         }
         
+        /*
         for ll in listaLoncheras{
             print("nom: ", ll.0.nombr, " cant: ", ll.1);
-        }
+        }*/
     }
     
     //Método que cuenta las casillas llenas

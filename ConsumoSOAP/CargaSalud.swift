@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CargaSalud: NSObject , NSURLConnectionDelegate, NSXMLParserDelegate{
+class CargaSalud: NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
     
     var resp: NSData! = nil
     var estado:NSMutableString!
@@ -16,8 +16,8 @@ class CargaSalud: NSObject , NSURLConnectionDelegate, NSXMLParserDelegate{
     var eeleDiccio=NSMutableDictionary()
     var element=NSString()
     
-    func cargaSaludables(){
-        
+    func cargaSaludables(carga: CargaInicial){
+        print("Inicia Carga Saludables");
         let mensajeEnviado:String = "<soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/' xmlns:enp='http://enpoint.lunch.com.co/'><soapenv:Header/><soapenv:Body><enp:listaSalud/></soapenv:Body></soapenv:Envelope>";
         
         let is_URL: String = "http://93.188.163.97:8080/Lunch2/adminEndpoint"
@@ -36,25 +36,34 @@ class CargaSalud: NSObject , NSURLConnectionDelegate, NSXMLParserDelegate{
         
         let task = session.dataTaskWithRequest(lobj_Request, completionHandler: {data, response, error -> Void in
             //print("Response: \(response)")
-            let strData = NSString(data: data!, encoding: NSUTF8StringEncoding)
-            self.resp=strData?.dataUsingEncoding(NSUTF8StringEncoding)
-            
-            //print("Body: \(strData)")
-            
-            if error != nil
-            {
-                print("Error: " + error!.description)
-            }
-            //print(self.resp)
-            self.parser=NSXMLParser(data: self.resp)
-            self.parser.delegate=self
-            self.parser.parse();
-            dispatch_async(dispatch_get_main_queue(),{
-                let cargaIt = CargaProductoSalud();
-                cargaIt.cargaSaludables();
-                print("Carga Saludables OK");
+            if(data == nil){
+                print("NULOOOO en saludables");
+            }else{
+                let strData = NSString(data: data!, encoding: NSUTF8StringEncoding)
                 
-            });
+                //print("Body: \(strData)")
+                
+                self.resp=strData?.dataUsingEncoding(NSUTF8StringEncoding)
+                self.parser=NSXMLParser(data: self.resp)
+                self.parser.delegate=self
+                self.parser.parse();
+                dispatch_async(dispatch_get_main_queue(),{
+                    carga.cargaImagenes();
+                    print("Carga Saludables OK");
+                    let cargaIt = CargaProductoSalud();
+                    cargaIt.cargaSaludables();
+                    //Plogin.pasa2();
+                    if(DatosB.cont.loginView.aprueba==true){
+                        //DatosB.cont.loginView.pasa2();
+                    }else{
+                        DatosB.cont.cargaProductos = true;
+                    }
+                    
+                    
+                    lobj_Request.setValue("Connection", forHTTPHeaderField: "close");
+                });
+            }
+            
             
         })
         task.resume();

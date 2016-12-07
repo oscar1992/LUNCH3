@@ -16,13 +16,14 @@ class Pred2: UIScrollView, UIScrollViewDelegate {
     override init(frame: CGRect){
         super.init(frame: frame);
         self.delegate=self;
-        
+        //iniciaCargaCajas();
         //cargaSaludables();
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     
     
     //Método que carga las loncheras saludables y las favoritas
@@ -44,10 +45,10 @@ class Pred2: UIScrollView, UIScrollViewDelegate {
             }
             print("PREDE")
             let tot = Double(DatosB.cont.saludables.count)+0.5;
-            let ancho = self.frame.width/CGFloat(tot);
+            let ancho = (self.frame.width/CGFloat(tot));
             let alto = ancho * 0.8;
             var p = CGFloat(0);
-            
+            //let OY = DatosC.contenedor.altoP*0.05;
             //print("cajas :", tot);
             for cajaS in DatosB.cont.saludables{
                 //print("nomb: ", cajaS.nombre);
@@ -57,8 +58,10 @@ class Pred2: UIScrollView, UIScrollViewDelegate {
                 let nombre = UILabel(frame: frameNombre);
                 nombre.text=cajaS.nombre;
                 nombre.textAlignment=NSTextAlignment.Center;
-                nombre.textColor=UIColor.whiteColor();
-                nombre.font=UIFont(name: "SansBeam Head", size: nombre.frame.height/2)
+                nombre.textColor=UIColor.init(red: 0, green: 0.5, blue: 0, alpha: 1);
+                nombre.adjustsFontSizeToFitWidth=true;
+                nombre.font=UIFont(name: "Gotham Bold", size: nombre.frame.height*0.8);
+                
                 //print("Frame Caja:", frameCaja);
                 var produs = [Producto]();
                 
@@ -71,6 +74,7 @@ class Pred2: UIScrollView, UIScrollViewDelegate {
                     }
                 }
                 let caja = Caja2(frame : frameCaja, id: cajaS.idSalud, nombre: cajaS.nombre, items: produs);
+                caja.accessibilityIdentifier="Saludable";
                 DatosB.cont.poneFondoTot(caja, fondoStr: "LoncheraVerde2", framePers: nil, identi: "Caja", scala: true);
                 cajas.append(caja);
                 self.addSubview(caja);
@@ -101,8 +105,9 @@ class Pred2: UIScrollView, UIScrollViewDelegate {
                 llenaFavorito(favo);
                 nombre.text=favo.nombre;
                 nombre.textAlignment=NSTextAlignment.Center;
-                nombre.textColor=UIColor.whiteColor();
-                nombre.font=UIFont(name: "SansBeam Head", size: nombre.frame.height/2);
+                nombre.textColor=UIColor.init(red: 0, green: 0, blue: 0.5, alpha: 1);
+                nombre.font=UIFont(name: "Gotham Bold", size: nombre.frame.height*0.8);
+                nombre.adjustsFontSizeToFitWidth=true;
                 let caja = Caja2(frame: frameCaja, id: favo.id, nombre: favo.nombre, items: favo.items);
                 DatosB.cont.poneFondoTot(caja, fondoStr: "LoncheraAzul2", framePers: nil, identi: "Caja", scala: true);
                 cajas.append(caja);
@@ -122,13 +127,15 @@ class Pred2: UIScrollView, UIScrollViewDelegate {
                     let frameN = CGRectMake(OX, 0, ancho, alto);
                     let frameNombre = CGRectMake(OX, alto, ancho, (ancho*0.2));
                     let nombre = UILabel(frame: frameNombre);
-                    nombre.text="Vacio";
+                    nombre.text="Vacío";
                     nombre.textAlignment=NSTextAlignment.Center;
                     nombre.textColor=UIColor.whiteColor();
-                    nombre.font=UIFont(name: "SansBeam Head", size: nombre.frame.height/2);
+                    nombre.adjustsFontSizeToFitWidth=true;
+                    nombre.font=UIFont(name: "Gotham Bold", size: nombre.frame.height*0.8);
                     let vacia = UIButton(frame: frameN);
                     DatosB.cont.poneFondoTot(vacia, fondoStr: "LoncheraGris2", framePers: nil, identi: "Caja", scala: true);
                     cajas.append(vacia);
+                    vacia.addTarget(self, action: #selector(Pred2.limipaLonchera), forControlEvents: .TouchDown);
                     self.addSubview(vacia);
                     self.addSubview(nombre);
                     p += 1;
@@ -138,7 +145,12 @@ class Pred2: UIScrollView, UIScrollViewDelegate {
             self.contentSize = CGSizeMake(((ancho)*(CGFloat(10))), self.frame.height);
             cini=false;
         }
-        
+        cargaSaludableInicial();
+    }
+    
+    //Método que indica a la lonchera a vaciar los productos de su interior
+    func limipaLonchera(){
+        DatosB.cont.home2.lonchera.limpia();
     }
     
     //Método que llena los productos de una caja favorita
@@ -160,6 +172,11 @@ class Pred2: UIScrollView, UIScrollViewDelegate {
         
     }
     
+    //Método que pone uan lonchera saludable pre-cargada
+    func cargaSaludableInicial(){
+        (cajas.first as! Caja2).llena();
+        
+    }
     
     /*
     // Only override drawRect: if you perform custom drawing.

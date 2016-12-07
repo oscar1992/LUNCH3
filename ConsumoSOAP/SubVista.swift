@@ -118,7 +118,7 @@ class SubVista: UIView {
                             if(Int(cc) < casillasAux.count){
                                 let prod = casillasAux[Int(cc)].producto;
                                 //print("P: ",casillasAux[Int(cc)].producto!.nombre);
-                                imagen=prod!.imagen;
+                                imagen=prod!.imagen!;
                                 let nn=CGRectMake(0, 0, casilla.frame.width, casilla.frame.height);
                                 let icono=ProductoView(frame: nn, imagen: imagen);
                                 
@@ -213,7 +213,7 @@ class SubVista: UIView {
                             if(Int(cc) < casillasAux.count){
                                 let prod = casillasAux[Int(cc)].producto;
                                 //print("P: ",casillasAux[Int(cc)].producto!.nombre);
-                                imagen=prod!.imagen;
+                                imagen=prod!.imagen!;
                                 
                                 let nn=CGRectMake(0, 0, casilla.frame.width, casilla.frame.height);
                                 print("ico: ",nn);
@@ -304,7 +304,7 @@ class SubVista: UIView {
                         if(Int(cc) < casillasAux.count){
                             let prod = casillasAux[Int(cc)].producto;
                             //print("P: ",casillasAux[Int(cc)].producto!.nombre);
-                            imagen=prod!.imagen;
+                            imagen=prod!.imagen!;
                             let nn=CGRectMake(0, 0, casilla.frame.width, casilla.frame.height);
                             let icono=ProductoView(frame: nn, imagen: imagen);
                             print("ico: ",nn);

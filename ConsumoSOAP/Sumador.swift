@@ -28,22 +28,25 @@ class Sumador: UIView {
         let alto = DatosC.contenedor.altoP*0.07;
         let frame1 = CGRectMake(borde, (borde), ancho1, alto);
         let frame2 = CGRectMake(borde, (alto), ancho1, alto);
-        let frame3 = CGRectMake((borde+ancho1), (borde), ancho2, alto);
-        let frame4 = CGRectMake((borde+ancho1), (alto), ancho2, alto);
+        let OX1 = self.frame.width - (ancho2+borde);
+        let frame3 = CGRectMake(OX1, (borde), ancho2, alto);
+        let frame4 = CGRectMake(OX1, (alto), ancho2, alto);
         let msg1 = UILabel(frame: frame1);
         labelPedido = UILabel(frame: frame3);
         let msg2 = UILabel(frame: frame2);
         labelPrecio = UILabel(frame: frame4);
         msg1.text = "Valor del envío";
-        msg1.font=UIFont(name: "SansBeamBody-Book", size: msg1.frame.height*0.5);
-        msg2.font=UIFont(name: "SansBeamBody-Book", size: msg2.frame.height*0.5);
-        labelPrecio.font=UIFont(name: "SansBeamBody-Book", size: msg2.frame.height*0.5);
-        labelPedido.font=UIFont(name: "SansBeamBody-Book", size: msg2.frame.height*0.5);
-        msg1.textAlignment=NSTextAlignment.Center;
-        msg2.textAlignment=NSTextAlignment.Center;
-        msg2.text = "Valor Total";
-        msg1.textColor=UIColor.init(red: 0.51, green: 0.77, blue: 0.25, alpha: 1);
-        msg2.textColor=UIColor.init(red: 0.51, green: 0.77, blue: 0.25, alpha: 1);
+        msg1.font=UIFont(name: "Gotham Bold", size: msg1.frame.height*0.4);
+        msg2.font=UIFont(name: "Gotham Bold", size: msg2.frame.height*0.4);
+        labelPrecio.font=UIFont(name: "Gotham Bold", size: msg2.frame.height*0.4);
+        labelPedido.font=UIFont(name: "Gotham Bold", size: msg2.frame.height*0.4);
+        labelPrecio.textAlignment=NSTextAlignment.Right;
+        labelPedido.textAlignment=NSTextAlignment.Right;
+        msg1.textAlignment=NSTextAlignment.Left;
+        msg2.textAlignment=NSTextAlignment.Left;
+        msg2.text = "VALOR TOTAL";
+        msg1.textColor=UIColor.init(red: 0, green: 0.5, blue: 0.15, alpha: 1);
+        msg2.textColor=UIColor.init(red: 0, green: 0.5, blue: 0.15, alpha: 1);
         self.addSubview(msg2);
         self.addSubview(msg1);
         self.addSubview(labelPrecio);
@@ -52,8 +55,11 @@ class Sumador: UIView {
     
     //Método que cambia los valores del las etiquetas
     func actuaPrecios(precTot: Int, envio: Int){
-        labelPedido.text="$"+String(envio);
-        labelPrecio.text="$"+String(precTot);
+        let formateadorPrecio = NSNumberFormatter();
+        formateadorPrecio.numberStyle = .CurrencyStyle;
+        formateadorPrecio.locale = NSLocale(localeIdentifier: "es_CO");
+        labelPedido.text=formateadorPrecio.stringFromNumber(envio)!;
+        labelPrecio.text=formateadorPrecio.stringFromNumber(precTot)!;
     }
     
     required init?(coder aDecoder: NSCoder) {

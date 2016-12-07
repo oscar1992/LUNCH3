@@ -132,6 +132,7 @@ class Casilla: UIButton {
         }else{
             imagen = UIImage(named: "CasillaBlanca")!;
         }
+
         let frame = CGRectMake(0, 0, self.frame.width, self.frame.height);
         let backImg = UIImageView(frame: frame);
         //backImg.contentMode = UIViewContentMode.ScaleAspectFit;

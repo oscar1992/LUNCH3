@@ -20,15 +20,18 @@ class ConsultaLogin : NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
     var element=NSString()
     var PLogin:LoginView?;
     
+    init(plogin: LoginView) {
+        self.PLogin=plogin;
+    }
     
     func consulta(email: String!, pass: String!){
-        
-        let ema=email;
+        PLogin?.bloquea();
+        _=email;
         let pas=pass;
         //print(ema, pas);
         let mensajeEnviado:String = "<soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/' xmlns:enp='http://enpoint.lunch.com.co/'><soapenv:Header/><soapenv:Body><enp:login><email>"+email+"</email><pass>"+pas+"</pass></enp:login></soapenv:Body></soapenv:Envelope>"
         
-        //print("Mensaje: ", mensajeEnviado);
+        print("Mensaje: ", mensajeEnviado);
         let is_URL: String = "http://93.188.163.97:8080/Lunch2/adminEndpoint"
         
         let lobj_Request = NSMutableURLRequest(URL: NSURL(string: is_URL)!)
@@ -44,36 +47,60 @@ class ConsultaLogin : NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
         lobj_Request.addValue("\"bool\"", forHTTPHeaderField: "SOAPAction")
         
         let task = session.dataTaskWithRequest(lobj_Request, completionHandler: {data, response, error -> Void in
-            //print("Response: \(response)")
-            let strData = NSString(data: data!, encoding: NSUTF8StringEncoding)
-            self.resp=strData?.dataUsingEncoding(NSUTF8StringEncoding)
-            
-            //print("Body: \(strData)")
-            
-            if error != nil
-            {
-                print("Error: " + error!.description)
-            }
-            //print(self.resp)
-            self.parser=NSXMLParser(data: self.resp)
-            self.parser.delegate=self
-            self.parser.parse();
-            //print("ini");
-            let consNinos=ConsultaNinos();
-            self.PLogin?.aprueba = self.aprueba;
-            
-            if(self.PLogin!.aprueba == true){
-                consNinos.consulta(self.PLogin!, aprueba: self.aprueba);
+            //
+            if(data == nil){
+                print("NULOOOO en consulta login");
+                let ancho = self.PLogin!.view.frame.width*0.8;
+                let alto = self.PLogin!.view.frame.height*0.4;
+                let OX = (self.PLogin!.view.frame.width/2)-(ancho/2);
+                let OY = (self.PLogin!.view.frame.height/2)-(alto/2);
+                let frameMensaje = CGRectMake(OX, OY, ancho, alto);
+                let mensaje = MensajeConexion(frame: frameMensaje, msg: nil);
+                self.PLogin?.view.addSubview(mensaje);
+                mensaje.layer.zPosition=5;
+                self.PLogin!.view.bringSubviewToFront(mensaje);
+                print("Response: \(response)")
             }else{
+                let strData = NSString(data: data!, encoding: NSUTF8StringEncoding)
+                
+                //print("Body: \(strData)")
+                
+                self.resp=strData?.dataUsingEncoding(NSUTF8StringEncoding)
+                self.parser=NSXMLParser(data: self.resp)
+                self.parser.delegate=self
+                self.parser.parse();
+                self.PLogin?.Msg="Tu Usuario o Contraseña no son válidos";
                 dispatch_async(dispatch_get_main_queue(),{
-                    //print("aprueba: ",self.aprueba);
+                    print("aprueba: ",self.aprueba);
+                    //self.PLogin?.ingresa.enabled=true;
+                    self.PLogin?.aprueba = self.aprueba;
+                    print("app: ", self.PLogin?.aprueba);
                     
+                    if(self.PLogin!.aprueba == true){
+                        print("pasa1: ", email, " - ", pass);
+                        let cons = ConsultaNinos();
+                        cons.consulta(self.PLogin!, aprueba: self.aprueba);
+                        
+                    }else{
+                        DatosB.cont.favoritos=[Favoritos]();
+                        
+                        DatosC.elimina();
+                        DatosD.elimina();
+                        //_ = CargaInicial();
+                        self.PLogin!.desbloquea();
+                    }
                     self.PLogin!.pasa();
                     
                     }
                 );
-
             }
+            
+          
+            //print(self.resp)
+            
+            //print("ini");
+            
+            
             
             
             
@@ -103,6 +130,9 @@ class ConsultaLogin : NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
     var pass=false;
     var primeravez=false;
     var numeroConf=false;
+    var terminos=false;
+    var terminoFecha=false;
+    var genero = false;
     
     var Pid:Int?;
     var Pnombre:String?;
@@ -112,6 +142,9 @@ class ConsultaLogin : NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
     var Ppass:String?
     var PprimeraVez:Bool?;
     var PnumeroConfirmacion:String?;
+    var Pterminos:Bool?;
+    var PterminoFecha:String?;
+    var Pgenero:String?;
     
     func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
         element=elementName;
@@ -145,7 +178,15 @@ class ConsultaLogin : NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
         case "telefono":
             telefono=true;
             break;
-        
+        case "termino":
+            terminos=true;
+            break;
+        case "terminoFecha":
+            terminoFecha=true;
+            break;
+        case "genero":
+            genero=true;
+            break;
         default:
             break;
         }
@@ -160,22 +201,34 @@ class ConsultaLogin : NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
         }
         if(nombre){
             Pnombre=string;
+            //print("nom: ", string);
             nombre=false;
         }
         if(telefono){
-            Ptelefono=string;
+            if(string == ""){
+                Ptelefono = "";
+            }else{
+                Ptelefono = string;
+            }
+            
+            
+            //print("tel: ", string);
             telefono=false;
         }
         if(direccion){
             Pdireccion=string;
+            //print("dir: ", string);
             direccion=false;
         }
         if(email){
             Pemail=string;
+            //print("ema: ", string);
             email=false;
         }
         if(pass){
             Ppass=string;
+            //print("pass: ", string);
+            
             pass=false;
         }
         if(primeravez){
@@ -185,10 +238,29 @@ class ConsultaLogin : NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
                 PprimeraVez=false;
             }
             primeravez=false;
+            //print("primera: ", string);
         }
         if(numeroConf){
+            //print("numerc: ", string);
             PnumeroConfirmacion=string;
             numeroConf=false;
+        }
+        if(terminos){
+            if(string == "true"){
+                Pterminos=true;
+            }else{
+                Pterminos=false;
+            }
+            terminos=false;
+        }
+        if(terminoFecha){
+            PterminoFecha=string;
+            print("termino: ", PterminoFecha);
+            terminoFecha=false;
+        }
+        if(genero){
+            Pgenero=string;
+            genero=false;
         }
     }
     
@@ -200,8 +272,21 @@ class ConsultaLogin : NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
                 //print("No")
                 aprueba=false;
             }else{
-                //print("Si")
-                let pad=Padre(id: Pid!, nombre: Pnombre!, telefono: Ptelefono!, direccion: Pdireccion!, email: Pemail!, pass: Ppass!, primeraVez: PprimeraVez!, numeroConf: PnumeroConfirmacion!);
+                if(Ptelefono == nil){
+                    Ptelefono = "--";
+                }
+                print("Si")
+                /*
+                print("id: ", Pid);
+                print("nombre: ", Pnombre);
+                print("tel: ", Ptelefono);
+                print("dir: ", Pdireccion);
+                print("ema: ", Pemail);
+                print("pass: ", Ppass);
+                print("prim: ", PprimeraVez);
+                print("nconf: ", PnumeroConfirmacion);
+ */
+                let pad=Padre(id: Pid!, nombre: Pnombre!, telefono: Ptelefono!, direccion: Pdireccion!, email: Pemail!, pass: Ppass!, primeraVez: PprimeraVez!, numeroConf: PnumeroConfirmacion!, terminos: Pterminos!, terminoFecha: PterminoFecha!, genero: Pgenero!);
                 DatosD.contenedor.padre=pad;
                 aprueba=true;
             }

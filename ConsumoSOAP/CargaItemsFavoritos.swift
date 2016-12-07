@@ -62,6 +62,7 @@ class CargaItemsFavoritos: NSObject, NSURLConnectionDelegate, NSXMLParserDelegat
                 //self.carg!.pideItems(self.items);
                 DatosB.cont.home2.predeterminadas.cargaSaludables();
                 print("Carga Items Favo");
+                lobj_Request.setValue("Connection", forHTTPHeaderField: "close");
             });
         })
         

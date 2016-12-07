@@ -15,11 +15,12 @@ class Lonchera2: UIView {
     var botfavo:UIButton!;
     var favorita=false;
     var lfavo: Favoritos?;
-    var letrero: UIView!;
+    
     var nombr:String!;
     var vista : UIView!;
     var nomb : UITextField!;
     var valor: Int!;
+    var salud: Bool!;
     
     override init(frame: CGRect){
         super.init(frame: frame);
@@ -67,10 +68,10 @@ class Lonchera2: UIView {
     
     //Método que inicia la tabla de los datos
     func iniciaTablaDatos(){
-        let ancho = self.frame.width;
+        let ancho = self.frame.width*0.8;
         let alto = DatosC.contenedor.altoP*0.110;
-        let OX = CGFloat(0);
-        let OY = self.frame.height;
+        let OX = (self.frame.width/2)-(ancho/2);
+        let OY = self.frame.height+(self.frame.height*0.1);
         let frameLetrero = CGRectMake(OX, OY, ancho, alto);
         contador = Contador2(frame: frameLetrero);
         //contador.backgroundColor=UIColor.blueColor();
@@ -81,20 +82,29 @@ class Lonchera2: UIView {
     //Método que permite poner un elemento en una casilla
     func setCasilla(tipo: Int, prod: Producto){
         for cas in casillas{
-            //print("tipo: ", tipo);
-            if (cas.tipo == tipo){
-                //print("castipo: ", tipo);
+            //print("tipo: ", prod.tipo);
+            if (cas.tipo == prod.tipo){
+                //print("castipo: ", cas.tipo);
                 if(cas.elemeto != nil){
                     cas.elemeto?.elimina();
                 }
                 //cas.seteaElemento(prod, tipo: cas.tipo!, ima: (prod.producto?.imagen)!, prod: prod.producto!);
                 
                 cas.elemeto?.espacioPadre=cas.frame;
+                let reductor = CGFloat(0.8);
+                let ancho = cas.frame.width*reductor;
+                let alto = cas.frame.height*reductor;
+                let OX = (cas.frame.width/2)-(ancho/2);
+                let OY = (cas.frame.height/2)-(alto/2);
                 let imagenN = prod.imagen;
-                let prodN=ProductoView(frame: CGRectMake(0, 0, cas.frame.width, cas.frame.height), imagen: imagenN);
+                let prodN=ProductoView(frame: CGRectMake(OX, OY, ancho, alto), imagen: imagenN!);
                 prodN.producto=prod;
                 prodN.padre=cas;
-                prodN.espacioPadre=CGRectMake(0, 0, cas.frame.width, cas.frame.height)
+                prodN.espacioPadre=CGRectMake(OX, OY, ancho, alto);
+                prodN.tipo=cas.tipo;
+                prodN.Natural=true;
+                prodN.PanelOrigen=nil;
+                prodN.Panel2=nil;
                 cas.elemeto=prodN;
                 cas.addSubview(prodN);
             }
@@ -105,11 +115,12 @@ class Lonchera2: UIView {
     //Método que evalua los valores de los productos y el color de la lonchera
     func actualizaContador(){
         //print("actua")
+        valor=0;
         var valor2=0;
         var calorias:Int=0;
         var azucar:Int=0;
         var proteina:Int=0;
-        var salud = true;
+        salud = true;
         for cas in casillas{
             if(cas.elemeto != nil){
                 //print("ele?: ", cas.elemeto?.producto?.nombre);
@@ -129,6 +140,7 @@ class Lonchera2: UIView {
                     }
                     
                 }
+                
                 valor2 += cas.elemeto!.producto!.precio;
                 valor = valor2;
                 //print("val: ", valor);
@@ -139,10 +151,17 @@ class Lonchera2: UIView {
             
             
         }
-        contador.azucar.text=String(azucar);
-        contador.calorias.text=String(calorias);
-        contador.proteina.text=String(proteina);
-        contador.valor.text=String(valor);
+        
+        let formateadorPrecio = NSNumberFormatter();
+        formateadorPrecio.numberStyle = .CurrencyStyle;
+        formateadorPrecio.locale = NSLocale(localeIdentifier: "es_CO");
+        contador.azucar.text=String(azucar)+" g";
+        contador.calorias.text=String(calorias)+" cal";
+        contador.proteina.text=String(proteina)+" g";
+        if(valor != nil){
+            contador.valor.text=formateadorPrecio.stringFromNumber(valor)!;
+        }
+        
         cambiaColor(salud);
         lfavo=esFavorita();
         if(lfavo != nil){
@@ -175,9 +194,17 @@ class Lonchera2: UIView {
     //Método que indica si la lonchera no contiene productos
     func estaLLena()->Bool{
         var llena = false;
+        print("VACIA??")
         for cas in casillas{
-            if(cas.elemeto != nil){
+            
+            if((cas.elemeto?.producto) == nil){
+                llena=false;
+                print("no posee")
+            }else{
                 llena=true;
+                print("cas: ", cas.elemeto?.producto);
+                print("posee");
+                break;
             }
         }
         return llena;
@@ -201,7 +228,7 @@ class Lonchera2: UIView {
     func iniciaBotonFav(){
         botfavo=UIButton();
         var imagen: UIImage;
-        imagen = UIImage(named: "BotonF")!;
+        imagen = UIImage(named: "FAVG")!;
         
         let OX=self.frame.width*0.45
         let OY=self.frame.height*0.85;
@@ -220,7 +247,7 @@ class Lonchera2: UIView {
         botfavo?.addSubview(backImg);
         botfavo?.sendSubviewToBack(backImg);
         */
-        DatosB.cont.poneFondoTot(botfavo, fondoStr: "BotonF", framePers: nil, identi: "Favo", scala: true);
+        DatosB.cont.poneFondoTot(botfavo, fondoStr: "FAVG", framePers: nil, identi: "Favo", scala: true);
         botfavo?.addTarget(self, action: #selector(Lonchera2.letreroNombre), forControlEvents: .TouchDown);
         self.addSubview(botfavo!);
         
@@ -228,7 +255,10 @@ class Lonchera2: UIView {
     
     //Método que sube la lonchera
     func subeFavorita(){
-        if(DatosB.cont.favoritos.count<=5){
+        
+        var subio=0;
+        print("Cajas: ", DatosB.cont.favoritos.count);
+        if(DatosB.cont.favoritos.count<5){//Límite de favoritas
             if(!favorita ){
                 vista.removeFromSuperview();
                 var prds = [Producto]()
@@ -237,10 +267,10 @@ class Lonchera2: UIView {
                         prds.append((cas.elemeto?.producto)!);
                     }
                 }
-                let sube = SubeFavorito(nombre: nomb.text!, prods: prds);
+                let sube = SubeFavorito(nombre: self.nombr, prods: prds);
                 sube.enviaFavorito();
                 favorita=true;
-                
+                subio=1;
             }else{
                 let rem = EliminaFavoritos();
                 rem.bot=botfavo;
@@ -248,9 +278,20 @@ class Lonchera2: UIView {
                 //Remueve
             }
         }else{
-            print("se pasó de cajas");
+            print("se pasó de cajas: ", DatosB.cont.favoritos.count);
+            if(favorita && DatosB.cont.favoritos.count>=5){
+                
+                let rem = EliminaFavoritos();
+                rem.bot=botfavo;
+                rem.elimina((lfavo!.id)!);
+                subio=0;
+            }else{
+                print("elimina normal")
+                subio=2;
+            }
+            
         }
-        letreroFavorito();
+        letreroFavorito(subio);
     }
     
     func esFavorita()->Favoritos?{
@@ -346,7 +387,7 @@ class Lonchera2: UIView {
                     for prod in lista{
                         if(prod.id == prod2.id){
                             if(cuenta[j]==cuenta2[i]){
-                                //print("Misma cantidad de: ", prod2.nombre);
+                                //0'print("Misma cantidad de: ", prod2.nombre);
                                 check += 1;
                             }
                         }
@@ -369,68 +410,54 @@ class Lonchera2: UIView {
     func cambiaFavorita(){
         if(favorita){
             //print("favo TRUE");
-            DatosB.cont.poneFondoTot(botfavo, fondoStr: "BotonFF", framePers: nil, identi: "Favo", scala: true);
+            DatosB.cont.poneFondoTot(botfavo, fondoStr: "FAVR", framePers: nil, identi: "Favo", scala: false);
         }else{
             //print("favo FALSE");
-            DatosB.cont.poneFondoTot(botfavo, fondoStr: "BotonF", framePers: nil, identi: "Favo", scala: true);
+            DatosB.cont.poneFondoTot(botfavo, fondoStr: "FAVG", framePers: nil, identi: "Favo", scala: true);
         }
     }
     
     //Método que puestra el letrero cuando se agrega/quita un afavorita
-    func letreroFavorito(){
-        let ancho = self.frame.width*0.4;
-        let alto = self.frame.height*0.3;
-        let ox = (self.frame.width/2)-(ancho/2);
-        let oy = (self.frame.height/2)-(alto/2);
-        let frameFav = CGRectMake(ox, oy, ancho, alto);
-        letrero = UIView(frame: frameFav);
-        letrero.backgroundColor=UIColor.blueColor();
-        if(favorita){
-            let msg = UILabel(frame: CGRectMake(0, 0, ancho, alto));
-            msg.text="Caja favorita añadida";
-            letrero.addSubview(msg);
-        }else{
-            let msg = UILabel(frame: CGRectMake(0, 0, ancho, alto));
-            msg.text="Caja favorita eliminada";
-            letrero.addSubview(msg);
-        }
-        _ = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(Lonchera2.cierraLetrero), userInfo: nil, repeats: false);
-        self.addSubview(letrero);
+    func letreroFavorito(sub: Int){
+        let ancho = DatosC.contenedor.anchoP*0.8
+        let ox = (DatosC.contenedor.anchoP/2)-(ancho/2);
+        let oy = (DatosC.contenedor.altoP/2)-(ancho/2);
+        let frameFav = CGRectMake(ox, oy, ancho, ancho);
+        let letrero = RespuestaFavorita(frame: frameFav, sub: sub);
+        //letrero.backgroundColor=UIColor.blueColor();
+        
+
+        
+        self.superview!.addSubview(letrero);
     }
     
     //Método que cierra el letrero del mensaje
     func cierraLetrero(){
-        letrero.removeFromSuperview();
+        botfavo.enabled=true;
+        //letrero.removeFromSuperview();
+        if(vista != nil){
+            vista.removeFromSuperview();
+        }
+        
     }
     
     //Método que pide el nombre de la lonchera favorita nueva
     func letreroNombre(){
+        botfavo.enabled=false;
+        print("favorita: ", estaLLena());
         if(!favorita){
-            let ancho = self.frame.width*0.4;
-            let alto = self.frame.height*0.3;
-            let ox = (self.frame.width/2)-(ancho/2);
-            let oy = (self.frame.height/2)-(alto/2);
-            let frameFav = CGRectMake(ox, oy, ancho, alto);
-            vista = UIView(frame: frameFav);
-            let texto = UILabel(frame: CGRectMake(0, 0, ancho, alto/3));
-            let frameNomb = CGRectMake(0, alto/3, ancho, alto/3);
-            let frameBot = CGRectMake(0, 2*(alto/3), ancho, alto/3);
-            let bot = UIButton(frame: frameBot);
-            nomb = UITextField(frame: frameNomb);
-            nomb.backgroundColor=UIColor.redColor();
-            texto.text = "Ingresa el nombre de la lonchera favorita";
-            texto.numberOfLines=0;
-            nomb.placeholder = "Favorita";
-            //bot.titleLabel = UILabel(frame: CGRectMake(0, 0, bot.frame.width, bot.frame.height));
-            bot.titleLabel?.text="Ingresar";
-            nombr=nomb.text;
-            bot.addTarget(self, action: #selector(Lonchera2.subeFavorita), forControlEvents: .TouchDown);
-            vista.addSubview(texto);
-            vista.addSubview(nomb);
-            vista.addSubview(bot);
-            vista.backgroundColor=UIColor.yellowColor();
-            self.addSubview(vista);
+            if(estaLLena()==true){
+                let ancho = DatosC.contenedor.anchoP*0.8
+                let ox = (DatosC.contenedor.anchoP/2)-(ancho/2);
+                let oy = (DatosC.contenedor.altoP/2)-(ancho/2);
+                let frameFav = CGRectMake(ox, oy, ancho, ancho);
+                vista = LetreroFavorita(frame: frameFav);
+                self.superview?.addSubview(vista);
+            }else{
+                botfavo.enabled=true;
+            }
         }else{
+            print("elimina");
             subeFavorita();
         }
         

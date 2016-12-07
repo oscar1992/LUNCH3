@@ -13,9 +13,10 @@ class PestanasProductos: UIButton {
     var subVista:VistaPestana?;
     var activo:Bool?;
     var tipo:Int!;
-    var padre:UIView?;
+    var padre:ContenedorProductos;
         
-    override init(frame: CGRect) {
+    init(frame: CGRect, padre: ContenedorProductos) {
+        self.padre=padre;
         super.init(frame: frame);
         self.backgroundColor=UIColor.redColor();
         self.addTarget(self, action: #selector(PestanasProductos.cambia(_:)), forControlEvents: .TouchDown);
@@ -54,6 +55,7 @@ class PestanasProductos: UIButton {
         self.backgroundColor=UIColor.blueColor();
         self.subVista!.view.hidden=false;
         self.superview?.sendSubviewToBack(self);
+        padre.activo=self;
         /*
         if(activo==true){
             //print("Desactiva");
@@ -74,8 +76,8 @@ class PestanasProductos: UIButton {
     
     //Método que inicializa 
     func iniSlide()->VistaPestana{
-        
-        subVista?.view.frame=CGRectMake(0, (self.frame.height+self.frame.origin.y), DatosC.contenedor.anchoP, self.padre!.frame.height*0.8);
+        //subVista?.view.frame=CGRectMake(0, (self.frame.height+self.frame.origin.y), DatosC.contenedor.anchoP, self.padre!.frame.height*0.8);
+        subVista?.view.frame=CGRectMake(0, (self.frame.height+self.frame.origin.y), DatosC.contenedor.anchoP, DatosC.contenedor.altoP-(self.frame.height+self.frame.origin.y+(DatosC.contenedor.altoP*0.092)));
         //print("retama", subVista?.view.frame);
         subVista?.tipo=self.tipo;
         //subVista?.carga();

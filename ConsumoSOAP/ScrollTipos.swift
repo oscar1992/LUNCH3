@@ -26,7 +26,13 @@ class ScrollTipos: UIScrollView, UIScrollViewDelegate {
     func cargaTipos(){
         let alto = DatosC.contenedor.altoP*0.2;
         var p = 0;
+        for vistaV in self.subviews{
+            if vistaV is VistaTipo{
+                vistaV.removeFromSuperview();
+            }
+        }
         for tipo in DatosB.cont.listaLoncheras{
+            
             let frameVista = CGRectMake(0, alto*CGFloat(p), self.frame.width, alto);
             let vv = VistaTipo(frame: frameVista, lonc: tipo.0, cant: tipo.1, indi: p);
             self.addSubview(vv);

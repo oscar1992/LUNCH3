@@ -36,8 +36,18 @@ class Caja2: UIButton {
             DatosB.cont.home2.lonchera.setCasilla(p, prod: item);
             p += 1;
         }
+        for caja in DatosB.cont.home2.predeterminadas.cajas{
+            if (caja is Caja2 && caja.accessibilityIdentifier=="Saludable"){
+                DatosB.cont.poneFondoTot(caja, fondoStr: "LoncheraVerde2", framePers: nil, identi: "Caja", scala: true);
+            }
+            
+        }
         DatosB.cont.home2.lonchera.nombr=self.nombre;
         DatosB.cont.home2.lonchera.actualizaContador();
+        if(self.accessibilityIdentifier=="Saludable"){
+            DatosB.cont.poneFondoTot(self, fondoStr: "LoncheraVerde(activo)", framePers: nil, identi: "Caja", scala: true);
+        }
+        
     }
 
     /*

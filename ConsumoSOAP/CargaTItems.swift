@@ -51,7 +51,7 @@ class CargaTItems: NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
             self.parser.parse()
             dispatch_async(dispatch_get_main_queue(),{
                 print("Carga Items");
-                
+                lobj_Request.setValue("Connection", forHTTPHeaderField: "close");
             });
         })
         

@@ -25,7 +25,9 @@ class SubeFavorito: NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
     
     func enviaFavorito(){
         let idp=String(DatosD.contenedor.padre.id!);
-        let mensajeEnviado:String = "<soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/' xmlns:enp='http://enpoint.lunch.com.co/'><soapenv:Header/><soapenv:Body><enp:IngresaFavorito><Lonchera><nombreNumero>"+nombre+"</nombreNumero><padre><idPadre>"+idp+"</idPadre></padre></Lonchera></enp:IngresaFavorito></soapenv:Body></soapenv:Envelope>";
+        let fechaPadre=DatosD.contenedor.padre.terminoFecha;
+        var mensajeEnviado:String = "<soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/' xmlns:enp='http://enpoint.lunch.com.co/'><soapenv:Header/><soapenv:Body><enp:IngresaFavorito><Lonchera><nombreNumero>"+nombre+"</nombreNumero><padre><idPadre>"+idp+"</idPadre>"
+        mensajeEnviado += "<terminoFecha>"+fechaPadre!+"</terminoFecha></padre></Lonchera></enp:IngresaFavorito></soapenv:Body></soapenv:Envelope>";
         
         
         let is_URL: String = "http://93.188.163.97:8080/Lunch2/clienteEndpoint"

@@ -16,6 +16,13 @@ class CargaTags: NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
     var parser=NSXMLParser()
     var eeleDiccio=NSMutableDictionary()
     var element=NSString()
+    var task: NSURLSessionDataTask!;
+    var produndidad: Int;
+    var mal = false;
+    
+    override init(){
+        self.produndidad = 0;
+    }
     
     func consulta(idProdcuto: Producto){
         
@@ -38,25 +45,34 @@ class CargaTags: NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
         //lobj_Request.addValue("223", forHTTPHeaderField: "Content-Length")
         lobj_Request.addValue("\"tagsPorProducto\"", forHTTPHeaderField: "SOAPAction")
         
-        let task = session.dataTaskWithRequest(lobj_Request, completionHandler: {data, response, error -> Void in
+        task = session.dataTaskWithRequest(lobj_Request, completionHandler: {data, response, error -> Void in
             //print("Response: \(response)")
-            let strData = NSString(data: data!, encoding: NSUTF8StringEncoding)
-            self.resp=strData?.dataUsingEncoding(NSUTF8StringEncoding)
-            //print("envia: ", mensajeEnviado);
-            //print("Body: \(strData)")
-            
-            if error != nil
-            {
-                print("Error: " + error!.description)
+            if(data == nil){
+                print("NULOOOO en Tags");
+                self.task.cancel();
+                print("Cancela Tags ", self.idProducto);
+                self.mal = true;
+            }else{
+                //print("Inicia Tags: ", self.produndidad);
+                let strData = NSString(data: data!, encoding: NSUTF8StringEncoding)
+                self.resp=strData?.dataUsingEncoding(NSUTF8StringEncoding)
+                //print("envia: ", mensajeEnviado);
+                //print("Body: \(strData)")
+
+                //print(self.resp)
+                self.parser=NSXMLParser(data: self.resp)
+                self.parser.delegate=self
+                self.parser.parse();
             }
-            //print(self.resp)
-            self.parser=NSXMLParser(data: self.resp)
-            self.parser.delegate=self
-            self.parser.parse();
+            
             //print("ini");
             
                 dispatch_async(dispatch_get_main_queue(),{
-                    //print("Carga Tags");
+                    print("Carga Tags: ", self.mal);
+                    if(self.mal){
+                        self.produndidad += 1;
+                        self.consulta(idProdcuto);
+                    }
                     
                     
                     }

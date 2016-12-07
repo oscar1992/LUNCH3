@@ -14,6 +14,8 @@ class Carrito: UIViewController {
     @IBOutlet weak var laBarra: LaBarra!
     var loncherasTipos = [(Lonchera2!, Int!)]();
     var sum:Sumador!;
+    var scroll:ScrollTipos!;
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,14 +40,14 @@ class Carrito: UIViewController {
     //Método que inicia el botón de volver
     func iniciaBotonVolver(){
         let ancho = DatosC.contenedor.altoP * 0.0922;
-        let centr = (ancho/2)-(ancho/4);
+        let ancho2 = ancho/3;
+        let centr = (ancho/2)-(ancho2/2);
         let frameBoton = CGRectMake(0, 0, ancho, ancho);
         let volver = UIButton(frame: frameBoton);
         volver.addTarget(self, action: #selector(Carrito.vuelve), forControlEvents: .TouchDown);
-        let subFrame = CGRectMake(centr, centr, ancho/2, ancho/2);
+        let subFrame = CGRectMake(centr, centr, ancho2, ancho2);
         DatosB.cont.poneFondoTot(volver, fondoStr: "Volver", framePers: subFrame, identi: nil, scala: true);
         self.view.addSubview(volver);
-        
     }
     
     //Método que cierra la ventana
@@ -68,30 +70,34 @@ class Carrito: UIViewController {
         let ancho = DatosC.contenedor.anchoP*0.8;
         let alto = DatosC.contenedor.altoP*0.11;
         let OX = (DatosC.contenedor.anchoP/2)-(ancho/2);
-        let OY = DatosC.contenedor.altoP*0.09;
+        let OY = DatosC.contenedor.altoP*0.12;
         let frameLet = CGRectMake(OX, OY, ancho, alto);
         let msg = UILabel(frame: frameLet);
         self.view.addSubview(msg);
-        msg.text = "!Estas son las loncheras que armaste¡"
+        msg.text = "¡Estas son las loncheras que armaste!"
         msg.numberOfLines = 0;
         msg.textAlignment=NSTextAlignment.Center;
-        msg.font = UIFont(name: "SansBeam Head", size: msg.frame.height/2);
+        msg.adjustsFontSizeToFitWidth=true;
+        msg.font = UIFont(name: "Gotham Medium", size: msg.frame.height*0.4);
         iniciaScroll(OY+alto);
     }
     
     //Método que ubica el scroll en la vista
     func iniciaScroll(yini: CGFloat){
+        if(scroll != nil){
+            scroll.removeFromSuperview();
+        }
         let alto = DatosC.contenedor.altoP*0.55;
         let frameScroll = CGRectMake(0, yini, self.view.frame.width, alto);
         iniciaSuma(yini+alto);
-        let scroll = ScrollTipos(frame: frameScroll);
+        scroll = ScrollTipos(frame: frameScroll);
         self.view.addSubview(scroll);
         
     }
     
     //Método que inicia el sumador del total de las loncheras
     func iniciaSuma(yini: CGFloat){
-        let alto = DatosC.contenedor.altoP*0.15;
+        let alto = DatosC.contenedor.altoP;
         let frameSuma = CGRectMake(0, yini, self.view.frame.width, alto);
         sum = Sumador(frame: frameSuma);
         self.view.addSubview(sum);
@@ -103,7 +109,7 @@ class Carrito: UIViewController {
         let ancho = DatosC.contenedor.anchoP*0.6;
         let alto = DatosC.contenedor.altoP*0.07;
         let OX = (self.view.frame.width/2)-(ancho/2);
-        let OY = yini;
+        let OY = self.view.frame.height*0.9;
         let frameB = CGRectMake(OX, OY, ancho, alto);
         let bot = UIButton(frame: frameB);
         DatosB.cont.poneFondoTot(bot, fondoStr: "BotConfirmar", framePers:  nil, identi: nil, scala: false);
@@ -113,12 +119,19 @@ class Carrito: UIViewController {
     
     //Mñetodo que cambia de ventana si el padre tiene datos o no tiene datos
     func pasa(){
-        evalua();
-        self.performSegueWithIdentifier("Datos", sender: nil);
+        if(evalua()){
+            if(DatosB.cont.primeraVezCarrito){
+                let cargaFechas=CargaFechaEntrega();
+                cargaFechas.cargaFechaEntrega();
+            }else{
+                
+                self.performSegueWithIdentifier("Datos", sender: nil);
+            }
+        }
     }
     
     //Método que evalua los datos del padre
-    func evalua(){
+    func evalua()->Bool{
         print("eva");
         let padre = DatosD.contenedor.padre;
         if(padre.direccion==nil){
@@ -136,7 +149,11 @@ class Carrito: UIViewController {
         }else{
             print("tel: ", padre.telefono);
         }
-        
+        if(DatosB.cont.listaLoncheras.count==0){
+            return false;
+        }else{
+            return true;
+        }
     }
     
         /*

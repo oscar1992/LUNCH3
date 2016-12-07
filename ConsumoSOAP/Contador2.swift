@@ -19,6 +19,7 @@ class Contador2: UIView {
     override init(frame: CGRect){
         super.init(frame:frame);
         iniciaLabels();
+        puntos();
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -98,15 +99,15 @@ class Contador2: UIView {
     func iniciaLabels(){
         let ancho = self.frame.width*0.4;
         let alto = self.frame.height*0.4;
-        let frameLV = CGRectMake(0, 0, ancho, alto);
-        let frameValo = CGRectMake(0, frameLV.height, ancho, alto);
+        let frameLV = CGRectMake(0, 15, ancho, alto);
+        let frameValo = CGRectMake(0, (frameLV.height), ancho, alto*1.3);
         let OX = self.frame.width*0.5;
         let ancho2 = self.frame.width*0.3;
         let alto2 = self.frame.height/3;
         //print("OX: ", OX);
-        let frameLA = CGRectMake(OX, 0, ancho2, alto2);
+        let frameLA = CGRectMake(OX, 10, ancho2, alto2);
         let frameLC = CGRectMake(OX, frameLA.height, ancho2, alto2);
-        let frameLP = CGRectMake(OX, (frameLC.height+frameLC.origin.y), ancho2, alto2);
+        let frameLP = CGRectMake(OX, (frameLC.height+frameLC.origin.y-10), ancho2, alto2);
         let OX2 = OX+(ancho2/2);
         let frameAzu=CGRectMake(OX2, frameLA.origin.y, ancho2, alto2);
         let frameCal=CGRectMake(OX2, frameLC.origin.y, ancho2, alto2);
@@ -118,12 +119,14 @@ class Contador2: UIView {
         let labelP = UILabel();
         labelV.frame=frameLV;
         labelA.frame=frameLA;
+        
         labelC.frame=frameLC;
         labelP.frame=frameLP;
-        labelA.text="Azucar:";
+        labelA.text="Azúcar:";
         labelV.text="Valor:";
-        labelP.text="Proteina:";
-        labelC.text="Calorias:";
+        labelP.text="Proteína:";
+        labelC.text="Calorías:";
+
         valor = UILabel();
         azucar = UILabel();
         calorias = UILabel();
@@ -140,30 +143,48 @@ class Contador2: UIView {
         seteaLabel2(azucar);
         seteaLabel2(calorias);
         seteaLabel2(proteina);
-        seteaLabel1(labelV);
+        seteaLabel3(labelV);
         seteaLabel1(labelA);
         seteaLabel1(labelC);
         seteaLabel1(labelP);
+        valor.textAlignment=NSTextAlignment.Center;
+        labelV.textAlignment=NSTextAlignment.Center;
     }
     
     func seteaLabel1(lab: UILabel){
         lab.textColor=UIColor.whiteColor();
         lab.font=UIFont(name: "SansBeamBody-Heavy", size: lab.frame.height/2);
-        lab.textAlignment=NSTextAlignment.Center;
+        lab.textAlignment=NSTextAlignment.Left;
         self.addSubview(lab);
     }
     
     
     func seteaLabel2(lab: UILabel){
         lab.textColor=UIColor.whiteColor();
-        lab.textAlignment=NSTextAlignment.Center;
-        lab.font=UIFont(name: "SansBeam Head", size: lab.frame.height/2);
+        lab.textAlignment=NSTextAlignment.Right;
+        lab.font=UIFont(name: "Gotham Book", size: lab.frame.height/2);
         self.addSubview(lab);
     }
-    //Método que evalua si la lonchera solo contiene productos saludables
-    func esSaludable(){
-        
+    
+    func seteaLabel3(lab: UILabel){
+        lab.textColor=UIColor.whiteColor();
+        lab.font=UIFont(name: "SansBeamBody-Heavy", size: lab.frame.height*0.7);
+        lab.textAlignment=NSTextAlignment.Left;
+        self.addSubview(lab);
     }
+    
+    //Método que pone el divisor
+    func puntos(){
+        let ancho = CGFloat(5);
+        let alto = self.frame.height*0.5;
+        let OX = self.frame.width*0.4;
+        let OY = (self.frame.height/2)-(alto/2);
+        let frameD=CGRectMake(OX, OY, ancho, alto);
+        let divisor = UIView(frame: frameD);
+        self.addSubview(divisor);
+        DatosB.cont.poneFondoTot(divisor, fondoStr: "Dots", framePers: nil, identi: nil, scala: true);
+    }
+    
     
     /*
     // Only override drawRect: if you perform custom drawing.

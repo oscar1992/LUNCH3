@@ -11,6 +11,8 @@ import UIKit
 class DetalleProducto: UIView {
     
     var prod : Producto!;
+    var casTipo:Int!;
+    var prodV : ProductoView!;
     
     init(frame: CGRect, prdo: Producto) {
         super.init(frame: frame);
@@ -75,7 +77,9 @@ class DetalleProducto: UIView {
         let label = UILabel(frame: frameNombre);
         label.text=String(prod.nombre!);
         label.font=UIFont(name: "SansBeam Head", size: alto);
-        label.textColor=UIColor.lightGrayColor();
+        label.textColor=UIColor.grayColor();
+        label.numberOfLines=2;
+        label.adjustsFontSizeToFitWidth=true;
         self.addSubview(label);
     }
     
@@ -83,7 +87,7 @@ class DetalleProducto: UIView {
     func Precio(){
         let OX = DatosC.contenedor.anchoP*0.25;
         let OY = DatosC.contenedor.altoP*0.11;
-        let ancho = DatosC.contenedor.anchoP*0.13;
+        let ancho = DatosC.contenedor.anchoP*0.3;
         let alto = DatosC.contenedor.altoP*0.03;
         let framePrecio = CGRectMake(OX, OY, ancho, alto);
         let precio = UILabel(frame: framePrecio);
@@ -135,8 +139,32 @@ class DetalleProducto: UIView {
                     //print("framecas: ", frameCasilla);
                     let tituloDato = UILabel(frame: CGRectMake(frameCasilla.origin.x, frameCasilla.origin.y, frameCasilla.width/2, frameCasilla.height));
                     let valorDato = UILabel(frame: CGRectMake(frameCasilla.width/2+frameCasilla.origin.x, frameCasilla.origin.y, frameCasilla.width/2, frameCasilla.height));
+                    var tipo: String;
+                    switch prod.listaDatos[itera].tipo {
+                    case "Calorias":
+                        tipo = "Cal";
+                        break;
+                    case "Grasas":
+                        tipo = "g";
+                        break;
+                    case "Azucar":
+                        tipo = "g";
+                        break;
+                    case "Proteinas":
+                        tipo = "g";
+                        break;
+                    case "Fibra":
+                        tipo = "g";
+                        break;
+                    case "Sodio":
+                        tipo = "mg";
+                        break;
+                    default:
+                        tipo = "";
+                        break;
+                    }
                     tituloDato.text = prod.listaDatos[itera].tipo+":";
-                    valorDato.text = String(prod.listaDatos[itera].valor);
+                    valorDato.text = String(prod.listaDatos[itera].valor)+"   "+tipo;
                     valorDato.textAlignment=NSTextAlignment.Center;
                     tituloDato.textAlignment=NSTextAlignment.Center
                     tituloDato.textColor=UIColor.grayColor();
@@ -169,12 +197,41 @@ class DetalleProducto: UIView {
         self.addSubview(boton);
     }
     
+    //Metodo que posiciona los botones de cruzar
+    func BotonesEleccion(){
+        let OX = DatosC.contenedor.anchoP*0.12;
+        let OY = DatosC.contenedor.altoP*0.7;
+        let ancho = DatosC.contenedor.anchoP*0.55;
+        let alto = DatosC.contenedor.altoP*0.05;
+        let frameBoton = CGRectMake(OX, OY, ancho, alto);
+        let boton = UIButton(frame: frameBoton);
+        let imagen = UIImage(named: "Botón CAMBIAR");
+        let back = UIImageView(frame: CGRectMake(0, 0, ancho, alto));
+        boton.addTarget(self, action: #selector(DetalleProducto.cruza(_:)), forControlEvents: .TouchDown);
+        back.image=imagen;
+        boton.addSubview(back);
+        self.addSubview(boton);
+    }
+    
     //Metodo que prmite agregar el producto en detalle a la lonchera
     func agrega(seneder: UIButton){
         let casilla = DatosC.contenedor.pantallaSV.casillaBaja;
-        let pv = ProductoView(frame: CGRectMake(0, 0, casilla.frame.width, casilla.frame.height), imagen: prod.imagen);
-        DatosC.contenedor.pantallaSV.casillaBaja.seteaElemento(pv, tipo: prod.tipo!, ima: prod.imagen, prod: prod);
+        let pv = ProductoView(frame: CGRectMake(0, 0, casilla.frame.width, casilla.frame.height), imagen: prod.imagen!);
+        DatosC.contenedor.pantallaSV.casillaBaja.seteaElemento(pv, tipo: prod.tipo!, ima: prod.imagen!, prod: prod);
         pv.cierraAlacena(true);
+    }
+    
+    func setTipo(tipo: Int){
+        self.casTipo=tipo;
+    }
+    
+    //Metodo que prmite agregar el producto en detalle a la lonchera
+    func cruza(seneder: UIButton){
+        
+        DatosC.contenedor.tipo=self.casTipo;
+        print("iactu: ", DatosC.contenedor.tipo);
+        DatosB.cont.home2.performSegueWithIdentifier("Seleccion", sender: nil);
+        self.removeFromSuperview();
     }
     
     //Método que estabelce la posición del botón de cerrar
@@ -194,6 +251,26 @@ class DetalleProducto: UIView {
     
     //Método que cierra la vista del detalle
     func cerrar(seneder: AnyObject){
+        self.removeFromSuperview();
+    }
+    
+    //Método que inicia el botón de eliminar
+    func iniciaBotonEliminar(prodV: ProductoView){
+        self.prodV=prodV;
+        let alto = DatosC.contenedor.altoP*0.05;
+        let OX = DatosC.contenedor.anchoP*0.12;
+        let OY = DatosC.contenedor.altoP*0.72+alto;
+        let ancho = DatosC.contenedor.anchoP*0.55;
+        let frame = CGRectMake(OX, OY, ancho, alto);
+        let boton = UIButton(frame: frame);
+        self.addSubview(boton);
+        DatosB.cont.poneFondoTot(boton, fondoStr: "Botón Eliminar", framePers: nil, identi: nil, scala: false);
+        boton.addTarget(self, action: #selector(DetalleProducto.eliminaProd), forControlEvents: .TouchDown);
+    }
+    
+    //Método que elimna una vista de producto
+    func eliminaProd(){
+        self.prodV.elimina();
         self.removeFromSuperview();
     }
     

@@ -36,7 +36,7 @@ struct keysPrimarias {
     }
 
 class DatosC{
-    static let contenedor=DatosC();
+    static var contenedor=DatosC();
     
     
     var arreglo = [Casilla]();
@@ -67,6 +67,10 @@ class DatosC{
     init(){
         self.anchoP=UIScreen.mainScreen().bounds.width;
         self.altoP=UIScreen.mainScreen().bounds.height;
+    }
+    
+    static func elimina(){
+        contenedor = DatosC();
     }
     
     func cambia() {

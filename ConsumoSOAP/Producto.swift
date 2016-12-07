@@ -16,18 +16,24 @@ class Producto: NSObject{
     var id:Int?;
     var nombre:String?;
     var precio:Int!;
-    var imagen:UIImage;
+    var imagen:UIImage?;
+    var imagenString: String?;
     var tipo:Int?;
     var disponible:Bool?;
     var salud:Bool?;
     var listaDatos=[TipoInfo]();
     var categoria: Int?;
     
-    init?(id: Int, nombre: String, precio : Int, imagen: UIImage, tipo: Int, disponible: Bool, salud: Bool, categoria: Int) {
+    init?(id: Int, nombre: String, precio : Int, imagen: UIImage?, imagenString: String?, tipo: Int, disponible: Bool, salud: Bool, categoria: Int) {
         self.id=id;
         self.nombre=nombre;
         self.precio=precio;
-        self.imagen=imagen;
+        if(imagen == nil){
+            self.imagen=UIImage(named: "ProductoVacio");
+        }else{
+            self.imagen=imagen;
+        }
+        self.imagenString=imagenString;
         self.tipo=tipo;
         self.disponible=disponible;
         self.salud=salud;

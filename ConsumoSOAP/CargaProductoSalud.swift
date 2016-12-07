@@ -39,25 +39,25 @@ class CargaProductoSalud: NSObject ,NSURLConnectionDelegate, NSXMLParserDelegate
         lobj_Request.addValue("\"bool\"", forHTTPHeaderField: "SOAPAction")
         
         let task = session.dataTaskWithRequest(lobj_Request, completionHandler: {data, response, error -> Void in
-            //print("Response: \(response)")
-            let strData = NSString(data: data!, encoding: NSUTF8StringEncoding)
-            self.resp=strData?.dataUsingEncoding(NSUTF8StringEncoding)
-            
-            //print("Body: \(strData)")
-            
-            if error != nil
-            {
-                print("Error: " + error!.description)
+            if(data == nil){
+                print("NULOOOO en Prducto-Salud");
+            }else{
+                let strData = NSString(data: data!, encoding: NSUTF8StringEncoding)
+                
+                //print("Body: \(strData)")
+                
+                self.resp=strData?.dataUsingEncoding(NSUTF8StringEncoding)
+                self.parser=NSXMLParser(data: self.resp)
+                self.parser.delegate=self
+                self.parser.parse();
+                dispatch_async(dispatch_get_main_queue(),{
+                    if(self.ultimo){
+                        print("Carga ProductoSaludables OK");
+                    }
+                    lobj_Request.setValue("Connection", forHTTPHeaderField: "close");
+                });
             }
-            //print(self.resp)
-            self.parser=NSXMLParser(data: self.resp)
-            self.parser.delegate=self
-            self.parser.parse();
-            dispatch_async(dispatch_get_main_queue(),{
-                if(self.ultimo){
-                    print("Carga ProductoSaludables OK");
-                }
-            });
+            
             
         })
         task.resume();
@@ -109,18 +109,19 @@ class CargaProductoSalud: NSObject ,NSURLConnectionDelegate, NSXMLParserDelegate
             let idS=Int(string);
             
             for salu in DatosB.cont.saludables{
-                //print("idS: ", idS, " salu: ", salu);
+                //print("idS: ", idS, "item salu: ", salu.idSalud);
                 if(salu.idSalud==idS){
                     self.salu=salu;
+                }else{
+                    //print("vacio: ", salu);
                 }
             }
             bsalu=false;
         }
     }
-    
     func parser(parser: NSXMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         if(elementName == "return"){
-            
+            //print("salu: ", salu.nombre);
             let prodSalud=ProductoSaludable(id: id, salu: salu, produ: produ);
             //print("ProdSa: ", prodSalud.produ.nombre);
             DatosB.cont.prodSaludables.append(prodSalud);

@@ -54,8 +54,8 @@ class CargaCajas: NSObject ,NSURLConnectionDelegate, NSXMLParserDelegate{
                 print("Consumo Cajas");
                 //print("aprueba: ");
                 
-                Plogin.pasa();
-                
+                Plogin.pasa2();
+                lobj_Request.setValue("Connection", forHTTPHeaderField: "close");
                 }
             );
             //sender.enabled=true;
@@ -144,7 +144,7 @@ class CargaCajas: NSObject ,NSURLConnectionDelegate, NSXMLParserDelegate{
             objs.append(caja);
             DatosC.contenedor.cajas.append(caja);
             //print("añade caja: ",caja.Color);
-            //print("añade caja: ",caja.Nombre);
+            print("añade caja: ",caja.Nombre);
             Nombre = "";
         }
     }

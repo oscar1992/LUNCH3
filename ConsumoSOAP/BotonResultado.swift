@@ -58,12 +58,13 @@ class BotonResultado: UIButton {
                 }
             }
         }
-        DatosC.contenedor.pantallaSV.contenedor.cierraBusqueda(self);
+        DatosC.contenedor.pantallaSV.cierraBusqueda(self);
     }
     
     //Método que permite cambiar la pestaña donde se aloja un producto
     func rotaPestaña(pest: VistaPestana, npest: Int){
         pest.setViewControllers([pest.paginas[npest]], direction: UIPageViewControllerNavigationDirection.Forward, animated: true, completion: nil);
+        pest.control?.currentPage=npest;
     }
 
     /*

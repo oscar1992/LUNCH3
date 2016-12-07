@@ -49,7 +49,7 @@ class ConsultaNinos: NSObject , NSURLConnectionDelegate, NSXMLParserDelegate{
         let task = session.dataTaskWithRequest(lobj_Request, completionHandler: {data, response, error -> Void in
             //print("Response: \(response)")
             let strData = NSString(data: data!, encoding: NSUTF8StringEncoding)
-            self.resp=strData?.dataUsingEncoding(NSUTF8StringEncoding)
+            
             
             //print("Body: \(strData)")
             
@@ -57,14 +57,18 @@ class ConsultaNinos: NSObject , NSURLConnectionDelegate, NSXMLParserDelegate{
             {
                 print("Error: " + error!.description)
             }
-            //print(self.resp)
-            self.parser=NSXMLParser(data: self.resp)
-            self.parser.delegate=self
-            self.parser.parse();
-            self.consume(Plogin);
-            
-            
-            
+            if(data == nil){
+                print("NULOOOO en consulta Ninos");
+            }else{
+                //print(self.resp)
+                self.resp=strData?.dataUsingEncoding(NSUTF8StringEncoding)
+                self.parser=NSXMLParser(data: self.resp)
+                self.parser.delegate=self
+                self.parser.parse();
+                self.consume(Plogin);
+                //Plogin.desbloquea();
+            }
+            lobj_Request.setValue("Connection", forHTTPHeaderField: "close");
         })
         
         task.resume();
@@ -163,22 +167,24 @@ class ConsultaNinos: NSObject , NSURLConnectionDelegate, NSXMLParserDelegate{
     }
     
     func consume(Plogin: LoginView){
-        let cargaI=ConsultaProductos();
+        //let cargaI=ConsultaProductos();
         //let cargaII=CargaTItems();
         let cargaIII=CargaSecuencia();
-        let cargaIV=CargaCajas();
+        //let cargaIV=CargaCajas();
         let cargaV=ConsultaCatergorias();
-        //let cargaVI=CargaSalud();
+        let cargaVI=CargaEnvio();
+        
         
         
         //let cargaVI=CargaFavoritos();
         //print("cargs")
-        cargaI.consulta();
+        //cargaI.consulta();
         //cargaII.CargaTItems();
         cargaIII.CargaSecuencia();
-        cargaIV.CargaCajas(Plogin);
+        //cargaIV.CargaCajas(Plogin);
         cargaV.consulta();
-        //cargaVI.cargaSaludables();
+        cargaVI.cargaEnvio();
+        
         
         //cargaVI.consulta(DatosD.contenedor.padre.id);
         
