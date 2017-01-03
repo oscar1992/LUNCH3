@@ -24,11 +24,22 @@ class CargaInicial: NSObject {
     var errores = [Producto]();
     var plogin : LoginView;
     
+    //MARK: Variables Evaluación
+    var tipos = [AnyClass]();
+    var iteraTipos = -1;
+    
+    
+    //MARK: Métodos
     init(log: LoginView){
         self.plogin=log;
         super.init();
-        let cargaI=ConsultaProductos();
-        cargaI.consulta(self);
+        iniciaArregloTipos();
+        iniciaEvaluacion();
+        
+        //evaluaActualizacion();
+        
+        //let cargaI=ConsultaProductos();
+        //cargaI.consulta(self);
         poneCredenciales();
         //DatosB.cont.cargaInicial=self;
     }
@@ -43,7 +54,6 @@ class CargaInicial: NSObject {
 
     
     func bloqueCarga2(){
-        
         var porcion = [Producto]();
         var ini = 0;
         var fin = 10;
@@ -53,12 +63,11 @@ class CargaInicial: NSObject {
             ini=(10*(ciclo-1))+1;
             fin=10*ciclo;
         }
-        print("ini: ", ini,"fin :", fin);
+        //print("ini: ", ini,"fin :", fin);
         for pp in ini ... fin{
             if(pp<DatosC.contenedor.productos.count){
                 porcion.append(DatosC.contenedor.productos[pp]);
             }
-            
         }
         let hilo = DISPATCH_QUEUE_PRIORITY_HIGH;
         for prod in porcion{
@@ -87,12 +96,11 @@ class CargaInicial: NSObject {
                     }
                 }
             }else{
-                print("Imagen de archivo: ", prod.id);
+                //print("Imagen de archivo: ", prod.id);
                 let datosIma = ima as! NSData;
                 prod.imagen=UIImage(data: datosIma);
                 recoge(prod.id!);
             }
-            
         }
     }
     
@@ -111,115 +119,86 @@ class CargaInicial: NSObject {
             print("fin?");
             print("errores: ", errores.count);
             //plogin.vista.removeFromSuperview();
-            let cargaInfo = CargaTinfo2();
-            cargaInfo.cargaInformacion(plogin);
-            
-            //
+            //let cargaInfo = CargaTinfo2();
+            //cargaInfo.cargaInformacion(plogin);
         }
     }
     
-    
-    /*
-    func bloqueCarga(inicia : Int){
-        let divi=parteLista(4);
-        var siguiente = true;
-        let hilo = DISPATCH_QUEUE_PRIORITY_BACKGROUND;
-        var p = inicia;
-        //print("Inicia: ",p," tot: ", DatosC.contenedor.productos.count);
-        if(p>=DatosC.contenedor.productos.count){
-            siguiente=false;
-            
-        }
+    //Método que inicia un arreglo con los tipos de datos a cargar
+    func iniciaArregloTipos(){
+        tipos.append(Producto);
+        tipos.append(Tag);
+        tipos.append(TipoInfo);
+        tipos.append(Saludable);
+        tipos.append(Favoritos);
+        tipos.append(ProductoSaludable);
+        tipos.append(TItems);
         
-        while(siguiente){
-            
-            let prod = DatosC.contenedor.productos[p];
-            let ima = NSUserDefaults.standardUserDefaults().objectForKey(String(prod.id));
-            if(ima == nil){
-                dispatch_async(dispatch_get_global_queue(hilo, 0)) {
-                    //print("Hilo de carga de imaganes: ", prod.nombre)
+    }
+    
+    //Método que se llama por cada elemento de la lista de los tipos
+    func iniciaEvaluacion(){
+        iteraTipos += 1;
+        print("ITERA TIPOS: ", iteraTipos, "tiposCount: ", tipos.count);
+        if(iteraTipos < tipos.count){
+            let carga2 = CargaInicial2(cInicial: self);
+            if(!carga2.exixte(tipos[iteraTipos])){
+                switch tipos[iteraTipos] {
+                case is Producto.Type:
+                    let cargaI=ConsultaProductos();
+                    cargaI.consulta(self);
+                    break;
+                case is TipoInfo.Type:
+                    let cargaTipoInfo = CargaTinfo2();
+                    cargaTipoInfo.cargaInformacion(plogin, cInicial: self);
+                    break;
+                case is Tag.Type:
+                    let cargaTags = CargaTags2();
+                    cargaTags.consulta(self);
+                    break;
+                case is Saludable.Type:
+                    let cargaSaludables = CargaSalud();
+                    cargaSaludables.cargaSaludables(self);
+                    break;
+                case is Favoritos.Type:
+                    let cargaFavoritos = CargaFavoritos();
+                    cargaFavoritos.consulta(DatosD.contenedor.padre.id, cInicial: self)
+                    break;
+                case is TItems.Type:
+                    let cargaTitems = CargaTItems();
+                    cargaTitems.CargaTItems(self);
+                    break;
+                case is ProductoSaludable.Type:
+                    print("Vacio en Producto-Saludable");
+                    let cargaProductoSaludable = CargaProductoSalud();
+                    cargaProductoSaludable.cargaSaludables(self);
+                    break;
+                default:
                     
-                    let url = NSURL(string: prod.imagenString!)!
-                    let data = NSData(contentsOfURL : url);
-                    if(data != nil){
-                        let imagenD=UIImage(data: data!);
-                        prod.imagen=imagenD;
-                        NSUserDefaults.standardUserDefaults().setObject(UIImagePNGRepresentation(imagenD!), forKey: String(prod.id));
-                        
-                    }else{
-                        self.falta1=true;
-                        
-                        //print("---------------------------------");
-                        print("img upd: ",prod.imagenString);
-                        //print("null imagen: ", prod.nombre);
-                        //print("---------------------------------");
-                    }
-                    
-                    dispatch_async(dispatch_get_main_queue()) {
-                        //print("Fin carga de iamgen: ", self.falta1);
-                        self.cant();
-                        if(self.falta1 == true){
-                            print("Vacío");
-                        }
-                        if(DatosC.contenedor.pantallaSV.contenedor != nil){
-                            print("repinta");
-                            DatosC.contenedor.pantallaSV.reiniciaContenedor();
-                            
-                        }
-                        
-                    }
+                    break;
                 }
                 
             }else{
-                print("Imagen de archivo: ", prod.id);
-                let datosIma = ima as! NSData;
-                prod.imagen=UIImage(data: datosIma);
-                self.cant();
-            }
-            p += 1;
-            //print("p: ", p);
-            if(p >= (divi*ciclo) || p >= DatosC.contenedor.productos.count){
-                ciclo += 1;
-                siguiente=false;
+                print("lleno: ", tipos[iteraTipos]);
+                carga2.lee(tipos[iteraTipos]);
+                
+                iniciaEvaluacion();
             }
             
-        }
-        if(p<DatosC.contenedor.productos.count){
-            self.bloqueCarga(p-1);
             
+        }else{
+            pasaLogin();
+            print("Fin");
         }
-
-    }
-    
-    func parteLista(divi: Int)->Int{
-        let cant = DatosC.contenedor.productos.count/divi;
-        print("cant: ", cant);
-        return cant;
-    }
- 
- 
-    
-    func iniciamsg(){
-        print("Inicia Msg");
-        let alto = DatosC.contenedor.altoP;
-        let ancho = DatosC.contenedor.anchoP;
-        let rect = CGRectMake(0, 0, ancho, alto);
-        vista = UIView(frame: rect);
-        let alto2 = DatosC.contenedor.altoP * 0.1;
-        let OY = DatosC.contenedor.altoP * 0.7;
-        let rect2 = CGRectMake(0, OY, DatosC.contenedor.anchoP, alto2);
-        texto = UILabel(frame: rect2);
-        texto!.textAlignment=NSTextAlignment.Center;
-        texto!.text="0%";
-        texto!.textColor=UIColor.init(red: 0, green: 0.5, blue: 0.15, alpha: 1);
-        texto?.font=UIFont(name: "Gotham Bold", size: alto2/2);
-        vista.addSubview(texto!);
-        print("Agrega MDG: ", texto?.text);
-        plogin.view.addSubview(vista);
-        vista.layer.zPosition=1;
+        
         
     }
-    */
+
+    //Método que evalua la existebcia de las imágenes
+    func preLogin(){
+        
+    }
+    
     
     func cant(){
         ss += 1;
@@ -228,7 +207,7 @@ class CargaInicial: NSObject {
         //print("Prog: ", prog);
         //print("TextA: ", plogin.texto?.text);
         plogin.texto!.text=String(prog)+"%";
-        print("TextD: ", plogin.texto?.text);
+        //print("TextD: ", plogin.texto?.text);
         plogin.vista.addSubview(plogin.texto!);
     }
     
@@ -239,4 +218,53 @@ class CargaInicial: NSObject {
         NSUserDefaults.standardUserDefaults().setObject(DatosD.contenedor.padre.pass, forKey: "pass");
         
     }
+    
+    func tamaProductos()->Int{
+        return DatosC.contenedor.productos.count;
+    }
+    
+    func tamaInfoNutricional()->Int{
+        return DatosB.cont.listaTInfo.count;
+    }
+    
+    func tamaImagnesVacias()->Int{
+        var vacias = 0;
+        if(DatosC.contenedor.productos.count != 0 || !DatosC.contenedor.productos.isEmpty){
+            for prod in DatosC.contenedor.productos{
+                if(prod.imagen == nil){
+                    vacias += 1;
+                }
+            }
+        }
+        return vacias;
+    }
+    
+    func tamaEtiquetas()->Int{
+        return DatosD.contenedor.tags.count;
+    }
+    
+    func tamaSaludables()->Int{
+        return DatosB.cont.saludables.count;
+    }
+    
+    func tamaItemsSaludables()->Int{
+        return DatosB.cont.prodSaludables.count;
+    }
+    
+    func tamaFavoritos()->Int{
+        return DatosB.cont.favoritos.count;
+    }
+    
+    func tamaItmesFavoritos()->Int{
+        return DatosB.cont.itemsFavo.count;
+    }
+    
+    func pasaLogin(){
+        plogin.pasa2();
+        if(plogin.vista != nil){
+            plogin.vista.removeFromSuperview();
+        }
+        
+    }
+    
 }

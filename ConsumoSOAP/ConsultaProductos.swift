@@ -20,6 +20,7 @@ class ConsultaProductos: NSObject , NSURLConnectionDelegate, NSXMLParserDelegate
     var eeleDiccio=NSMutableDictionary()
     var element=NSString()
     var task: NSURLSessionDataTask!;
+    var profundidad = 0;
 
     //MARK: Consulta
     
@@ -28,6 +29,8 @@ class ConsultaProductos: NSObject , NSURLConnectionDelegate, NSXMLParserDelegate
     }
     
     func consulta(carga: CargaInicial){
+        msgInicia();
+        
         let is_URL: String = "http://93.188.163.97:8080/Lunch2/adminEndpoint"
         
         let lobj_Request = NSMutableURLRequest(URL: NSURL(string: is_URL)!)
@@ -42,14 +45,16 @@ class ConsultaProductos: NSObject , NSURLConnectionDelegate, NSXMLParserDelegate
         //lobj_Request.addValue("223", forHTTPHeaderField: "Content-Length")
         lobj_Request.addValue("\"listaProductoEntity\"", forHTTPHeaderField: "SOAPAction")
         
-        task = session.dataTaskWithRequest(lobj_Request, completionHandler: {data, response, error -> Void in
+        task = session.dataTaskWithRequest(lobj_Request, completionHandler: {data, response, error -> Void in //Inicio del Subproceso
             //print("Response: \(response)")
+            self.task.priority=1.0;
             var nulo = false;
             if(data == nil){
-                print("NULOOOO en productos");
-                nulo = true;
+                print("tana: ", self.task.countOfBytesReceived, "Estado Previo: ", self.task.state.rawValue);
                 self.task.cancel();
-                self.consulta(carga);
+                print("NULOOOO en productos: ", self.profundidad, "Estado: ", self.task.state.rawValue);
+                nulo = true;
+                
             }else{
                 let strData = NSString(data: data!, encoding: NSUTF8StringEncoding)
                 
@@ -59,22 +64,26 @@ class ConsultaProductos: NSObject , NSURLConnectionDelegate, NSXMLParserDelegate
                 self.parser=NSXMLParser(data: self.resp)
                 self.parser.delegate=self
                 self.parser.parse();
-                let cargaVII=CargaSalud();
-                cargaVII.cargaSaludables(carga);
+                // cargaVII=CargaSalud();
+                //cargaVII.cargaSaludables(carga);
             }
             
-            dispatch_async(dispatch_get_main_queue(),{
-                if(nulo){
-                    
+            dispatch_async(dispatch_get_main_queue(),{ // Fin del Subproceso
+                if(nulo && self.profundidad<2){
+                    lobj_Request.setValue("Connection", forHTTPHeaderField: "close");
+                    self.profundidad += 1;
+                    print("Reinicia carga: ", self.task.state);
+                    self.consulta(carga);
+                }else if(nulo && self.profundidad>=2){
+                    self.msgDesconexion();
                 }else{
+                    //DatosB.cont.guardaLista( DatosC.contenedor.productos, nombre: "Productos")
                     
+                    print("Fin Carga Productos");
+                    let cargaI2 = CargaInicial2(cInicial: carga);
+                    cargaI2.guarda(DatosC.contenedor.productos, tipo: Producto.self);
+
                 }
-                let cargaTags = CargaTags2();
-                cargaTags.consulta();
-                
-                //lobj_Request.setValue("Connection", forHTTPHeaderField: "close");
-                print("Carga Productos");
-                
                 
             });
         })
@@ -196,7 +205,7 @@ class ConsultaProductos: NSObject , NSURLConnectionDelegate, NSXMLParserDelegate
     func parser(parser: NSXMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         //Añade Objs
         if(elementName as NSString).isEqualToString("return"){
-            let prod = Producto(id: id!, nombre: nombre!, precio: precio!, imagen: imagen, imagenString: imagenString, tipo: tipo!, disponible: disponible!, salud: salud!, categoria: categoria!)!;
+            let prod = Producto(id: id!, nombre: nombre!, precio: precio!, imagen: imagen, imagenString: imagenString, tipo: tipo!, disponible: disponible!, salud: salud!, categoria: categoria!);
             //let cargaTinfo = CargaTInfo();
             //cargaTinfo.CargaTInfo(prod);
             DatosC.contenedor.productos.append(prod);
@@ -205,5 +214,27 @@ class ConsultaProductos: NSObject , NSURLConnectionDelegate, NSXMLParserDelegate
             //ctags.consulta(prod);
             //print("pasa parser:", prod.categoria);
         }
+    }
+    
+    func msgInicia(){
+        let vista = DatosB.cont.loginView;
+        if(vista.ingresa != nil){
+            vista.iniciamsg();
+            vista.texto?.text="Inicia Carga Productos";
+        }
+    }
+    
+    func msgDesconexion(){
+        let vista = DatosB.cont.loginView;
+        
+        let ancho = vista.view.frame.width*0.8;
+        let alto = vista.view.frame.height*0.4;
+        let OX = (vista.view.frame.width/2)-(ancho/2);
+        let OY = (vista.view.frame.height/2)-(alto/2);
+        let frameMensaje = CGRectMake(OX, OY, ancho, alto);
+        let mensaje = MensajeConexion(frame: frameMensaje, msg: nil);
+        vista.view.addSubview(mensaje);
+        mensaje.layer.zPosition=5;
+        vista.view.bringSubviewToFront(mensaje);
     }
 }

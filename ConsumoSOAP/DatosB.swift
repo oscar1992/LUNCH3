@@ -268,4 +268,35 @@ class DatosB: NSObject {
             print("pp: ", prods.0.nombre, "cant: ", prods.1);
         }*/
     }
+    
+    //Método que transfiere de una lista plana a una lista con propiedades
+    func conciliador(lista: [Producto])->NSArray{
+        let array = NSArray();
+        for prod in lista{
+            array.setValue(prod, forKey: String(prod.id));
+        }
+        return array;
+    }
+    
+    //Método que permite guardar una lista de datos en el dispositivo
+    func guardaLista(lista: [Producto], nombre: String)->Bool{
+        if(!nombre.isEmpty){
+            let defaults = NSUserDefaults.standardUserDefaults();
+            let datosManejables = NSKeyedArchiver.archivedDataWithRootObject(conciliador(lista));
+            defaults.setObject(datosManejables, forKey: "Productos");
+            defaults.synchronize()
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    //Método que permite recuperar una lista del dispositivo
+    func recuperaLista(nombre: String)->AnyObject?{
+        if(!nombre.isEmpty){
+            return NSUserDefaults.standardUserDefaults().objectForKey(nombre);
+        }else{
+            return nil;
+        }
+    }
 }

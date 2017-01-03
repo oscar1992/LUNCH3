@@ -16,6 +16,8 @@ class ConsultaCatergorias: NSObject, NSURLConnectionDelegate, NSXMLParserDelegat
     var parser=NSXMLParser()
     var eeleDiccio=NSMutableDictionary()
     var element=NSString()
+    var profundidad = 0;
+    var task : NSURLSessionDataTask!;
     
     func consulta(){
         let mensajeEnviado:String = "<soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/' xmlns:enp='http://enpoint.lunch.com.co/'><soapenv:Header/><soapenv:Body><enp:listaCategoriaEntity/></soapenv:Body></soapenv:Envelope>"
@@ -34,8 +36,10 @@ class ConsultaCatergorias: NSObject, NSURLConnectionDelegate, NSXMLParserDelegat
         //lobj_Request.addValue("223", forHTTPHeaderField: "Content-Length")
         lobj_Request.addValue("\"bool\"", forHTTPHeaderField: "SOAPAction")
         
-        let task = session.dataTaskWithRequest(lobj_Request, completionHandler: {data, response, error -> Void in
+        task = session.dataTaskWithRequest(lobj_Request, completionHandler: {data, response, error -> Void in
+            var nulo = false;
             if(data == nil){
+                nulo = true;
                 print("Nulo en Categorias");
             }else{
                 let strData = NSString(data: data!, encoding: NSUTF8StringEncoding)
@@ -45,6 +49,13 @@ class ConsultaCatergorias: NSObject, NSURLConnectionDelegate, NSXMLParserDelegat
                 self.parser.parse();
             }
             dispatch_async(dispatch_get_main_queue(),{
+                if(nulo) && self.profundidad<2{
+                    self.profundidad += 1;
+                    self.task.cancel();
+                    self.consulta();
+                }else if(nulo && self.profundidad>=2){
+                    self.msgDesconexion();
+                }
                 print("Carga Categorias");
                 lobj_Request.setValue("Connection", forHTTPHeaderField: "close");
             });
@@ -113,5 +124,18 @@ class ConsultaCatergorias: NSObject, NSURLConnectionDelegate, NSXMLParserDelegat
             DatosD.contenedor.categorias.append(cat);
             
         }
+    }
+    
+    func msgDesconexion(){
+        let vista = DatosB.cont.loginView;
+        let ancho = vista.view.frame.width*0.8;
+        let alto = vista.view.frame.height*0.4;
+        let OX = (vista.view.frame.width/2)-(ancho/2);
+        let OY = (vista.view.frame.height/2)-(alto/2);
+        let frameMensaje = CGRectMake(OX, OY, ancho, alto);
+        let mensaje = MensajeConexion(frame: frameMensaje, msg: nil);
+        vista.view.addSubview(mensaje);
+        mensaje.layer.zPosition=5;
+        vista.view.bringSubviewToFront(mensaje);
     }
 }

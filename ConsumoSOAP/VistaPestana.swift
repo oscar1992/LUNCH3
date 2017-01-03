@@ -225,6 +225,7 @@ class VistaPestana: UIPageViewController, UIPageViewControllerDelegate, UIPageVi
             if(categoria.tipo == self.tipo){
                 for prod in DatosC.contenedor.productos{
                     //print("Prod cate: ", prod.categoria, " - cateid: ", categoria.id);
+                    
                     if(prod.categoria == categoria.id){
                         //print("PRDO: ",prod.nombre, " cccc ", prod.categoria);
                         let pv=ProductoView(frame: frameProducto(), imagen: prod.imagen!);

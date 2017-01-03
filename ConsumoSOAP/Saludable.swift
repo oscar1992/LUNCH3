@@ -8,15 +8,29 @@
 
 import UIKit
 
-class Saludable: NSObject {
+class Saludable: NSObject, NSCoding {
     var idSalud:Int!;
     var nombre:String!;
-    var productos = [Producto]();
+    var productos : [Producto]?;
     
-    init(idSalud: Int, nombre: String) {
+    convenience init(idSalud: Int, nombre: String) {
+        self.init();
         self.idSalud=idSalud;
         self.nombre=nombre;
+        self.productos=[Producto]();
     }
     
+    required convenience init(coder decoder: NSCoder) {
+        self.init();
+        self.idSalud = decoder.decodeObjectForKey("idSalud") as! Int;
+        self.nombre = decoder.decodeObjectForKey("nombre") as! String;
+        self.productos = decoder.decodeObjectForKey("productos") as? [Producto];
+    }
     
+    func encodeWithCoder(coder: NSCoder) {
+        
+        if let idSalud = idSalud{coder.encodeObject(idSalud, forKey: "idSalud")};
+        if let nombre = nombre{coder.encodeObject(nombre, forKey: "nombre")};
+        //if let productos = [Producto]{coder.encodeObject(productos, forKey: "nombre")};
+    }
 }

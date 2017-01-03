@@ -35,7 +35,7 @@ class Home2: UIViewController {
         let fondo = CGRectMake(0, laBarra.frame.height, self.view.frame.width, (self.view.frame.height-laBarra.frame.height));
         DatosB.cont.poneFondoTot(self.view, fondoStr: "FondoHome", framePers: fondo, identi: "FondoTot", scala: false);
         //print("carga home");
-        
+        predeterminadas.cargaSaludables();
         // Do any additional setup after loading the view.
     }
 
@@ -74,10 +74,11 @@ class Home2: UIViewController {
     
     //Método que inicia el espacio de las loncheras predeterminadas
     func iniciaPredeterminadas(){
-        let cargaF = CargaFavoritos();
-        cargaF.consulta(DatosD.contenedor.padre.id);
+        //let cargaF = CargaFavoritos();
+        //cargaF.consulta(DatosD.contenedor.padre.id);
         let frame = CGRectMake(0, DatosC.contenedor.altoP * 0.12, DatosC.contenedor.anchoP, (DatosC.contenedor.altoP*0.16866));
         predeterminadas = Pred2(frame: frame);
+        
         //DatosB.cont.poneFondoTot(self.view, fondoStr: "FondoPredeterminadas", framePers: frame, identi: "FondoPred" , scala: false);
         self.view.addSubview(predeterminadas);
         

@@ -28,7 +28,7 @@ class Predeterminadas: UIScrollView, UIScrollViewDelegate{
         //self.backgroundColor=UIColor.clearColor().colorWithAlphaComponent(0.0);
         setFondo2();
         //
-        cargaFavoritos();
+        //cargaFavoritos();
         ordenaCajas();
         
         
@@ -76,12 +76,12 @@ class Predeterminadas: UIScrollView, UIScrollViewDelegate{
     }
     
     // Método que permite cargar las loncheras favoritas previamente almacenadas
-    func cargaFavoritos(){
+    /*func cargaFavoritos(){
         let carg = CargaFavoritos();
         carg.pred=self;
         carg.consulta(DatosD.contenedor.padre.id);
         //print("Carga");
-    }
+    }*/
     
     func añadeFavoritas(){
         

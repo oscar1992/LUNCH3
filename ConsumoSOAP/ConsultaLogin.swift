@@ -19,6 +19,8 @@ class ConsultaLogin : NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
     var eeleDiccio=NSMutableDictionary()
     var element=NSString()
     var PLogin:LoginView?;
+    var task: NSURLSessionDataTask!;
+    var profundidad = 0;
     
     init(plogin: LoginView) {
         self.PLogin=plogin;
@@ -46,20 +48,15 @@ class ConsultaLogin : NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
         //lobj_Request.addValue("223", forHTTPHeaderField: "Content-Length")
         lobj_Request.addValue("\"bool\"", forHTTPHeaderField: "SOAPAction")
         
-        let task = session.dataTaskWithRequest(lobj_Request, completionHandler: {data, response, error -> Void in
+        task = session.dataTaskWithRequest(lobj_Request, completionHandler: {data, response, error -> Void in
             //
+            var nulo = false;
             if(data == nil){
+                nulo = true;
+                
                 print("NULOOOO en consulta login");
-                let ancho = self.PLogin!.view.frame.width*0.8;
-                let alto = self.PLogin!.view.frame.height*0.4;
-                let OX = (self.PLogin!.view.frame.width/2)-(ancho/2);
-                let OY = (self.PLogin!.view.frame.height/2)-(alto/2);
-                let frameMensaje = CGRectMake(OX, OY, ancho, alto);
-                let mensaje = MensajeConexion(frame: frameMensaje, msg: nil);
-                self.PLogin?.view.addSubview(mensaje);
-                mensaje.layer.zPosition=5;
-                self.PLogin!.view.bringSubviewToFront(mensaje);
-                print("Response: \(response)")
+                
+                //print("Response: \(response)")
             }else{
                 let strData = NSString(data: data!, encoding: NSUTF8StringEncoding)
                 
@@ -70,7 +67,31 @@ class ConsultaLogin : NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
                 self.parser.delegate=self
                 self.parser.parse();
                 self.PLogin?.Msg="Tu Usuario o Contraseña no son válidos";
-                dispatch_async(dispatch_get_main_queue(),{
+               
+            }
+            dispatch_async(dispatch_get_main_queue(),{
+                //print("nulo: ", nulo, "prof: ", self.profundidad);
+                if(nulo && self.profundidad<2){
+                    print("reinicia");
+                    self.profundidad += 1;
+                    self.consulta(email, pass: pass);
+                    self.task.cancel();
+                }else if(self.profundidad>=2 && nulo){
+                    print("Se pasó de intentos");
+                    self.msgDesconexion();
+                    /*
+                    let ancho = self.PLogin!.view.frame.width*0.8;
+                    let alto = self.PLogin!.view.frame.height*0.4;
+                    let OX = (self.PLogin!.view.frame.width/2)-(ancho/2);
+                    let OY = (self.PLogin!.view.frame.height/2)-(alto/2);
+                    let frameMensaje = CGRectMake(OX, OY, ancho, alto);
+                    let mensaje = MensajeConexion(frame: frameMensaje, msg: nil);
+                    mensaje.iniciaTimer();
+                    self.PLogin?.view.addSubview(mensaje);
+                    mensaje.layer.zPosition=5;
+                    self.PLogin!.view.bringSubviewToFront(mensaje);
+                    */
+                }else{
                     print("aprueba: ",self.aprueba);
                     //self.PLogin?.ingresa.enabled=true;
                     self.PLogin?.aprueba = self.aprueba;
@@ -91,10 +112,10 @@ class ConsultaLogin : NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
                     }
                     self.PLogin!.pasa();
                     
-                    }
-                );
-            }
-            
+                }
+                }
+                
+            );
           
             //print(self.resp)
             
@@ -291,5 +312,23 @@ class ConsultaLogin : NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
                 aprueba=true;
             }
         }
+    }
+    
+    func msgDesconexion(){
+        var vista = DatosB.cont.loginView;
+        if(vista.ingresa != nil){
+            
+        }else{
+            vista = PLogin!;
+        }
+        let ancho = vista.view.frame.width*0.8;
+        let alto = vista.view.frame.height*0.4;
+        let OX = (vista.view.frame.width/2)-(ancho/2);
+        let OY = (vista.view.frame.height/2)-(alto/2);
+        let frameMensaje = CGRectMake(OX, OY, ancho, alto);
+        let mensaje = MensajeConexion(frame: frameMensaje, msg: nil);
+        vista.view.addSubview(mensaje);
+        mensaje.layer.zPosition=5;
+        vista.view.bringSubviewToFront(mensaje);
     }
 }

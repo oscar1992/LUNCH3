@@ -50,9 +50,11 @@ class CargaSalud: NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
                 dispatch_async(dispatch_get_main_queue(),{
                     carga.cargaImagenes();
                     print("Carga Saludables OK");
-                    let cargaIt = CargaProductoSalud();
-                    cargaIt.cargaSaludables();
+                    //let cargaIt = CargaProductoSalud();
+                    //cargaIt.cargaSaludables();
                     //Plogin.pasa2();
+                    let cargaI2 = CargaInicial2(cInicial: carga);
+                    cargaI2.guarda(DatosB.cont.saludables, tipo: Saludable.self);
                     if(DatosB.cont.loginView.aprueba==true){
                         //DatosB.cont.loginView.pasa2();
                     }else{

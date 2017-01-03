@@ -109,6 +109,7 @@ class LoginView: UIViewController {
             let OY = (self.view.frame.height/2)-(alto/2);
             let frameMensaje = CGRectMake(OX, OY, ancho, alto);
             let mensaje = MensajeConexion(frame: frameMensaje, msg: self.Msg);
+            mensaje.iniciaTimer();
             mensaje.layer.zPosition=5;
             self.view.addSubview(mensaje);
             self.view.bringSubviewToFront(mensaje);
@@ -433,23 +434,26 @@ class LoginView: UIViewController {
     var texto : UILabel?;
     
     func iniciamsg(){
-        print("Inicia Msg");
-        let alto = DatosC.contenedor.altoP;
-        let ancho = DatosC.contenedor.anchoP;
-        let rect = CGRectMake(0, 0, ancho, alto);
-        vista = UIView(frame: rect);
-        let alto2 = DatosC.contenedor.altoP * 0.1;
-        let OY = DatosC.contenedor.altoP * 0.7;
-        let rect2 = CGRectMake(0, OY, DatosC.contenedor.anchoP, alto2);
-        texto = UILabel(frame: rect2);
-        texto!.textAlignment=NSTextAlignment.Center;
-        texto!.text="0%";
-        texto!.textColor=UIColor.init(red: 0, green: 0.5, blue: 0.15, alpha: 1);
-        texto?.font=UIFont(name: "Gotham Bold", size: alto2/2);
-        vista.addSubview(texto!);
-        print("Agrega MDG: ", texto?.text);
-        self.view.addSubview(vista);
-        vista.layer.zPosition=1;
+        if(vista == nil){
+            print("Inicia Msg");
+            let alto = DatosC.contenedor.altoP;
+            let ancho = DatosC.contenedor.anchoP;
+            let rect = CGRectMake(0, 0, ancho, alto);
+            vista = UIView(frame: rect);
+            let alto2 = DatosC.contenedor.altoP * 0.1;
+            let OY = DatosC.contenedor.altoP * 0.7;
+            let rect2 = CGRectMake(0, OY, DatosC.contenedor.anchoP, alto2);
+            texto = UILabel(frame: rect2);
+            texto!.textAlignment=NSTextAlignment.Center;
+            texto!.text="0%";
+            texto!.textColor=UIColor.init(red: 0, green: 0.5, blue: 0.15, alpha: 1);
+            texto?.font=UIFont(name: "Gotham Bold", size: alto2/2);
+            vista.addSubview(texto!);
+            print("Agrega MDG: ", texto?.text);
+            self.view.addSubview(vista);
+            vista.layer.zPosition=1;
+        }
+        
         
     }
     

@@ -16,6 +16,8 @@ class ConsultaNinos: NSObject , NSURLConnectionDelegate, NSXMLParserDelegate{
     var parser=NSXMLParser()
     var eeleDiccio=NSMutableDictionary()
     var element=NSString();
+    var task: NSURLSessionDataTask!;
+    var profundidad = 0;
         
     func consulta(Plogin: LoginView, aprueba: Bool){
         let padre = DatosD.contenedor.padre;
@@ -47,20 +49,13 @@ class ConsultaNinos: NSObject , NSURLConnectionDelegate, NSXMLParserDelegate{
         lobj_Request.addValue("\"bool\"", forHTTPHeaderField: "SOAPAction")
         
         let task = session.dataTaskWithRequest(lobj_Request, completionHandler: {data, response, error -> Void in
-            //print("Response: \(response)")
-            let strData = NSString(data: data!, encoding: NSUTF8StringEncoding)
-            
-            
-            //print("Body: \(strData)")
-            
-            if error != nil
-            {
-                print("Error: " + error!.description)
-            }
+            var nulo = false;
             if(data == nil){
                 print("NULOOOO en consulta Ninos");
+                nulo = true;
             }else{
                 //print(self.resp)
+                let strData = NSString(data: data!, encoding: NSUTF8StringEncoding)
                 self.resp=strData?.dataUsingEncoding(NSUTF8StringEncoding)
                 self.parser=NSXMLParser(data: self.resp)
                 self.parser.delegate=self
@@ -68,7 +63,19 @@ class ConsultaNinos: NSObject , NSURLConnectionDelegate, NSXMLParserDelegate{
                 self.consume(Plogin);
                 //Plogin.desbloquea();
             }
-            lobj_Request.setValue("Connection", forHTTPHeaderField: "close");
+            dispatch_async(dispatch_get_main_queue(),{
+                if(nulo && self.profundidad<2){
+                    self.profundidad += 1;
+                    self.task.cancel();
+                    self.consulta(Plogin, aprueba: aprueba);
+                }else if(self.profundidad>=2 && nulo){
+                    self.msgDesconexion();
+                }else{
+                    
+                }
+                lobj_Request.setValue("Connection", forHTTPHeaderField: "close");
+            });
+            
         })
         
         task.resume();
@@ -188,6 +195,19 @@ class ConsultaNinos: NSObject , NSURLConnectionDelegate, NSXMLParserDelegate{
         
         //cargaVI.consulta(DatosD.contenedor.padre.id);
         
+    }
+    
+    func msgDesconexion(){
+        let vista = DatosB.cont.loginView;
+        let ancho = vista.view.frame.width*0.8;
+        let alto = vista.view.frame.height*0.4;
+        let OX = (vista.view.frame.width/2)-(ancho/2);
+        let OY = (vista.view.frame.height/2)-(alto/2);
+        let frameMensaje = CGRectMake(OX, OY, ancho, alto);
+        let mensaje = MensajeConexion(frame: frameMensaje, msg: nil);
+        vista.view.addSubview(mensaje);
+        mensaje.layer.zPosition=5;
+        vista.view.bringSubviewToFront(mensaje);
     }
 
 }

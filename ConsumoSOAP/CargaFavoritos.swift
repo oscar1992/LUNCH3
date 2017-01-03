@@ -22,7 +22,7 @@ class CargaFavoritos: NSObject , NSURLConnectionDelegate, NSXMLParserDelegate{
     let color = "AZUL";
     var caja = Caja();
     
-    func consulta(idPadre: Int!){
+    func consulta(idPadre: Int!, cInicial: CargaInicial){
         
         let idP = String(idPadre);
         //print("idp: ", idP);
@@ -62,6 +62,8 @@ class CargaFavoritos: NSObject , NSURLConnectionDelegate, NSXMLParserDelegate{
                 
                 let cargaFav = CargaItemsFavoritos();
                 cargaFav.carga();
+                let cargaI2 = CargaInicial2(cInicial: cInicial);
+                cargaI2.guarda(DatosB.cont.favoritos, tipo: Favoritos.self);
                 lobj_Request.setValue("Connection", forHTTPHeaderField: "close");
             });
             

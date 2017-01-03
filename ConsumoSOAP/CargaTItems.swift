@@ -19,7 +19,7 @@ class CargaTItems: NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
     var eeleDiccio=NSMutableDictionary()
     var element=NSString()
     
-    func CargaTItems(){
+    func CargaTItems(cInicial: CargaInicial){
         let is_URL: String = "http://93.188.163.97:8080/Lunch2/adminEndpoint"
         
         let lobj_Request = NSMutableURLRequest(URL: NSURL(string: is_URL)!)
@@ -51,6 +51,8 @@ class CargaTItems: NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
             self.parser.parse()
             dispatch_async(dispatch_get_main_queue(),{
                 print("Carga Items");
+                let cargaI2 = CargaInicial2(cInicial: cInicial);
+                cargaI2.guarda(DatosC.contenedor.titems, tipo: TItems.self);
                 lobj_Request.setValue("Connection", forHTTPHeaderField: "close");
             });
         })

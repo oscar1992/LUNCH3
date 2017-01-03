@@ -1,34 +1,26 @@
 //
-//  CargaTags.swift
-//  ConsumoSOAP
+//  CargaTags2.swift
+//  La Lonchera
 //
-//  Created by Oscar Ramirez on 15/07/16.
+//  Created by Oscar Ramirez on 5/12/16.
 //  Copyright © 2016 Edumedio. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-class CargaTags: NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
-    
+class CargaTags2: NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
     var resp: NSData! = nil
     var estado:NSMutableString!
     var parser=NSXMLParser()
     var eeleDiccio=NSMutableDictionary()
     var element=NSString()
     var task: NSURLSessionDataTask!;
-    var produndidad: Int;
-    var mal = false;
+    var profundidad = 0;
     
-    override init(){
-        self.produndidad = 0;
-    }
-    
-    func consulta(idProdcuto: Producto){
-        
-        let idP = String(idProdcuto.id!);
-        //print(idP);
-        let mensajeEnviado:String = "<soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/' xmlns:enp='http://enpoint.lunch.com.co/'><soapenv:Header/><soapenv:Body><enp:tagsPorProducto><idProducto>"+idP+"</idProducto></enp:tagsPorProducto></soapenv:Body></soapenv:Envelope>";
+    func consulta(cInicial: CargaInicial){
+        msgInicia();
+        let mensajeEnviado:String = "<soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/' xmlns:enp='http://enpoint.lunch.com.co/'><soapenv:Header/><soapenv:Body><enp:listaTags/></soapenv:Body></soapenv:Envelope>";
         
         //print("Mensaje: ", mensajeEnviado);
         let is_URL: String = "http://93.188.163.97:8080/Lunch2/adminEndpoint"
@@ -44,44 +36,44 @@ class CargaTags: NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
         lobj_Request.addValue(String(mensajeEnviado.characters.count), forHTTPHeaderField: "Content-Length")
         //lobj_Request.addValue("223", forHTTPHeaderField: "Content-Length")
         lobj_Request.addValue("\"tagsPorProducto\"", forHTTPHeaderField: "SOAPAction")
-        
         task = session.dataTaskWithRequest(lobj_Request, completionHandler: {data, response, error -> Void in
-            //print("Response: \(response)")
             self.task.priority=1.0;
+            //print("Response: \(response)")
+            var nulo = false;
             if(data == nil){
-                print("NULOOOO en Tags");
+                print("NULOOOO en Tags Completos");
                 self.task.cancel();
-                print("Cancela Tags ", self.idProducto);
-                self.mal = true;
+                nulo = true;
             }else{
                 //print("Inicia Tags: ", self.produndidad);
                 let strData = NSString(data: data!, encoding: NSUTF8StringEncoding)
                 self.resp=strData?.dataUsingEncoding(NSUTF8StringEncoding)
                 //print("envia: ", mensajeEnviado);
                 //print("Body: \(strData)")
-
+                
                 //print(self.resp)
                 self.parser=NSXMLParser(data: self.resp)
                 self.parser.delegate=self
                 self.parser.parse();
             }
-            
-            //print("ini");
-            
-                dispatch_async(dispatch_get_main_queue(),{
-                    print("Carga Tags: ", self.mal);
-                    if(self.mal){
-                        self.produndidad += 1;
-                        self.consulta(idProdcuto);
-                    }
-                    
-                    
-                    }
-                );
+            dispatch_async(dispatch_get_main_queue(),{
+                if(nulo && self.profundidad<2){
+                    print("Err tags: Profundidad: ", self.profundidad)
+                    self.profundidad += 1;
+                    self.consulta(cInicial);
+                }else if(nulo && self.profundidad>=2){
+                    self.msgDesconexion();
+                }else{
+                    print("Carga Tags Completos");
+                    let cargaI2 = CargaInicial2(cInicial: cInicial);
+                    cargaI2.guarda(DatosD.contenedor.tags, tipo: Tag.self);
+                }
                 
+                //print("tama Prods?: ", DatosC.contenedor.productos.count);
+                
+            });
             
-        })
-        
+        });
         task.resume();
     }
     
@@ -95,7 +87,7 @@ class CargaTags: NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
     
     func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
         
-        if(elementName as NSString).isEqualToString("loginResponse"){
+        if(elementName as NSString).isEqualToString("listaTagsResponse"){
             estado=NSMutableString();
             estado="";
         }
@@ -148,5 +140,30 @@ class CargaTags: NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
             }
             
         }
+    }
+    
+    func msgInicia(){
+        //print("carga tags");
+        let vista = DatosB.cont.loginView;
+        if(vista.ingresa != nil){
+            if(vista.vista==nil){
+                vista.iniciamsg();
+            }
+            vista.texto?.text="Inicia Carga Etiquetas";
+        }
+    }
+    
+    func msgDesconexion(){
+        let vista = DatosB.cont.loginView;
+        
+        let ancho = vista.view.frame.width*0.8;
+        let alto = vista.view.frame.height*0.4;
+        let OX = (vista.view.frame.width/2)-(ancho/2);
+        let OY = (vista.view.frame.height/2)-(alto/2);
+        let frameMensaje = CGRectMake(OX, OY, ancho, alto);
+        let mensaje = MensajeConexion(frame: frameMensaje, msg: nil);
+        vista.view.addSubview(mensaje);
+        mensaje.layer.zPosition=5;
+        vista.view.bringSubviewToFront(mensaje);
     }
 }

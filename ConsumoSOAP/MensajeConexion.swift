@@ -36,7 +36,7 @@ class MensajeConexion: UIView {
         let frameIco = CGRectMake(OX, OY, ancho, alto);
         icono = UIView(frame: frameIco);
         self.addSubview(icono);
-        DatosB.cont.poneFondoTot(icono, fondoStr: "ICO Advertencia", framePers: nil, identi: nil, scala: true);
+        DatosB.cont.poneFondoTot(icono, fondoStr: "ICO Triste", framePers: nil, identi: nil, scala: true);
         let anchoT = self.frame.width*0.8;
         let altoT = self.frame.height*0.3;
         let OXT = (self.frame.width/2)-(anchoT/2);
@@ -44,7 +44,7 @@ class MensajeConexion: UIView {
         let frameT = CGRectMake(OXT, OYT, anchoT, altoT);
         let mensaje = UILabel(frame: frameT);
         if(msg == nil){
-            mensaje.text="NO hay Conexión con el servidor";
+            mensaje.text="Revisa tu conexión a internet";
         }else{
             mensaje.text=msg;
         }
@@ -53,6 +53,10 @@ class MensajeConexion: UIView {
         mensaje.font=UIFont(name: "Gotham Bold", size: mensaje.frame.height);
         mensaje.adjustsFontSizeToFitWidth=true;
         self.addSubview(mensaje);
+        //
+    }
+    
+    func iniciaTimer(){
         _ = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: #selector(MensajeConexion.cierra), userInfo: nil, repeats: false);
     }
     

@@ -17,9 +17,11 @@ class CargaTinfo2: NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
     var eeleDiccio=NSMutableDictionary()
     var element=NSString()
     var task: NSURLSessionDataTask!;
+    var profundidad = 0;
     
-    func cargaInformacion(log: LoginView){
-        print("Inicia Info: ");
+    func cargaInformacion(log: LoginView, cInicial: CargaInicial){
+        
+        msgInicia();
         let mensajeEnviado:String = "<soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/' xmlns:enp='http://enpoint.lunch.com.co/'><soapenv:Header/><soapenv:Body><enp:listaInformacionNutricionalEntity/></soapenv:Body></soapenv:Envelope>";
         
         //print("Mensaje: ", mensajeEnviado);
@@ -37,11 +39,12 @@ class CargaTinfo2: NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
         //lobj_Request.addValue("223", forHTTPHeaderField: "Content-Length")
         lobj_Request.addValue("\"tagsPorProducto\"", forHTTPHeaderField: "SOAPAction")
         task = session.dataTaskWithRequest(lobj_Request, completionHandler: {data, response, error -> Void in
-            //print("Response: \(response)")
+            self.task.priority=1.0;
+            var nulo = false;
             if(data == nil){
-                print("NULOOOO en Carga Tipo Info");
-                self.task.cancel();
+                print("NULOOOO en Carga Tipo Info: ", self.profundidad);
                 
+                nulo = true;
             }else{
                 
                 let strData = NSString(data: data!, encoding: NSUTF8StringEncoding)
@@ -55,10 +58,21 @@ class CargaTinfo2: NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
                 self.parser.parse();
             }
             dispatch_async(dispatch_get_main_queue(),{
-                print("Carga Informacion Nutricional");
-                self.añadeInfo();
-                log.pasa2();
-                log.vista.removeFromSuperview();
+                if(nulo && self.profundidad<2){
+                    self.task.cancel();
+                    self.profundidad += 1;
+                    self.cargaInformacion(log, cInicial: cInicial);
+                }else if(nulo && self.profundidad>=2){
+                    self.msgDesconexion();
+                }else{
+                    print("Carga Informacion Nutricional");
+                    let cargaI2 = CargaInicial2(cInicial: cInicial);
+                    cargaI2.guarda(DatosB.cont.listaTInfo, tipo: TipoInfo.self);
+                    self.añadeInfo();
+                    //log.pasa2();
+                    //log.vista.removeFromSuperview();
+                }
+                
                 
                 //print("tama Prods?: ", DatosC.contenedor.productos.count);
                 
@@ -163,5 +177,29 @@ class CargaTinfo2: NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
             }
         }
         return ret;
+    }
+    
+    func msgInicia(){
+        let vista = DatosB.cont.loginView;
+        if(vista.ingresa != nil){
+            if(vista.vista==nil){
+                vista.iniciamsg();
+            }
+            vista.texto?.text="Inicia Carga Info";
+        }
+    }
+    
+    func msgDesconexion(){
+        let vista = DatosB.cont.loginView;
+        
+        let ancho = vista.view.frame.width*0.8;
+        let alto = vista.view.frame.height*0.4;
+        let OX = (vista.view.frame.width/2)-(ancho/2);
+        let OY = (vista.view.frame.height/2)-(alto/2);
+        let frameMensaje = CGRectMake(OX, OY, ancho, alto);
+        let mensaje = MensajeConexion(frame: frameMensaje, msg: nil);
+        vista.view.addSubview(mensaje);
+        mensaje.layer.zPosition=5;
+        vista.view.bringSubviewToFront(mensaje);
     }
 }

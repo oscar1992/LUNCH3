@@ -148,6 +148,7 @@
 		A1C6DFCD1D91D149008B659B /* Despliega.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C6DFCC1D91D147008B659B /* Despliega.swift */; };
 		A1C6DFDC1D92EB10008B659B /* Gotham-Bold_0.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A1C6DFDA1D92EB10008B659B /* Gotham-Bold_0.ttf */; };
 		A1C6DFDD1D92EB10008B659B /* Gotham-Book_0.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A1C6DFDB1D92EB10008B659B /* Gotham-Book_0.ttf */; };
+		A1CB37E71E02EC7F003B4DD2 /* CargaInicial2.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CB37E61E02EC7F003B4DD2 /* CargaInicial2.swift */; };
 		A1CD96511DF6072700ADD84B /* CargaTags2.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CD96501DF6072600ADD84B /* CargaTags2.swift */; };
 		A1CD96531DF7137000ADD84B /* CargaTinfo2.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CD96521DF7136F00ADD84B /* CargaTinfo2.swift */; };
 		A1CED92D1DA2ACA1004E090F /* VistaGenero.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CED92C1DA2ACA1004E090F /* VistaGenero.swift */; };
@@ -159,6 +160,7 @@
 		A1CED9391DA413DF004E090F /* CompruebaEmail.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CED9381DA413DE004E090F /* CompruebaEmail.swift */; };
 		A1CED93B1DA436F4004E090F /* Olvida1.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CED93A1DA436F3004E090F /* Olvida1.swift */; };
 		A1CED93D1DA43CD1004E090F /* PideRestauracion.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CED93C1DA43CD1004E090F /* PideRestauracion.swift */; };
+		A1D0462D1E0D86C700A0C257 /* CargaImagenes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D0462C1E0D86C700A0C257 /* CargaImagenes.swift */; };
 		A1D1116F1D494E3A00B97F22 /* EliminaFavoritos.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D1116E1D494E3800B97F22 /* EliminaFavoritos.swift */; };
 		A1D111711D4AAAF300B97F22 /* BarraOpciones.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D111701D4AAAF300B97F22 /* BarraOpciones.swift */; };
 		A1D111731D4AC4C800B97F22 /* Circulo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D111721D4AC4C800B97F22 /* Circulo.swift */; };
@@ -333,6 +335,7 @@
 		A1C6DFCC1D91D147008B659B /* Despliega.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Despliega.swift; sourceTree = "<group>"; };
 		A1C6DFDA1D92EB10008B659B /* Gotham-Bold_0.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Gotham-Bold_0.ttf"; path = "ConsumoSOAP/Resources/Fonts/Gotham-Bold_0.ttf"; sourceTree = "<group>"; };
 		A1C6DFDB1D92EB10008B659B /* Gotham-Book_0.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Gotham-Book_0.ttf"; path = "ConsumoSOAP/Resources/Fonts/Gotham-Book_0.ttf"; sourceTree = "<group>"; };
+		A1CB37E61E02EC7F003B4DD2 /* CargaInicial2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CargaInicial2.swift; sourceTree = "<group>"; };
 		A1CD96501DF6072600ADD84B /* CargaTags2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CargaTags2.swift; sourceTree = "<group>"; };
 		A1CD96521DF7136F00ADD84B /* CargaTinfo2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CargaTinfo2.swift; sourceTree = "<group>"; };
 		A1CED92C1DA2ACA1004E090F /* VistaGenero.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VistaGenero.swift; sourceTree = "<group>"; };
@@ -344,6 +347,7 @@
 		A1CED9381DA413DE004E090F /* CompruebaEmail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompruebaEmail.swift; sourceTree = "<group>"; };
 		A1CED93A1DA436F3004E090F /* Olvida1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Olvida1.swift; sourceTree = "<group>"; };
 		A1CED93C1DA43CD1004E090F /* PideRestauracion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PideRestauracion.swift; sourceTree = "<group>"; };
+		A1D0462C1E0D86C700A0C257 /* CargaImagenes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CargaImagenes.swift; sourceTree = "<group>"; };
 		A1D1116E1D494E3800B97F22 /* EliminaFavoritos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EliminaFavoritos.swift; sourceTree = "<group>"; };
 		A1D111701D4AAAF300B97F22 /* BarraOpciones.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarraOpciones.swift; sourceTree = "<group>"; };
 		A1D111721D4AC4C800B97F22 /* Circulo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Circulo.swift; sourceTree = "<group>"; };
@@ -494,6 +498,7 @@
 				A1CED9381DA413DE004E090F /* CompruebaEmail.swift */,
 				A1CED93C1DA43CD1004E090F /* PideRestauracion.swift */,
 				A16BAFE01DA8392D007386ED /* ActualizaPadre.swift */,
+				A1D0462C1E0D86C700A0C257 /* CargaImagenes.swift */,
 			);
 			name = Cargas;
 			sourceTree = "<group>";
@@ -694,6 +699,7 @@
 				A1CED93A1DA436F3004E090F /* Olvida1.swift */,
 				A1E44D421DA55A3D00967E18 /* Olvida2.swift */,
 				A12371281DD23CBD00532E6C /* CargaInicial.swift */,
+				A1CB37E61E02EC7F003B4DD2 /* CargaInicial2.swift */,
 			);
 			name = Login;
 			sourceTree = "<group>";
@@ -913,6 +919,7 @@
 				A1D1116F1D494E3A00B97F22 /* EliminaFavoritos.swift in Sources */,
 				A16710A51D79C68B004CB71D /* Saludable.swift in Sources */,
 				A18A1B091DB6BB5D009C4950 /* NodoMapa.swift in Sources */,
+				A1CB37E71E02EC7F003B4DD2 /* CargaInicial2.swift in Sources */,
 				A1CED9311DA2C794004E090F /* VistaFoto.swift in Sources */,
 				A1C6DFC71D908ABE008B659B /* FechaEntrega.swift in Sources */,
 				A16710A71D79E6B0004CB71D /* CargaProductoSalud.swift in Sources */,
@@ -959,6 +966,7 @@
 				A1F1F5731D1DC09800B4BFBE /* BotonDias.swift in Sources */,
 				A18052BE1DBAD3DF005930AC /* BotMetodoPago.swift in Sources */,
 				A159F1931DB16F6700655BE6 /* Direcciones.swift in Sources */,
+				A1D0462D1E0D86C700A0C257 /* CargaImagenes.swift in Sources */,
 				A10671E71D3E84DF00D0F0B5 /* DetalleProducto.swift in Sources */,
 				A1521C121DBFC3C600342E93 /* BotHoraEntrega.swift in Sources */,
 				A18878B81CBC266600737085 /* CreaNino.swift in Sources */,

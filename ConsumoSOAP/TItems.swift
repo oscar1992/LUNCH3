@@ -8,14 +8,25 @@
 
 import Foundation
 
-class TItems: NSObject {
+class TItems: NSObject, NSCoding {
     
-    var id:Int;
-    var productos : Producto?;
+    var id:Int!;
+    var productos : Producto!;
     //var favo : Favoritos!;
     
-    init(id: Int) {
+    convenience init(id: Int) {
+        self.init();
         self.id=id;
-        
+    }
+    
+    required convenience init(coder decoder: NSCoder) {
+        self.init();
+        self.id = decoder.decodeObjectForKey("id") as! Int;
+        self.productos = decoder.decodeObjectForKey("productos") as! Producto;
+    }
+    
+    func encodeWithCoder(coder: NSCoder) {
+        if let id = id{coder.encodeObject(id, forKey: "id")};
+        if let productos = productos{coder.encodeObject(productos, forKey: "productos")};
     }
 }

@@ -26,10 +26,9 @@ class MensajeCrea: UIView {
         DatosB.cont.poneFondoTot(self, fondoStr: "Base 2", framePers: nil, identi: nil, scala: false);
         iniciaImagen();
         iniciaMensaje();
-        iniciaTime3();
         self.accessibilityIdentifier="msg";
         fondo();
-        
+        cambiaImagen();
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -97,10 +96,6 @@ class MensajeCrea: UIView {
         
     }
     
-    func iniciaTime3(){
-        timer3 = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: #selector(MensajeCrea.mataItera), userInfo: nil, repeats: false);
-
-    }
     
     func cierra(){
         print("cierra")
@@ -123,26 +118,27 @@ class MensajeCrea: UIView {
     func nombresImagenes(){
         nombresImgs.append(UIImage(named: "ICO Corazón")!);
         nombresImgs.append(UIImage(named: "ICO Feliz")!);
-        //timer2 = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: #selector(MensajeCrea.interaImagen), userInfo: nil, repeats: true);
+        //
     }
     
-    func interaImagen(){
-        if(itera<nombresImgs.count){
-            //print("itera: ", nombresImgs[itera]);
-            cambiaImagen(nombresImgs[itera]);
-            //DatosB.cont.poneFondoTot(corazon, fondoStr: nombresImgs[itera], framePers: nil, identi: "ico", scala: true);
-            itera += 1;
+    
+    func cambiaImagen(){
+        print("Hilo Imagen")
+        let hiloImagen = DISPATCH_QUEUE_PRIORITY_DEFAULT;
+        dispatch_async(dispatch_get_global_queue(hiloImagen, 0)) {
+            self.timer2 = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: #selector(MensajeCrea.iteraImagen), userInfo: nil, repeats: true);
+        };
+        
+    }
+    
+    func iteraImagen(){
+        if(itera==0){
+            itera=1;
         }else{
-            itera = 0;
+            itera=0;
         }
-    }
-    
-    func mataItera(){
-        //timer2.invalidate();
-        //timer2 = nil;
-    }
-    
-    func cambiaImagen(ima: UIImage){
+        print("Itera: ", itera);
+        /*
         for vista in corazon.subviews{
             if(vista.accessibilityIdentifier=="ico"){
                 vista.removeFromSuperview();
@@ -155,5 +151,6 @@ class MensajeCrea: UIView {
         backImg.image=ima;
         backImg.accessibilityIdentifier="ico";
         corazon.addSubview(backImg);
+        */
     }
 }
