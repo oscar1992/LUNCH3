@@ -18,6 +18,11 @@ class CargaZip: NSObject {
     var paths: String!;
     var entrada : String!;
     var salida : String!;
+    var padre: CargaInicial!;
+    
+    init(padre: CargaInicial){
+        self.padre=padre;
+    }
     
     func ejecuta(){
         rutas();
@@ -30,6 +35,7 @@ class CargaZip: NSObject {
         }else{
             agregaImagenes();
         }
+        
     }
     
     //Método que establece las rutas de los directorios donde se descargará el zip y donde se descomprimian las Imagenes
@@ -88,8 +94,7 @@ class CargaZip: NSObject {
     
     //Método que carga las imagenes descargadas y las agrega a la lista de productos;
     func agregaImagenes(){
-        
-        print("Agrega Imagenes: ", self.salida);
+        print("Agrega Imagenes: ");
         if(existenImagenes()){
             var lista: [String];
             do{
@@ -100,11 +105,34 @@ class CargaZip: NSObject {
             for prod in DatosC.contenedor.productos{
                 self.salida = (paths?.stringByAppendingString("/Imagenes/"))!;
                 let ruta = self.salida.stringByAppendingString(prod.imagenString!);
-                print("ruta: ", ruta);
+                //print("ruta: ", ruta);
                 let data = NSData(contentsOfFile: ruta)
                 let imagen = UIImage(data: data!);
                 prod.imagen=imagen;
+                //print("IMA: ", prod.imagen);
             }
+            for itemS in  DatosB.cont.prodSaludables{
+                for prod in DatosC.contenedor.productos{
+                    if(itemS.produ.id == prod.id){
+                        itemS.produ.imagen=prod.imagen;
+                    }
+                }
+                //print("PDSA: ", itemS.produ.imagen);
+            }
+            for tit in DatosC.contenedor.titems{
+                for prod in DatosC.contenedor.productos{
+                    if(tit.productos.id == prod.id){
+                        tit.productos.imagen == prod.imagen;
+                    }
+                }
+            }
+            
         }
+        continuaPadre();
+    }
+    
+    
+    func continuaPadre() -> Void {
+        padre.pasaLogin();
     }
 }

@@ -155,7 +155,7 @@ class CargaTinfo2: NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
         if(elementName as NSString).isEqualToString("return"){
             let tInfo = TipoInfo(id: id!, tipo: tipoNombre!, valor: valor!, idProducto: idProducto!);
             DatosB.cont.listaTInfo.append(tInfo);
-            //print("----------------");
+            print("---------------- tipoinfo: ", DatosB.cont.listaTInfo.count);
         }
     }
     
@@ -185,7 +185,7 @@ class CargaTinfo2: NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
             if(vista.vista==nil){
                 vista.iniciamsg();
             }
-            vista.texto?.text="Inicia Carga Info";
+            //vista.texto?.text="Inicia Carga Info";
         }
     }
     

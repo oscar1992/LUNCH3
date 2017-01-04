@@ -149,7 +149,7 @@ class CargaTags2: NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
             if(vista.vista==nil){
                 vista.iniciamsg();
             }
-            vista.texto?.text="Inicia Carga Etiquetas";
+            //vista.texto?.text="Inicia Carga Etiquetas";
         }
     }
     

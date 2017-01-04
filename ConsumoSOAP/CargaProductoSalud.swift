@@ -23,7 +23,7 @@ class CargaProductoSalud: NSObject ,NSURLConnectionDelegate, NSXMLParserDelegate
    
     
     func cargaSaludables(cInicial: CargaInicial){
-        msgInicia();
+        //msgInicia();
         print("Inicia Producto-Salud");
         let mensajeEnviado:String = "<soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/' xmlns:enp='http://enpoint.lunch.com.co/'><soapenv:Header/><soapenv:Body><enp:listaProductoSaludTodos/></soapenv:Body></soapenv:Envelope>";
         
@@ -156,7 +156,7 @@ class CargaProductoSalud: NSObject ,NSURLConnectionDelegate, NSXMLParserDelegate
             if(vista.vista==nil){
                 vista.iniciamsg();
             }
-            vista.texto?.text="Inicia Carga Producto-Saludable";
+            //vista.texto?.text="Inicia Carga Producto-Saludable";
         }
     }
     

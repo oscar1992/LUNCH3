@@ -97,7 +97,7 @@ class Lonchera2: UIView {
                 let OX = (cas.frame.width/2)-(ancho/2);
                 let OY = (cas.frame.height/2)-(alto/2);
                 let imagenN = prod.imagen;
-                let prodN=ProductoView(frame: CGRectMake(OX, OY, ancho, alto), imagen: imagenN!);
+                let prodN=ProductoView(frame: CGRectMake(OX, OY, ancho, alto), imagen: prod.imagen!);
                 prodN.producto=prod;
                 prodN.padre=cas;
                 prodN.espacioPadre=CGRectMake(OX, OY, ancho, alto);

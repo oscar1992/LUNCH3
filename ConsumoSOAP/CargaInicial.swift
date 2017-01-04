@@ -186,8 +186,9 @@ class CargaInicial: NSObject {
             
             
         }else{
-            cargaZip();
             //pasaLogin();
+            uneTinfo();
+            cargaZip();
             print("Fin");
         }
         
@@ -196,7 +197,7 @@ class CargaInicial: NSObject {
 
     //Método que evalua la existencia de las imágenes
     func cargaZip(){
-        let carga3 = CargaZip();
+        let carga3 = CargaZip(padre: self);
         carga3.ejecuta();
     }
     
@@ -207,9 +208,9 @@ class CargaInicial: NSObject {
         let prog = ss * 100 / tot;
         //print("Prog: ", prog);
         //print("TextA: ", plogin.texto?.text);
-        plogin.texto!.text=String(prog)+"%";
+        //plogin.texto!.text=String(prog)+"%";
         //print("TextD: ", plogin.texto?.text);
-        plogin.vista.addSubview(plogin.texto!);
+        //plogin.vista.addSubview(plogin.texto!);
     }
     
     func poneCredenciales(){
@@ -267,5 +268,25 @@ class CargaInicial: NSObject {
         }
         
     }
+    
+    //Método que une la información nutricional con su respectivo producto
+    func uneTinfo(){
+        print("TAMA TINFO: ", DatosB.cont.listaTInfo.count);
+        for prod in DatosC.contenedor.productos{
+            for titm in DatosB.cont.listaTInfo{
+                if(titm.idProducto == prod.id){
+                    prod.listaDatos.append(titm);
+                }
+            }
+        }
+        for itemS in  DatosB.cont.prodSaludables{
+            for prod in DatosC.contenedor.productos{
+                if(itemS.produ.id == prod.id){
+                    itemS.produ.listaDatos=prod.listaDatos;
+                }
+            }
+        }
+    }
+    
     
 }

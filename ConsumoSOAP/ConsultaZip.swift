@@ -21,6 +21,7 @@ class ConsultaZip: NSObject, NSURLSessionDownloadDelegate{
     var entrada : String!;
     var fileManager : NSFileManager;
     var padre: CargaZip!;
+    var vista : LoginView!;
     
     lazy var session : NSURLSession = {
         let config = NSURLSessionConfiguration.ephemeralSessionConfiguration()
@@ -33,6 +34,7 @@ class ConsultaZip: NSObject, NSURLSessionDownloadDelegate{
         self.entrada=entrada;
         self.fileManager=fileM;
         self.padre=padre;
+        self.vista = DatosB.cont.loginView;
     }
     
     func descarga(){
@@ -49,8 +51,9 @@ class ConsultaZip: NSObject, NSURLSessionDownloadDelegate{
     func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten writ: Int64, totalBytesExpectedToWrite exp: Int64) {
         taskTotalBytesWritten = Int(writ);
         taskTotalBytesExpectedToWrite = Int(exp);
-        percentageWritten = (Float(taskTotalBytesWritten) / Float(taskTotalBytesExpectedToWrite))*100;
-        print("Va en: ", percentageWritten);
+        percentageWritten = (Float(taskTotalBytesWritten) / Float(taskTotalBytesExpectedToWrite));
+        setBarra(percentageWritten);
+        //print("Va en: ", percentageWritten);
         
     }
     
@@ -79,28 +82,25 @@ class ConsultaZip: NSObject, NSURLSessionDownloadDelegate{
                 print("Error creando el directorio")
             }
         }
-        if(fileManager.fileExistsAtPath(location.path!)){
-            print("Zip en el temporal");
-        }else{
-            print("Temporal vacio");
-            
-        }
-        /*
-        let data = NSData(contentsOfURL: location);
-        if (data?.length>0){
-            entrada = paths.stringByAppendingString("/elzip2.zip");
-            print("ENTRADA F: ", entrada);
-            print("CREA: ", fileManager.createFileAtPath(entrada, contents: data, attributes: nil));
-        }
-        */
         do{
             entrada = paths.stringByAppendingString("/elzip2.zip");
             try(fileManager.moveItemAtPath(location.path!, toPath: entrada));
             print("Archivo Guardado")
+            padre.descomprimir();
         }catch{
             print("Error guardando archivo");
         }
         
+    }
+
+    
+    //Método que establece el porcentaje de la barra de carga
+    func setBarra(val: Float){
+        if(vista.ingresa != nil){
+            vista.iniciamsg();
+            //vista.texto?.text="Inicia Carga Productos";
+        }
+        vista.barra.progress=val;
     }
     
 }

@@ -81,6 +81,7 @@ class LoginView: UIViewController {
                 print("Cambia PASS")
                 self.performSegueWithIdentifier("Olvida2", sender: nil);
             }else{
+                iniciamsg();
                 //iniciaCargaCajas();
                 guarda(email.text!, pas: pass.text!);
                 print("Proceda Señor");
@@ -431,7 +432,8 @@ class LoginView: UIViewController {
     }
     
     var vista : UIView!;
-    var texto : UILabel?;
+    //var texto : UILabel?;
+    var barra : UIProgressView!;
     
     func iniciamsg(){
         if(vista == nil){
@@ -440,9 +442,14 @@ class LoginView: UIViewController {
             let ancho = DatosC.contenedor.anchoP;
             let rect = CGRectMake(0, 0, ancho, alto);
             vista = UIView(frame: rect);
-            let alto2 = DatosC.contenedor.altoP * 0.1;
-            let OY = DatosC.contenedor.altoP * 0.7;
+            let alto2 = DatosC.contenedor.altoP * 0.2;
+            let OY = DatosC.contenedor.altoP * 0.8;
             let rect2 = CGRectMake(0, OY, DatosC.contenedor.anchoP, alto2);
+            barra = UIProgressView(frame: rect2);
+            barra.progressTintColor=UIColor.init(red: 0, green: 0.5, blue: 0, alpha: 1);
+            //barra.progress=0.5;
+            vista.addSubview(barra);
+            /*
             texto = UILabel(frame: rect2);
             texto!.textAlignment=NSTextAlignment.Center;
             texto!.text="0%";
@@ -450,6 +457,7 @@ class LoginView: UIViewController {
             texto?.font=UIFont(name: "Gotham Bold", size: alto2/2);
             vista.addSubview(texto!);
             print("Agrega MDG: ", texto?.text);
+            */
             self.view.addSubview(vista);
             vista.layer.zPosition=1;
         }

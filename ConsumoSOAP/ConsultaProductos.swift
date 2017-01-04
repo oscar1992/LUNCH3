@@ -29,7 +29,7 @@ class ConsultaProductos: NSObject , NSURLConnectionDelegate, NSXMLParserDelegate
     }
     
     func consulta(carga: CargaInicial){
-        msgInicia();
+        //msgInicia();
         
         let is_URL: String = "http://93.188.163.97:8080/Lunch2/adminEndpoint"
         
@@ -220,7 +220,7 @@ class ConsultaProductos: NSObject , NSURLConnectionDelegate, NSXMLParserDelegate
         let vista = DatosB.cont.loginView;
         if(vista.ingresa != nil){
             vista.iniciamsg();
-            vista.texto?.text="Inicia Carga Productos";
+            //vista.texto?.text="Inicia Carga Productos";
         }
     }
     

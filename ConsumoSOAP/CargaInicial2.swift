@@ -64,6 +64,7 @@ class CargaInicial2 : NSObject{
                 try fileManager.createDirectoryAtPath(datosURL!, withIntermediateDirectories: false, attributes: nil);
                 //print("OK creacion directorio: ", datosURL);
                 print("Guarda ", tipo, "tama", lista.count);
+                var p = 0;
                 for ele in lista{
                     switch tipo {
                     case is Producto.Type:
@@ -75,10 +76,11 @@ class CargaInicial2 : NSObject{
                         break;
                     case is TipoInfo.Type:
                         let obj = (ele as! TipoInfo);
-                        let rutaEle = datosURL?.stringByAppendingString("/"+String(obj.id));
+                        let rutaEle = datosURL?.stringByAppendingString("/"+String(p));
+                        print("P: ", p);
                         let contenido = NSKeyedArchiver.archivedDataWithRootObject(obj);
                         fileManager.createFileAtPath(rutaEle!, contents: contenido, attributes: nil);
-                        
+                        p += 1;
                         break;
                     case is Tag.Type:
                         let obj = (ele as! Tag);
@@ -166,13 +168,13 @@ class CargaInicial2 : NSObject{
             let lista = try fileManager.contentsOfDirectoryAtPath(datosURL!);
             carga(tipo, lista: lista, ruta: datosURL);
             print("tama: ", lista.count);
-            for ll in lista{
+            //for ll in lista{
                 //let rutaEle = datosURL?.stringByAppendingString("/"+ll);
                 //print("NN: ", rutaEle);
                 //print("Trae", (NSKeyedUnarchiver.unarchiveObjectWithData(fileManager.contentsAtPath(rutaEle!)!)));
                 //let prod = (NSKeyedUnarchiver.unarchiveObjectWithData(fileManager.contentsAtPath(rutaEle!)!))
                 //print("prod: ", (prod as! Producto).nombre);
-            }
+            //}
         }catch{
             print("Error leyendo archivos");
         }
@@ -192,12 +194,14 @@ class CargaInicial2 : NSObject{
             break;
         case is TipoInfo.Type:
             DatosB.cont.listaTInfo.removeAll();
+            print("TAMAINFO: ", lista.count);
             for ele in lista{
                 let rutaEle = ruta.stringByAppendingString("/"+ele);
                 let prod = (NSKeyedUnarchiver.unarchiveObjectWithData(fileManager.contentsAtPath(rutaEle)!));
                 print("TIPOINFO: ", (prod as! TipoInfo).valor);
                 DatosB.cont.listaTInfo.append(prod as! TipoInfo);
             }
+            
             break;
         case is Tag.Type:
             DatosD.contenedor.tags.removeAll();
@@ -307,5 +311,6 @@ class CargaInicial2 : NSObject{
         }
         return retorna;
     }
+    
     
 }
