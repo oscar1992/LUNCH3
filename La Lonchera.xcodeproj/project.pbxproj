@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5FA3927AB9E600FC1DD2F086 /* Pods_La_LoncheraTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19FFCCC8968C971E0C39BC96 /* Pods_La_LoncheraTests.framework */; };
 		A102F66B1CA9CCF7001359A5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A102F66A1CA9CCF7001359A5 /* AppDelegate.swift */; };
 		A102F66D1CA9CCF7001359A5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A102F66C1CA9CCF7001359A5 /* ViewController.swift */; };
 		A102F6721CA9CCF7001359A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A102F6711CA9CCF7001359A5 /* Assets.xcassets */; };
@@ -17,6 +18,8 @@
 		A10671E31D3D596600D0F0B5 /* ScrollResultados.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10671E21D3D596600D0F0B5 /* ScrollResultados.swift */; };
 		A10671E51D3D5AF500D0F0B5 /* BotonResultado.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10671E41D3D5AF500D0F0B5 /* BotonResultado.swift */; };
 		A10671E71D3E84DF00D0F0B5 /* DetalleProducto.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10671E61D3E84DD00D0F0B5 /* DetalleProducto.swift */; };
+		A10B16BB1E1BF0C000EA1CBA /* CargaZip.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10B16BA1E1BF0C000EA1CBA /* CargaZip.swift */; };
+		A10B16BD1E1C093600EA1CBA /* ConsultaZip.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10B16BC1E1C093600EA1CBA /* ConsultaZip.swift */; };
 		A11169EB1DDCEC5100B9D759 /* SubeBusqueda.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11169EA1DDCEC5100B9D759 /* SubeBusqueda.swift */; };
 		A11278AF1D8C707200015B61 /* CargaEnvio.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11278AE1D8C707200015B61 /* CargaEnvio.swift */; };
 		A11838B71D8206C100201A96 /* SubeFavorito.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11838B61D8206B900201A96 /* SubeFavorito.swift */; };
@@ -160,7 +163,6 @@
 		A1CED9391DA413DF004E090F /* CompruebaEmail.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CED9381DA413DE004E090F /* CompruebaEmail.swift */; };
 		A1CED93B1DA436F4004E090F /* Olvida1.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CED93A1DA436F3004E090F /* Olvida1.swift */; };
 		A1CED93D1DA43CD1004E090F /* PideRestauracion.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CED93C1DA43CD1004E090F /* PideRestauracion.swift */; };
-		A1D0462D1E0D86C700A0C257 /* CargaImagenes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D0462C1E0D86C700A0C257 /* CargaImagenes.swift */; };
 		A1D1116F1D494E3A00B97F22 /* EliminaFavoritos.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D1116E1D494E3800B97F22 /* EliminaFavoritos.swift */; };
 		A1D111711D4AAAF300B97F22 /* BarraOpciones.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D111701D4AAAF300B97F22 /* BarraOpciones.swift */; };
 		A1D111731D4AC4C800B97F22 /* Circulo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D111721D4AC4C800B97F22 /* Circulo.swift */; };
@@ -177,6 +179,7 @@
 		A1F1F5731D1DC09800B4BFBE /* BotonDias.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F1F5721D1DC09700B4BFBE /* BotonDias.swift */; };
 		A1F1F5781D21A81100B4BFBE /* Sans-Beam-Head-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A1F1F5771D21A81100B4BFBE /* Sans-Beam-Head-Bold.otf */; };
 		A1FF33141CED15B8007771F2 /* PFactura.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FF33131CED15B8007771F2 /* PFactura.swift */; };
+		CD5DBBE66B38D087A4B941CB /* Pods_La_Lonchera.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 308CD5FB8EEE63B067F9591A /* Pods_La_Lonchera.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -190,6 +193,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		19FFCCC8968C971E0C39BC96 /* Pods_La_LoncheraTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_La_LoncheraTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1DDE7166C5DFCF3AF56F2793 /* Pods-La LoncheraTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-La LoncheraTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-La LoncheraTests/Pods-La LoncheraTests.release.xcconfig"; sourceTree = "<group>"; };
+		308CD5FB8EEE63B067F9591A /* Pods_La_Lonchera.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_La_Lonchera.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		61B8252123BE2A4434500DAE /* Pods-La Lonchera.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-La Lonchera.release.xcconfig"; path = "Pods/Target Support Files/Pods-La Lonchera/Pods-La Lonchera.release.xcconfig"; sourceTree = "<group>"; };
+		6EB8A70CC01221AB32DA64F9 /* Pods-La Lonchera.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-La Lonchera.debug.xcconfig"; path = "Pods/Target Support Files/Pods-La Lonchera/Pods-La Lonchera.debug.xcconfig"; sourceTree = "<group>"; };
+		9C59D3ABF824E5C79372D471 /* Pods-La LoncheraTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-La LoncheraTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-La LoncheraTests/Pods-La LoncheraTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A102F6671CA9CCF7001359A5 /* La Lonchera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "La Lonchera.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A102F66A1CA9CCF7001359A5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A102F66C1CA9CCF7001359A5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -204,6 +213,8 @@
 		A10671E21D3D596600D0F0B5 /* ScrollResultados.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollResultados.swift; sourceTree = "<group>"; };
 		A10671E41D3D5AF500D0F0B5 /* BotonResultado.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BotonResultado.swift; sourceTree = "<group>"; };
 		A10671E61D3E84DD00D0F0B5 /* DetalleProducto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetalleProducto.swift; sourceTree = "<group>"; };
+		A10B16BA1E1BF0C000EA1CBA /* CargaZip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CargaZip.swift; sourceTree = "<group>"; };
+		A10B16BC1E1C093600EA1CBA /* ConsultaZip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsultaZip.swift; sourceTree = "<group>"; };
 		A11169EA1DDCEC5100B9D759 /* SubeBusqueda.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubeBusqueda.swift; sourceTree = "<group>"; };
 		A11278AE1D8C707200015B61 /* CargaEnvio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CargaEnvio.swift; sourceTree = "<group>"; };
 		A11838B61D8206B900201A96 /* SubeFavorito.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubeFavorito.swift; sourceTree = "<group>"; };
@@ -347,7 +358,6 @@
 		A1CED9381DA413DE004E090F /* CompruebaEmail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompruebaEmail.swift; sourceTree = "<group>"; };
 		A1CED93A1DA436F3004E090F /* Olvida1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Olvida1.swift; sourceTree = "<group>"; };
 		A1CED93C1DA43CD1004E090F /* PideRestauracion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PideRestauracion.swift; sourceTree = "<group>"; };
-		A1D0462C1E0D86C700A0C257 /* CargaImagenes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CargaImagenes.swift; sourceTree = "<group>"; };
 		A1D1116E1D494E3800B97F22 /* EliminaFavoritos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EliminaFavoritos.swift; sourceTree = "<group>"; };
 		A1D111701D4AAAF300B97F22 /* BarraOpciones.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarraOpciones.swift; sourceTree = "<group>"; };
 		A1D111721D4AC4C800B97F22 /* Circulo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Circulo.swift; sourceTree = "<group>"; };
@@ -371,6 +381,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD5DBBE66B38D087A4B941CB /* Pods_La_Lonchera.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -378,12 +389,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5FA3927AB9E600FC1DD2F086 /* Pods_La_LoncheraTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		93BC81C4C7EDB5827BE42689 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				308CD5FB8EEE63B067F9591A /* Pods_La_Lonchera.framework */,
+				19FFCCC8968C971E0C39BC96 /* Pods_La_LoncheraTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		A102F65E1CA9CCF7001359A5 = {
 			isa = PBXGroup;
 			children = (
@@ -400,6 +421,8 @@
 				A102F6691CA9CCF7001359A5 /* ConsumoSOAP */,
 				A102F67E1CA9CCF8001359A5 /* ConsumoSOAPTests */,
 				A102F6681CA9CCF7001359A5 /* Products */,
+				DF3DEFD2E2B0AE3336F80C3E /* Pods */,
+				93BC81C4C7EDB5827BE42689 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -498,7 +521,7 @@
 				A1CED9381DA413DE004E090F /* CompruebaEmail.swift */,
 				A1CED93C1DA43CD1004E090F /* PideRestauracion.swift */,
 				A16BAFE01DA8392D007386ED /* ActualizaPadre.swift */,
-				A1D0462C1E0D86C700A0C257 /* CargaImagenes.swift */,
+				A10B16BC1E1C093600EA1CBA /* ConsultaZip.swift */,
 			);
 			name = Cargas;
 			sourceTree = "<group>";
@@ -700,6 +723,7 @@
 				A1E44D421DA55A3D00967E18 /* Olvida2.swift */,
 				A12371281DD23CBD00532E6C /* CargaInicial.swift */,
 				A1CB37E61E02EC7F003B4DD2 /* CargaInicial2.swift */,
+				A10B16BA1E1BF0C000EA1CBA /* CargaZip.swift */,
 			);
 			name = Login;
 			sourceTree = "<group>";
@@ -716,6 +740,17 @@
 			name = Carrito;
 			sourceTree = "<group>";
 		};
+		DF3DEFD2E2B0AE3336F80C3E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6EB8A70CC01221AB32DA64F9 /* Pods-La Lonchera.debug.xcconfig */,
+				61B8252123BE2A4434500DAE /* Pods-La Lonchera.release.xcconfig */,
+				9C59D3ABF824E5C79372D471 /* Pods-La LoncheraTests.debug.xcconfig */,
+				1DDE7166C5DFCF3AF56F2793 /* Pods-La LoncheraTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -723,9 +758,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A102F6841CA9CCF8001359A5 /* Build configuration list for PBXNativeTarget "La Lonchera" */;
 			buildPhases = (
+				5F3C3407B22FF6E173940CC3 /* [CP] Check Pods Manifest.lock */,
 				A102F6631CA9CCF7001359A5 /* Sources */,
 				A102F6641CA9CCF7001359A5 /* Frameworks */,
 				A102F6651CA9CCF7001359A5 /* Resources */,
+				0A3544653CC0958648BD4CAD /* [CP] Embed Pods Frameworks */,
+				A398DDAED6E614B549163A33 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -740,9 +778,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A102F6871CA9CCF8001359A5 /* Build configuration list for PBXNativeTarget "La LoncheraTests" */;
 			buildPhases = (
+				61E62F18BA1263C58E1A8D1A /* [CP] Check Pods Manifest.lock */,
 				A102F6771CA9CCF8001359A5 /* Sources */,
 				A102F6781CA9CCF8001359A5 /* Frameworks */,
 				A102F6791CA9CCF8001359A5 /* Resources */,
+				F9C169FD0FC9C16FC2F1C23A /* [CP] Embed Pods Frameworks */,
+				1EF92532767A0890AF41FF89 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -827,6 +868,99 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0A3544653CC0958648BD4CAD /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-La Lonchera/Pods-La Lonchera-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		1EF92532767A0890AF41FF89 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-La LoncheraTests/Pods-La LoncheraTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5F3C3407B22FF6E173940CC3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		61E62F18BA1263C58E1A8D1A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		A398DDAED6E614B549163A33 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-La Lonchera/Pods-La Lonchera-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F9C169FD0FC9C16FC2F1C23A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-La LoncheraTests/Pods-La LoncheraTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		A102F6631CA9CCF7001359A5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -892,6 +1026,7 @@
 				A18055B81DC7DDD100D5D757 /* Cabecera.swift in Sources */,
 				A1521C0A1DBEB54300342E93 /* VistaMetodos.swift in Sources */,
 				A1C6DFCB1D90989E008B659B /* CargaHoraEntrega.swift in Sources */,
+				A10B16BD1E1C093600EA1CBA /* ConsultaZip.swift in Sources */,
 				A10671E11D398AD900D0F0B5 /* Tag.swift in Sources */,
 				A1CD96531DF7137000ADD84B /* CargaTinfo2.swift in Sources */,
 				A1857DEC1CE287DF00D6966D /* Calendario.swift in Sources */,
@@ -910,6 +1045,7 @@
 				A1C6DFCD1D91D149008B659B /* Despliega.swift in Sources */,
 				A12C042C1D1496C300BA72E1 /* LaBarra.swift in Sources */,
 				A1CED9371DA3101F004E090F /* SubePadre.swift in Sources */,
+				A10B16BB1E1BF0C000EA1CBA /* CargaZip.swift in Sources */,
 				A1AEC8351DCD22380094B945 /* VistaCancelaFin.swift in Sources */,
 				A19834F71CBD52EB0099D815 /* Caja.swift in Sources */,
 				A1FF33141CED15B8007771F2 /* PFactura.swift in Sources */,
@@ -966,7 +1102,6 @@
 				A1F1F5731D1DC09800B4BFBE /* BotonDias.swift in Sources */,
 				A18052BE1DBAD3DF005930AC /* BotMetodoPago.swift in Sources */,
 				A159F1931DB16F6700655BE6 /* Direcciones.swift in Sources */,
-				A1D0462D1E0D86C700A0C257 /* CargaImagenes.swift in Sources */,
 				A10671E71D3E84DF00D0F0B5 /* DetalleProducto.swift in Sources */,
 				A1521C121DBFC3C600342E93 /* BotHoraEntrega.swift in Sources */,
 				A18878B81CBC266600737085 /* CreaNino.swift in Sources */,
@@ -1115,6 +1250,7 @@
 		};
 		A102F6851CA9CCF8001359A5 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6EB8A70CC01221AB32DA64F9 /* Pods-La Lonchera.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1131,6 +1267,7 @@
 		};
 		A102F6861CA9CCF8001359A5 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 61B8252123BE2A4434500DAE /* Pods-La Lonchera.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1147,6 +1284,7 @@
 		};
 		A102F6881CA9CCF8001359A5 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9C59D3ABF824E5C79372D471 /* Pods-La LoncheraTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = ConsumoSOAPTests/Info.plist;
@@ -1159,6 +1297,7 @@
 		};
 		A102F6891CA9CCF8001359A5 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1DDE7166C5DFCF3AF56F2793 /* Pods-La LoncheraTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = ConsumoSOAPTests/Info.plist;

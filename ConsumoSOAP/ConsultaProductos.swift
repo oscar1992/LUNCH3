@@ -177,8 +177,8 @@ class ConsultaProductos: NSObject , NSURLConnectionDelegate, NSXMLParserDelegate
         }
         if(flagnombreimagen){
             //print("IMAGEN: ",string);
-            let rutaf="http://93.188.163.97:8080/Lunch2/files/"+string;
-            
+            //let rutaf="http://93.188.163.97:8080/Lunch2/files/"+string;
+            let rutaf=string;
             //let url = NSURL(string: rutaf)!
             //let data = NSData(contentsOfURL : url);
             //let imagenD=UIImage(data: data!);

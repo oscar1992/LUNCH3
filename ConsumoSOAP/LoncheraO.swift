@@ -216,7 +216,7 @@ class LoncheraO: UIViewController {
             let sube = IngresaFavoritos();
             sube.bot = self.botfavo;
             let cargaFav=(self.view.superview?.superview?.superview?.superview?.superview as! VistaNino);
-            cargaFav.EspacioLoncheras.cargaFavoritos();
+            //cargaFav.EspacioLoncheras.cargaFavoritos();
             sube.predeter = cargaFav.EspacioLoncheras;
             //sube.evalua(prodos);
             mensajeFavorito(true);

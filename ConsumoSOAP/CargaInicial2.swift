@@ -116,13 +116,6 @@ class CargaInicial2 : NSObject{
                         let contenido = NSKeyedArchiver.archivedDataWithRootObject(obj);
                         fileManager.createFileAtPath(rutaEle!, contents: contenido, attributes: nil);
                         break;
-                    case is UIImage.Type:
-                        let obj = (ele as! UIImage);
-                        print("acces Ima: ", obj.accessibilityIdentifier);
-                        let rutaEle = datosURL?.stringByAppendingString("/"+String(obj.accessibilityIdentifier));
-                        let contenido = NSKeyedArchiver.archivedDataWithRootObject(obj);
-                        fileManager.createFileAtPath(rutaEle!, contents: contenido, attributes: nil);
-                        break;
                     default:
                         print("Tipo desconocido: ", tipo);
                         break;
@@ -164,9 +157,6 @@ class CargaInicial2 : NSObject{
             break;
         case is ProductoSaludable.Type:
             datosURL = (paths?.stringByAppendingString("/ProductoSaludable"))!;
-            break;
-        case is UIImage.Type:
-            datosURL = (paths?.stringByAppendingString("/Imagenes"))!;
             break;
         default:
             print("Tipo desconocido: ", tipo);

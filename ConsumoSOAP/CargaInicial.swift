@@ -48,7 +48,7 @@ class CargaInicial: NSObject {
         print("Inicia Carga Imagenes");
         plogin.iniciamsg();
         //bloqueCarga(0);
-        bloqueCarga2();
+        //bloqueCarga2();
         
     }
 
@@ -181,22 +181,23 @@ class CargaInicial: NSObject {
             }else{
                 print("lleno: ", tipos[iteraTipos]);
                 carga2.lee(tipos[iteraTipos]);
-                
                 iniciaEvaluacion();
             }
             
             
         }else{
-            pasaLogin();
+            cargaZip();
+            //pasaLogin();
             print("Fin");
         }
         
         
     }
 
-    //Método que evalua la existebcia de las imágenes
-    func preLogin(){
-        
+    //Método que evalua la existencia de las imágenes
+    func cargaZip(){
+        let carga3 = CargaZip();
+        carga3.ejecuta();
     }
     
     
