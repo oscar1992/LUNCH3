@@ -77,7 +77,7 @@ class CargaInicial2 : NSObject{
                     case is TipoInfo.Type:
                         let obj = (ele as! TipoInfo);
                         let rutaEle = datosURL?.stringByAppendingString("/"+String(p));
-                        print("P: ", p);
+                        //print("P: ", p);
                         let contenido = NSKeyedArchiver.archivedDataWithRootObject(obj);
                         fileManager.createFileAtPath(rutaEle!, contents: contenido, attributes: nil);
                         p += 1;
@@ -134,6 +134,7 @@ class CargaInicial2 : NSObject{
         }
     }
     
+    //Método que lee los archivos almacenados en el dispositivo
     func lee(tipo: AnyClass){
         print("Inica Lectura: ", tipo);
         let paths = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true).first;
@@ -188,6 +189,7 @@ class CargaInicial2 : NSObject{
             for ele in lista{
                 let rutaEle = ruta.stringByAppendingString("/"+ele);
                 let prod = (NSKeyedUnarchiver.unarchiveObjectWithData(fileManager.contentsAtPath(rutaEle)!));
+                print("FECHA PROD: ",(prod as! Producto).ultimaActualizacion);
                 DatosC.contenedor.productos.append(prod as! Producto);
             }
             
@@ -198,7 +200,7 @@ class CargaInicial2 : NSObject{
             for ele in lista{
                 let rutaEle = ruta.stringByAppendingString("/"+ele);
                 let prod = (NSKeyedUnarchiver.unarchiveObjectWithData(fileManager.contentsAtPath(rutaEle)!));
-                print("TIPOINFO: ", (prod as! TipoInfo).valor);
+                //print("TIPOINFO: ", (prod as! TipoInfo).valor);
                 DatosB.cont.listaTInfo.append(prod as! TipoInfo);
             }
             
@@ -228,11 +230,11 @@ class CargaInicial2 : NSObject{
             }
             break;
         case is TItems.Type:
-            DatosC.contenedor.titems.removeAll();
+            DatosB.cont.itemsFavo.removeAll();
             for ele in lista{
                 let rutaEle = ruta.stringByAppendingString("/"+ele);
                 let prod = (NSKeyedUnarchiver.unarchiveObjectWithData(fileManager.contentsAtPath(rutaEle)!));
-                DatosC.contenedor.titems.append(prod as! TItems);
+                DatosB.cont.itemsFavo.append(prod as! TItems);
             }
             break;
         case is ProductoSaludable.Type:

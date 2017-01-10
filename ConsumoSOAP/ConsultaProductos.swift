@@ -103,6 +103,7 @@ class ConsultaProductos: NSObject , NSURLConnectionDelegate, NSXMLParserDelegate
     var flagdisponible=false;
     var flagsalud=false;
     var flagcategoria = false;
+    var flagUltimaActualizacion = false;
     
     var id:Int?;
     var nombre:String?;
@@ -113,6 +114,7 @@ class ConsultaProductos: NSObject , NSURLConnectionDelegate, NSXMLParserDelegate
     var disponible:Bool?;
     var salud:Bool?;
     var categoria: Int?;
+    var ultimaActualizacion: NSDate!;
     
     func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
         
@@ -124,19 +126,15 @@ class ConsultaProductos: NSObject , NSURLConnectionDelegate, NSXMLParserDelegate
         }
         if(elementName as NSString).isEqualToString("idProducto"){
             flagid=true;
-            
         }
         if(elementName as NSString).isEqualToString("nombre"){
             flagnombre=true;
-            
         }
         if(elementName as NSString).isEqualToString("nombreImagen"){
             flagnombreimagen=true;
-            
         }
         if(elementName as NSString).isEqualToString("precio"){
             flagprecio=true;
-            
         }
         if(elementName as NSString).isEqualToString("tipo"){
             flagtipo=true;
@@ -150,6 +148,10 @@ class ConsultaProductos: NSObject , NSURLConnectionDelegate, NSXMLParserDelegate
         if(elementName as NSString).isEqualToString("idCategoria"){
             flagcategoria=true;
         }
+        if(elementName as NSString).isEqualToString("ultimaActualizacion"){
+            flagUltimaActualizacion = true;
+        }
+        
     }
     
     func parser(parser: NSXMLParser, foundCharacters string: String) {
@@ -199,13 +201,20 @@ class ConsultaProductos: NSObject , NSURLConnectionDelegate, NSXMLParserDelegate
             //print("Caregoria: ",categoria);
             flagcategoria = false;
         }
+        if(flagUltimaActualizacion){
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateFormat="yyyy-MM-ddTHH:mm:ss.SSS-X";
+            ultimaActualizacion = dateFormatter.dateFromString(string);
+            print("STRING: ", dateFormatter.dateFromString(string));
+            print("PROD ULTM: ", ultimaActualizacion);
+        }
         
     }
     
     func parser(parser: NSXMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         //Añade Objs
         if(elementName as NSString).isEqualToString("return"){
-            let prod = Producto(id: id!, nombre: nombre!, precio: precio!, imagen: imagen, imagenString: imagenString, tipo: tipo!, disponible: disponible!, salud: salud!, categoria: categoria!);
+            let prod = Producto(id: id!, nombre: nombre!, precio: precio!, imagen: imagen, imagenString: imagenString, tipo: tipo!, disponible: disponible!, salud: salud!, categoria: categoria!, ultimaActualizacion: self.ultimaActualizacion);
             //let cargaTinfo = CargaTInfo();
             //cargaTinfo.CargaTInfo(prod);
             DatosC.contenedor.productos.append(prod);

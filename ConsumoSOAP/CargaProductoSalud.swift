@@ -85,10 +85,12 @@ class CargaProductoSalud: NSObject ,NSURLConnectionDelegate, NSXMLParserDelegate
     var bid=false;
     var bsalu=false;
     var bprodu=false;
+    var bUltimaActualizacion=false;
     
     var id:Int!;
     var salu:Saludable!;
     var produ:Producto!;
+    var ultimaActualizacion: NSDate!;
     
     func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
         if(elementName as NSString).isEqualToString("listaSaludResponse"){
@@ -104,6 +106,9 @@ class CargaProductoSalud: NSObject ,NSURLConnectionDelegate, NSXMLParserDelegate
             break;
         case "idSalud":
             bsalu=true;
+            break;
+        case "ultimaActualizacion":
+            bUltimaActualizacion=true;
             break;
         default:
             break;
@@ -139,11 +144,17 @@ class CargaProductoSalud: NSObject ,NSURLConnectionDelegate, NSXMLParserDelegate
             }
             bsalu=false;
         }
+        if(bUltimaActualizacion){
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateFormat="yyyy-MM-dd HH:mm:ss.SSS";
+            ultimaActualizacion = NSDate();
+        }
+        
     }
     func parser(parser: NSXMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         if(elementName == "return"){
             //print("saluWS: ", self.produ.nombre);
-            let prodSalud=ProductoSaludable(id: id, salu: salu, produ: produ);
+            let prodSalud=ProductoSaludable(id: id, salu: salu, produ: produ, ultimaActualizacion: ultimaActualizacion);
             //print("ProdSa: ", prodSalud.produ.nombre);
             DatosB.cont.prodSaludables.append(prodSalud);
         }

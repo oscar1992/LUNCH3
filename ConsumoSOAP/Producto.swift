@@ -23,8 +23,9 @@ class Producto: NSObject, NSCoding{
     var salud:Bool!;
     var listaDatos=[TipoInfo]();
     var categoria: Int!;
+    var ultimaActualizacion: NSDate!;
     
-    convenience init(id: Int, nombre: String, precio : Int, imagen: UIImage?, imagenString: String?, tipo: Int, disponible: Bool, salud: Bool, categoria: Int) {
+    convenience init(id: Int, nombre: String, precio : Int, imagen: UIImage?, imagenString: String?, tipo: Int, disponible: Bool, salud: Bool, categoria: Int, ultimaActualizacion: NSDate) {
         self.init();
         self.id=id;
         self.nombre=nombre;
@@ -39,6 +40,7 @@ class Producto: NSObject, NSCoding{
         self.disponible=disponible;
         self.salud=salud;
         self.categoria = categoria;
+        self.ultimaActualizacion = ultimaActualizacion;
     }
     
     required convenience init(coder decoder: NSCoder) {
@@ -52,6 +54,7 @@ class Producto: NSObject, NSCoding{
         self.disponible = decoder.decodeObjectForKey("disponible") as! Bool;
         self.salud = decoder.decodeObjectForKey("salud") as! Bool;
         self.categoria = decoder.decodeObjectForKey("categoria") as! Int;
+        self.ultimaActualizacion = decoder.decodeObjectForKey("ultimaActualizacion") as! NSDate;
     }
     
     func encodeWithCoder(coder: NSCoder) {
@@ -64,6 +67,7 @@ class Producto: NSObject, NSCoding{
         if let disponible = disponible { coder.encodeObject(disponible, forKey: "disponible") }
         if let salud = salud { coder.encodeObject(salud, forKey: "salud") }
         if let categoria = categoria { coder.encodeObject(categoria, forKey: "categoria") }
+        if let ultimaActualizacion = ultimaActualizacion{ coder.encodeObject(ultimaActualizacion, forKey:  "ultimaActualizacion")}
     }
     
     //MARK: Porpiedades

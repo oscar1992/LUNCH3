@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import ConsumoSOAP
+@testable import #imageLiteral(resourceName: "LoncheraP1")
 
 class ConsumoSOAPTests: XCTestCase {
     

@@ -132,7 +132,7 @@ class CargaInicial: NSObject {
         tipos.append(Saludable);
         tipos.append(Favoritos);
         tipos.append(ProductoSaludable);
-        tipos.append(TItems);
+        //tipos.append(TItems);
         
     }
     
@@ -165,8 +165,8 @@ class CargaInicial: NSObject {
                     cargaFavoritos.consulta(DatosD.contenedor.padre.id, cInicial: self)
                     break;
                 case is TItems.Type:
-                    let cargaTitems = CargaTItems();
-                    cargaTitems.CargaTItems(self);
+                    let cargaTitems = CargaItemsFavoritos();
+                    cargaTitems.carga();
                     break;
                 case is ProductoSaludable.Type:
                     print("Vacio en Producto-Saludable");
