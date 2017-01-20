@@ -1,33 +1,46 @@
 //
-//  CargaProductoSalud.swift
-//  Lunch1
+//  ProductosSaludablesNuevos.swift
+//  La Lonchera
 //
-//  Created by Oscar Ramirez on 2/09/16.
-//  Copyright © 2016 Edumedio. All rights reserved.
+//  Created by Oscar Ramirez on 12/01/17.
+//  Copyright © 2017 Edumedio. All rights reserved.
 //
 
 import UIKit
 
-class CargaProductoSalud: NSObject ,NSURLConnectionDelegate, NSXMLParserDelegate{
+class ProductosSaludablesNuevos: NSObject ,NSURLConnectionDelegate, NSXMLParserDelegate{
     
+    var mensajeEnviado:String!;
     var resp: NSData! = nil
     var estado:NSMutableString!
     var parser=NSXMLParser()
     var eeleDiccio=NSMutableDictionary()
     var element=NSString()
-    var saluEnv:Saludable!
-    var ultimo = false;
     var task: NSURLSessionDataTask!;
     var profundidad = 0;
+    var productosSaludNuevos = [ProductoSaludable]();
+    var cIni:CargaInicial3!;
     
-   
+    init(ids: [Int], fechas: [NSDate], cInicial: CargaInicial3){
+        mensajeEnviado = "<soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/' xmlns:enp='http://enpoint.lunch.com.co/'><soapenv:Header/><soapenv:Body><enp:productosSNuevos>";
+        var p = 0;
+        for id in ids{
+            mensajeEnviado.appendContentsOf("<ids>"+String(id)+"</ids>");
+            mensajeEnviado.appendContentsOf("<fecha>"+String(fechas[p])+"</fecha>");
+            p += 1;
+        }
+        
+        mensajeEnviado.appendContentsOf("</enp:productosSNuevos></soapenv:Body></soapenv:Envelope>");
+        //print("Mensaje Enviado: ", mensajeEnviado);
+        super.init();
+        self.consulta();
+        self.cIni=cInicial;
+    }
     
-    func cargaSaludables(cInicial: CargaInicial){
+    func consulta(){
         //msgInicia();
         print("Inicia Producto-Salud");
-        let mensajeEnviado:String = "<soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/' xmlns:enp='http://enpoint.lunch.com.co/'><soapenv:Header/><soapenv:Body><enp:listaProductoSaludTodos/></soapenv:Body></soapenv:Envelope>";
-        
-        let is_URL: String = "http://93.188.163.97:8080/Lunch2/adminEndpoint"
+        let is_URL: String = "http://93.188.163.97:8080/Lunch2/clienteEndpoint";
         
         let lobj_Request = NSMutableURLRequest(URL: NSURL(string: is_URL)!)
         let session = NSURLSession.sharedSession()
@@ -45,7 +58,7 @@ class CargaProductoSalud: NSObject ,NSURLConnectionDelegate, NSXMLParserDelegate
             var nulo = false;
             if(data == nil){
                 nulo = true;
-                print("NULOOOO en Prducto-Salud");
+                print("NULOOOO en Producto-SaludNuevo");
             }else{
                 let strData = NSString(data: data!, encoding: NSUTF8StringEncoding)
                 
@@ -56,24 +69,17 @@ class CargaProductoSalud: NSObject ,NSURLConnectionDelegate, NSXMLParserDelegate
                 self.parser.delegate=self
                 self.parser.parse();
                 dispatch_async(dispatch_get_main_queue(),{
-                    print("Fin Producto- Salud: ", nulo, "- ultimo: ",self.ultimo);
                     if(nulo && self.profundidad<2){
+                        lobj_Request.setValue("Connection", forHTTPHeaderField: "close");
                         self.profundidad += 1;
-                        self.task.cancel();
-                        self.cargaSaludables(cInicial);
+                        self.consulta();
                     }else if(nulo && self.profundidad>=2){
-                        self.msgDesconexion();
+                        //Se murio
                     }else{
-                        
-                            print("Carga ProductoSaludables OK");
-                            let cargaI2 = CargaInicial2(cInicial: cInicial);
-                            cargaI2.guarda(DatosB.cont.prodSaludables, tipo: ProductoSaludable.self);
-                            
-                        
+                        //Fin OK
+                        print("CantidadProductos Nuevos: ", self.productosSaludNuevos.count);
+                        self.cIni.cambiaProductosSaludablesNuevos(self.productosSaludNuevos);
                     }
-                    
-                    
-                    lobj_Request.setValue("Connection", forHTTPHeaderField: "close");
                 });
             }
             
@@ -81,6 +87,7 @@ class CargaProductoSalud: NSObject ,NSURLConnectionDelegate, NSXMLParserDelegate
         })
         task.resume();
     }
+    
     
     var bid=false;
     var bsalu=false;
@@ -122,10 +129,10 @@ class CargaProductoSalud: NSObject ,NSURLConnectionDelegate, NSXMLParserDelegate
         }
         if(bprodu){
             let idp=Int(string);
-            //print("Prod in saluWS: ", DatosC.contenedor.productos.count);
+            print("Prod in saluWS: ", DatosC.contenedor.productos.count);
             for produ in DatosC.contenedor.productos{
                 if(produ.id==idp){
-                    //print("produ: ", produ.nombre);
+                    print("produ: ", produ.nombre);
                     self.produ=produ;
                 }
             }
@@ -133,13 +140,13 @@ class CargaProductoSalud: NSObject ,NSURLConnectionDelegate, NSXMLParserDelegate
         }
         if(bsalu){
             let idS=Int(string);
-            //print("Sau tama: ", DatosB.cont.saludables.count);
+            print("Salu tama: ", DatosB.cont.saludables.count);
             for salu in DatosB.cont.saludables{
-                //print("idS: ", idS, "item salu: ", salu.idSalud);
+                print("idS: ", idS, "item salu: ", salu.idSalud);
                 if(salu.idSalud==idS){
                     self.salu=salu;
                 }else{
-                    //print("vacio: ", salu);
+                    print("vacio: ", salu);
                 }
             }
             bsalu=false;
@@ -147,41 +154,19 @@ class CargaProductoSalud: NSObject ,NSURLConnectionDelegate, NSXMLParserDelegate
         if(bUltimaActualizacion){
             let dateFormatter = NSDateFormatter()
             dateFormatter.dateFormat="yyyy-MM-dd'T'hh:mm:ss.SSSZZ";
-            ultimaActualizacion = dateFormatter.dateFromString(string);   
+            ultimaActualizacion = dateFormatter.dateFromString(string);
         }
         
     }
     func parser(parser: NSXMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         if(elementName == "return"){
-            //print("saluWS: ", self.produ.nombre);
+            print("saluWS: ", self.produ.nombre);
+            //print("ultima: ", ultimaActualizacion);
             let prodSalud=ProductoSaludable(id: id, salu: salu, produ: produ, ultimaActualizacion: ultimaActualizacion);
             //print("ProdSa: ", prodSalud.produ.nombre);
-            DatosB.cont.prodSaludables.append(prodSalud);
+            productosSaludNuevos.append(prodSalud);
         }
     }
     
-    func msgInicia(){
-        //print("carga tags");
-        let vista = DatosB.cont.loginView;
-        if(vista.ingresa != nil){
-            if(vista.vista==nil){
-                vista.iniciamsg();
-            }
-            //vista.texto?.text="Inicia Carga Producto-Saludable";
-        }
-    }
-    
-    func msgDesconexion(){
-        let vista = DatosB.cont.loginView;
-        
-        let ancho = vista.view.frame.width*0.8;
-        let alto = vista.view.frame.height*0.4;
-        let OX = (vista.view.frame.width/2)-(ancho/2);
-        let OY = (vista.view.frame.height/2)-(alto/2);
-        let frameMensaje = CGRectMake(OX, OY, ancho, alto);
-        let mensaje = MensajeConexion(frame: frameMensaje, msg: nil);
-        vista.view.addSubview(mensaje);
-        mensaje.layer.zPosition=5;
-        vista.view.bringSubviewToFront(mensaje);
-    }
+   
 }

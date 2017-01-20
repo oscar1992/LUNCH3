@@ -24,9 +24,7 @@ class CargaInicial2 : NSObject{
     
     //Método que guarda varios tipos de listas en el dispositivo
     func guarda(lista: [AnyObject], tipo: AnyClass){
-        
         cInicial!.iniciaEvaluacion();
-        print("Inicia persistencia: ", tipo);
         let paths = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true).first;
         var datosURL : String!;
         switch tipo {
@@ -63,7 +61,7 @@ class CargaInicial2 : NSObject{
             do{
                 try fileManager.createDirectoryAtPath(datosURL!, withIntermediateDirectories: false, attributes: nil);
                 //print("OK creacion directorio: ", datosURL);
-                print("Guarda ", tipo, "tama", lista.count);
+                //print("Guarda ", tipo, "tama", lista.count);
                 var p = 0;
                 for ele in lista{
                     switch tipo {
@@ -113,7 +111,7 @@ class CargaInicial2 : NSObject{
                         break;
                     case is ProductoSaludable.Type:
                         let obj = (ele as! ProductoSaludable);
-                        print("Producto Saludable: ", obj.id);
+                        //print("Producto Saludable: ", obj.id);
                         let rutaEle = datosURL?.stringByAppendingString("/"+String(obj.id));
                         let contenido = NSKeyedArchiver.archivedDataWithRootObject(obj);
                         fileManager.createFileAtPath(rutaEle!, contents: contenido, attributes: nil);
@@ -125,11 +123,11 @@ class CargaInicial2 : NSObject{
                     
                 }
             }catch{
-                print("NO se pudo crear el directorio: ", datosURL);
+                //print("NO se pudo crear el directorio: ", datosURL);
             }
             
         }else{
-            print("Directorio existe: ", datosURL);
+            //print("Directorio existe: ", datosURL);
             lee(tipo);
         }
     }
@@ -168,7 +166,7 @@ class CargaInicial2 : NSObject{
         do{
             let lista = try fileManager.contentsOfDirectoryAtPath(datosURL!);
             carga(tipo, lista: lista, ruta: datosURL);
-            print("tama: ", lista.count);
+            //print("tama: ", lista.count);
             //for ll in lista{
                 //let rutaEle = datosURL?.stringByAppendingString("/"+ll);
                 //print("NN: ", rutaEle);
@@ -189,14 +187,14 @@ class CargaInicial2 : NSObject{
             for ele in lista{
                 let rutaEle = ruta.stringByAppendingString("/"+ele);
                 let prod = (NSKeyedUnarchiver.unarchiveObjectWithData(fileManager.contentsAtPath(rutaEle)!));
-                print("FECHA PROD: ",(prod as! Producto).ultimaActualizacion);
+                //print("FECHA PROD: ",(prod as! Producto).ultimaActualizacion);
                 DatosC.contenedor.productos.append(prod as! Producto);
             }
             
             break;
         case is TipoInfo.Type:
             DatosB.cont.listaTInfo.removeAll();
-            print("TAMAINFO: ", lista.count);
+            //print("TAMAINFO: ", lista.count);
             for ele in lista{
                 let rutaEle = ruta.stringByAppendingString("/"+ele);
                 let prod = (NSKeyedUnarchiver.unarchiveObjectWithData(fileManager.contentsAtPath(rutaEle)!));
@@ -312,6 +310,11 @@ class CargaInicial2 : NSObject{
             print("Error en tipo de lista");
         }
         return retorna;
+    }
+    
+    //Método que permite almacaner los favoritos del padre, se tratan independuente de las otras cargas debido a que se actualizan siempre
+    func guardaFavoritos(){
+        print("Favoritos OK")
     }
     
     

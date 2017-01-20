@@ -12,7 +12,6 @@
 		A102F66D1CA9CCF7001359A5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A102F66C1CA9CCF7001359A5 /* ViewController.swift */; };
 		A102F6721CA9CCF7001359A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A102F6711CA9CCF7001359A5 /* Assets.xcassets */; };
 		A102F6751CA9CCF7001359A5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A102F6731CA9CCF7001359A5 /* LaunchScreen.storyboard */; };
-		A102F6801CA9CCF8001359A5 /* ConsumoSOAPTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A102F67F1CA9CCF8001359A5 /* ConsumoSOAPTests.swift */; };
 		A10671DF1D397A7700D0F0B5 /* CargaTags.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10671DE1D397A7700D0F0B5 /* CargaTags.swift */; };
 		A10671E11D398AD900D0F0B5 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10671E01D398AD900D0F0B5 /* Tag.swift */; };
 		A10671E31D3D596600D0F0B5 /* ScrollResultados.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10671E21D3D596600D0F0B5 /* ScrollResultados.swift */; };
@@ -171,8 +170,11 @@
 		A1D877941D7F4814000DA798 /* Caja2.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D877931D7F4812000DA798 /* Caja2.swift */; };
 		A1D877971D7F609D000DA798 /* Carrito.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D877961D7F609C000DA798 /* Carrito.swift */; };
 		A1D877991D7F725A000DA798 /* Favoritos.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D877981D7F725A000DA798 /* Favoritos.swift */; };
+		A1E03A721E26916C000499A1 /* CargaInicial3.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E03A711E26916C000499A1 /* CargaInicial3.swift */; };
+		A1E03A751E26CA9A000499A1 /* ProductosNuevos.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E03A741E26CA9A000499A1 /* ProductosNuevos.swift */; };
 		A1E44D431DA55A3E00967E18 /* Olvida2.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E44D421DA55A3D00967E18 /* Olvida2.swift */; };
 		A1E44D451DA5615200967E18 /* DatosK.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E44D441DA5615200967E18 /* DatosK.swift */; };
+		A1E692941E2808F300BF9726 /* ProductosSaludablesNuevos.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E692931E2808F300BF9726 /* ProductosSaludablesNuevos.swift */; };
 		A1F1F56D1D19D78E00B4BFBE /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = A1F1F56C1D19D78E00B4BFBE /* Fonts */; };
 		A1F1F5701D19DA3B00B4BFBE /* Albertino.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A1F1F56E1D19DA3B00B4BFBE /* Albertino.ttf */; };
 		A1F1F5711D19DA3B00B4BFBE /* Sans-Beam-Head-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = A1F1F56F1D19DA3B00B4BFBE /* Sans-Beam-Head-Medium.otf */; };
@@ -206,7 +208,6 @@
 		A102F6741CA9CCF7001359A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A102F6761CA9CCF7001359A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A102F67B1CA9CCF8001359A5 /* La Lonchera.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "La Lonchera.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		A102F67F1CA9CCF8001359A5 /* ConsumoSOAPTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumoSOAPTests.swift; sourceTree = "<group>"; };
 		A102F6811CA9CCF8001359A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A10671DE1D397A7700D0F0B5 /* CargaTags.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CargaTags.swift; sourceTree = "<group>"; };
 		A10671E01D398AD900D0F0B5 /* Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
@@ -366,8 +367,11 @@
 		A1D877931D7F4812000DA798 /* Caja2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Caja2.swift; sourceTree = "<group>"; };
 		A1D877961D7F609C000DA798 /* Carrito.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Carrito.swift; sourceTree = "<group>"; };
 		A1D877981D7F725A000DA798 /* Favoritos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Favoritos.swift; sourceTree = "<group>"; };
+		A1E03A711E26916C000499A1 /* CargaInicial3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CargaInicial3.swift; sourceTree = "<group>"; };
+		A1E03A741E26CA9A000499A1 /* ProductosNuevos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductosNuevos.swift; sourceTree = "<group>"; };
 		A1E44D421DA55A3D00967E18 /* Olvida2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Olvida2.swift; sourceTree = "<group>"; };
 		A1E44D441DA5615200967E18 /* DatosK.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatosK.swift; sourceTree = "<group>"; };
+		A1E692931E2808F300BF9726 /* ProductosSaludablesNuevos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductosSaludablesNuevos.swift; sourceTree = "<group>"; };
 		A1F1F56C1D19D78E00B4BFBE /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Fonts; path = Resources/Fonts; sourceTree = "<group>"; };
 		A1F1F56E1D19DA3B00B4BFBE /* Albertino.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Albertino.ttf; path = ConsumoSOAP/Resources/Fonts/Albertino.ttf; sourceTree = "<group>"; };
 		A1F1F56F1D19DA3B00B4BFBE /* Sans-Beam-Head-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Sans-Beam-Head-Medium.otf"; path = "ConsumoSOAP/Resources/Fonts/Sans-Beam-Head-Medium.otf"; sourceTree = "<group>"; };
@@ -438,6 +442,7 @@
 		A102F6691CA9CCF7001359A5 /* ConsumoSOAP */ = {
 			isa = PBXGroup;
 			children = (
+				A1E03A731E26CA57000499A1 /* CargasNuevas */,
 				A18055BB1DC7F51400D5D757 /* Historial */,
 				A15170761DBE65AE00300653 /* CargaPedidos */,
 				A159F18F1DAFE87500655BE6 /* Direcciones */,
@@ -475,7 +480,6 @@
 		A102F67E1CA9CCF8001359A5 /* ConsumoSOAPTests */ = {
 			isa = PBXGroup;
 			children = (
-				A102F67F1CA9CCF8001359A5 /* ConsumoSOAPTests.swift */,
 				A102F6811CA9CCF8001359A5 /* Info.plist */,
 			);
 			path = ConsumoSOAPTests;
@@ -724,6 +728,7 @@
 				A12371281DD23CBD00532E6C /* CargaInicial.swift */,
 				A1CB37E61E02EC7F003B4DD2 /* CargaInicial2.swift */,
 				A10B16BA1E1BF0C000EA1CBA /* CargaZip.swift */,
+				A1E03A711E26916C000499A1 /* CargaInicial3.swift */,
 			);
 			name = Login;
 			sourceTree = "<group>";
@@ -738,6 +743,15 @@
 				A19945121D95C37F00A7B8F9 /* MensajeEliminaLonchera.swift */,
 			);
 			name = Carrito;
+			sourceTree = "<group>";
+		};
+		A1E03A731E26CA57000499A1 /* CargasNuevas */ = {
+			isa = PBXGroup;
+			children = (
+				A1E03A741E26CA9A000499A1 /* ProductosNuevos.swift */,
+				A1E692931E2808F300BF9726 /* ProductosSaludablesNuevos.swift */,
+			);
+			name = CargasNuevas;
 			sourceTree = "<group>";
 		};
 		DF3DEFD2E2B0AE3336F80C3E /* Pods */ = {
@@ -805,7 +819,7 @@
 					Letras,
 				);
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = Edumedio;
 				TargetAttributes = {
 					A102F6661CA9CCF7001359A5 = {
@@ -1063,6 +1077,7 @@
 				A14E89A81DCB95610081B4FC /* CargaLista.swift in Sources */,
 				A1A605C31CC81BD000FE9AC7 /* PestanasProductos.swift in Sources */,
 				A13603C61CAEE6580032A19A /* ConsultaProductos.swift in Sources */,
+				A1E03A751E26CA9A000499A1 /* ProductosNuevos.swift in Sources */,
 				A1CED92F1DA2B2D5004E090F /* Selector.swift in Sources */,
 				A1D877971D7F609D000DA798 /* Carrito.swift in Sources */,
 				A17788421CBFEBD200BEF5A5 /* VistaLonchera.swift in Sources */,
@@ -1074,6 +1089,7 @@
 				A10671E31D3D596600D0F0B5 /* ScrollResultados.swift in Sources */,
 				A183B4F61D7893090080DBA9 /* DatosB.swift in Sources */,
 				A19180D31CF609C6000FBD31 /* LoginView.swift in Sources */,
+				A1E692941E2808F300BF9726 /* ProductosSaludablesNuevos.swift in Sources */,
 				A1D111711D4AAAF300B97F22 /* BarraOpciones.swift in Sources */,
 				A199450F1D945FF000A7B8F9 /* RespuestaFavorita.swift in Sources */,
 				A19180D91CF654D4000FBD31 /* Padre.swift in Sources */,
@@ -1115,6 +1131,7 @@
 				A1D111731D4AC4C800B97F22 /* Circulo.swift in Sources */,
 				A19227AB1DCA46CC00E21C1A /* CargaTipos.swift in Sources */,
 				A17982D81CDCEC9F00558C55 /* TipoInfo.swift in Sources */,
+				A1E03A721E26916C000499A1 /* CargaInicial3.swift in Sources */,
 				A1AF82451D59994D00085408 /* Año2.swift in Sources */,
 				A18055B51DC7D53200D5D757 /* Menu.swift in Sources */,
 				A12C04281D107EBB00BA72E1 /* NinoCalendarioBot.swift in Sources */,
@@ -1129,7 +1146,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A102F6801CA9CCF8001359A5 /* ConsumoSOAPTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1177,8 +1193,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1223,8 +1241,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1243,6 +1263,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1261,6 +1282,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = Lunch0.1;
 				PRODUCT_NAME = "La Lonchera";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1278,6 +1300,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = Lunch0.1;
 				PRODUCT_NAME = "La Lonchera";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

@@ -24,9 +24,7 @@ class CargaItemsFavoritos: NSObject, NSURLConnectionDelegate, NSXMLParserDelegat
     
     
     
-    func carga(){
-        
-        
+    func carga(cInicial: CargaInicial){
         let mensajeEnviado:String = "<soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/' xmlns:enp='http://enpoint.lunch.com.co/'><soapenv:Header/><soapenv:Body><enp:listaItemsFavoritos/></soapenv:Body></soapenv:Envelope>";
         //print("Envia: ", mensajeEnviado);
         let is_URL: String = "http://93.188.163.97:8080/Lunch2/clienteEndpoint"
@@ -62,6 +60,9 @@ class CargaItemsFavoritos: NSObject, NSURLConnectionDelegate, NSXMLParserDelegat
                 //self.carg!.pideItems(self.items);
                 //DatosB.cont.home2.predeterminadas.cargaSaludables();//XXXXXXXXXXX Iniciar en otro lado
                 print("Carga Items Favo");
+                let cargaI2 = CargaInicial2(cInicial: cInicial);
+                //cargaI2.guarda(DatosB.cont.favoritos, tipo: Favoritos.self);
+                //cargaI2.guarda(DatosB.cont.itemsFavo, tipo: TItems.self);
                 lobj_Request.setValue("Connection", forHTTPHeaderField: "close");
             });
         })

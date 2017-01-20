@@ -19,6 +19,7 @@ class CargaZip: NSObject {
     var entrada : String!;
     var salida : String!;
     var padre: CargaInicial!;
+    var n  = 0;
     
     init(padre: CargaInicial){
         self.padre=padre;
@@ -28,12 +29,17 @@ class CargaZip: NSObject {
         rutas();
         if(!existenImagenes()){// No existen las imágenes
             if(existeZip()){
-                descomprimir();
+                for n in 0...9{
+                    let rutaEntrada = entrada.stringByAppendingString("/elzip"+String(n)+".zip");
+                    descomprimir(rutaEntrada);
+                }
+                
             }else{
                 bajaZip();
             }
         }else{
             agregaImagenes();
+            padre.pasaLogin();
         }
         
     }
@@ -48,12 +54,15 @@ class CargaZip: NSObject {
     //Método que comprueba que el archivo zip se encuentre en el directorio de descarga
     func existeZip()->Bool{
         var retorna = false;
-        entrada = paths.stringByAppendingString("/elzip2.zip")
-        if(fileManager.fileExistsAtPath(entrada)){
-            retorna = true;
-        }else{
-            retorna = false;
+        for n in 0...9{
+            let rutaEntrada = entrada.stringByAppendingString("/elzip"+String(n)+".zip");
+            if(fileManager.fileExistsAtPath(rutaEntrada)){
+                retorna = true;
+            }else{
+                retorna = false;
+            }
         }
+        
         print("Existe ZIP: ", retorna);
         return retorna;
     }
@@ -75,21 +84,29 @@ class CargaZip: NSObject {
     }
     
     //Mñetodo que descomprime el archivo zip guardado
-    func descomprimir(){
+    func descomprimir(ruta: String){
         //let rutaEntrada = entrada.stringByAppendingString("/elzip2.zip");
-        if(SSZipArchive.unzipFileAtPath(entrada, toDestination: salida)){
-            print("OK descompresion zip");
-            agregaImagenes();
-        }else{
-            print("Error descompresion zip");
-        }
+        //for n in 0...9{
+            //let rutaEntrada = entrada.stringByAppendingString("/elzip"+String(n)+".zip");
+            print("ruta: ", ruta);
+            if(SSZipArchive.unzipFileAtPath(ruta, toDestination: salida)){
+                print("OK descompresion zip: ");
+                agregaImagenes();
+            }else{
+                print("Error descompresion zip");
+            }
+        
+        //}
+       
     }
     
     //Método que descarga el zip en la ruta de entrada
     func bajaZip(){
-        let bajaZip = ConsultaZip(entrada: entrada, fileM: fileManager, padre: self);
-        bajaZip.descarga();
-        print("Bajo?");
+        for n in 0...9{
+            let bajaZip = ConsultaZip(entrada: entrada, fileM: fileManager, padre: self);
+            bajaZip.descarga(n);
+            print("Bajo?");
+        }
     }
     
     //Método que carga las imagenes descargadas y las agrega a la lista de productos;
@@ -105,10 +122,18 @@ class CargaZip: NSObject {
             for prod in DatosC.contenedor.productos{
                 self.salida = (paths?.stringByAppendingString("/Imagenes/"))!;
                 let ruta = self.salida.stringByAppendingString(prod.imagenString!);
-                //print("ruta: ", ruta);
-                let data = NSData(contentsOfFile: ruta)
-                let imagen = UIImage(data: data!);
-                prod.imagen=imagen;
+                
+                
+                    let data = NSData(contentsOfFile: ruta)
+                if(data != nil){
+                    //print("ruta: ", ruta);
+                    //print("prod: ", prod.imagenString);
+                    let imagen = UIImage(data: data!);
+                    prod.imagen=imagen;
+                }
+                
+                
+                
                 //print("IMA: ", prod.imagen);
             }
             for itemS in  DatosB.cont.prodSaludables{
@@ -128,11 +153,18 @@ class CargaZip: NSObject {
             }
             
         }
-        continuaPadre();
+        if(n == 9){
+            continuaPadre();
+        }
+        n += 1;
+        print("n: ", n);
     }
     
     
     func continuaPadre() -> Void {
-        padre.pasaLogin();
+        //if(DatosB.cont.loginView.view == nil){
+            padre.pasaLogin();
+        //}
+        
     }
 }

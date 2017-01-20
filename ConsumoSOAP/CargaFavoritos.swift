@@ -61,9 +61,10 @@ class CargaFavoritos: NSObject , NSURLConnectionDelegate, NSXMLParserDelegate{
                 print("Upd Favoritas OK");
                 
                 let cargaFav = CargaItemsFavoritos();
-                cargaFav.carga();
-                let cargaI2 = CargaInicial2(cInicial: cInicial);
-                cargaI2.guarda(DatosB.cont.favoritos, tipo: Favoritos.self);
+                cargaFav.carga(cInicial);
+                //let cargaI2 = CargaInicial2(cInicial: cInicial);
+                
+                
                 lobj_Request.setValue("Connection", forHTTPHeaderField: "close");
             });
             
@@ -119,7 +120,7 @@ class CargaFavoritos: NSObject , NSURLConnectionDelegate, NSXMLParserDelegate{
             
             //favorito.items=cargaFav.productos;
             DatosB.cont.favoritos.append(favorito);
-            //print("llena: ", nombre);
+            print("llena: ", nombre);
             ids.append(idNumero!);
             
         }

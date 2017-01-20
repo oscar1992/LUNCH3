@@ -155,7 +155,7 @@ class CargaTinfo2: NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
         if(elementName as NSString).isEqualToString("return"){
             let tInfo = TipoInfo(id: id!, tipo: tipoNombre!, valor: valor!, idProducto: idProducto!);
             DatosB.cont.listaTInfo.append(tInfo);
-            print("---------------- tipoinfo: ", DatosB.cont.listaTInfo.count);
+            //print("---------------- tipoinfo: ", DatosB.cont.listaTInfo.count);
         }
     }
     

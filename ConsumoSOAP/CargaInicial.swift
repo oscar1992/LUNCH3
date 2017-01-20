@@ -126,22 +126,27 @@ class CargaInicial: NSObject {
     
     //Método que inicia un arreglo con los tipos de datos a cargar
     func iniciaArregloTipos(){
+        
+        cargaFavoritos();
         tipos.append(Producto);
         tipos.append(Tag);
         tipos.append(TipoInfo);
         tipos.append(Saludable);
-        tipos.append(Favoritos);
-        tipos.append(ProductoSaludable);
-        //tipos.append(TItems);
         
+        tipos.append(ProductoSaludable);
+        //tipos.append(Favoritos);
+        
+        //
     }
     
     //Método que se llama por cada elemento de la lista de los tipos
     func iniciaEvaluacion(){
         iteraTipos += 1;
-        print("ITERA TIPOS: ", iteraTipos, "tiposCount: ", tipos.count);
+        //print("ITERA TIPOS: ", iteraTipos, "tiposCount: ", tipos.count);
+        let carga3 = CargaInicial3(cInicial: self);
         if(iteraTipos < tipos.count){
             let carga2 = CargaInicial2(cInicial: self);
+
             if(!carga2.exixte(tipos[iteraTipos])){
                 switch tipos[iteraTipos] {
                 case is Producto.Type:
@@ -161,12 +166,11 @@ class CargaInicial: NSObject {
                     cargaSaludables.cargaSaludables(self);
                     break;
                 case is Favoritos.Type:
-                    let cargaFavoritos = CargaFavoritos();
-                    cargaFavoritos.consulta(DatosD.contenedor.padre.id, cInicial: self)
+                    
                     break;
                 case is TItems.Type:
-                    let cargaTitems = CargaItemsFavoritos();
-                    cargaTitems.carga();
+                    //let cargaTitems = CargaItemsFavoritos();
+                    //cargaTitems.carga(self);
                     break;
                 case is ProductoSaludable.Type:
                     print("Vacio en Producto-Saludable");
@@ -179,13 +183,16 @@ class CargaInicial: NSObject {
                 }
                 
             }else{
+                
                 print("lleno: ", tipos[iteraTipos]);
                 carga2.lee(tipos[iteraTipos]);
-                iniciaEvaluacion();
+                carga3.comparaFechas(tipos[iteraTipos]);
+                //iniciaEvaluacion();
             }
             
             
         }else{
+            
             //pasaLogin();
             uneTinfo();
             cargaZip();
@@ -288,5 +295,9 @@ class CargaInicial: NSObject {
         }
     }
     
+    func cargaFavoritos(){
+        let cargaFavoritos = CargaFavoritos();
+        cargaFavoritos.consulta(DatosD.contenedor.padre.id, cInicial: self)
+    }
     
 }

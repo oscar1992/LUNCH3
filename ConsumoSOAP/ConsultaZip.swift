@@ -22,6 +22,7 @@ class ConsultaZip: NSObject, NSURLSessionDownloadDelegate{
     var fileManager : NSFileManager;
     var padre: CargaZip!;
     var vista : LoginView!;
+    var n = 0;
     
     lazy var session : NSURLSession = {
         let config = NSURLSessionConfiguration.ephemeralSessionConfiguration()
@@ -37,15 +38,19 @@ class ConsultaZip: NSObject, NSURLSessionDownloadDelegate{
         self.vista = DatosB.cont.loginView;
     }
     
-    func descarga(){
-        let url:NSURL = NSURL(string: "http://93.188.163.97:8080/Lunch2/files/elzip.zip")!
-        if self.task != nil {
-            return
-        }
-        let req = NSMutableURLRequest(URL:url);
-        let task = self.session.downloadTaskWithRequest(req)
-        self.task = task
-        task.resume();
+    func descarga(n: Int){
+        self.n=n;
+        //for n in 0...9{
+            let url:NSURL = NSURL(string: "http://93.188.163.97:8080/Lunch2/files/elzip"+String(n)+".zip")!
+            /*if self.task != nil {
+                return
+            }*/
+            print("ini descarga: ", n);
+            let req = NSMutableURLRequest(URL:url);
+            let task = self.session.downloadTaskWithRequest(req)
+            self.task = task
+            task.resume();
+        //}
     }
     
     func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten writ: Int64, totalBytesExpectedToWrite exp: Int64) {
@@ -53,7 +58,7 @@ class ConsultaZip: NSObject, NSURLSessionDownloadDelegate{
         taskTotalBytesExpectedToWrite = Int(exp);
         percentageWritten = (Float(taskTotalBytesWritten) / Float(taskTotalBytesExpectedToWrite));
         setBarra(percentageWritten);
-        //print("Va en: ", percentageWritten);
+        //print("N: ",n," Va en: ", percentageWritten);
         
     }
     
@@ -83,12 +88,13 @@ class ConsultaZip: NSObject, NSURLSessionDownloadDelegate{
             }
         }
         do{
-            entrada = paths.stringByAppendingString("/elzip2.zip");
+            entrada = paths.stringByAppendingString("/elzip"+String(n)+".zip");
             try(fileManager.moveItemAtPath(location.path!, toPath: entrada));
-            print("Archivo Guardado")
-            padre.descomprimir();
+            print("Archivo Guardado: ", n);
+            padre.descomprimir(entrada);
+            //n += 1;
         }catch{
-            print("Error guardando archivo");
+            print("Error guardando archivo: ", n);
         }
         
     }
@@ -96,11 +102,14 @@ class ConsultaZip: NSObject, NSURLSessionDownloadDelegate{
     
     //Método que establece el porcentaje de la barra de carga
     func setBarra(val: Float){
-        if(vista.ingresa != nil){
+        if(vista.barra == nil){
             vista.iniciamsg();
             //vista.texto?.text="Inicia Carga Productos";
         }
-        vista.barra.progress=val;
+        
+        vista.barra.progress = (val+vista.barra.progress)/2;
+        
+        
     }
     
 }

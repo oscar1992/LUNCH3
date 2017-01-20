@@ -83,14 +83,14 @@ class VistaFoto: UIView{
         let imageReference = image.CGImage
         let maskReference = mask.CGImage
         
-        let imageMask = CGImageMaskCreate(CGImageGetWidth(maskReference),
-                                          CGImageGetHeight(maskReference),
-                                          CGImageGetBitsPerComponent(maskReference),
-                                          CGImageGetBitsPerPixel(maskReference),
-                                          CGImageGetBytesPerRow(maskReference),
-                                          CGImageGetDataProvider(maskReference), nil, true)
+        let imageMask = CGImageMaskCreate(CGImageGetWidth(maskReference!),
+                                          CGImageGetHeight(maskReference!),
+                                          CGImageGetBitsPerComponent(maskReference!),
+                                          CGImageGetBitsPerPixel(maskReference!),
+                                          CGImageGetBytesPerRow(maskReference!),
+                                          CGImageGetDataProvider(maskReference!)!, nil, true)
         
-        let maskedReference = CGImageCreateWithMask(imageReference, imageMask)
+        let maskedReference = CGImageCreateWithMask(imageReference!, imageMask!)
         
         let maskedImage = UIImage(CGImage:maskedReference!)
         
