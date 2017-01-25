@@ -143,6 +143,7 @@
 		A1AEC8351DCD22380094B945 /* VistaCancelaFin.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AEC8341DCD22380094B945 /* VistaCancelaFin.swift */; };
 		A1AF82451D59994D00085408 /* Año2.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AF82441D59994D00085408 /* Año2.swift */; };
 		A1B696491CED267C001FBFE1 /* FacturaScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B696481CED267C001FBFE1 /* FacturaScroll.swift */; };
+		A1BA5C421E365AB000E79C62 /* ErrorZip.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BA5C411E365AB000E79C62 /* ErrorZip.swift */; };
 		A1C6DFC51D908AA3008B659B /* CargaFechaEntrega.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C6DFC41D908AA3008B659B /* CargaFechaEntrega.swift */; };
 		A1C6DFC71D908ABE008B659B /* FechaEntrega.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C6DFC61D908ABE008B659B /* FechaEntrega.swift */; };
 		A1C6DFC91D908CEF008B659B /* HoraEntrega.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C6DFC81D908CEF008B659B /* HoraEntrega.swift */; };
@@ -340,6 +341,7 @@
 		A1AEC8341DCD22380094B945 /* VistaCancelaFin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VistaCancelaFin.swift; sourceTree = "<group>"; };
 		A1AF82441D59994D00085408 /* Año2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Año2.swift"; sourceTree = "<group>"; };
 		A1B696481CED267C001FBFE1 /* FacturaScroll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacturaScroll.swift; sourceTree = "<group>"; };
+		A1BA5C411E365AB000E79C62 /* ErrorZip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorZip.swift; sourceTree = "<group>"; };
 		A1C6DFC41D908AA3008B659B /* CargaFechaEntrega.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CargaFechaEntrega.swift; sourceTree = "<group>"; };
 		A1C6DFC61D908ABE008B659B /* FechaEntrega.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FechaEntrega.swift; sourceTree = "<group>"; };
 		A1C6DFC81D908CEF008B659B /* HoraEntrega.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HoraEntrega.swift; sourceTree = "<group>"; };
@@ -526,6 +528,7 @@
 				A1CED93C1DA43CD1004E090F /* PideRestauracion.swift */,
 				A16BAFE01DA8392D007386ED /* ActualizaPadre.swift */,
 				A10B16BC1E1C093600EA1CBA /* ConsultaZip.swift */,
+				A1BA5C411E365AB000E79C62 /* ErrorZip.swift */,
 			);
 			name = Cargas;
 			sourceTree = "<group>";
@@ -1018,6 +1021,7 @@
 				A1521C0E1DBFBAE900342E93 /* BotFechaEntrega.swift in Sources */,
 				A1CED9391DA413DF004E090F /* CompruebaEmail.swift in Sources */,
 				A18052BC1DBACBC3005930AC /* Despliega2.swift in Sources */,
+				A1BA5C421E365AB000E79C62 /* ErrorZip.swift in Sources */,
 				A16710A91D79E812004CB71D /* ProductoSaludable.swift in Sources */,
 				A18878B61CBC055700737085 /* BotonNino.swift in Sources */,
 				A19227B11DCA7D8D00E21C1A /* ScrollEEntregadas.swift in Sources */,

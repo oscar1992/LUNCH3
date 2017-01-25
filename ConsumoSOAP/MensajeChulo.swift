@@ -37,7 +37,6 @@ class MensajeChulo: UIView {
         icono = UIView(frame: imagenFrame);
         DatosB.cont.poneFondoTot(icono, fondoStr: "ChuloVerdeMejor", framePers: nil, identi: nil, scala: true);
         self.addSubview(icono);
-        
     }
 
     func iniciaMensaje(){

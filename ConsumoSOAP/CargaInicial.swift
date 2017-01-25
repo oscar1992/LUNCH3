@@ -22,6 +22,7 @@ class CargaInicial: NSObject {
     //var texto : UILabel?;
     var bloqueapasa = false;
     var errores = [Producto]();
+    var exitos = [Producto]();
     var plogin : LoginView;
     
     //MARK: Variables Evaluación
@@ -54,6 +55,7 @@ class CargaInicial: NSObject {
 
     
     func bloqueCarga2(){
+        msgInicia();
         var porcion = [Producto]();
         var ini = 0;
         var fin = 10;
@@ -63,7 +65,7 @@ class CargaInicial: NSObject {
             ini=(10*(ciclo-1))+1;
             fin=10*ciclo;
         }
-        //print("ini: ", ini,"fin :", fin);
+        print("ini: ", ini,"fin :", fin);
         for pp in ini ... fin{
             if(pp<DatosC.contenedor.productos.count){
                 porcion.append(DatosC.contenedor.productos[pp]);
@@ -71,8 +73,8 @@ class CargaInicial: NSObject {
         }
         let hilo = DISPATCH_QUEUE_PRIORITY_HIGH;
         for prod in porcion{
-            let ima = NSUserDefaults.standardUserDefaults().objectForKey(String(prod.id));
-            if(ima == nil){
+            //let ima = NSUserDefaults.standardUserDefaults().objectForKey(String(prod.id));
+            //if(ima == nil){
                 //print("Imagen de red: ", prod.id);
                 dispatch_async(dispatch_get_global_queue(hilo, 0)) {
                     var ok = false;
@@ -81,7 +83,8 @@ class CargaInicial: NSObject {
                     if(data != nil){
                         let imagenD=UIImage(data: data!);
                         prod.imagen=imagenD;
-                        NSUserDefaults.standardUserDefaults().setObject(UIImagePNGRepresentation(imagenD!), forKey: String(prod.id));
+                        //NSUserDefaults.standardUserDefaults().setObject(UIImagePNGRepresentation(imagenD!), forKey: String(prod.id));
+                        self.exitos.append(prod);
                         //self.recoge();
                         //print("ImagenE");
                         ok = true;
@@ -94,12 +97,8 @@ class CargaInicial: NSObject {
                         }
                         self.recoge(prod.id!);
                     }
-                }
-            }else{
-                //print("Imagen de archivo: ", prod.id);
-                let datosIma = ima as! NSData;
-                prod.imagen=UIImage(data: datosIma);
-                recoge(prod.id!);
+                //}
+           
             }
         }
     }
@@ -113,9 +112,12 @@ class CargaInicial: NSObject {
             //print("fin ciclo: ", cuenta);
             ciclo += 1;
             valida = 0;
-            //print("nuevo ciclo");
+            print("nuevo ciclo");
             bloqueCarga2();
         }else if(cuenta==DatosC.contenedor.productos.count){
+            let carga2 = CargaInicial2(cInicial: self);
+            carga2.guardaImagenes(exitos);
+            //iniciaEvaluacion();
             print("fin?");
             print("errores: ", errores.count);
             //plogin.vista.removeFromSuperview();
@@ -124,16 +126,19 @@ class CargaInicial: NSObject {
         }
     }
     
-    //Método que inicia un arreglo con los tipos de datos a cargar
+    //Método que inicia un arreglo con los tipos de datos a cargar, importante el orden, imágenes a lo último
     func iniciaArregloTipos(){
         
         cargaFavoritos();
         tipos.append(Producto);
+        tipos.append(UIImage);
         tipos.append(Tag);
         tipos.append(TipoInfo);
         tipos.append(Saludable);
-        
         tipos.append(ProductoSaludable);
+        
+        
+        
         //tipos.append(Favoritos);
         
         //
@@ -177,8 +182,11 @@ class CargaInicial: NSObject {
                     let cargaProductoSaludable = CargaProductoSalud();
                     cargaProductoSaludable.cargaSaludables(self);
                     break;
+                case is UIImage.Type:
+                    bloqueCarga2();
+                    break;
                 default:
-                    
+                    print("default en switch de existen: ", tipos[iteraTipos]);
                     break;
                 }
                 
@@ -193,10 +201,12 @@ class CargaInicial: NSObject {
             
         }else{
             
-            //pasaLogin();
+            //
             uneTinfo();
-            cargaZip();
+            //cargaZip();
+            
             print("Fin");
+            pasaLogin();
         }
         
         
@@ -211,13 +221,29 @@ class CargaInicial: NSObject {
     
     func cant(){
         ss += 1;
-        let tot = DatosC.contenedor.productos.count;
-        let prog = ss * 100 / tot;
-        //print("Prog: ", prog);
+        let tot = Float(DatosC.contenedor.productos.count);
+        let prog = ((Float(ss) * 0.9) / tot);
+        print("Prog: ", prog);
+        sumaBarra(Float(prog));
         //print("TextA: ", plogin.texto?.text);
         //plogin.texto!.text=String(prog)+"%";
         //print("TextD: ", plogin.texto?.text);
         //plogin.vista.addSubview(plogin.texto!);
+    }
+    
+    func sumaBarra(val: Float){
+        let vista = DatosB.cont.loginView;
+        if(vista.ingresa != nil){
+            vista.barra.progress = val + 0.02;
+        }
+    }
+    
+    func msgInicia(){
+        let vista = DatosB.cont.loginView;
+        if(vista.ingresa != nil){
+            vista.iniciamsg();
+            vista.texto?.text="Inicia Carga Imágenes";
+        }
     }
     
     func poneCredenciales(){

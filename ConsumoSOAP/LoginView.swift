@@ -38,8 +38,8 @@ class LoginView: UIViewController {
         
         self.view.accessibilityIdentifier="LOG";
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(LoginView.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil);
-        
-        
+        UIApplication.sharedApplication().idleTimerDisabled=true;
+        //errorZip();
         // Do any additional setup after loading the view.
     }
     
@@ -432,7 +432,7 @@ class LoginView: UIViewController {
     }
     
     var vista : UIView!;
-    //var texto : UILabel?;
+    var texto : UILabel?;
     var barra : UIProgressView!;
     
     func iniciamsg(){
@@ -449,15 +449,15 @@ class LoginView: UIViewController {
             barra.progressTintColor=UIColor.init(red: 0, green: 0.5, blue: 0, alpha: 1);
             //barra.progress=0.5;
             vista.addSubview(barra);
-            /*
+            
             texto = UILabel(frame: rect2);
             texto!.textAlignment=NSTextAlignment.Center;
-            texto!.text="0%";
+            texto!.text="";
             texto!.textColor=UIColor.init(red: 0, green: 0.5, blue: 0.15, alpha: 1);
-            texto?.font=UIFont(name: "Gotham Bold", size: alto2/2);
+            texto?.font=UIFont(name: "Gotham Bold", size: alto2/4);
             vista.addSubview(texto!);
             print("Agrega MDG: ", texto?.text);
-            */
+            
             self.view.addSubview(vista);
             vista.layer.zPosition=1;
         }
@@ -465,7 +465,21 @@ class LoginView: UIViewController {
         
     }
     
-
+    var vmsg : UIView!;
+    
+    func errorZip(){
+        print("Ini?");
+        let ancho = self.view.frame.width*0.8 ;
+        let alto = self.view.frame.height*0.5;
+        let OX = (self.view.frame.width - ancho)/2;
+        let OY = (self.view.frame.height-alto)/2;
+        let tama = CGRectMake(OX, OY, ancho, alto);
+        vmsg = ErrorZip(frame: tama);
+        //vmsg.backgroundColor=UIColor.blueColor();
+        vista.addSubview(vmsg);
+        print("Tama: ", vmsg);
+        
+    }
 
 
 }

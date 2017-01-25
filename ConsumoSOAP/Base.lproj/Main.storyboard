@@ -1,45 +1,49 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="2QL-vC-9bR">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES" initialViewController="2QL-vC-9bR">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="Gotham-Bold_0.ttf">
+        <array key="Gotham-Bold_0.ttf">
             <string>GothamBold</string>
-        </mutableArray>
-        <mutableArray key="Gotham-Book_0.ttf">
+        </array>
+        <array key="Gotham-Book_0.ttf">
             <string>GothamBook</string>
-        </mutableArray>
-        <mutableArray key="Gotham-Medium_0.ttf">
+        </array>
+        <array key="Gotham-Medium_0.ttf">
             <string>GothamMedium</string>
-        </mutableArray>
-        <mutableArray key="Gotham-Ultra_0.ttf">
+        </array>
+        <array key="Gotham-Ultra_0.ttf">
             <string>GothamUltra</string>
-        </mutableArray>
-        <mutableArray key="Sans-Beam-Body-Book.otf">
+        </array>
+        <array key="Sans-Beam-Body-Book.otf">
             <string>SansBeamBody-Book</string>
-        </mutableArray>
-        <mutableArray key="Sans-Beam-Head-Bold.otf">
+        </array>
+        <array key="Sans-Beam-Head-Bold.otf">
             <string>SansBeamHead-Bold</string>
-        </mutableArray>
+        </array>
     </customFonts>
     <scenes>
         <!--Home2-->
         <scene sceneID="NhN-Fb-kcc">
             <objects>
-                <viewController id="Neg-Ks-fCf" customClass="Home2" customModule="Lunch1" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Neg-Ks-fCf" customClass="Home2" customModule="La_Lonchera" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="b20-Uh-eML">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" id="e6j-Dz-vbu" userLabel="LaBarra" customClass="LaBarra" customModule="Lunch1" customModuleProvider="target">
+                            <view contentMode="scaleToFill" id="e6j-Dz-vbu" userLabel="LaBarra" customClass="LaBarra" customModule="La_Lonchera" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="54"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
                         <outlet property="laBarra" destination="e6j-Dz-vbu" id="uPD-SL-wmp"/>
@@ -55,12 +59,12 @@
         <!--Carrito-->
         <scene sceneID="3LJ-R2-0ht">
             <objects>
-                <viewController id="hb5-TO-jQJ" customClass="Carrito" customModule="Lunch1" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="hb5-TO-jQJ" customClass="Carrito" customModule="La_Lonchera" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cOi-aO-BDa">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" id="yZ6-gP-mSE" userLabel="LaBarra" customClass="LaBarra" customModule="Lunch1" customModuleProvider="target">
+                            <view contentMode="scaleToFill" id="yZ6-gP-mSE" userLabel="LaBarra" customClass="LaBarra" customModule="La_Lonchera" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="54"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
@@ -68,14 +72,14 @@
                                         <rect key="frame" x="25" y="16" width="152" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="SansBeamBody-Book" family="SansBeam Body" pointSize="17"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
                         <outlet property="laBarra" destination="yZ6-gP-mSE" id="XuI-11-qGz"/>
@@ -89,18 +93,18 @@
         <!--Datos Padre-->
         <scene sceneID="MZR-v6-5WI">
             <objects>
-                <viewController id="3LK-co-lmX" customClass="DatosPadre" customModule="Lunch1" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="3LK-co-lmX" customClass="DatosPadre" customModule="La_Lonchera" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="JDf-ES-z9L">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" id="Gkx-Pp-FEh" userLabel="LaBarra" customClass="LaBarra" customModule="Lunch1" customModuleProvider="target">
+                            <view contentMode="scaleToFill" id="Gkx-Pp-FEh" userLabel="LaBarra" customClass="LaBarra" customModule="La_Lonchera" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="54"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
                         <outlet property="laBarra" destination="Gkx-Pp-FEh" id="SRR-Pv-Iq6"/>
@@ -114,29 +118,29 @@
         <!--PantallaP-->
         <scene sceneID="17c-PQ-rYs">
             <objects>
-                <viewController autoresizesArchivedViewToFullSize="NO" id="OxI-ag-49q" customClass="PantallaP" customModule="Lunch1" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController autoresizesArchivedViewToFullSize="NO" id="OxI-ag-49q" customClass="PantallaP" customModule="La_Lonchera" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3N6-gm-Use">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" id="KV1-QQ-mIW" userLabel="LaBarra" customClass="LaBarra" customModule="Lunch1" customModuleProvider="target">
+                            <view contentMode="scaleToFill" id="KV1-QQ-mIW" userLabel="LaBarra" customClass="LaBarra" customModule="La_Lonchera" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="20" width="320" height="54"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <button opaque="NO" contentMode="redraw" placeholderIntrinsicWidth="66" placeholderIntrinsicHeight="66" restorationIdentifier="BTN 1" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="GJh-Js-LBr">
                                 <rect key="frame" x="127" y="89" width="66" height="66"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="SansBeamHead-Bold" family="SansBeam Head" pointSize="16"/>
                                 <state key="normal">
-                                    <color key="titleColor" red="1" green="0.89924760084805122" blue="0.77268526896675049" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="1" green="0.89924760084805122" blue="0.77268526896675049" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <segue destination="mNr-NS-Epx" kind="modal" animates="NO" id="2zQ-Cy-iTW"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
                         <outlet property="BotonAnadir" destination="GJh-Js-LBr" id="7E1-yT-Vjx"/>
@@ -152,26 +156,26 @@
         <!--PantallaSV-->
         <scene sceneID="P9g-5y-xpz">
             <objects>
-                <viewController restorationIdentifier="Seleccion" id="qPw-xE-pVA" customClass="PantallaSV" customModule="Lunch1" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="Seleccion" id="qPw-xE-pVA" customClass="PantallaSV" customModule="La_Lonchera" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Nzm-5t-HI6">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" id="YI0-KU-6kP">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
-                            <view contentMode="scaleToFill" id="T7r-r0-W7Z" customClass="LaBarra" customModule="Lunch1" customModuleProvider="target">
+                            <view contentMode="scaleToFill" id="T7r-r0-W7Z" customClass="LaBarra" customModule="La_Lonchera" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" notEnabled="YES"/>
                                 </accessibility>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
                         <outlet property="LaBarra" destination="T7r-r0-W7Z" id="U6R-od-ohv"/>
@@ -186,18 +190,18 @@
         <!--Calendario-->
         <scene sceneID="qQd-VJ-iT0">
             <objects>
-                <viewController id="yyi-nP-QVf" customClass="Calendario" customModule="Lunch1" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="yyi-nP-QVf" customClass="Calendario" customModule="La_Lonchera" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="PtX-Hj-9nJ">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" id="RXb-TH-oIe" customClass="LaBarra" customModule="Lunch1" customModuleProvider="target">
+                            <view contentMode="scaleToFill" id="RXb-TH-oIe" customClass="LaBarra" customModule="La_Lonchera" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="20" width="320" height="54"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
                         <outlet property="laBarra" destination="RXb-TH-oIe" id="PT5-SJ-S7z"/>
@@ -212,18 +216,18 @@
         <!--Factura-->
         <scene sceneID="Qiq-CK-C7X">
             <objects>
-                <viewController id="Kda-1K-zO3" customClass="PFactura" customModule="Lunch1" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Kda-1K-zO3" customClass="PFactura" customModule="La_Lonchera" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dlL-HZ-PIq">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" id="pcX-2P-aFz" customClass="LaBarra" customModule="Lunch1" customModuleProvider="target">
+                            <view contentMode="scaleToFill" id="pcX-2P-aFz" customClass="LaBarra" customModule="La_Lonchera" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="20" width="320" height="54"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="cXv-Jd-lMp"/>
                 </viewController>
@@ -234,9 +238,9 @@
         <!--Login View-->
         <scene sceneID="AMa-fE-9PM">
             <objects>
-                <viewController id="2QL-vC-9bR" customClass="LoginView" customModule="Lunch1" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="2QL-vC-9bR" customClass="LoginView" customModule="La_Lonchera" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aUv-wz-hFS">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" id="UVm-o9-X5h">
@@ -255,14 +259,14 @@
                                 <rect key="frame" x="123" y="420" width="85" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal">
-                                    <color key="titleShadowColor" red="0.79723012447357178" green="0.94993549585342407" blue="0.82382124662399292" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleShadowColor" red="0.75778293609619141" green="0.9454883337020874" blue="0.78398430347442627" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="ingresa:" destination="2QL-vC-9bR" eventType="touchUpInside" id="XOr-2T-dKU"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
                         <outlet property="email" destination="UVm-o9-X5h" id="FeD-s7-YJB"/>
@@ -270,7 +274,7 @@
                         <outlet property="pass" destination="qaQ-TU-PWZ" id="20o-4B-YkU"/>
                         <segue destination="OxI-ag-49q" kind="modal" identifier="Ingresa2" animates="NO" id="SbS-h1-chq"/>
                         <segue destination="xyL-xU-Na2" kind="modal" identifier="Ingresa2" id="ie1-xu-HA5"/>
-                        <segue destination="Neg-Ks-fCf" kind="modal" identifier="Ingresa" id="tbC-0r-QKh"/>
+                        <segue destination="Neg-Ks-fCf" kind="modal" identifier="Ingresa" animates="NO" id="tbC-0r-QKh"/>
                         <segue destination="13a-ZA-CaG" kind="modal" identifier="NuevaCuenta" id="rmo-k8-2k0"/>
                         <segue destination="Qof-fY-GFP" kind="modal" identifier="Olvido" id="09K-yq-9DM"/>
                         <segue destination="727-XF-3vs" kind="modal" identifier="Olvida2" id="JRD-Qz-uDV"/>
@@ -283,11 +287,11 @@
         <!--Olvida1-->
         <scene sceneID="0Tq-vx-Xoo">
             <objects>
-                <viewController id="Qof-fY-GFP" customClass="Olvida1" customModule="Lunch1" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Qof-fY-GFP" customClass="Olvida1" customModule="La_Lonchera" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4aK-et-wox">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cDE-KX-cQn" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -297,11 +301,11 @@
         <!--Olvida2-->
         <scene sceneID="pAv-um-lYb">
             <objects>
-                <viewController id="727-XF-3vs" customClass="Olvida2" customModule="Lunch1" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="727-XF-3vs" customClass="Olvida2" customModule="La_Lonchera" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="KOo-O3-Lj9">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
                         <segue destination="Neg-Ks-fCf" kind="modal" identifier="Ingresa3" id="y7Z-gq-fHE"/>
@@ -314,18 +318,18 @@
         <!--Historial-->
         <scene sceneID="Cwc-nx-ONW">
             <objects>
-                <viewController id="Nco-2Y-qhD" customClass="Historial" customModule="Lunch1" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Nco-2Y-qhD" customClass="Historial" customModule="La_Lonchera" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="T74-rz-c2B">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" id="1Ap-xQ-Tso" userLabel="LaBarra" customClass="LaBarra" customModule="Lunch1" customModuleProvider="target">
+                            <view contentMode="scaleToFill" id="1Ap-xQ-Tso" userLabel="LaBarra" customClass="LaBarra" customModule="La_Lonchera" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="54"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
                         <segue destination="O5Q-6k-Awq" kind="modal" identifier="Tipos" id="HmR-jn-Pxd"/>
@@ -338,18 +342,18 @@
         <!--Tipos-->
         <scene sceneID="arZ-em-dbc">
             <objects>
-                <viewController id="O5Q-6k-Awq" customClass="Tipos" customModule="Lunch1" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="O5Q-6k-Awq" customClass="Tipos" customModule="La_Lonchera" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Kc0-Jh-oyy">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" id="RVy-LA-4zc" userLabel="LaBarra" customClass="LaBarra" customModule="Lunch1" customModuleProvider="target">
+                            <view contentMode="scaleToFill" id="RVy-LA-4zc" userLabel="LaBarra" customClass="LaBarra" customModule="La_Lonchera" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="54"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
                         <segue destination="hb5-TO-jQJ" kind="modal" identifier="Carrito2" id="IwE-f6-p8i"/>
@@ -362,11 +366,11 @@
         <!--Crea Usuario-->
         <scene sceneID="8U8-Df-qTa">
             <objects>
-                <viewController id="13a-ZA-CaG" customClass="CreaUsuario" customModule="Lunch1" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="13a-ZA-CaG" customClass="CreaUsuario" customModule="La_Lonchera" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ni1-f2-Alk">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
                         <segue destination="Neg-Ks-fCf" kind="modal" identifier="Ingresa2" id="cvU-QX-vx3"/>
@@ -381,39 +385,39 @@
             <objects>
                 <viewController id="xyL-xU-Na2" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wBC-sV-agn">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Datos Incorrectos" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Fb8-Di-dyO">
                                 <rect key="frame" x="20" y="265" width="280" height="39"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="GothamBold" family="Gotham Bold" pointSize="31"/>
-                                <color key="textColor" red="0.0" green="0.50196081400000003" blue="0.15858326342281878" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.0" green="0.50196081400000003" blue="0.15858326342281878" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Datos Incorrectos" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4TR-ld-RNK">
                                 <rect key="frame" x="20" y="311" width="280" height="39"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="GothamBook" family="Gotham Book" pointSize="31"/>
-                                <color key="textColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Datos Incorrectos" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dlt-wb-13p">
                                 <rect key="frame" x="20" y="217" width="280" height="39"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="GothamUltra" family="Gotham Ultra" pointSize="31"/>
-                                <color key="textColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Datos Incorrectos" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="oFt-4H-sFx">
                                 <rect key="frame" x="20" y="358" width="280" height="39"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="GothamMedium" family="Gotham Medium" pointSize="31"/>
-                                <color key="textColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ljy-E6-XRT" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -423,46 +427,46 @@
         <!--Crea Nino-->
         <scene sceneID="RmZ-uz-cQv">
             <objects>
-                <viewController id="mNr-NS-Epx" customClass="CreaNino" customModule="Lunch1" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="mNr-NS-Epx" customClass="CreaNino" customModule="La_Lonchera" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pgM-ns-mEP">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="wM4-if-me6">
                                 <rect key="frame" x="96" y="82" width="128" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.33607838970886922" green="0.52921082872685821" blue="0.61750801282051282" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.33607838970886922" green="0.52921082872685821" blue="0.61750801282051282" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nombre" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="WqE-YG-pPp">
                                 <rect key="frame" x="20" y="228" width="80" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hombre" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="pwk-sn-578">
                                 <rect key="frame" x="20" y="412" width="95" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mujer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3Za-GQ-5TO">
                                 <rect key="frame" x="20" y="446" width="95" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fecha de Nacimiento" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9FE-3Y-mal">
                                 <rect key="frame" x="56" y="270" width="209" height="27"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" id="01Z-Sz-YnC">
-                                <rect key="frame" x="0.0" y="314" width="320" height="78"/>
+                                <rect key="frame" x="0.0" y="314" width="375" height="78"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <date key="date" timeIntervalSinceReferenceDate="482091590.39632702">
                                     <!--2016-04-11 18:19:50 +0000-->
@@ -490,7 +494,7 @@
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="bY8-q7-D5F">
                                 <rect key="frame" x="136" y="446" width="51" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="onTintColor" red="1" green="0.04677283753" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="onTintColor" red="1" green="0.04677283753" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <action selector="Anina:" destination="mNr-NS-Epx" eventType="valueChanged" id="AOF-bp-NRB"/>
                                 </connections>
@@ -498,7 +502,7 @@
                             <switch opaque="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="A41-Bv-1A0">
                                 <rect key="frame" x="136" y="412" width="51" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="onTintColor" red="1" green="0.046772837529804212" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="onTintColor" red="1" green="0.046772837529804212" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <action selector="Anino:" destination="mNr-NS-Epx" eventType="valueChanged" id="USe-an-xNE"/>
                                 </connections>
@@ -512,15 +516,15 @@
                             <view contentMode="scaleToFill" id="Nmg-qd-YpN" userLabel="Mensaje">
                                 <rect key="frame" x="40" y="289" width="240" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
-                            <view contentMode="scaleToFill" id="hoE-RN-Z6e" userLabel="LaBarra" customClass="LaBarra" customModule="Lunch1" customModuleProvider="target">
+                            <view contentMode="scaleToFill" id="hoE-RN-Z6e" userLabel="LaBarra" customClass="LaBarra" customModule="La_Lonchera" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="20" width="320" height="54"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
                         <outlet property="BotonAceptar" destination="OPr-zD-GhX" id="JcP-Pb-OxO"/>
@@ -542,10 +546,15 @@
             <point key="canvasLocation" x="-871" y="2433"/>
         </scene>
     </scenes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
+    </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="SbS-h1-chq"/>
-        <segue reference="QRH-mL-ShM"/>
-        <segue reference="IwE-f6-p8i"/>
+        <segue reference="tbC-0r-QKh"/>
         <segue reference="Ee2-os-9ZT"/>
+        <segue reference="IwE-f6-p8i"/>
     </inferredMetricsTieBreakers>
 </document>

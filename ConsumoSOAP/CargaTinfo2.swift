@@ -20,7 +20,6 @@ class CargaTinfo2: NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
     var profundidad = 0;
     
     func cargaInformacion(log: LoginView, cInicial: CargaInicial){
-        
         msgInicia();
         let mensajeEnviado:String = "<soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/' xmlns:enp='http://enpoint.lunch.com.co/'><soapenv:Header/><soapenv:Body><enp:listaInformacionNutricionalEntity/></soapenv:Body></soapenv:Envelope>";
         
@@ -65,6 +64,7 @@ class CargaTinfo2: NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
                 }else if(nulo && self.profundidad>=2){
                     self.msgDesconexion();
                 }else{
+                    self.sumaBarra();
                     print("Carga Informacion Nutricional");
                     let cargaI2 = CargaInicial2(cInicial: cInicial);
                     cargaI2.guarda(DatosB.cont.listaTInfo, tipo: TipoInfo.self);
@@ -185,7 +185,14 @@ class CargaTinfo2: NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
             if(vista.vista==nil){
                 vista.iniciamsg();
             }
-            //vista.texto?.text="Inicia Carga Info";
+            vista.texto?.text="Inicia Carga Info";
+        }
+    }
+    
+    func sumaBarra(){
+        let vista = DatosB.cont.loginView;
+        if(vista.ingresa != nil){
+            vista.barra.progress = vista.barra.progress + 0.02;
         }
     }
     

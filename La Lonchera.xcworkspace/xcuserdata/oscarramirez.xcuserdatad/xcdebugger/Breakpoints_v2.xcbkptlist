@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ConsumoSOAP/ConsultaProductos.swift"
-            timestampString = "505754305.460672"
+            timestampString = "506875587.214327"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "107"
-            endingLineNumber = "107"
+            startingLineNumber = "97"
+            endingLineNumber = "97"
             landmarkName = "ConsultaProductos"
             landmarkType = "3">
          </BreakpointContent>
@@ -81,6 +81,70 @@
             endingLineNumber = "243"
             landmarkName = "armaFecha(fecha:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ConsumoSOAP/LoginView.swift"
+            timestampString = "506874194.343818"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "392"
+            endingLineNumber = "392"
+            landmarkName = "esRecupera(text:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ConsumoSOAP/CargaInicial.swift"
+            timestampString = "507065048.102788"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "99"
+            endingLineNumber = "99"
+            landmarkName = "bloqueCarga2()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "La_Lonchera.CargaInicial.(bloqueCarga2 () -&gt; ()).(closure #1)"
+                  moduleName = "La Lonchera"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/oscarramirez/Desktop/playgrond/ConsumoSOAP/ConsumoSOAP/CargaInicial.swift"
+                  timestampString = "507050940.865792"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "98"
+                  endingLineNumber = "98"
+                  offsetFromSymbolStart = "1032">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "function signature specialization &lt;Arg[0] = Value Promoted from Box&gt; of La_Lonchera.CargaInicial.(bloqueCarga2 () -&gt; ()).(closure #1).(closure #1)"
+                  moduleName = "La Lonchera"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/oscarramirez/Desktop/playgrond/ConsumoSOAP/ConsumoSOAP/CargaInicial.swift"
+                  timestampString = "507050940.868674"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "98"
+                  endingLineNumber = "98"
+                  offsetFromSymbolStart = "448">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

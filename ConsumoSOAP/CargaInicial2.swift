@@ -49,7 +49,7 @@ class CargaInicial2 : NSObject{
         case is ProductoSaludable.Type:
             datosURL = (paths?.stringByAppendingString("/ProductoSaludable"))!;
             break;
-        case is UIImage.Type:
+        case is UIImage:
             datosURL = (paths?.stringByAppendingString("/Imagenes"))!;
             break;
         default:
@@ -159,8 +159,12 @@ class CargaInicial2 : NSObject{
         case is ProductoSaludable.Type:
             datosURL = (paths?.stringByAppendingString("/ProductoSaludable"))!;
             break;
+        case is UIImage.Type:
+            //print("Lee imagenes");
+            datosURL = (paths?.stringByAppendingString("/Imagenes"))!;
+            break;
         default:
-            print("Tipo desconocido: ", tipo);
+            print("LEE Tipo desconocido: ", tipo);
             break;
         }
         do{
@@ -240,11 +244,30 @@ class CargaInicial2 : NSObject{
             for ele in lista{
                 let rutaEle = ruta.stringByAppendingString("/"+ele);
                 let prod = (NSKeyedUnarchiver.unarchiveObjectWithData(fileManager.contentsAtPath(rutaEle)!));
+                let prodS = (prod as! ProductoSaludable);
+                for pp in DatosC.contenedor.productos{
+                    if(prodS.produ.id == pp.id){
+                        //print("PS: ", prodS.produ.nombre);
+                        //print("PP:  ", pp.nombre);
+                        prodS.produ.imagen=pp.imagen;
+                    }
+                }
+                
                 DatosB.cont.prodSaludables.append(prod as! ProductoSaludable);
             }
             break;
         case is UIImage.Type:
-            
+            //print("Carga Imagenes");
+            for ele in lista{
+                let rutaEle = ruta.stringByAppendingString("/"+ele);
+                let ima = (NSKeyedUnarchiver.unarchiveObjectWithData(fileManager.contentsAtPath(rutaEle)!));
+                for prod in DatosC.contenedor.productos{
+                    if(prod.id == Int(ele)){
+                        //print("Asigna: ", prod.nombre, "ele: ", ele, " tt: ", ima);
+                        prod.imagen=(ima as! UIImage);
+                    }
+                }
+            }
             break;
         default:
             print("Tipo desconocido: ", tipo);
@@ -279,6 +302,9 @@ class CargaInicial2 : NSObject{
             break;
         case is ProductoSaludable.Type:
             datosURL = (paths?.stringByAppendingString("/ProductoSaludable"))!;
+            break;
+        case is UIImage.Type:
+            datosURL = (paths?.stringByAppendingString("/Imagenes"))!;
             break;
         default:
             print("Tipo desconocido: ", tipo);
@@ -317,5 +343,26 @@ class CargaInicial2 : NSObject{
         print("Favoritos OK")
     }
     
+    //Método que guarda las imágenes, independiente del método de guardar datos, ya que el switch no reconoce la clase como un tipo
+    func guardaImagenes(lista: [Producto]){
+        cInicial!.iniciaEvaluacion();
+        let paths = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true).first;
+        var datosURL : String!;
+        datosURL = (paths?.stringByAppendingString("/Imagenes"))!;
+        if(!fileManager.fileExistsAtPath(datosURL!)){
+            do{
+                try fileManager.createDirectoryAtPath(datosURL!, withIntermediateDirectories: false, attributes: nil);
+                for ele in lista{
+                    let obj = (ele);
+                    let rutaEle = datosURL?.stringByAppendingString("/"+String(obj.id));
+                    let contenido = NSKeyedArchiver.archivedDataWithRootObject(obj.imagen!);
+                    fileManager.createFileAtPath(rutaEle!, contents: contenido, attributes: nil);
+                }
+            }catch{
+                
+            }
+        }
+        lee(UIImage);
+    }
     
 }

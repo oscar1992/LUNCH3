@@ -54,7 +54,6 @@ class LetreroAgregar: UIView {
 
     
     func enviaLonchera(lonchera: Lonchera2){
-        
         DatosB.cont.agregaLonchera(lonchera);
         //DatosB.cont.loncheras.append(lonchera);
         for cas in lonchera.casillas{

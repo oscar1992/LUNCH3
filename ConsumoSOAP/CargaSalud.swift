@@ -17,6 +17,7 @@ class CargaSalud: NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
     var element=NSString()
     
     func cargaSaludables(carga: CargaInicial){
+        msgInicia();
         print("Inicia Carga Saludables");
         let mensajeEnviado:String = "<soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/' xmlns:enp='http://enpoint.lunch.com.co/'><soapenv:Header/><soapenv:Body><enp:listaSalud/></soapenv:Body></soapenv:Envelope>";
         
@@ -49,6 +50,7 @@ class CargaSalud: NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
                 self.parser.parse();
                 dispatch_async(dispatch_get_main_queue(),{
                     carga.cargaImagenes();
+                    self.sumaBarra();
                     print("Carga Saludables OK");
                     //let cargaIt = CargaProductoSalud();
                     //cargaIt.cargaSaludables();
@@ -114,6 +116,24 @@ class CargaSalud: NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
             DatosB.cont.saludables.append(salu);
             
             
+        }
+    }
+    
+    func msgInicia(){
+        //print("carga tags");
+        let vista = DatosB.cont.loginView;
+        if(vista.ingresa != nil){
+            if(vista.vista==nil){
+                vista.iniciamsg();
+            }
+            vista.texto?.text="Inicia Carga Cajas Saludables";
+        }
+    }
+    
+    func sumaBarra(){
+        let vista = DatosB.cont.loginView;
+        if(vista.ingresa != nil){
+            vista.barra.progress = vista.barra.progress + 0.02;
         }
     }
 }

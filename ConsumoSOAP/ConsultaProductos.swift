@@ -29,14 +29,11 @@ class ConsultaProductos: NSObject , NSURLConnectionDelegate, NSXMLParserDelegate
     }
     
     func consulta(carga: CargaInicial){
-        //msgInicia();
-        
+        msgInicia();
         let is_URL: String = "http://93.188.163.97:8080/Lunch2/adminEndpoint"
-        
         let lobj_Request = NSMutableURLRequest(URL: NSURL(string: is_URL)!)
         let session = NSURLSession.sharedSession()
         let _: NSError?
-        
         lobj_Request.HTTPMethod = "POST"
         lobj_Request.HTTPBody = mensajeEnviado.dataUsingEncoding(NSUTF8StringEncoding)
         lobj_Request.addValue("www.lunch.com", forHTTPHeaderField: "Host")
@@ -44,7 +41,6 @@ class ConsultaProductos: NSObject , NSURLConnectionDelegate, NSXMLParserDelegate
         lobj_Request.addValue(String(mensajeEnviado.characters.count), forHTTPHeaderField: "Content-Length")
         //lobj_Request.addValue("223", forHTTPHeaderField: "Content-Length")
         lobj_Request.addValue("\"listaProductoEntity\"", forHTTPHeaderField: "SOAPAction")
-        
         task = session.dataTaskWithRequest(lobj_Request, completionHandler: {data, response, error -> Void in //Inicio del Subproceso
             //print("Response: \(response)")
             self.task.priority=1.0;
@@ -57,15 +53,10 @@ class ConsultaProductos: NSObject , NSURLConnectionDelegate, NSXMLParserDelegate
                 
             }else{
                 let strData = NSString(data: data!, encoding: NSUTF8StringEncoding)
-                
-                //print("Body: \(strData)")
-                
                 self.resp=strData?.dataUsingEncoding(NSUTF8StringEncoding)
                 self.parser=NSXMLParser(data: self.resp)
                 self.parser.delegate=self
                 self.parser.parse();
-                // cargaVII=CargaSalud();
-                //cargaVII.cargaSaludables(carga);
             }
             
             dispatch_async(dispatch_get_main_queue(),{ // Fin del Subproceso
@@ -77,8 +68,7 @@ class ConsultaProductos: NSObject , NSURLConnectionDelegate, NSXMLParserDelegate
                 }else if(nulo && self.profundidad>=2){
                     self.msgDesconexion();
                 }else{
-                    //DatosB.cont.guardaLista( DatosC.contenedor.productos, nombre: "Productos")
-                    
+                    self.sumaBarra();
                     print("Fin Carga Productos");
                     let cargaI2 = CargaInicial2(cInicial: carga);
                     cargaI2.guarda(DatosC.contenedor.productos, tipo: Producto.self);
@@ -179,8 +169,8 @@ class ConsultaProductos: NSObject , NSURLConnectionDelegate, NSXMLParserDelegate
         }
         if(flagnombreimagen){
             //print("IMAGEN: ",string);
-            //let rutaf="http://93.188.163.97:8080/Lunch2/files/"+string;
-            let rutaf=string;
+            let rutaf="http://93.188.163.97:8080/Lunch2/files/"+string;
+            //let rutaf=string;
             //let url = NSURL(string: rutaf)!
             //let data = NSData(contentsOfURL : url);
             //let imagenD=UIImage(data: data!);
@@ -239,7 +229,14 @@ class ConsultaProductos: NSObject , NSURLConnectionDelegate, NSXMLParserDelegate
         let vista = DatosB.cont.loginView;
         if(vista.ingresa != nil){
             vista.iniciamsg();
-            //vista.texto?.text="Inicia Carga Productos";
+            vista.texto?.text="Inicia Carga Productos";
+        }
+    }
+    
+    func sumaBarra(){
+        let vista = DatosB.cont.loginView;
+        if(vista.ingresa != nil){
+            vista.barra.progress = vista.barra.progress + 0.02;
         }
     }
     

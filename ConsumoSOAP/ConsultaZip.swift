@@ -25,6 +25,7 @@ class ConsultaZip: NSObject, NSURLSessionDownloadDelegate{
     var n = 0;
     
     lazy var session : NSURLSession = {
+        
         let config = NSURLSessionConfiguration.ephemeralSessionConfiguration()
         config.allowsCellularAccess = false
         let session = NSURLSession(configuration: config, delegate: self, delegateQueue: NSOperationQueue.mainQueue())
@@ -39,6 +40,7 @@ class ConsultaZip: NSObject, NSURLSessionDownloadDelegate{
     }
     
     func descarga(n: Int){
+        msgInicia();
         self.n=n;
         //for n in 0...9{
             let url:NSURL = NSURL(string: "http://93.188.163.97:8080/Lunch2/files/elzip"+String(n)+".zip")!
@@ -67,7 +69,10 @@ class ConsultaZip: NSObject, NSURLSessionDownloadDelegate{
     }
     
     func URLSession(session: NSURLSession, task: NSURLSessionTask, didCompleteWithError error: NSError?) {
-        //print("completed: error: \(error)")
+        print("completed: error: \(error)")
+        if(error != nil){
+            msgError();
+        }
     }
     
     @objc func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didFinishDownloadingToURL location: NSURL) {
@@ -106,10 +111,32 @@ class ConsultaZip: NSObject, NSURLSessionDownloadDelegate{
             vista.iniciamsg();
             //vista.texto?.text="Inicia Carga Productos";
         }
-        
-        vista.barra.progress = (val+vista.barra.progress)/2;
-        
-        
+        if(val > vista.barra.progress){
+            vista.barra.progress = val;
+        }else{
+            //vista.barra.progress = (val+vista.barra.progress)/2;
+        }
+    }
+    
+    func msgInicia(){
+        //print("carga tags");
+        let vista = DatosB.cont.loginView;
+        if(vista.ingresa != nil){
+            if(vista.vista==nil){
+                vista.iniciamsg();
+            }
+            vista.texto?.text="Inicia Carga Imágenes";
+        }
+    }
+    
+    var errCamt = 0;
+    
+    func msgError(){
+        let vista = DatosB.cont.loginView;
+        if(vista.vmsg == nil){
+            print("Ini msg");
+            vista.errorZip();
+        }
     }
     
 }

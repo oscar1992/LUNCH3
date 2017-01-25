@@ -23,7 +23,7 @@ class CargaProductoSalud: NSObject ,NSURLConnectionDelegate, NSXMLParserDelegate
    
     
     func cargaSaludables(cInicial: CargaInicial){
-        //msgInicia();
+        msgInicia();
         print("Inicia Producto-Salud");
         let mensajeEnviado:String = "<soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/' xmlns:enp='http://enpoint.lunch.com.co/'><soapenv:Header/><soapenv:Body><enp:listaProductoSaludTodos/></soapenv:Body></soapenv:Envelope>";
         
@@ -64,12 +64,10 @@ class CargaProductoSalud: NSObject ,NSURLConnectionDelegate, NSXMLParserDelegate
                     }else if(nulo && self.profundidad>=2){
                         self.msgDesconexion();
                     }else{
-                        
+                        self.sumaBarra();
                             print("Carga ProductoSaludables OK");
                             let cargaI2 = CargaInicial2(cInicial: cInicial);
                             cargaI2.guarda(DatosB.cont.prodSaludables, tipo: ProductoSaludable.self);
-                            
-                        
                     }
                     
                     
@@ -125,7 +123,7 @@ class CargaProductoSalud: NSObject ,NSURLConnectionDelegate, NSXMLParserDelegate
             //print("Prod in saluWS: ", DatosC.contenedor.productos.count);
             for produ in DatosC.contenedor.productos{
                 if(produ.id==idp){
-                    //print("produ: ", produ.nombre);
+                    print("produ: ", produ.nombre);
                     self.produ=produ;
                 }
             }
@@ -167,7 +165,14 @@ class CargaProductoSalud: NSObject ,NSURLConnectionDelegate, NSXMLParserDelegate
             if(vista.vista==nil){
                 vista.iniciamsg();
             }
-            //vista.texto?.text="Inicia Carga Producto-Saludable";
+            vista.texto?.text="Inicia Carga Producto-Saludable";
+        }
+    }
+    
+    func sumaBarra(){
+        let vista = DatosB.cont.loginView;
+        if(vista.ingresa != nil){
+            vista.barra.progress = vista.barra.progress + 0.02;
         }
     }
     

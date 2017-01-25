@@ -64,6 +64,7 @@ class CargaTags2: NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
                 }else if(nulo && self.profundidad>=2){
                     self.msgDesconexion();
                 }else{
+                    self.sumaBarra();
                     print("Carga Tags Completos");
                     let cargaI2 = CargaInicial2(cInicial: cInicial);
                     cargaI2.guarda(DatosD.contenedor.tags, tipo: Tag.self);
@@ -143,13 +144,17 @@ class CargaTags2: NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
     }
     
     func msgInicia(){
-        //print("carga tags");
         let vista = DatosB.cont.loginView;
         if(vista.ingresa != nil){
-            if(vista.vista==nil){
-                vista.iniciamsg();
-            }
-            //vista.texto?.text="Inicia Carga Etiquetas";
+            vista.iniciamsg();
+            vista.texto?.text="Inicia Carga Etiquetas";
+        }
+    }
+    
+    func sumaBarra(){
+        let vista = DatosB.cont.loginView;
+        if(vista.ingresa != nil){
+            vista.barra.progress = vista.barra.progress + 0.02;
         }
     }
     
