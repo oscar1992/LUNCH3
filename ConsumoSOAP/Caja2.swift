@@ -33,21 +33,31 @@ class Caja2: UIButton {
         DatosB.cont.home2.lonchera.limpia();
         for item in items{
             //print("item: ", item.nombre);
-            DatosB.cont.home2.lonchera.setCasilla(p, prod: item);
+            if (self.accessibilityIdentifier=="Saludable"){
+                DatosB.cont.home2.lonchera.setCasilla(p, prod: item, salud: true);
+            }
+            if(self.accessibilityIdentifier=="Favorita"){
+                DatosB.cont.home2.lonchera.setCasilla(p, prod: item, salud: false);
+            }
+            
             p += 1;
         }
         for caja in DatosB.cont.home2.predeterminadas.cajas{
             if (caja is Caja2 && caja.accessibilityIdentifier=="Saludable"){
                 DatosB.cont.poneFondoTot(caja, fondoStr: "LoncheraVerde2", framePers: nil, identi: "Caja", scala: true);
             }
-            
+            if(caja is Caja2 && caja.accessibilityIdentifier=="Favorita"){
+                DatosB.cont.poneFondoTot(caja, fondoStr: "LoncheraAzul2", framePers: nil, identi: "Caja", scala: true);
+            }
         }
         DatosB.cont.home2.lonchera.nombr=self.nombre;
         DatosB.cont.home2.lonchera.actualizaContador();
         if(self.accessibilityIdentifier=="Saludable"){
             DatosB.cont.poneFondoTot(self, fondoStr: "LoncheraVerde(activo)", framePers: nil, identi: "Caja", scala: true);
         }
-        
+        if(self.accessibilityIdentifier=="Favorita"){
+            DatosB.cont.poneFondoTot(self, fondoStr: "Favorita(Activa)", framePers: nil, identi: "Caja", scala: true);
+        }
     }
 
     /*

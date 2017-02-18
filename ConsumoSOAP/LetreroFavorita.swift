@@ -43,7 +43,7 @@ class LetreroFavorita: UIView {
         let OX = (self.frame.width/2)-(ancho/2)
         let OY = (corazon.frame.height + corazon.frame.origin.y);
         texto = UILabel(frame: CGRectMake(OX, OY, ancho, self.frame.height*0.25));
-        texto.text = "¡Ahora ponle nombre a tu Lonchera favorita!";
+        texto.text = "¡Dale nombre a tu Lonchera favorita!";
         texto.numberOfLines=2;
         texto.textColor=UIColor.lightGrayColor();
         texto.textAlignment=NSTextAlignment.Center;

@@ -15,7 +15,7 @@ class VistaSubidaExito: UIView {
 
     
     init (){
-        self.mensaje="!Perfecto, recibimos tu pedido! !Empezamos a armar tus Loncheras! \n!En la sección de Pedidos podras ver el detalle de tu orden! ";
+        self.mensaje="¡Tus loncheras están en proceso! Podrás ver el estado y detalle de tu orden en la sección de pedidos.";
         let ancho = DatosC.contenedor.anchoP*0.8;
         let alto = DatosC.contenedor.altoP*0.4;
         let OX = (DatosC.contenedor.anchoP/2)-(ancho/2);

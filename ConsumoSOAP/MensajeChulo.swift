@@ -44,7 +44,7 @@ class MensajeChulo: UIView {
         let OX = (self.frame.width/2)-(ancho/2)
         let OY = (icono.frame.height + icono.frame.origin.y);
         texto = UILabel(frame: CGRectMake(OX, OY, ancho, self.frame.height*0.25));
-        texto.text = "¡Agregaste el producto a La Lonchera!";
+        texto.text = "¡Agregaste el producto a tu Lonchera!";
         //texto.lineBreakMode=NSLineBreakMode.ByWordWrapping;
         //texto.numberOfLines=2;
         texto.adjustsFontSizeToFitWidth=true;

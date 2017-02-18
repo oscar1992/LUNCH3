@@ -520,7 +520,7 @@ class VistaPestana: UIPageViewController, UIPageViewControllerDelegate, UIPageVi
         var imagen: UIImage;
         var barra: UIImage;
         if(salud){
-            imagen = UIImage(named: "LabelSaludable")!;
+            imagen = UIImage(named: "LabelNoSaludable")!;
             barra = UIImage(named: "lineaVerde")!;
         }else{
             imagen = UIImage(named: "LabelNoSaludable")!;
@@ -529,6 +529,9 @@ class VistaPestana: UIPageViewController, UIPageViewControllerDelegate, UIPageVi
         let frameBack = CGRectMake(0, 0, panel.frame.width, panel.frame.height);
         let backImg = UIImageView(frame: frameBack);
         backImg.image = imagen;
+        if(salud){
+            subImagen(backImg);
+        }
         panel.addSubview(backImg);
         let frameBarra = CGRectMake(cas.frame.width*0.1, frame.height/2, cas.frame.width*0.8, 3);
         let backImg2 = UIImageView(frame: frameBarra);
@@ -557,14 +560,14 @@ class VistaPestana: UIPageViewController, UIPageViewControllerDelegate, UIPageVi
         Lab2.text = calorias + " calorías";
         Lab1.textAlignment = NSTextAlignment.Center;
         Lab2.textAlignment = NSTextAlignment.Center;
-        Lab1.font=UIFont(name: "SansBeam Head", size: Lab1.frame.height)!;
-        Lab2.font=UIFont(name: "SansBeamBody-Heavy", size: Lab2.frame.height/2)!;
+        Lab1.font=UIFont(name: "SansBeam Head", size: Lab1.frame.height/1.2)!;
+        Lab2.font=UIFont(name: "SansBeamBody-Heavy", size: Lab2.frame.height/1.8)!;
         //Lab2.backgroundColor=UIColor.redColor();
         Lab1.adjustsFontSizeToFitWidth=true;
         Lab2.adjustsFontSizeToFitWidth=true;
         if(salud){
-            Lab1.textColor = UIColor.whiteColor();
-            Lab2.textColor = UIColor.whiteColor();
+            Lab1.textColor = UIColor.grayColor();
+            Lab2.textColor = UIColor.grayColor();
         }else{
             Lab1.textColor = UIColor.grayColor();
             Lab2.textColor = UIColor.grayColor();
@@ -605,6 +608,7 @@ class VistaPestana: UIPageViewController, UIPageViewControllerDelegate, UIPageVi
         }
         let backImg = UIImageView(frame: frameBack);
         backImg.image = imagen;
+        
         estante.addSubview(backImg);
         //estante.backgroundColor = UIColor.yellowColor();
         vista.view.addSubview(estante);
@@ -637,7 +641,7 @@ class VistaPestana: UIPageViewController, UIPageViewControllerDelegate, UIPageVi
     */
     //Método que inicia la casilla de referencia
     func iniciaCasillaBaja(vista: UIView){
-        let casillaBaja = UIView();
+        let casillaBaja = UIButton();
         //let casillaBaja2 = UIView();
         let ancho = CGFloat(DatosC.contenedor.anchoP*0.8);
         let alto = CGFloat(DatosC.contenedor.altoP*0.5);
@@ -647,6 +651,8 @@ class VistaPestana: UIPageViewController, UIPageViewControllerDelegate, UIPageVi
         let frameCasilla = CGRectMake(OX, OY, ancho, alto);
         //let frameCasilla2 = CGRectMake(OX+10, OY+10, ancho, alto);
         casillaBaja.frame=frameCasilla;
+        casillaBaja.addTarget(self, action: #selector(Panel!.devuelve(_:)), forControlEvents: .TouchDown);
+        casillaBaja.layer.zPosition=1;
         //casillaBaja2.frame=frameCasilla2;
         //casillaBaja.tipo=DatosC.contenedor.tipo;
         //casillaBaja.activo=false;
@@ -678,6 +684,22 @@ class VistaPestana: UIPageViewController, UIPageViewControllerDelegate, UIPageVi
         dispatch_async(dispatch_get_global_queue(hilo, 0)) {
             
         }
+    }
+    
+    func devuelve(sender: UIButton){
+        print("Devuelve");
+        Panel!.devuelve(sender);
+    }
+    
+    //Método que permite poner la hojita en las saludables
+    func subImagen(vista : UIView){
+        let ancho = vista.frame.width*0.3;
+        let OX = vista.frame.width-(ancho/2);
+        let OY = -(ancho/2)
+        let frame = CGRectMake(OX, OY, ancho, ancho);
+        let subVista = UIView(frame: frame);
+        DatosB.cont.poneFondoTot(subVista, fondoStr: "Hoja Verde", framePers: nil, identi: nil, scala: true);
+        vista.addSubview(subVista);
     }
     
         /*

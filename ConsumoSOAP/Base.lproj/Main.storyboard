@@ -50,6 +50,9 @@
                         <segue destination="qPw-xE-pVA" kind="modal" identifier="Seleccion" id="Ee2-os-9ZT"/>
                         <segue destination="hb5-TO-jQJ" kind="modal" identifier="Carrito" id="BkF-8r-kaq"/>
                         <segue destination="Nco-2Y-qhD" kind="modal" identifier="Historial" id="rej-Ga-wjo"/>
+                        <segue destination="xP9-mW-28X" kind="modal" identifier="SaludableInfo" id="5vb-Pd-gcQ"/>
+                        <segue destination="ihp-NX-PWr" kind="modal" identifier="Tarjetas" id="Dpg-gj-xmV"/>
+                        <segue destination="tqz-gL-eHc" kind="modal" identifier="Contacto" id="CLW-RW-3FW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5ts-Zr-Cwv" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -89,6 +92,27 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Tv-OO-z6c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2155" y="497"/>
+        </scene>
+        <!--Vista Contacto-->
+        <scene sceneID="s6M-PJ-puC">
+            <objects>
+                <viewController id="tqz-gL-eHc" customClass="VistaContacto" customModule="La_Lonchera" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Lc0-QS-Jxp">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" misplaced="YES" id="qE4-eA-FlZ" userLabel="LaBarra" customClass="LaBarra" customModule="La_Lonchera" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="54"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ulJ-VH-UDJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2582" y="-502"/>
         </scene>
         <!--Datos Padre-->
         <scene sceneID="MZR-v6-5WI">
@@ -315,6 +339,27 @@
             </objects>
             <point key="canvasLocation" x="1149" y="1644"/>
         </scene>
+        <!--Saludable Info-->
+        <scene sceneID="LFX-o8-ZxR">
+            <objects>
+                <viewController id="xP9-mW-28X" customClass="SaludableInfo" customModule="La_Lonchera" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="C18-4q-e9c">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" misplaced="YES" id="YGa-sA-9Vs" userLabel="LaBarra" customClass="LaBarra" customModule="La_Lonchera" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="54"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="35U-Dk-qfl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="340" y="-501"/>
+        </scene>
         <!--Historial-->
         <scene sceneID="Cwc-nx-ONW">
             <objects>
@@ -362,6 +407,27 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aOB-GD-hvd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1427" y="-504"/>
+        </scene>
+        <!--Vista Tarjetas-->
+        <scene sceneID="qHa-7g-Qdk">
+            <objects>
+                <viewController id="ihp-NX-PWr" customClass="VistaTarjetas" customModule="La_Lonchera" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3hJ-4b-WjF">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" misplaced="YES" id="tFN-C4-k6W" userLabel="LaBarra" customClass="LaBarra" customModule="La_Lonchera" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="54"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iLv-dp-Ke4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1967" y="-502"/>
         </scene>
         <!--Crea Usuario-->
         <scene sceneID="8U8-Df-qTa">
@@ -553,8 +619,8 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="SbS-h1-chq"/>
-        <segue reference="tbC-0r-QKh"/>
+        <segue reference="cvU-QX-vx3"/>
         <segue reference="Ee2-os-9ZT"/>
-        <segue reference="IwE-f6-p8i"/>
+        <segue reference="BkF-8r-kaq"/>
     </inferredMetricsTieBreakers>
 </document>

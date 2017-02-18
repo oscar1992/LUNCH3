@@ -70,7 +70,7 @@ class ConsultaLogin : NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
                
             }
             dispatch_async(dispatch_get_main_queue(),{
-                //print("nulo: ", nulo, "prof: ", self.profundidad);
+                print("nulo: ", nulo, "prof: ", self.profundidad);
                 if(nulo && self.profundidad<2){
                     print("reinicia");
                     self.profundidad += 1;

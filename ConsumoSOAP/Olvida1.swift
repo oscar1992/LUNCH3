@@ -181,7 +181,7 @@ class Olvida1: UIViewController {
         let OX = (self.view.frame.width/2)-(ancho/2);
         let OY = (self.view.frame.height/2)-(alto/2);
         let frameMens = CGRectMake(OX, OY, ancho, alto);
-        let msg = MensajeCrea(frame: frameMens, msg: "Listo! Ahora entra a tu correo.!");
+        let msg = MensajeCrea(frame: frameMens, msg: "Listo! Ahora entra a tu correo.!", gif: false);
         msg.iniciaImagen3();
         _ = NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: #selector(Olvida1.cierraVista), userInfo: nil, repeats: false);
         self.view.addSubview(msg);

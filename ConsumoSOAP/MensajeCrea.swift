@@ -12,16 +12,19 @@ class MensajeCrea: UIView {
     
     var mensaje:String;
     var corazon :UIView!;
+    var corazon2 : UIImageView!;
     var timer: NSTimer!;
     var itera = 0;
     var nombresImgs = [UIImage]();
     var timer2 : NSTimer!;
     var timer3 : NSTimer!;
     var texto : UILabel!;
+    var gif: Bool!;
 
     
-    init (frame: CGRect, msg: String){
+    init (frame: CGRect, msg: String, gif: Bool){
         self.mensaje=msg;
+        self.gif=gif;
         super.init(frame: frame);
         DatosB.cont.poneFondoTot(self, fondoStr: "Base 2", framePers: nil, identi: nil, scala: false);
         iniciaImagen();
@@ -39,12 +42,28 @@ class MensajeCrea: UIView {
     func iniciaImagen(){
         let altoIma = self.frame.height;
         let OXima = (self.frame.width/2)-(altoIma/2);
-        let OYIma = self.frame.height*0;
+        let OYIma = CGFloat(0);
         let imagenFrame = CGRectMake(OXima, OYIma, altoIma, altoIma);
-        corazon = UIView(frame: imagenFrame);
-        DatosB.cont.poneFondoTot(corazon, fondoStr: "LoncheraP1", framePers: nil, identi: "ico", scala: true);
+        corazon=UIView();
+        corazon.frame=imagenFrame;
+        if(gif == true){
+            let imaGif = UIImage.gifImageWithName("LoncheraP3");
+            corazon2 = UIImageView();
+            corazon2.image = imaGif;
+            corazon2.contentMode = UIViewContentMode.ScaleAspectFit;
+            corazon2.frame=imagenFrame;
+            print("Frame: ", corazon2.frame);
+            self.addSubview(corazon2);
+        }else{
+            self.addSubview(corazon);
+            DatosB.cont.poneFondoTot(corazon, fondoStr: "LoncheraP1", framePers: nil, identi: "ico", scala: true);
+        }
+        
+        
+ 
+        //
         nombresImagenes();
-        self.addSubview(corazon);
+        
     }
     
     func iniciaMensaje(){

@@ -52,7 +52,7 @@ class RespuestaFavorita: UIView {
         switch  sub {
         case 1:
             DatosB.cont.poneFondoTot(cajita, fondoStr: "ICO Feliz", framePers: nil, identi: nil, scala: true);
-            msg.text="Creaste una Lonchera favorita";
+            msg.text="¡Creaste una Lonchera favorita!";
             self.addSubview(msg);
             break;
         case 0:

@@ -46,7 +46,7 @@ class CompruebaEmail: NSObject, NSURLConnectionDelegate, NSXMLParserDelegate {
                     let OX = (DatosB.cont.loginView.view.frame.width/2)-(ancho/2);
                     let OY = (DatosB.cont.loginView.view.frame.height/2)-(alto/2);
                     let frameMens = CGRectMake(OX, OY, ancho, alto);
-                    let msg = MensajeCrea(frame: frameMens, msg: "Error de conexión");
+                    let msg = MensajeCrea(frame: frameMens, msg: "Error de conexión", gif: false);
                     DatosB.cont.olvida1.view.addSubview(msg);
                     msg.iniciaTimer();
                     //_ = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: #selector(CompruebaEmail.cierra), userInfo: nil, repeats: false);

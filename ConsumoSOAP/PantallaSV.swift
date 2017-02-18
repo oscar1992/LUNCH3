@@ -67,7 +67,7 @@ class PantallaSV: UIViewController, UITextFieldDelegate {
          //cargaElementos();
         //self.view.bringSubviewToFront(LaBarra);
         self.view.sendSubviewToBack(LaBarra);
-        
+        iniciaTutorial();
         
         
         // Do any additional setup after loading the view.
@@ -258,7 +258,7 @@ class PantallaSV: UIViewController, UITextFieldDelegate {
         iniciaLoncheraReferencia();
         iniciaCasillaBaja();
         espacioIntercambio.accessibilityIdentifier = "Inter";
-        
+        //espacioIntercambio.addTarget(self, action: #selector(PantallaSV.devuelve(_:)), forControlEvents: .TouchDown);
     }
     
     //Método que escoge la imagen referencia de la lonchera pequeña
@@ -515,6 +515,24 @@ class PantallaSV: UIViewController, UITextFieldDelegate {
     func cierraPantallaSV(sender: UIButton){
         
         DatosC.contenedor.pantallaSV.devuelve(sender);
+    }
+    
+    let tut = BaseImagenes2(transitionStyle: UIPageViewControllerTransitionStyle.Scroll,
+                           navigationOrientation: UIPageViewControllerNavigationOrientation.Horizontal,
+                           options: nil);
+    
+    //Método que inicia el tutorial, si es la primera vez que inicia la app
+    func iniciaTutorial(){
+        if(DatosD.contenedor.padre.primeraVez==true){
+            self.view.addSubview(tut.view);
+            tut.view.frame=CGRectMake(0, 0, self.view.frame.width*1, self.view.frame.height/1);
+            DatosD.contenedor.padre.primeraVez=false;
+            let actuaP = ActualizaPadre();
+            actuaP.actualizaPadre(DatosD.contenedor.padre);
+            print("TUTORIAL");
+        }else{
+            print("no tutorial");
+        }
     }
     /*
      // MARK: - Navigation

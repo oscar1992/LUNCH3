@@ -44,7 +44,7 @@ class Sumador: UIView {
         labelPedido.textAlignment=NSTextAlignment.Right;
         msg1.textAlignment=NSTextAlignment.Left;
         msg2.textAlignment=NSTextAlignment.Left;
-        msg2.text = "VALOR TOTAL";
+        msg2.text = "Valor Total";
         msg1.textColor=UIColor.init(red: 0, green: 0.5, blue: 0.15, alpha: 1);
         msg2.textColor=UIColor.init(red: 0, green: 0.5, blue: 0.15, alpha: 1);
         self.addSubview(msg2);

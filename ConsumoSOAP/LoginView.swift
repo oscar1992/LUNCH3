@@ -409,7 +409,7 @@ class LoginView: UIViewController {
         let OX = (self.view.frame.width/2)-(ancho/2);
         let OY = (self.view.frame.height/2)-(alto/2);
         let frameMens = CGRectMake(OX, OY, ancho, alto);
-        let msg = MensajeCrea(frame: frameMens, msg: msg);
+        let msg = MensajeCrea(frame: frameMens, msg: msg, gif: true);
         
         msg.layer.zPosition=1;
         msg.accessibilityIdentifier="msg";
@@ -444,7 +444,18 @@ class LoginView: UIViewController {
             vista = UIView(frame: rect);
             let alto2 = DatosC.contenedor.altoP * 0.2;
             let OY = DatosC.contenedor.altoP * 0.8;
-            let rect2 = CGRectMake(0, OY, DatosC.contenedor.anchoP, alto2);
+            let rect2 = CGRectMake(DatosC.contenedor.anchoP*0.1, OY, DatosC.contenedor.anchoP*0.8, alto2);
+            
+            let anchoG = ancho*0.1;
+            let OX = (ancho/2)-(anchoG/2);
+            let OY2=alto2+OY;
+            let rect3 = CGRectMake(OX, OY, anchoG, anchoG);
+            
+            let imaGif = UIImage.gifImageWithName("spinner");
+            let gif = UIImageView(image: imaGif);
+            gif.contentMode = UIViewContentMode.ScaleAspectFill;
+            gif.frame=rect3;
+            vista.addSubview(gif);
             barra = UIProgressView(frame: rect2);
             barra.progressTintColor=UIColor.init(red: 0, green: 0.5, blue: 0, alpha: 1);
             //barra.progress=0.5;
@@ -455,7 +466,7 @@ class LoginView: UIViewController {
             texto!.text="";
             texto!.textColor=UIColor.init(red: 0, green: 0.5, blue: 0.15, alpha: 1);
             texto?.font=UIFont(name: "Gotham Bold", size: alto2/4);
-            vista.addSubview(texto!);
+            //vista.addSubview(texto!);
             print("Agrega MDG: ", texto?.text);
             
             self.view.addSubview(vista);

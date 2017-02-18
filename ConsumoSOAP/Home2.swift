@@ -36,6 +36,7 @@ class Home2: UIViewController {
         DatosB.cont.poneFondoTot(self.view, fondoStr: "FondoHome", framePers: fondo, identi: "FondoTot", scala: false);
         //print("carga home");
         predeterminadas.cargaSaludables();
+        iniciaTutorial();
         // Do any additional setup after loading the view.
     }
 
@@ -125,8 +126,6 @@ class Home2: UIViewController {
         let ox = (DatosC.contenedor.anchoP/2)-(ancho/2);
         let oy = (DatosC.contenedor.altoP/2)-(ancho/2);
         let frameLet = CGRectMake(ox, oy, ancho, ancho);
-        
-        
         if(lonchera.estaLLena()){
             let letrero = LetreroAgregar(frame: frameLet, lonchera: lonchera);
             self.view.addSubview(letrero);
@@ -234,7 +233,28 @@ class Home2: UIViewController {
         let msgChulo=MensajeChulo();
         self.view.addSubview(msgChulo);
     }
+    
+    
+    let tut = BaseImagenes(transitionStyle: UIPageViewControllerTransitionStyle.Scroll,
+                           navigationOrientation: UIPageViewControllerNavigationOrientation.Horizontal,
+                           options: nil);
+    
+    //Método que inicia el tutorial, si es la primera vez que inicia la app
+    func iniciaTutorial(){
+        if(DatosD.contenedor.padre.primeraVez==true){
+            self.view.addSubview(tut.view);
+            tut.view.frame=CGRectMake(0, 0, self.view.frame.width*1, self.view.frame.height/1);
+            
+            print("TUTORIAL");
+        }else{
+            print("no tutorial");
+        }
+    }
    
+
+    
+    
+    
     /*
     // MARK: - Navigation
 

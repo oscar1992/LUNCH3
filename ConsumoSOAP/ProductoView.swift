@@ -393,7 +393,7 @@ class ProductoView: UIButton {
             poneChulo()
             print("iAct: ", DatosC.contenedor.tipo);
             
-            DatosB.cont.home2.lonchera.setCasilla(DatosC.contenedor.tipo!, prod: self.producto!);
+            DatosB.cont.home2.lonchera.setCasilla(DatosC.contenedor.tipo!, prod: self.producto!, salud: false);
             self.Natural=true;
             DatosB.cont.home2.lonchera.nombr="Personalizada";
             DatosC.contenedor.lonchera.color = nil;

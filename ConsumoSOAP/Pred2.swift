@@ -78,13 +78,12 @@ class Pred2: UIScrollView, UIScrollViewDelegate {
                 DatosB.cont.poneFondoTot(caja, fondoStr: "LoncheraVerde2", framePers: nil, identi: "Caja", scala: true);
                 cajas.append(caja);
                 self.addSubview(caja);
-                self.addSubview(nombre);
-                
+                //self.addSubview(nombre);
                 p += 1;
                 
             }
             let tot2 = Double(DatosB.cont.favoritos.count);
-            
+            nombreGrande();
             
             for favo in DatosB.cont.favoritos{
                 let OX = ((ancho) * p);
@@ -109,6 +108,7 @@ class Pred2: UIScrollView, UIScrollViewDelegate {
                 nombre.font=UIFont(name: "Gotham Bold", size: nombre.frame.height*0.8);
                 nombre.adjustsFontSizeToFitWidth=true;
                 let caja = Caja2(frame: frameCaja, id: favo.id, nombre: favo.nombre, items: favo.items);
+                caja.accessibilityIdentifier="Favorita";
                 DatosB.cont.poneFondoTot(caja, fondoStr: "LoncheraAzul2", framePers: nil, identi: "Caja", scala: true);
                 cajas.append(caja);
                 self.addSubview(caja);
@@ -176,6 +176,22 @@ class Pred2: UIScrollView, UIScrollViewDelegate {
     func cargaSaludableInicial(){
         (cajas.first as! Caja2).llena();
         
+    }
+    
+    //Método que pone el nombre grande
+    func nombreGrande(){
+        let ancho = self.frame.width/CGFloat(1);
+        let alto = ancho * 0.2;
+        let OX = CGFloat(0);
+        let OY = ancho*0.09;
+        let frameNombregrande = CGRectMake(OX, OY, ancho, alto);
+        let textoG = UILabel(frame: frameNombregrande);
+        textoG.textAlignment=NSTextAlignment.Center;
+        textoG.textColor=UIColor.init(red: 0, green: 0.5, blue: 0, alpha: 1);
+        textoG.adjustsFontSizeToFitWidth=true;
+        textoG.font=UIFont(name: "Gotham Bold", size: textoG.frame.height*0.2);
+        textoG.text = "Nuestras loncheras sugeridas";
+        self.addSubview(textoG);
     }
     
     /*

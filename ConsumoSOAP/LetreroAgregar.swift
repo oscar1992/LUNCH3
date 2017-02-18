@@ -40,7 +40,7 @@ class LetreroAgregar: UIView {
         let OX = (self.frame.width/2)-(ancho/2)
         let OY = (icono.frame.height + icono.frame.origin.y);
         texto = UILabel(frame: CGRectMake(OX, OY, ancho, self.frame.height*0.25));
-        texto.text = "¡Listo! Agregaste esta lonchera a tu carrito de compras!";
+        texto.text = "¡Listo! Agregaste esta lonchera a tu carrito de compras";
         //texto.lineBreakMode=NSLineBreakMode.ByWordWrapping;
         //texto.numberOfLines=2;
         texto.adjustsFontSizeToFitWidth=true;
@@ -58,7 +58,7 @@ class LetreroAgregar: UIView {
         //DatosB.cont.loncheras.append(lonchera);
         for cas in lonchera.casillas{
             //print("ele: ", cas.elemeto?.producto?.nombre);
-            cas.elemeto?.elimina();
+            //cas.elemeto?.elimina();
         }
         lonchera.actualizaContador();
         var tot = 0;

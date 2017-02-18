@@ -76,7 +76,7 @@ class VistaPedido: UIView {
         let OY = self.frame.height*0.02;
         let frameBot = CGRectMake(OX, OY, ancho, ancho);
         let botEditar = UIButton(frame: frameBot);
-        self.addSubview(botEditar);
+        //self.addSubview(botEditar);
         DatosB.cont.poneFondoTot(botEditar, fondoStr: "BotonCerrar", framePers: nil, identi: nil, scala: true);
         botEditar.addTarget(self, action: #selector(VistaPedido.cancela), forControlEvents: .TouchDown);
     }

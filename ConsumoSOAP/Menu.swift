@@ -72,10 +72,25 @@ class Menu: UIView {
                 self.addSubview(bot);
                 bot.addTarget(self, action: #selector(Menu.pasaHistorial), forControlEvents: .TouchDown);
                 break;
-            case 1:
+            case 4:
                 let bot = BotonMenu(ima: "BotonCerrar", texto: "Cerrar Sesión", frame: frame);
                 self.addSubview(bot);
                 bot.addTarget(self, action: #selector(Menu.cierraSesion), forControlEvents: .TouchDown);
+                break;
+            case 1:
+                let bot = BotonMenu(ima: "ICO 1", texto: "¿Qué es la lonchera?", frame: frame);
+                self.addSubview(bot);
+                bot.addTarget(self, action: #selector(Menu.pasaSaludableInfo), forControlEvents: .TouchDown);
+                break;
+            case 2:
+                let bot = BotonMenu(ima: "ICO 4", texto: "Tarjetas", frame: frame);
+                self.addSubview(bot);
+                bot.addTarget(self, action: #selector(Menu.pasaTarjetas), forControlEvents: .TouchDown);
+                break;
+            case 3:
+                let bot = BotonMenu(ima: "ICO 5", texto: "Contacto", frame: frame);
+                self.addSubview(bot);
+                bot.addTarget(self, action: #selector(Menu.pasaContacto), forControlEvents: .TouchDown);
                 break;
             default:
                 break;
@@ -90,10 +105,28 @@ class Menu: UIView {
         padre.performSegueWithIdentifier("Historial", sender: nil);
     }
     
-    //Mñétodo que cierra la sesión y destruye los datos cargados
+    //Método que cierra la sesión y destruye los datos cargados
     func cierraSesion(){
         let msgCierra = MensajeCierra();
         self.addSubview(msgCierra);
+    }
+    
+    //Método que permite pasar a la ventana del historial
+    func pasaSaludableInfo(){
+        padre.muestra();
+        padre.performSegueWithIdentifier("SaludableInfo", sender: nil);
+    }
+    
+    //Método que permite pasar a la ventana de tarjetas
+    func pasaTarjetas(){
+        padre.muestra();
+        padre.performSegueWithIdentifier("Tarjetas", sender: nil);
+    }
+    
+    //Método que permite pasar a la ventana de contacto
+    func pasaContacto(){
+        padre.muestra();
+        padre.performSegueWithIdentifier("Contacto", sender: nil);
     }
 
 }

@@ -20,6 +20,10 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
     var texto2:UILabel!;
     var direccion1:UITextField!;
     var direccion2:UITextField!;
+    var direccion3:UITextField!;
+    var direccion4:UILabel!;
+    var vista5:UIButton!;
+    var vistaCiudad: UIView!;
     var telefono:UITextField!;
     var metodo:UILabel!;
     var boton : UIButton!;
@@ -40,7 +44,7 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(LoginView.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil);
         carrito=DatosB.cont.carrito;
         DatosB.cont.datosPadre=self;
-        
+        listaCiudad();
         
         // Do any additional setup after loading the view.
     }
@@ -86,7 +90,8 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
         let ancho = DatosC.contenedor.anchoP*0.8;
         let alto = DatosC.contenedor.anchoP*0.05;
         let OX = (DatosC.contenedor.anchoP/2)-(ancho/2);
-        let OY = DatosC.contenedor.altoP*0.2;
+        let OY = DatosC.contenedor.altoP*0.15
+        ;
         let frameNomb = CGRectMake(OX, OY, ancho, alto);
         let nom = UILabel(frame: frameNomb);
         nom.text=DatosD.contenedor.padre.nombre;
@@ -98,7 +103,7 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
         let OX2=(DatosC.contenedor.anchoP/2)-(ancho2/2);
         let frame2 = CGRectMake(OX2, OY+alto, ancho2, alto);
         let text = UILabel(frame: frame2);
-        text.text="Confirmanos tus datos de entrega";
+        text.text="Confírmanos tus datos de entrega:";
         text.textAlignment=NSTextAlignment.Center;
         self.view.addSubview(text);
         iniciaTabDireccion((text.frame.height+text.frame.origin.y));
@@ -108,34 +113,106 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
     func iniciaTabDireccion(yini: CGFloat){
         let ancho = DatosC.contenedor.anchoP;
         let bordeTxt = (ancho*0.02);
-        let alto = DatosC.contenedor.anchoP*0.07;
+        let alto = DatosC.contenedor.anchoP*0.06;
         let frameBarra = CGRectMake(0, (yini+borde), ancho, alto);
         let vista = UIView(frame: frameBarra);
         let frameText = CGRectMake(bordeTxt, 0, ancho, alto);
         let texto = UILabel(frame: frameText);
-        texto.text="Direccion";
+        texto.text="Dirección";
         texto.font=UIFont(name: "SansBeamBody-Book", size: texto.frame.height/2);
         vista.addSubview(texto);
         vista.backgroundColor=UIColor.init(red: 0.51, green: 0.77, blue: 0.25, alpha: 1);
         let frameVista2=CGRectMake(0, (frameBarra.origin.y+alto), ancho, alto);
+        let frameVista3=CGRectMake(0, (frameVista2.origin.y+alto), ancho, alto);
+        let frameVista4=CGRectMake(0, (frameVista3.origin.y+alto), ancho*0.5, alto);
+        let frameVista5=CGRectMake(ancho*0.5, (frameVista3.origin.y+alto), ancho*0.5, alto);
         let vista2 = UIView(frame: frameVista2);
+        let vista3 = UIView(frame: frameVista3);
+        let vista4 = UIView(frame: frameVista4);
+        vista5 = UIButton(frame: frameVista5);
+        vista5.addTarget(self, action: #selector(DatosPadre.muestraCiudad), forControlEvents: .TouchDown);
         vista2.backgroundColor=UIColor.whiteColor();
+        vista3.backgroundColor=UIColor.whiteColor();
+        vista4.backgroundColor=UIColor.whiteColor();
+        vista5.backgroundColor=UIColor.whiteColor();
         let frameText2=CGRectMake(bordeTxt, 0, ancho, alto);
+        
         direccion1 = UITextField(frame: frameText2);
+        direccion2 = UITextField(frame: frameText2);
+        direccion3 = UITextField(frame: frameText2);
+        direccion4 = UILabel(frame: frameText2);
         vista2.addSubview(direccion1);
+        vista3.addSubview(direccion2);
+        vista4.addSubview(direccion3);
+        vista5.addSubview(direccion4);
         direccion1.text=DatosD.contenedor.padre.direccion;
+        direccion2.text="Edificio / Casa / Apartamento";
+        direccion3.text="Barrio";
+        direccion4.text="Ciudad v";
         direccion1.textColor=UIColor.grayColor();
+        direccion2.textColor=UIColor.grayColor();
+        direccion3.textColor=UIColor.grayColor();
+        direccion4.textColor=UIColor.grayColor();
         direccion1.delegate=self;
+        direccion2.delegate=self;
+        direccion3.delegate=self;
+        //direccion4.delegate=self;
         self.view.addSubview(vista);
         self.view.addSubview(vista2);
-        iniciaTabTelefono((vista2.frame.height+vista2.frame.origin.y));
+        self.view.addSubview(vista3);
+        self.view.addSubview(vista4);
+        self.view.addSubview(vista5);
+        
+        iniciaTabTelefono((vista2.frame.height+vista2.frame.origin.y+vista3.frame.height+vista5.frame.height));
+    }
+    
+    func muestraCiudad(){
+        vistaCiudad.hidden=false;
+    }
+    
+    func listaCiudad(){
+        print("lista");
+        let lista = ["Bogotá"];
+        let frame = CGRectMake(vista5.frame.origin.x, vista5.frame.origin.y+vista5.frame.height, vista5.frame.width, vista5.frame.height*CGFloat(lista.count));
+        vistaCiudad = UIView(frame: frame);
+        vistaCiudad.hidden=true;
+        var n = 0;
+        for bott in lista{
+            let frameBot = CGRectMake(0, vista5.frame.height*CGFloat(n), frame.width, (frame.height/CGFloat(lista.count))*0.9);
+            print("nomb: ", frameBot)
+            let bot = UIButton(frame: frameBot);
+            let frameNom = CGRectMake(frame.width*0.2, 0, frame.width, vista5.frame.height);
+            let lab = UILabel(frame: frameNom);
+            lab.textColor=UIColor.grayColor();
+            lab.text=bott;
+            bot.addSubview(lab);
+            bot.backgroundColor=UIColor.whiteColor();
+            bot.addTarget(self, action: #selector(DatosPadre.botCiudad(_:)), forControlEvents: .TouchDown);
+            vistaCiudad.addSubview(bot);
+            n += 1;
+        }
+        
+        vistaCiudad.backgroundColor=UIColor.whiteColor();
+        self.view.addSubview(vistaCiudad);
+    }
+    
+    func botCiudad(sender: UIButton){
+        vistaCiudad.hidden=true;
+        for vista in sender.subviews{
+            if vista is UILabel{
+                var lab = vista as! UILabel;
+                print("qq: ", lab.text);
+                direccion4.text=lab.text;
+            }
+        }
+        //print("Bot: ", sender);
     }
     
     //Método que inicia la tabla de la direccion
     func iniciaTabTelefono(yini: CGFloat){
         let ancho = DatosC.contenedor.anchoP;
         let bordeTxt = (ancho*0.02);
-        let alto = DatosC.contenedor.anchoP*0.07;
+        let alto = DatosC.contenedor.anchoP*0.06;
         let frameBarra = CGRectMake(0, (yini+borde), ancho, alto);
         let vista = UIView(frame: frameBarra);
         let frameText = CGRectMake(bordeTxt, 0, ancho, alto);
@@ -160,12 +237,12 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
     func iniciaTabFechaEntrega(yini: CGFloat){
         let ancho = DatosC.contenedor.anchoP;
         let bordeTxt = (ancho*0.02);
-        let alto = DatosC.contenedor.anchoP*0.07;
+        let alto = DatosC.contenedor.anchoP*0.06;
         let frameBarra = CGRectMake(0, (yini+borde), ancho, alto);
         let vista = UIView(frame: frameBarra);
         let frameText = CGRectMake(bordeTxt, 0, ancho, alto);
         let texto = UILabel(frame: frameText);
-        texto.text="Selecciona la fecha de entrega";
+        texto.text="Fecha de entrega";
         texto.font=UIFont(name: "SansBeamBody-Book", size: texto.frame.height/2);
         vista.addSubview(texto);
         vista.backgroundColor=UIColor.init(red: 0.51, green: 0.77, blue: 0.25, alpha: 1);
@@ -188,23 +265,23 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
     func iniciaTabHoraEntrega(yini: CGFloat){
         let ancho = DatosC.contenedor.anchoP;
         let bordeTxt = (ancho*0.02);
-        let alto = DatosC.contenedor.anchoP*0.07;
+        let alto = DatosC.contenedor.anchoP*0.06;
         let frameBarra = CGRectMake(0, (yini+borde), ancho, alto);
         let vista = UIView(frame: frameBarra);
         let frameText = CGRectMake(bordeTxt, 0, ancho, alto);
         let texto = UILabel(frame: frameText);
-        texto.text="Selecciona la hora de entrega";
+        texto.text="Hora de entrega";
         texto.font=UIFont(name: "SansBeamBody-Book", size: texto.frame.height/2);
         vista.addSubview(texto);
         vista.backgroundColor=UIColor.init(red: 0.51, green: 0.77, blue: 0.25, alpha: 1);
         let frameVista2=CGRectMake(0, (frameBarra.origin.y+alto), ancho, alto);
         let vista2 = UIButton(frame: frameVista2);
-        vista2.addTarget(self, action: #selector(DatosPadre.listaDesplegable2(_:)), forControlEvents: .TouchDown);
-        vista2.backgroundColor=UIColor.whiteColor();
+        //vista2.addTarget(self, action: #selector(DatosPadre.listaDesplegable2(_:)), forControlEvents: .TouchDown);
+        vista2.backgroundColor=UIColor.init(red: 0.51, green: 0.77, blue: 0.25, alpha: 1);
         let frameText2=CGRectMake(bordeTxt, 0, ancho, alto);
         self.texto2 = UILabel(frame: frameText2);
         vista2.addSubview(self.texto2);
-        self.texto2.text="Elija la hora";
+        self.texto2.text="Te entregaremos el pedido durante el día. Si no estas, lo dejaremos en portería!";
         self.view.addSubview(vista);
         self.view.addSubview(vista2);
         iniciaTabMetodo((vista2.frame.height+vista2.frame.origin.y));
@@ -214,12 +291,12 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
     func iniciaTabMetodo(yini: CGFloat){
         let ancho = DatosC.contenedor.anchoP;
         let bordeTxt = (ancho*0.02);
-        let alto = DatosC.contenedor.anchoP*0.07;
+        let alto = DatosC.contenedor.anchoP*0.06;
         let frameBarra = CGRectMake(0, (yini+borde), ancho, alto);
         let vista = UIView(frame: frameBarra);
         let frameText = CGRectMake(bordeTxt, 0, ancho, alto);
         let texto = UILabel(frame: frameText);
-        texto.text="Selecciona el método de pago";
+        texto.text="Forma de pago";
         texto.font=UIFont(name: "SansBeamBody-Book", size: texto.frame.height/2);
         vista.addSubview(texto);
         vista.backgroundColor=UIColor.init(red: 0.51, green: 0.77, blue: 0.25, alpha: 1);
@@ -238,7 +315,7 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
     
     func iniciaListaDesplegableMetodo(sender: UIButton){
         bloqueador();
-        let Datos = ["Efectivo", "Crédito", "Débito"];
+        let Datos = ["Efectivo"];
         let despliega = VistaMetodos(opciones: Datos);
         
         self.view.addSubview(despliega);
@@ -342,6 +419,10 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
         return true
     }
     
+    func textFieldDidBeginEditing(textField: UITextField) {
+        textField.text = "";
+    }
+    
     func textFieldDidEndEditing(textField: UITextField){
         print("oooo");
         if(textField.text != ""&&tieneNumeros(textField.text!)){
@@ -374,10 +455,10 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
     func valida(){
         var pasaDir = false;
         var pasaTel = false;
-        var pasaHora = false;
+        var pasaHora = true;
         var pasaFecha = false;
         var pasaMetodo = false;
-        var info = "";
+        var info = "Por favor diligencia estos campos:";
         if(direccion1.text?.characters.count<0){
             pasaDir=false;
             
@@ -387,6 +468,7 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
                 info += "Dirección Inválida";
                 pasaDir=false;
             }else{
+                
                 pasaDir=true;
             }
             
@@ -401,17 +483,17 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
         }else{
             pasaTel = true;
         }
-        if(hora != nil){
+        if(hora == nil){//Modificación forzosa
             pasaHora=true;
         }else{
             pasaHora=false;
-            info += "\n¿A qué hora quieres recibir Las Loncheras?";
+            info += "\n*Hora de Entrega de tus loncheras";
         }
         if(fecha != nil){
             pasaFecha = true;
         }else{
             pasaFecha = false;
-            info += "\n¿Que día quieres recibir Las Loncheras?";
+            info += "\n*Fecha de entrega de tus loncheras";
         }
         if(metodoV != nil){
             pasaMetodo = true;
@@ -490,7 +572,8 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
     func subePedido(){
         let subeP = SubePedido();
         
-        print("hora: ", hora);
+        //print("hora: ", hora);
+        hora="----";
         print("fecha: ", texto);
         print("id padre: ", DatosD.contenedor.padre.id);
         print("fecha actual: ", fechaActual());
@@ -499,7 +582,16 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
         print("cantidad: ", cant());
         
         let actua=ActualizaPadre();
-        DatosD.contenedor.padre.direccion=direccion1.text;
+        if(direccion2.text == "Edificio / Casa / Apartamento"){
+            direccion2.text="";
+        }
+        if(direccion3.text == "Barrio"){
+            direccion3.text="";
+        }
+        if(direccion4.text == "Ciudad v"){
+            direccion4.text="";
+        }
+        DatosD.contenedor.padre.direccion=(direccion1.text!+" "+direccion2.text!+" "+direccion3.text!+" "+direccion4.text!);
         DatosD.contenedor.padre.telefono=telefono.text;
         actua.actualizaPadre(DatosD.contenedor.padre);
         

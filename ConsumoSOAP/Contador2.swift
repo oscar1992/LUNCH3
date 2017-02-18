@@ -98,9 +98,9 @@ class Contador2: UIView {
     //Método que inicia los labels
     func iniciaLabels(){
         let ancho = self.frame.width*0.4;
-        let alto = self.frame.height*0.4;
+        let alto = self.frame.height*0.3;
         let frameLV = CGRectMake(0, 15, ancho, alto);
-        let frameValo = CGRectMake(0, (frameLV.height), ancho, alto*1.3);
+        let frameValo = CGRectMake(0, (alto), ancho, alto*1.3);
         let OX = self.frame.width*0.5;
         let ancho2 = self.frame.width*0.3;
         let alto2 = self.frame.height/3;
@@ -139,11 +139,11 @@ class Contador2: UIView {
         azucar.text="----";
         calorias.text="----";
         proteina.text="----";
-        seteaLabel2(valor);
+        seteaLabel3(valor);
         seteaLabel2(azucar);
         seteaLabel2(calorias);
         seteaLabel2(proteina);
-        seteaLabel3(labelV);
+        //seteaLabel3(labelV);
         seteaLabel1(labelA);
         seteaLabel1(labelC);
         seteaLabel1(labelP);

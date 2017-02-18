@@ -206,7 +206,7 @@ class CreaUsuario: UIViewController, UITextFieldDelegate, UIImagePickerControlle
                 let OX = (self.view.frame.width/2)-(ancho/2);
                 let OY = (self.view.frame.height/2)-(alto/2);
                 let frameMens = CGRectMake(OX, OY, ancho, alto);
-                let msg = MensajeCrea(frame: frameMens, msg: "Correo no válido");
+                let msg = MensajeCrea(frame: frameMens, msg: "Correo no válido", gif: false);
                 msg.iniciaTimer();
                 self.view.addSubview(msg);
                 //bot.enabled=false;
@@ -222,7 +222,7 @@ class CreaUsuario: UIViewController, UITextFieldDelegate, UIImagePickerControlle
                 let OX = (self.view.frame.width/2)-(ancho/2);
                 let OY = (self.view.frame.height/2)-(alto/2);
                 let frameMens = CGRectMake(OX, OY, ancho, alto);
-                let msg = MensajeCrea(frame: frameMens, msg: "La clave debe contener minimo 6 caracteres");
+                let msg = MensajeCrea(frame: frameMens, msg: "La clave debe contener minimo 6 caracteres" , gif: false);
                 msg.iniciaTimer();
                 self.view.addSubview(msg);
                 passValido=false;
@@ -476,7 +476,7 @@ class CreaUsuario: UIViewController, UITextFieldDelegate, UIImagePickerControlle
                 msgT = msgT + "\nEste correo ya existe! Seguro ya creaste un usuario!";
             }
             //print("msg: ", msgT);
-            let msg = MensajeCrea(frame: frameMens, msg: msgT);
+            let msg = MensajeCrea(frame: frameMens, msg: msgT, gif: false);
             msg.iniciaTimer();
             self.view.addSubview(msg);
             
@@ -496,7 +496,7 @@ class CreaUsuario: UIViewController, UITextFieldDelegate, UIImagePickerControlle
         let OX = (self.view.frame.width/2)-(ancho/2);
         let OY = (self.view.frame.height/2)-(alto/2);
         let frameMens = CGRectMake(OX, OY, ancho, alto);
-        let msg = MensajeCrea(frame: frameMens, msg: mensaje);
+        let msg = MensajeCrea(frame: frameMens, msg: mensaje, gif: false);
         if(adv){
             msg.iniciaImagen3();
             _ = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: #selector(CreaUsuario.pasaHome), userInfo: nil, repeats: false);

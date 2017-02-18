@@ -301,7 +301,7 @@ class Olvida2: UIViewController , UITextFieldDelegate{
         let OX = (self.view.frame.width/2)-(ancho/2);
         let OY = (self.view.frame.height/2)-(alto/2);
         let frameMens = CGRectMake(OX, OY, ancho, alto);
-        let msg = MensajeCrea(frame: frameMens, msg: mensaje);
+        let msg = MensajeCrea(frame: frameMens, msg: mensaje, gif: false);
         msg.iniciaTimer();
         self.view.addSubview(msg);
     }

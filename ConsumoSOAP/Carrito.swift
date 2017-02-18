@@ -74,7 +74,7 @@ class Carrito: UIViewController {
         let frameLet = CGRectMake(OX, OY, ancho, alto);
         let msg = UILabel(frame: frameLet);
         self.view.addSubview(msg);
-        msg.text = "¡Estas son las loncheras que armaste!"
+        msg.text = "Estas son las loncheras que armaste"
         msg.numberOfLines = 0;
         msg.textAlignment=NSTextAlignment.Center;
         msg.adjustsFontSizeToFitWidth=true;

@@ -58,7 +58,7 @@ class VistaMetodos: UIView {
         let OY = CGFloat(0);
         let frame = CGRectMake(OX, OY, ancho, alto);
         let titulo = UILabel(frame: frame);
-        titulo.text="¿Cómo quieres pagar?";
+        titulo.text="Selecciona tu método de pago:";
         titulo.font=UIFont(name: "SansBeam Head", size: titulo.frame.height);
         titulo.adjustsFontSizeToFitWidth=true;
         titulo.textAlignment=NSTextAlignment.Center;

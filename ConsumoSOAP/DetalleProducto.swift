@@ -65,6 +65,14 @@ class DetalleProducto: UIView {
         let back = UIImageView(frame: frameImagen);
         back.image=imagen;
         self.addSubview(back);
+        if(prod.salud == true){
+            let frameSaludable = CGRectMake(0, back.frame.height+back.frame.origin.y, back.frame.width, back.frame.height);
+            let vistaSalud = UIView(frame: frameSaludable);
+            DatosB.cont.poneFondoTot(vistaSalud, fondoStr: "Hoja Verde", framePers: nil, identi: nil, scala: true);
+            //vistaSalud.backgroundColor=UIColor.cyanColor();
+            self.addSubview(vistaSalud);
+        }
+        
     }
     
     //Método que establece el label del Nombre del producto
@@ -104,11 +112,16 @@ class DetalleProducto: UIView {
     
     //Método que establece la posición de la imagen
     func Imagen(){
-        let OX = DatosC.contenedor.anchoP*0.13;
-        let OY = DatosC.contenedor.altoP*0.17;
+        /*
         let ancho = DatosC.contenedor.anchoP*0.45;
         let alto = DatosC.contenedor.altoP*0.37;
-        
+        let OX = DatosC.contenedor.anchoP*0.13;
+        let OY = DatosC.contenedor.altoP*0.17;
+ */
+        let ancho = self.frame.width*0.8;
+        let alto = self.frame.height*0.5;
+        let OX = (self.frame.width/2)-(ancho/2);
+        let OY = (self.frame.height/2)-(alto/1.5);
         let frameImagen = CGRectMake(OX, OY, ancho, alto);
         let imagen = prod.imagen;
         let back = UIImageView(frame: frameImagen);

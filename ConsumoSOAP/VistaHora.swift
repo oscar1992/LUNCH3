@@ -58,7 +58,7 @@ class VistaHora: UIView {
         let OY = CGFloat(0);
         let frame = CGRectMake(OX, OY, ancho, alto);
         let titulo = UILabel(frame: frame);
-        titulo.text="¿A qué hora quieres recibir Las Loncheras?";
+        titulo.text="Selecciona la hora de entrega de tus loncheras:";
         titulo.font=UIFont(name: "SansBeam Head", size: titulo.frame.height);
         titulo.adjustsFontSizeToFitWidth=true;
         titulo.textAlignment=NSTextAlignment.Center;

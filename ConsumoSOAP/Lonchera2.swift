@@ -80,35 +80,64 @@ class Lonchera2: UIView {
     }
     
     //Método que permite poner un elemento en una casilla
-    func setCasilla(tipo: Int, prod: Producto){
-        for cas in casillas{
-            //print("tipo: ", prod.tipo);
-            if (cas.tipo == prod.tipo){
-                //print("castipo: ", cas.tipo);
-                if(cas.elemeto != nil){
-                    cas.elemeto?.elimina();
+    func setCasilla(tipo: Int, prod: Producto, salud: Bool){
+        
+        if(salud){
+            for cas in casillas{
+                //print("tipo: ", prod.tipo);
+                if (cas.tipo == prod.tipo){
+                    //print("castipo: ", cas.tipo);
+                    if(cas.elemeto != nil){
+                        cas.elemeto?.elimina();
+                    }
+                    //cas.seteaElemento(prod, tipo: cas.tipo!, ima: (prod.producto?.imagen)!, prod: prod.producto!);
+                    
+                    cas.elemeto?.espacioPadre=cas.frame;
+                    let reductor = CGFloat(0.8);
+                    let ancho = cas.frame.width*reductor;
+                    let alto = cas.frame.height*reductor;
+                    let OX = (cas.frame.width/2)-(ancho/2);
+                    let OY = (cas.frame.height/2)-(alto/2);
+                    let imagenN = prod.imagen;
+                    let prodN=ProductoView(frame: CGRectMake(OX, OY, ancho, alto), imagen: prod.imagen!);
+                    prodN.producto=prod;
+                    prodN.padre=cas;
+                    prodN.espacioPadre=CGRectMake(OX, OY, ancho, alto);
+                    prodN.tipo=cas.tipo;
+                    prodN.Natural=true;
+                    prodN.PanelOrigen=nil;
+                    prodN.Panel2=nil;
+                    cas.elemeto=prodN;
+                    cas.addSubview(prodN);
                 }
-                //cas.seteaElemento(prod, tipo: cas.tipo!, ima: (prod.producto?.imagen)!, prod: prod.producto!);
-                
-                cas.elemeto?.espacioPadre=cas.frame;
-                let reductor = CGFloat(0.8);
-                let ancho = cas.frame.width*reductor;
-                let alto = cas.frame.height*reductor;
-                let OX = (cas.frame.width/2)-(ancho/2);
-                let OY = (cas.frame.height/2)-(alto/2);
-                let imagenN = prod.imagen;
-                let prodN=ProductoView(frame: CGRectMake(OX, OY, ancho, alto), imagen: prod.imagen!);
-                prodN.producto=prod;
-                prodN.padre=cas;
-                prodN.espacioPadre=CGRectMake(OX, OY, ancho, alto);
-                prodN.tipo=cas.tipo;
-                prodN.Natural=true;
-                prodN.PanelOrigen=nil;
-                prodN.Panel2=nil;
-                cas.elemeto=prodN;
-                cas.addSubview(prodN);
             }
+        }else{
+            print("Tipo: ", tipo);
+            let cas = casillas[tipo-1];
+            if(cas.elemeto != nil){
+                cas.elemeto?.elimina();
+            }
+            //cas.seteaElemento(prod, tipo: cas.tipo!, ima: (prod.producto?.imagen)!, prod: prod.producto!);
+            
+            cas.elemeto?.espacioPadre=cas.frame;
+            let reductor = CGFloat(0.8);
+            let ancho = cas.frame.width*reductor;
+            let alto = cas.frame.height*reductor;
+            let OX = (cas.frame.width/2)-(ancho/2);
+            let OY = (cas.frame.height/2)-(alto/2);
+            let imagenN = prod.imagen;
+            let prodN=ProductoView(frame: CGRectMake(OX, OY, ancho, alto), imagen: prod.imagen!);
+            prodN.producto=prod;
+            prodN.padre=cas;
+            prodN.espacioPadre=CGRectMake(OX, OY, ancho, alto);
+            prodN.tipo=cas.tipo;
+            prodN.Natural=true;
+            prodN.PanelOrigen=nil;
+            prodN.Panel2=nil;
+            cas.elemeto=prodN;
+            cas.addSubview(prodN);
         }
+        
         actualizaContador();
     }
     
