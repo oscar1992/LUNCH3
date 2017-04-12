@@ -37,7 +37,7 @@ class DatosK: NSObject {
     }
     
     func bajaVista(vista: UIView){
-        //print("baja");
+        print("baja");
         if(vista.frame.origin.y<0){
             //print("frameV: ", vista.frame);
             let frameVista = CGRectMake(vista.frame.origin.x, 0, vista.frame.width, vista.frame.height);

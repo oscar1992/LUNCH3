@@ -75,7 +75,7 @@ class CargaInicial2 : NSObject{
                     case is TipoInfo.Type:
                         let obj = (ele as! TipoInfo);
                         let rutaEle = datosURL?.stringByAppendingString("/"+String(p));
-                        //print("P: ", p);
+                        print("P: ", p);
                         let contenido = NSKeyedArchiver.archivedDataWithRootObject(obj);
                         fileManager.createFileAtPath(rutaEle!, contents: contenido, attributes: nil);
                         p += 1;
@@ -191,7 +191,7 @@ class CargaInicial2 : NSObject{
             for ele in lista{
                 let rutaEle = ruta.stringByAppendingString("/"+ele);
                 let prod = (NSKeyedUnarchiver.unarchiveObjectWithData(fileManager.contentsAtPath(rutaEle)!));
-                //print("FECHA PROD: ",(prod as! Producto).ultimaActualizacion);
+                //print("FECHA PROD: ",(prod as! Producto).id);
                 DatosC.contenedor.productos.append(prod as! Producto);
             }
             

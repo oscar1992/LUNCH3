@@ -84,6 +84,7 @@ class CargaInicial: NSObject {
                         let imagenD=UIImage(data: data!);
                         prod.imagen=imagenD;
                         //NSUserDefaults.standardUserDefaults().setObject(UIImagePNGRepresentation(imagenD!), forKey: String(prod.id));
+                        
                         self.exitos.append(prod);
                         //self.recoge();
                         //print("ImagenE");
@@ -160,7 +161,7 @@ class CargaInicial: NSObject {
                     break;
                 case is TipoInfo.Type:
                     let cargaTipoInfo = CargaTinfo2();
-                    cargaTipoInfo.cargaInformacion(plogin, cInicial: self);
+                    cargaTipoInfo.cargaInformacion(self);
                     break;
                 case is Tag.Type:
                     let cargaTags = CargaTags2();

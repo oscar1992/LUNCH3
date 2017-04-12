@@ -19,8 +19,9 @@ class CargaTinfo2: NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
     var task: NSURLSessionDataTask!;
     var profundidad = 0;
     
-    func cargaInformacion(log: LoginView, cInicial: CargaInicial){
+    func cargaInformacion(cInicial: CargaInicial){
         msgInicia();
+        DatosB.cont.listaTInfo.removeAll();
         let mensajeEnviado:String = "<soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/' xmlns:enp='http://enpoint.lunch.com.co/'><soapenv:Header/><soapenv:Body><enp:listaInformacionNutricionalEntity/></soapenv:Body></soapenv:Envelope>";
         
         //print("Mensaje: ", mensajeEnviado);
@@ -60,14 +61,15 @@ class CargaTinfo2: NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
                 if(nulo && self.profundidad<2){
                     self.task.cancel();
                     self.profundidad += 1;
-                    self.cargaInformacion(log, cInicial: cInicial);
+                    self.cargaInformacion(cInicial);
                 }else if(nulo && self.profundidad>=2){
                     self.msgDesconexion();
                 }else{
                     self.sumaBarra();
-                    print("Carga Informacion Nutricional");
+                    
                     let cargaI2 = CargaInicial2(cInicial: cInicial);
                     cargaI2.guarda(DatosB.cont.listaTInfo, tipo: TipoInfo.self);
+                    print("Carga Informacion Nutricional");
                     self.añadeInfo();
                     //log.pasa2();
                     //log.vista.removeFromSuperview();
@@ -154,8 +156,12 @@ class CargaTinfo2: NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
     func parser(parser: NSXMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         if(elementName as NSString).isEqualToString("return"){
             let tInfo = TipoInfo(id: id!, tipo: tipoNombre!, valor: valor!, idProducto: idProducto!);
+            
+            if(idProducto == 193){
+                print("---------------- tipoinfo: ", valor!, " - ", idProducto!, " -id: ", id!);
+            }
             DatosB.cont.listaTInfo.append(tInfo);
-            //print("---------------- tipoinfo: ", DatosB.cont.listaTInfo.count);
+            //
         }
     }
     

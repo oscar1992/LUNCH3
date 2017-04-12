@@ -42,7 +42,7 @@ class VistaPedido: UIView {
                 parLabels(frame1, text1: "Fecha Entrega:", text2: formateadorFecha(pedido.fechaEntrega));
                 break;
             case 3:
-                parLabels(frame1, text1: "Hora de Entrega:", text2: String(pedido.horaEntrega));
+                //parLabels(frame1, text1: "Hora de Entrega:", text2: String(pedido.horaEntrega));
                 break;
             case 4:
                 parLabels(frame1, text1: "Valor Total:", text2: String(pedido.valor));

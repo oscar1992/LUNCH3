@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SubePedido: NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
+class ConfirmaPedido: NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
     var resp: NSData! = nil
     var estado:NSMutableString!
     var parser=NSXMLParser()
@@ -16,22 +16,22 @@ class SubePedido: NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
     var element=NSString()
     var idReferencia:Int!;
     
-    func subePedido(idPadre: Padre, fechaPedido: String, fechaEntrega: String, horaEntrega: String, valor: Double, cantidad: Int, metodo: String, aprobado: Bool){
+    func confirmaPedido(idPedido: String, idPadre: Padre, fechaPedido: String, fechaEntrega: String, horaEntrega: String, valor: Double, cantidad: Int, metodo: String, aprobado: Bool){
         
-        var mensajeEnviado:String = "<soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/' xmlns:enp='http://enpoint.lunch.com.co/'><soapenv:Header/><soapenv:Body><enp:ingresaPedido><Pedido>";
+        var mensajeEnviado:String = "<soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/' xmlns:enp='http://enpoint.lunch.com.co/'><soapenv:Header/><soapenv:Body><enp:actualizaPedido><Pedido>";
         
         mensajeEnviado += "<aprobado>"+String(aprobado)+"</aprobado>";
         mensajeEnviado += "<cantidad>"+String(cantidad)+"</cantidad>";
         mensajeEnviado += "<fechaEntrega>"+fechaEntrega+"</fechaEntrega>";
         mensajeEnviado += "<fechaPedido>"+fechaPedido+"</fechaPedido>";
         mensajeEnviado += "<horaEntrega>"+horaEntrega+"</horaEntrega>";
-        mensajeEnviado += "<idPedido>?</idPedido>";
+        mensajeEnviado += "<idPedido>"+idPedido+"</idPedido>";
         mensajeEnviado += "<padre><idPadre>"+String(idPadre.id!)+"</idPadre>";
         mensajeEnviado += "<terminoFecha>"+idPadre.terminoFecha!+"</terminoFecha></padre>";
         mensajeEnviado += "<valor>"+String(valor)+"</valor>";
         mensajeEnviado += "<metodo>"+metodo+"</metodo>";
         
-        mensajeEnviado += "</Pedido></enp:ingresaPedido></soapenv:Body></soapenv:Envelope>";
+        mensajeEnviado += "</Pedido></enp:actualizaPedido></soapenv:Body></soapenv:Envelope>";
         
         print("envia Pedido: ", mensajeEnviado);
         let is_URL: String = "http://93.188.163.97:8080/Lunch2/clienteEndpoint"
@@ -64,23 +64,7 @@ class SubePedido: NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
             self.parser.delegate=self
             self.parser.parse();
             dispatch_async(dispatch_get_main_queue(),{
-                print("ID: ", self.id);
-                print("idPadre: ", idPadre.id);
-                print("fecha pedido: ", fechaPedido);
-                print("fecha entrega: ", fechaEntrega);
-                print("hora entrega: ", horaEntrega);
-                print("valor: ", valor);
-                print("cantidad: ", cantidad);
-                print("método: ", metodo);
-                let pedido = Pedido(id: Int(self.id), idPadre: idPadre.id!, fechaPedido: fechaPedido, fechaEntrega: fechaEntrega, horaEntrega: horaEntrega, valor: valor, cantidad: cantidad, metodo: metodo, entregado: false, cancelado: false);
-                print("idpedido: ", pedido.id);
-                
-                let subeTipo = SubeTipoLonchera();
-                subeTipo.subeListaTipos(DatosB.cont.listaLoncheras, padre: idPadre, pedido: pedido);
-                DatosB.cont.datosPadre.boton.enabled=true;
-                DatosB.cont.datosPadre.idReferencia = self.idReferencia;
-                DatosB.cont.datosPadre.debita2();
-                DatosC.contenedor.pedido = pedido;
+                print("Exito: ", data);
             });
             
         })

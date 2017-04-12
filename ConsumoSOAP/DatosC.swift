@@ -33,6 +33,7 @@ struct keysPrimarias {
     //static let mesActual = Mes();
     static let ninoActual = VistaNino();
     static let caelendario = Calendario();
+    
     }
 
 class DatosC{
@@ -63,6 +64,7 @@ class DatosC{
     //static var mesActual = Mes();
     var ninoActual : VistaNino?;
     static var calendario = Calendario();
+    var pedido : Pedido?;
     
     init(){
         self.anchoP=UIScreen.mainScreen().bounds.width;

@@ -40,6 +40,8 @@ class CargaPedidos: NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
         //lobj_Request.addValue("223", forHTTPHeaderField: "Content-Length")
         lobj_Request.addValue("\"bool\"", forHTTPHeaderField: "SOAPAction")
         
+        //print("mensg: ", mensajeEnviado);
+        
         let task = session.dataTaskWithRequest(lobj_Request, completionHandler: {data, response, error -> Void in
             //print("Response: \(response)")
             let strData = NSString(data: data!, encoding: NSUTF8StringEncoding)

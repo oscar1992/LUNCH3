@@ -1,16 +1,15 @@
 //
-//  AddCard.swift
+//  DeleteCard.swift
 //  La Lonchera
 //
-//  Created by Oscar Ramirez on 10/02/17.
+//  Created by Oscar Ramirez on 28/02/17.
 //  Copyright © 2017 Edumedio. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-
-class AddCard: NSObject, NSURLConnectionDelegate{
+class DeleteCard: NSObject, NSURLConnectionDelegate{
     
     var envia:String="";
     var aplicationCode : String!;
@@ -18,8 +17,11 @@ class AddCard: NSObject, NSURLConnectionDelegate{
     var email : String!;
     var sesionId : String!;
     var timeStamp : String!;
+    var tarjeta: TarjetaEntidad!;
+    var vista: VistaTarjetas!;
     
-    override init(){
+    init(tarjeta: TarjetaEntidad){
+        self.tarjeta=tarjeta;
         super.init();
         aplicationCode = "LONCH";
         uid = String(DatosD.contenedor.padre.id!);
@@ -29,33 +31,46 @@ class AddCard: NSObject, NSURLConnectionDelegate{
         
     }
     
-    func add()->NSURLRequest{
-        envia += "https://ccapi-stg.paymentez.com/api/cc/add?";
-        envia += "application_code="+aplicationCode;
-        envia += "&email="+email;
-        envia += "&session_id="+sesionId;
-        envia += "&uid="+uid;
-        envia += "&auth_timestamp="+timeStamp;
-        envia += "&"+sesionId;
-        let cadenaSHA = "application_code="+aplicationCode+"&email="+email+"&session_id="+sesionId+"&uid="+uid+"&"+timeStamp+"&"+sesionId;
-        //let cadenaSHA = "application_code=foo&email=awesome%40user.com&uid=1&1394829530&Th1sI5myK3Y";
-        let datos = cadenaSHA.dataUsingEncoding(NSUTF8StringEncoding);
-        print("Pre SHA: ", cadenaSHA);
-        envia += "&auth_token="+String(sha256(datos!));
-        //envia += "XXX"
-        //envia = envia.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!;
-        //envia = envia.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!;
-        //print("Pre: ", envia);
-        let url = NSURL(string: envia);
-        print("Envia: ", url!);
-        let request = NSURLRequest(URL: url!);
-        return request;
-        //NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) {(response, data, error) in
-        //print(NSString(data: data!, encoding: NSUTF8StringEncoding))
-        //}
+    func trataEmail(email: String)->String{
+        var retorna = email;
+        for letra in email.characters{
+            if(letra == "@"){
+                retorna.replaceRange(retorna.rangeOfString("@")!, with: "%40");
+            }
+            
+        }
+        return retorna;
     }
     
-    //Mñetodo que hashea una cadena de texto introducido a travez del encriptado SHA256
+    //Método que genera la cadena para ahcer el request del servicio de paymentez
+    func borra(){
+        let cadenaSHA = "application_code="+aplicationCode+"&card_reference="+tarjeta.referencia+"&uid="+uid+"&"+timeStamp+"&"+sesionId;
+        let datos = cadenaSHA.dataUsingEncoding(NSUTF8StringEncoding);
+        print("Pre SHA: ", cadenaSHA);
+        envia += "https://ccapi-stg.paymentez.com/api/cc/delete?";
+        envia += "card_reference="+tarjeta.referencia;
+        envia += "&application_code="+aplicationCode;
+        envia += "&uid="+uid;
+        envia += "&auth_timestamp="+timeStamp;
+        envia += "&auth_token="+String(sha256(datos!));
+
+        let url = NSURL(string: envia);
+        print("Envia: ", url!);
+        let request = NSMutableURLRequest(URL: url!);
+        request.HTTPMethod = "POST";
+        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) {(response, data, error) in
+            //print(NSString(data: data!, encoding: NSUTF8StringEncoding));
+            let httpStatus = response as? NSHTTPURLResponse;
+            if  httpStatus!.statusCode == 200{
+                print("Borrado");
+                self.vista.consultaTarjetas();
+            }else{
+                print("No borrado: ",  httpStatus!.statusCode);
+            }
+        }
+    }
+    
+    //Método que hashea una cadena de texto introducido a travez del encriptado SHA256
     func sha256(data : NSData) -> String {
         let res = NSMutableData(length: Int(CC_SHA256_DIGEST_LENGTH))
         CC_SHA256(data.bytes, CC_LONG(data.length), UnsafeMutablePointer(res!.mutableBytes))
@@ -71,7 +86,7 @@ class AddCard: NSObject, NSURLConnectionDelegate{
             if(letra == " "){
                 //pos.append(cambia.rangeOfString(" ")!);
                 cambia.replaceRange(cambia.rangeOfString(" ")!, with: "");
-                 //print("Cambia: ", cambia);
+                //print("Cambia: ", cambia);
             }
             if(letra == "<"){
                 cambia.replaceRange(cambia.rangeOfString("<")!, with: "");
@@ -84,17 +99,6 @@ class AddCard: NSObject, NSURLConnectionDelegate{
             p += 1;
         }
         return cambia;
-    }
-    
-    func trataEmail(email: String)->String{
-        var retorna = email;
-        for letra in email.characters{
-            if(letra == "@"){
-                retorna.replaceRange(retorna.rangeOfString("@")!, with: "%40");
-            }
-            
-        }
-        return retorna;
     }
     
 }

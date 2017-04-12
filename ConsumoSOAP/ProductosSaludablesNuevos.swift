@@ -77,7 +77,7 @@ class ProductosSaludablesNuevos: NSObject ,NSURLConnectionDelegate, NSXMLParserD
                         //Se murio
                     }else{
                         //Fin OK
-                        print("CantidadProductos Nuevos: ", self.productosSaludNuevos.count);
+                        print("CantidadProductosSS Nuevos: ", self.productosSaludNuevos.count);
                         self.cIni.cambiaProductosSaludablesNuevos(self.productosSaludNuevos);
                     }
                 });

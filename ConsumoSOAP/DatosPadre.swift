@@ -29,7 +29,8 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
     var boton : UIButton!;
     var carrito: Carrito!;
     var bloq:UIView!;
-    
+    var tarjeta: TarjetaEntidad!;
+    var idReferencia : Int!; //Referencia para las compras con tarjeta de crédito
     
     var vistaDir: VistaDirecciones!;
     
@@ -41,7 +42,7 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
         iniciaBotonVolver();
         iniciaFondo()
         poliogono();
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(LoginView.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil);
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(DatosPadre.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil);
         carrito=DatosB.cont.carrito;
         DatosB.cont.datosPadre=self;
         listaCiudad();
@@ -55,6 +56,8 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
         DatosK.cont.tecladoFrame=frame;
         DatosK.cont.subeVistaCantidad(self.view, cant: 150);
     }
+    
+    
     
     //Método que inicia el fondo de los datops
     func iniciaFondo(){
@@ -105,6 +108,7 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
         let text = UILabel(frame: frame2);
         text.text="Confírmanos tus datos de entrega:";
         text.textAlignment=NSTextAlignment.Center;
+        text.adjustsFontSizeToFitWidth=true;
         self.view.addSubview(text);
         iniciaTabDireccion((text.frame.height+text.frame.origin.y));
     }
@@ -253,7 +257,7 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
         vista2.backgroundColor=UIColor.whiteColor();
         let frameText2=CGRectMake(bordeTxt, 0, ancho, alto);
         self.texto = UILabel(frame: frameText2);
-        self.texto.text="Fecha";
+        self.texto.text="Selecciona la Fecha";
         vista2.addSubview(self.texto);
         
         self.view.addSubview(vista);
@@ -281,7 +285,8 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
         let frameText2=CGRectMake(bordeTxt, 0, ancho, alto);
         self.texto2 = UILabel(frame: frameText2);
         vista2.addSubview(self.texto2);
-        self.texto2.text="Te entregaremos el pedido durante el día. Si no estas, lo dejaremos en portería!";
+        self.texto2.text="Te entregaremos el pedido durante el día";
+        self.texto2.adjustsFontSizeToFitWidth=true;
         self.view.addSubview(vista);
         self.view.addSubview(vista2);
         iniciaTabMetodo((vista2.frame.height+vista2.frame.origin.y));
@@ -307,7 +312,7 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
         let frameText2=CGRectMake(bordeTxt, 0, ancho, alto);
         metodo = UILabel(frame: frameText2);
         vista2.addSubview(metodo);
-        metodo.text="Forma de Pago";
+        metodo.text="Selecciona tu forma de pago";
         self.view.addSubview(vista);
         self.view.addSubview(vista2);
         iniciabotonPedido(vista2.frame.origin.y+vista2.frame.height);
@@ -315,7 +320,7 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
     
     func iniciaListaDesplegableMetodo(sender: UIButton){
         bloqueador();
-        let Datos = ["Efectivo"];
+        let Datos = ["Crédito"];
         let despliega = VistaMetodos(opciones: Datos);
         
         self.view.addSubview(despliega);
@@ -512,11 +517,30 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
                 print("tipo: ", tipos.0.nombr);
                 print("cants: ", tipos.1);
             }
-            subePedido();
-            
+            debita();
+            //subePedido();
         }
-        
-        
+    }
+    
+    func debita(){
+        subePedido();
+    }
+    
+    func debita2(){
+        if(tarjeta != nil && metodo.text != "Efectivo"){
+                       var tipos = "";
+            var precio = 0;
+            for lonch in DatosB.cont.listaLoncheras{
+                tipos += lonch.0.nombr+"-"+String(lonch.1);
+                precio += lonch.0.valor;
+            }
+            precio += Int(DatosB.cont.envia);
+            print("TT: ", tipos);
+            let debita = DebitCard(tarjeta: tarjeta, cantidad: String(precio), descripcion: tipos, referencia: String(idReferencia), vat: "0.00");
+            //debita.debita(String(precio), descripcion: tipos, referencia: String(idReferencia), vat: "0.00");
+        }else{
+            print("No hay método");
+        }
     }
     
     func tieneNumeros(texto: String)->Bool{
@@ -594,8 +618,12 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
         DatosD.contenedor.padre.direccion=(direccion1.text!+" "+direccion2.text!+" "+direccion3.text!+" "+direccion4.text!);
         DatosD.contenedor.padre.telefono=telefono.text;
         actua.actualizaPadre(DatosD.contenedor.padre);
-        
-        subeP.subePedido(DatosD.contenedor.padre, fechaPedido: fechaActual(), fechaEntrega: fecha, horaEntrega: hora, valor: valor(), cantidad: cant(), metodo: metodoV);
+        var aprobado = false
+        print("MétodoV: ", metodoV);
+        if(metodoV == "Efectivo"){
+            aprobado = true;
+        }
+        subeP.subePedido(DatosD.contenedor.padre, fechaPedido: fechaActual(), fechaEntrega: fecha, horaEntrega: hora, valor: valor(), cantidad: cant(), metodo: metodoV, aprobado: aprobado);
         boton.enabled=false;
     }
     

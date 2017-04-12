@@ -92,7 +92,7 @@ class SaludableInfo: UIViewController {
         let frame = CGRectMake(OX, OY, ancho, alto);
         let texto = UILabel(frame: frame);
         texto.font=UIFont(name: "Gotham Bold", size: alto*0.1);
-        texto.text="Hicimos el trabajo por ti, como expertos nutricionales, seleccionamos la mejor oferta de productos saludables y la ponemos a tu dispocisión, solo aquí en La Lonchera. Armamos y llevamos Loncheras saludables para ti y tu familia.";
+        texto.text="Somos la primera app de alimentación que te permite elegir, personalizar y ordenar loncheras saludables para ti y tu familia. Con expertos nutricionales seleccionamos la mejor oferta de productos saludables, la organizamos y la ponemos a tu disposición.";
         texto.numberOfLines = 9;
         texto.textColor=UIColor.grayColor();
         texto.adjustsFontSizeToFitWidth=true;
@@ -121,7 +121,7 @@ class SaludableInfo: UIViewController {
         let frame = CGRectMake(OX, OY, ancho, alto);
         let texto = UILabel(frame: frame);
         texto.font=UIFont(name: "Gotham Bold", size: alto*0.1);
-        texto.text="Aseguramos que todos los productos marcados con la hoja:\n*No tienen endulzantes artificiales\n*Son bajos en azúcar\n*No tienen grasas dañinas\n*No tienen ingredientes artificiales\n*Son bajos en sodio\nContienen alto aporte nutricional: vitaminas, antioxidantes y minerales.";
+        texto.text="Seleccionamos los mejores productos saludables\n1. No tienen ingredientes artificiales ni grasas dañinas.\n2. Son bajos en azúcar y en sodio.\n3. Contienen alto aporte nutricional: vitaminas, antioxidantes y minerales.\n";
         texto.numberOfLines = 9;
         texto.textColor=UIColor.grayColor();
         texto.adjustsFontSizeToFitWidth=true;

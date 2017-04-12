@@ -268,7 +268,7 @@ class CreaUsuario: UIViewController, UITextFieldDelegate, UIImagePickerControlle
         let frameGenero = CGRectMake(OX, OY, ancho, alto);
         let genero = VistaGenero(frame: frameGenero);
         genero.accessibilityIdentifier="genero";
-        self.view.addSubview(genero);
+        //self.view.addSubview(genero);
         iniciaFoto(yini);iniciaCheckTerminos(OY+alto);
     }
     
@@ -443,6 +443,8 @@ class CreaUsuario: UIViewController, UITextFieldDelegate, UIImagePickerControlle
         
         print("emailValido: ", emailValido);
         print("emailExistente: ", emailExistente);
+        bgene = true;
+        genero = "-";
         if(bnomb==false||bema==false||bpass==false||bgene==false||bterm==false||emailValido==false||passValido==false||emailExistente==true){
             let ancho = self.view.frame.width*0.8;
             let alto = self.view.frame.height*0.4;
@@ -459,9 +461,12 @@ class CreaUsuario: UIViewController, UITextFieldDelegate, UIImagePickerControlle
             if(bpass==false){
                 msgT = msgT + "\nUps! las contraseñas no son iguales! Trata de nuevo.";
             }
+           
+            
             if(bgene==false){
                 msgT = msgT + "\nNo nos dijiste si eres hombre o mujer.";
             }
+      
             if(bterm==false){
                 msgT = msgT + "\nSe te olvidó seleccionar los términos y condiciones";
             }
@@ -476,6 +481,7 @@ class CreaUsuario: UIViewController, UITextFieldDelegate, UIImagePickerControlle
                 msgT = msgT + "\nEste correo ya existe! Seguro ya creaste un usuario!";
             }
             //print("msg: ", msgT);
+            
             let msg = MensajeCrea(frame: frameMens, msg: msgT, gif: false);
             msg.iniciaTimer();
             self.view.addSubview(msg);
@@ -483,6 +489,7 @@ class CreaUsuario: UIViewController, UITextFieldDelegate, UIImagePickerControlle
         }else{
             pasa = true;
         }
+        print("sube: ", pasa);
         return (pasa, nombre, email, pass2, genero, terminos);
     }
     

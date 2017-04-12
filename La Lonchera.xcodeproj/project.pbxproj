@@ -17,8 +17,10 @@
 		A10671E31D3D596600D0F0B5 /* ScrollResultados.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10671E21D3D596600D0F0B5 /* ScrollResultados.swift */; };
 		A10671E51D3D5AF500D0F0B5 /* BotonResultado.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10671E41D3D5AF500D0F0B5 /* BotonResultado.swift */; };
 		A10671E71D3E84DF00D0F0B5 /* DetalleProducto.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10671E61D3E84DD00D0F0B5 /* DetalleProducto.swift */; };
+		A10A368D1E71B5580055AA6A /* VistaMensaje.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10A368C1E71B5580055AA6A /* VistaMensaje.swift */; };
 		A10B16BB1E1BF0C000EA1CBA /* CargaZip.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10B16BA1E1BF0C000EA1CBA /* CargaZip.swift */; };
 		A10B16BD1E1C093600EA1CBA /* ConsultaZip.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10B16BC1E1C093600EA1CBA /* ConsultaZip.swift */; };
+		A1111EA41E7724CE004510E5 /* ConfirmaPedido.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1111EA31E7724CE004510E5 /* ConfirmaPedido.swift */; };
 		A11169EB1DDCEC5100B9D759 /* SubeBusqueda.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11169EA1DDCEC5100B9D759 /* SubeBusqueda.swift */; };
 		A11278AF1D8C707200015B61 /* CargaEnvio.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11278AE1D8C707200015B61 /* CargaEnvio.swift */; };
 		A11838B71D8206C100201A96 /* SubeFavorito.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11838B61D8206B900201A96 /* SubeFavorito.swift */; };
@@ -37,9 +39,13 @@
 		A13A2BD11D08AFF50008E22E /* CargaFavoritos.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13A2BD01D08AFF50008E22E /* CargaFavoritos.swift */; };
 		A13A2BD31D08C2590008E22E /* CargaItemsFavoritos.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13A2BD21D08C2590008E22E /* CargaItemsFavoritos.swift */; };
 		A13A2BD51D0A2A750008E22E /* IngresaFavoritos.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13A2BD41D0A2A750008E22E /* IngresaFavoritos.swift */; };
+		A13E2D8C1E5FE12300244054 /* TarjetaEntidad.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13E2D8B1E5FE12300244054 /* TarjetaEntidad.swift */; };
+		A13E2D8E1E613DD300244054 /* VistaTarjeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13E2D8D1E613DCD00244054 /* VistaTarjeta.swift */; };
+		A13E2D901E655A2E00244054 /* DeleteCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13E2D8F1E655A2E00244054 /* DeleteCard.swift */; };
 		A13EC13E1E4B676100B1C5F2 /* BaseTutorial.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13EC13D1E4B676100B1C5F2 /* BaseTutorial.swift */; };
 		A13EC1401E4BAB5300B1C5F2 /* VistaTut.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13EC13F1E4BAB5300B1C5F2 /* VistaTut.swift */; };
 		A13EC1421E4BB46F00B1C5F2 /* BaseImagenes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13EC1411E4BB46E00B1C5F2 /* BaseImagenes.swift */; };
+		A13EF2BE1E6E2D3000947C03 /* VistaWeb2.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13EF2BD1E6E2D2F00947C03 /* VistaWeb2.swift */; };
 		A14296241D23064100A0905B /* Sans-Beam-Body-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = A14296231D23064100A0905B /* Sans-Beam-Body-Heavy.otf */; };
 		A14296261D230B7C00A0905B /* Sans Beam Head SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A14296251D230B7C00A0905B /* Sans Beam Head SemiBold.otf */; };
 		A14296281D2580C100A0905B /* SubeNino.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14296271D2580C100A0905B /* SubeNino.swift */; };
@@ -164,6 +170,7 @@
 		A1C6DFDC1D92EB10008B659B /* Gotham-Bold_0.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A1C6DFDA1D92EB10008B659B /* Gotham-Bold_0.ttf */; };
 		A1C6DFDD1D92EB10008B659B /* Gotham-Book_0.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A1C6DFDB1D92EB10008B659B /* Gotham-Book_0.ttf */; };
 		A1CB37E71E02EC7F003B4DD2 /* CargaInicial2.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CB37E61E02EC7F003B4DD2 /* CargaInicial2.swift */; };
+		A1CB6EAC1E65E5A80011B8FA /* DebitCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CB6EAB1E65E5A70011B8FA /* DebitCard.swift */; };
 		A1CD96511DF6072700ADD84B /* CargaTags2.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CD96501DF6072600ADD84B /* CargaTags2.swift */; };
 		A1CD96531DF7137000ADD84B /* CargaTinfo2.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CD96521DF7136F00ADD84B /* CargaTinfo2.swift */; };
 		A1CED92D1DA2ACA1004E090F /* VistaGenero.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CED92C1DA2ACA1004E090F /* VistaGenero.swift */; };
@@ -178,6 +185,7 @@
 		A1D1116F1D494E3A00B97F22 /* EliminaFavoritos.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D1116E1D494E3800B97F22 /* EliminaFavoritos.swift */; };
 		A1D111711D4AAAF300B97F22 /* BarraOpciones.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D111701D4AAAF300B97F22 /* BarraOpciones.swift */; };
 		A1D111731D4AC4C800B97F22 /* Circulo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D111721D4AC4C800B97F22 /* Circulo.swift */; };
+		A1D869561E67257C002EA209 /* BotDebita.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D869551E67257C002EA209 /* BotDebita.swift */; };
 		A1D877901D7A2D5C000DA798 /* Lonchera2.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D8778F1D7A2D59000DA798 /* Lonchera2.swift */; };
 		A1D877921D7DCD35000DA798 /* Contador2.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D877911D7DCD35000DA798 /* Contador2.swift */; };
 		A1D877941D7F4814000DA798 /* Caja2.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D877931D7F4812000DA798 /* Caja2.swift */; };
@@ -187,12 +195,15 @@
 		A1E03A751E26CA9A000499A1 /* ProductosNuevos.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E03A741E26CA9A000499A1 /* ProductosNuevos.swift */; };
 		A1E44D431DA55A3E00967E18 /* Olvida2.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E44D421DA55A3D00967E18 /* Olvida2.swift */; };
 		A1E44D451DA5615200967E18 /* DatosK.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E44D441DA5615200967E18 /* DatosK.swift */; };
+		A1E65AE61E5DEC4200239599 /* ListCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E65AE51E5DEC4200239599 /* ListCard.swift */; };
 		A1E692941E2808F300BF9726 /* ProductosSaludablesNuevos.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E692931E2808F300BF9726 /* ProductosSaludablesNuevos.swift */; };
+		A1F044491E6F115D00514057 /* SubVista2.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F044481E6F115C00514057 /* SubVista2.swift */; };
 		A1F1F56D1D19D78E00B4BFBE /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = A1F1F56C1D19D78E00B4BFBE /* Fonts */; };
 		A1F1F5701D19DA3B00B4BFBE /* Albertino.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A1F1F56E1D19DA3B00B4BFBE /* Albertino.ttf */; };
 		A1F1F5711D19DA3B00B4BFBE /* Sans-Beam-Head-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = A1F1F56F1D19DA3B00B4BFBE /* Sans-Beam-Head-Medium.otf */; };
 		A1F1F5731D1DC09800B4BFBE /* BotonDias.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F1F5721D1DC09700B4BFBE /* BotonDias.swift */; };
 		A1F1F5781D21A81100B4BFBE /* Sans-Beam-Head-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A1F1F5771D21A81100B4BFBE /* Sans-Beam-Head-Bold.otf */; };
+		A1F330741E96AE0000971F78 /* getIP.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F330731E96AE0000971F78 /* getIP.swift */; };
 		A1FF33141CED15B8007771F2 /* PFactura.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FF33131CED15B8007771F2 /* PFactura.swift */; };
 		CD5DBBE66B38D087A4B941CB /* Pods_La_Lonchera.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 308CD5FB8EEE63B067F9591A /* Pods_La_Lonchera.framework */; };
 /* End PBXBuildFile section */
@@ -227,8 +238,10 @@
 		A10671E21D3D596600D0F0B5 /* ScrollResultados.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollResultados.swift; sourceTree = "<group>"; };
 		A10671E41D3D5AF500D0F0B5 /* BotonResultado.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BotonResultado.swift; sourceTree = "<group>"; };
 		A10671E61D3E84DD00D0F0B5 /* DetalleProducto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetalleProducto.swift; sourceTree = "<group>"; };
+		A10A368C1E71B5580055AA6A /* VistaMensaje.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VistaMensaje.swift; sourceTree = "<group>"; };
 		A10B16BA1E1BF0C000EA1CBA /* CargaZip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CargaZip.swift; sourceTree = "<group>"; };
 		A10B16BC1E1C093600EA1CBA /* ConsultaZip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsultaZip.swift; sourceTree = "<group>"; };
+		A1111EA31E7724CE004510E5 /* ConfirmaPedido.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmaPedido.swift; sourceTree = "<group>"; };
 		A11169EA1DDCEC5100B9D759 /* SubeBusqueda.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubeBusqueda.swift; sourceTree = "<group>"; };
 		A11278AE1D8C707200015B61 /* CargaEnvio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CargaEnvio.swift; sourceTree = "<group>"; };
 		A11838B61D8206B900201A96 /* SubeFavorito.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubeFavorito.swift; sourceTree = "<group>"; };
@@ -247,9 +260,13 @@
 		A13A2BD01D08AFF50008E22E /* CargaFavoritos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CargaFavoritos.swift; sourceTree = "<group>"; };
 		A13A2BD21D08C2590008E22E /* CargaItemsFavoritos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CargaItemsFavoritos.swift; sourceTree = "<group>"; };
 		A13A2BD41D0A2A750008E22E /* IngresaFavoritos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IngresaFavoritos.swift; sourceTree = "<group>"; };
+		A13E2D8B1E5FE12300244054 /* TarjetaEntidad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TarjetaEntidad.swift; sourceTree = "<group>"; };
+		A13E2D8D1E613DCD00244054 /* VistaTarjeta.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VistaTarjeta.swift; sourceTree = "<group>"; };
+		A13E2D8F1E655A2E00244054 /* DeleteCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteCard.swift; sourceTree = "<group>"; };
 		A13EC13D1E4B676100B1C5F2 /* BaseTutorial.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTutorial.swift; sourceTree = "<group>"; };
 		A13EC13F1E4BAB5300B1C5F2 /* VistaTut.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VistaTut.swift; sourceTree = "<group>"; };
 		A13EC1411E4BB46E00B1C5F2 /* BaseImagenes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseImagenes.swift; sourceTree = "<group>"; };
+		A13EF2BD1E6E2D2F00947C03 /* VistaWeb2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VistaWeb2.swift; sourceTree = "<group>"; };
 		A14296231D23064100A0905B /* Sans-Beam-Body-Heavy.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Sans-Beam-Body-Heavy.otf"; path = "ConsumoSOAP/Resources/Fonts/Sans-Beam-Body-Heavy.otf"; sourceTree = "<group>"; };
 		A14296251D230B7C00A0905B /* Sans Beam Head SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Sans Beam Head SemiBold.otf"; path = "ConsumoSOAP/Resources/Fonts/Sans Beam Head SemiBold.otf"; sourceTree = "<group>"; };
 		A14296271D2580C100A0905B /* SubeNino.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubeNino.swift; sourceTree = "<group>"; };
@@ -375,6 +392,7 @@
 		A1C6DFDA1D92EB10008B659B /* Gotham-Bold_0.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Gotham-Bold_0.ttf"; path = "ConsumoSOAP/Resources/Fonts/Gotham-Bold_0.ttf"; sourceTree = "<group>"; };
 		A1C6DFDB1D92EB10008B659B /* Gotham-Book_0.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Gotham-Book_0.ttf"; path = "ConsumoSOAP/Resources/Fonts/Gotham-Book_0.ttf"; sourceTree = "<group>"; };
 		A1CB37E61E02EC7F003B4DD2 /* CargaInicial2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CargaInicial2.swift; sourceTree = "<group>"; };
+		A1CB6EAB1E65E5A70011B8FA /* DebitCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebitCard.swift; sourceTree = "<group>"; };
 		A1CD96501DF6072600ADD84B /* CargaTags2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CargaTags2.swift; sourceTree = "<group>"; };
 		A1CD96521DF7136F00ADD84B /* CargaTinfo2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CargaTinfo2.swift; sourceTree = "<group>"; };
 		A1CED92C1DA2ACA1004E090F /* VistaGenero.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VistaGenero.swift; sourceTree = "<group>"; };
@@ -389,6 +407,7 @@
 		A1D1116E1D494E3800B97F22 /* EliminaFavoritos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EliminaFavoritos.swift; sourceTree = "<group>"; };
 		A1D111701D4AAAF300B97F22 /* BarraOpciones.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarraOpciones.swift; sourceTree = "<group>"; };
 		A1D111721D4AC4C800B97F22 /* Circulo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Circulo.swift; sourceTree = "<group>"; };
+		A1D869551E67257C002EA209 /* BotDebita.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BotDebita.swift; sourceTree = "<group>"; };
 		A1D8778F1D7A2D59000DA798 /* Lonchera2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lonchera2.swift; sourceTree = "<group>"; };
 		A1D877911D7DCD35000DA798 /* Contador2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contador2.swift; sourceTree = "<group>"; };
 		A1D877931D7F4812000DA798 /* Caja2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Caja2.swift; sourceTree = "<group>"; };
@@ -398,12 +417,15 @@
 		A1E03A741E26CA9A000499A1 /* ProductosNuevos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductosNuevos.swift; sourceTree = "<group>"; };
 		A1E44D421DA55A3D00967E18 /* Olvida2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Olvida2.swift; sourceTree = "<group>"; };
 		A1E44D441DA5615200967E18 /* DatosK.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatosK.swift; sourceTree = "<group>"; };
+		A1E65AE51E5DEC4200239599 /* ListCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListCard.swift; sourceTree = "<group>"; };
 		A1E692931E2808F300BF9726 /* ProductosSaludablesNuevos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductosSaludablesNuevos.swift; sourceTree = "<group>"; };
+		A1F044481E6F115C00514057 /* SubVista2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubVista2.swift; sourceTree = "<group>"; };
 		A1F1F56C1D19D78E00B4BFBE /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Fonts; path = Resources/Fonts; sourceTree = "<group>"; };
 		A1F1F56E1D19DA3B00B4BFBE /* Albertino.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Albertino.ttf; path = ConsumoSOAP/Resources/Fonts/Albertino.ttf; sourceTree = "<group>"; };
 		A1F1F56F1D19DA3B00B4BFBE /* Sans-Beam-Head-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Sans-Beam-Head-Medium.otf"; path = "ConsumoSOAP/Resources/Fonts/Sans-Beam-Head-Medium.otf"; sourceTree = "<group>"; };
 		A1F1F5721D1DC09700B4BFBE /* BotonDias.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BotonDias.swift; sourceTree = "<group>"; };
 		A1F1F5771D21A81100B4BFBE /* Sans-Beam-Head-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Sans-Beam-Head-Bold.otf"; path = "ConsumoSOAP/Resources/Fonts/Sans-Beam-Head-Bold.otf"; sourceTree = "<group>"; };
+		A1F330731E96AE0000971F78 /* getIP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = getIP.swift; sourceTree = "<group>"; };
 		A1FF33131CED15B8007771F2 /* PFactura.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PFactura.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -666,8 +688,17 @@
 			isa = PBXGroup;
 			children = (
 				A14724881E4E21FD00EAA851 /* AddCard.swift */,
-				A147248A1E4E29BC00EAA851 /* VistaTarjetas.swift */,
 				A147248C1E4E60B000EAA851 /* Header.h */,
+				A1E65AE51E5DEC4200239599 /* ListCard.swift */,
+				A13E2D8B1E5FE12300244054 /* TarjetaEntidad.swift */,
+				A13E2D8D1E613DCD00244054 /* VistaTarjeta.swift */,
+				A13E2D8F1E655A2E00244054 /* DeleteCard.swift */,
+				A1CB6EAB1E65E5A70011B8FA /* DebitCard.swift */,
+				A1D869551E67257C002EA209 /* BotDebita.swift */,
+				A13EF2BD1E6E2D2F00947C03 /* VistaWeb2.swift */,
+				A1F044481E6F115C00514057 /* SubVista2.swift */,
+				A10A368C1E71B5580055AA6A /* VistaMensaje.swift */,
+				A1F330731E96AE0000971F78 /* getIP.swift */,
 			);
 			name = Tarjetas;
 			sourceTree = "<group>";
@@ -682,6 +713,7 @@
 				A19227AA1DCA46CC00E21C1A /* CargaTipos.swift */,
 				A14E89A71DCB95610081B4FC /* CargaLista.swift */,
 				A1AEC8301DCD109F0094B945 /* CancelaPedido.swift */,
+				A1111EA31E7724CE004510E5 /* ConfirmaPedido.swift */,
 			);
 			name = CargaPedidos;
 			sourceTree = "<group>";
@@ -721,6 +753,7 @@
 		A18055B61DC7DD7800D5D757 /* MenuLateral */ = {
 			isa = PBXGroup;
 			children = (
+				A147248A1E4E29BC00EAA851 /* VistaTarjetas.swift */,
 				A18055B41DC7D52D00D5D757 /* Menu.swift */,
 				A18055B71DC7DDD100D5D757 /* Cabecera.swift */,
 				A18055B91DC7EB1300D5D757 /* BotonMenu.swift */,
@@ -1098,11 +1131,13 @@
 				A1A082111CBD8F42001C0AD2 /* CargaTItems.swift in Sources */,
 				A173440B1D89E3CB003B467C /* VistaTipo.swift in Sources */,
 				A18055BA1DC7EB1400D5D757 /* BotonMenu.swift in Sources */,
+				A1F330741E96AE0000971F78 /* getIP.swift in Sources */,
 				A1D877991D7F725A000DA798 /* Favoritos.swift in Sources */,
 				A16BAFE11DA8392F007386ED /* ActualizaPadre.swift in Sources */,
 				A17083D31E43852A00085C46 /* SaludableInfo.swift in Sources */,
 				A13603CF1CAF20770032A19A /* ProductoView.swift in Sources */,
 				A1A39A4A1D9E082100CA37BD /* CompruebaInternet.swift in Sources */,
+				A13E2D901E655A2E00244054 /* DeleteCard.swift in Sources */,
 				A1E44D431DA55A3E00967E18 /* Olvida2.swift in Sources */,
 				A1C6DFC51D908AA3008B659B /* CargaFechaEntrega.swift in Sources */,
 				A13A2BCD1D0717CC0008E22E /* ConsultaCategorias.swift in Sources */,
@@ -1112,6 +1147,7 @@
 				A1CED93B1DA436F4004E090F /* Olvida1.swift in Sources */,
 				A14E89A41DCA956D0081B4FC /* Tipos.swift in Sources */,
 				A14554A11E4D37610061A534 /* BaseImagenes2.swift in Sources */,
+				A1CB6EAC1E65E5A80011B8FA /* DebitCard.swift in Sources */,
 				A13603C81CAEFB3D0032A19A /* Producto.swift in Sources */,
 				A18055B81DC7DDD100D5D757 /* Cabecera.swift in Sources */,
 				A1521C0A1DBEB54300342E93 /* VistaMetodos.swift in Sources */,
@@ -1134,6 +1170,7 @@
 				A19747821CDA7F9600656813 /* Contador.swift in Sources */,
 				A1C6DFCD1D91D149008B659B /* Despliega.swift in Sources */,
 				A12C042C1D1496C300BA72E1 /* LaBarra.swift in Sources */,
+				A1E65AE61E5DEC4200239599 /* ListCard.swift in Sources */,
 				A1CED9371DA3101F004E090F /* SubePadre.swift in Sources */,
 				A10B16BB1E1BF0C000EA1CBA /* CargaZip.swift in Sources */,
 				A1AEC8351DCD22380094B945 /* VistaCancelaFin.swift in Sources */,
@@ -1145,6 +1182,7 @@
 				A1D1116F1D494E3A00B97F22 /* EliminaFavoritos.swift in Sources */,
 				A16710A51D79C68B004CB71D /* Saludable.swift in Sources */,
 				A13EC13E1E4B676100B1C5F2 /* BaseTutorial.swift in Sources */,
+				A13EF2BE1E6E2D3000947C03 /* VistaWeb2.swift in Sources */,
 				A18A1B091DB6BB5D009C4950 /* NodoMapa.swift in Sources */,
 				A1CB37E71E02EC7F003B4DD2 /* CargaInicial2.swift in Sources */,
 				A1CED9311DA2C794004E090F /* VistaFoto.swift in Sources */,
@@ -1154,6 +1192,7 @@
 				A14E89A81DCB95610081B4FC /* CargaLista.swift in Sources */,
 				A1A605C31CC81BD000FE9AC7 /* PestanasProductos.swift in Sources */,
 				A13603C61CAEE6580032A19A /* ConsultaProductos.swift in Sources */,
+				A1F044491E6F115D00514057 /* SubVista2.swift in Sources */,
 				A1E03A751E26CA9A000499A1 /* ProductosNuevos.swift in Sources */,
 				A1CED92F1DA2B2D5004E090F /* Selector.swift in Sources */,
 				A1D877971D7F609D000DA798 /* Carrito.swift in Sources */,
@@ -1175,6 +1214,7 @@
 				A13EC1401E4BAB5300B1C5F2 /* VistaTut.swift in Sources */,
 				A1A6421E1E3B9EBE00AFF572 /* iOSDevCenters+GIF.swift in Sources */,
 				A13EC1421E4BB46F00B1C5F2 /* BaseImagenes.swift in Sources */,
+				A10A368D1E71B5580055AA6A /* VistaMensaje.swift in Sources */,
 				A1CED93D1DA43CD1004E090F /* PideRestauracion.swift in Sources */,
 				A1A605C51CC8204900FE9AC7 /* VistaPestana.swift in Sources */,
 				A1B696491CED267C001FBFE1 /* FacturaScroll.swift in Sources */,
@@ -1189,7 +1229,9 @@
 				A18052B81DBAB8B3005930AC /* ValidaPedido.swift in Sources */,
 				A10671DF1D397A7700D0F0B5 /* CargaTags.swift in Sources */,
 				A183B4FA1D78A9D90080DBA9 /* Pred2.swift in Sources */,
+				A1D869561E67257C002EA209 /* BotDebita.swift in Sources */,
 				A1857DEE1CE28B6200D6966D /* Mes.swift in Sources */,
+				A13E2D8C1E5FE12300244054 /* TarjetaEntidad.swift in Sources */,
 				A1D877901D7A2D5C000DA798 /* Lonchera2.swift in Sources */,
 				A18878B21CBBECB400737085 /* PantallaP.swift in Sources */,
 				A17B55711CE3D8E500FA2353 /* Dia.swift in Sources */,
@@ -1217,9 +1259,11 @@
 				A18055B51DC7D53200D5D757 /* Menu.swift in Sources */,
 				A12C04281D107EBB00BA72E1 /* NinoCalendarioBot.swift in Sources */,
 				A19227A91DCA3D4800E21C1A /* CargaPedidos.swift in Sources */,
+				A1111EA41E7724CE004510E5 /* ConfirmaPedido.swift in Sources */,
 				A1AEC8331DCD19200094B945 /* VIstaDeseaCancelar.swift in Sources */,
 				A18055BD1DC7F53E00D5D757 /* Historial.swift in Sources */,
 				A1CED9331DA2E22E004E090F /* SelectorTerminos.swift in Sources */,
+				A13E2D8E1E613DD300244054 /* VistaTarjeta.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1367,7 +1411,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = ConsumoSOAP/Header.h;
 				SWIFT_VERSION = 2.3;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1388,7 +1432,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = ConsumoSOAP/Header.h;
 				SWIFT_VERSION = 2.3;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

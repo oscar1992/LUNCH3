@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidEnterBackground(application: UIApplication) {
         print("En backGround");
-         ContadorCierra = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: #selector(AppDelegate.cierra), userInfo: nil, repeats: false);
+         ContadorCierra = NSTimer.scheduledTimerWithTimeInterval(1800, target: self, selector: #selector(AppDelegate.cierra), userInfo: nil, repeats: false);
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     }

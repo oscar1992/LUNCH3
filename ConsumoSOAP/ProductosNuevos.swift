@@ -25,13 +25,14 @@ class ProductosNuevos: NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
         mensajeEnviado = "<soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/' xmlns:enp='http://enpoint.lunch.com.co/'><soapenv:Header/><soapenv:Body><enp:productosNuevos>";
         var p = 0;
         for id in ids{
+            print("ProdNNNNN: ", id);
             mensajeEnviado.appendContentsOf("<ids>"+String(id)+"</ids>");
             mensajeEnviado.appendContentsOf("<fecha>"+String(fechas[p])+"</fecha>");
             p += 1;
         }
         
         mensajeEnviado.appendContentsOf("</enp:productosNuevos></soapenv:Body></soapenv:Envelope>");
-        //print("Mensaje Enviado: ", mensajeEnviado);
+        
         super.init();
         self.consulta();
         self.cIni=cInicial;
@@ -226,12 +227,16 @@ class ProductosNuevos: NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
     func parser(parser: NSXMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         //Añade Objs
         if(elementName as NSString).isEqualToString("return"){
+            /*
+            print("------Producto Nuevo------");
             print("id: ", id);
             print("tipo: ", tipo);
             print("disponible: ", disponible);
             print("salud: ", salud);
             print("Categ: ", categoria);
             print("fecha: ", ultimaActualizacion);
+            print("------FinProducto Nuevo------");
+            */
             let prod = Producto(id: id!, nombre: nombre!, precio: precio!, imagen: imagen, imagenString: imagenString, tipo: tipo!, disponible: disponible!, salud: salud!, categoria: categoria!, ultimaActualizacion: self.ultimaActualizacion);
             productosNuevos.append(prod);
         }
