@@ -18,32 +18,32 @@ class PestanasProductos: UIButton {
     init(frame: CGRect, padre: ContenedorProductos) {
         self.padre=padre;
         super.init(frame: frame);
-        self.backgroundColor=UIColor.redColor();
-        self.addTarget(self, action: #selector(PestanasProductos.cambia(_:)), forControlEvents: .TouchDown);
+        self.backgroundColor=UIColor.red;
+        self.addTarget(self, action: #selector(PestanasProductos.cambia(_:)), for: .touchDown);
         
         if(subVista != nil){
             self.addSubview((subVista?.view)!);
         }else{
-            subVista=VistaPestana(transitionStyle: UIPageViewControllerTransitionStyle.Scroll,
-                                  navigationOrientation: UIPageViewControllerNavigationOrientation.Horizontal ,
+            subVista=VistaPestana(transitionStyle: UIPageViewControllerTransitionStyle.scroll,
+                                  navigationOrientation: UIPageViewControllerNavigationOrientation.horizontal ,
                                   options:nil );
         }
-        backgroundColor=UIColor.lightGrayColor();
+        backgroundColor=UIColor.lightGray;
         
-        self.subVista?.view.hidden=true;
+        self.subVista?.view.isHidden=true;
         //print("crea");
         
     }
     
-    func cambia(sender: UIButton){
+    func cambia(_ sender: UIButton){
         //print("cambia: ", self.tipo);
         
         for pest in DatosC.contenedor.Pestanas{
             //if(pest.activo==true){
                 
             pest.activo=false;
-            pest.backgroundColor=UIColor.lightGrayColor();
-            pest.subVista!.view.hidden=true;
+            pest.backgroundColor=UIColor.lightGray;
+            pest.subVista!.view.isHidden=true;
             pest.Fondo();
             //pest.superview?.bringSubviewToFront(pest);
                 //print("Activo: ",pest.frame);
@@ -52,9 +52,9 @@ class PestanasProductos: UIButton {
         }
         self.activo=true;
         FondoActivo();
-        self.backgroundColor=UIColor.blueColor();
-        self.subVista!.view.hidden=false;
-        self.superview?.sendSubviewToBack(self);
+        self.backgroundColor=UIColor.blue;
+        self.subVista!.view.isHidden=false;
+        self.superview?.sendSubview(toBack: self);
         padre.activo=self;
         /*
         if(activo==true){
@@ -77,7 +77,7 @@ class PestanasProductos: UIButton {
     //Método que inicializa 
     func iniSlide()->VistaPestana{
         //subVista?.view.frame=CGRectMake(0, (self.frame.height+self.frame.origin.y), DatosC.contenedor.anchoP, self.padre!.frame.height*0.8);
-        subVista?.view.frame=CGRectMake(0, (self.frame.height+self.frame.origin.y), DatosC.contenedor.anchoP, DatosC.contenedor.altoP-(self.frame.height+self.frame.origin.y+(DatosC.contenedor.altoP*0.092)));
+        subVista?.view.frame=CGRect(x: 0, y: (self.frame.height+self.frame.origin.y), width: DatosC.contenedor.anchoP, height: DatosC.contenedor.altoP-(self.frame.height+self.frame.origin.y+(DatosC.contenedor.altoP*0.092)));
         //print("retama", subVista?.view.frame);
         subVista?.tipo=self.tipo;
         //subVista?.carga();
@@ -116,13 +116,13 @@ class PestanasProductos: UIButton {
             imagen = UIImage(named: "CasillaVerde")!;
             break;
         }
-        let frame = CGRectMake(0, 0, self.frame.width, self.frame.height);
+        let frame = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height);
         let backImg = UIImageView(frame: frame);
         //backImg.contentMode = UIViewContentMode.ScaleAspectFit;
         backImg.image = imagen;
         self.addSubview(backImg);
-        self.sendSubviewToBack(backImg);
-        self.backgroundColor=UIColor.blueColor();
+        self.sendSubview(toBack: backImg);
+        self.backgroundColor=UIColor.blue;
     }
     
     func FondoActivo(){
@@ -150,12 +150,12 @@ class PestanasProductos: UIButton {
             imagen = UIImage(named: "CasillaVerde")!;
             break;
         }
-        let frame = CGRectMake(0, 0, self.frame.width, self.frame.height);
+        let frame = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height);
         let backImg = UIImageView(frame: frame);
         //backImg.contentMode = UIViewContentMode.ScaleAspectFit;
         backImg.image = imagen;
         self.addSubview(backImg);
-        self.sendSubviewToBack(backImg);
+        self.sendSubview(toBack: backImg);
     }
     
     

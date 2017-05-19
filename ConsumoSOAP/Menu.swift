@@ -17,7 +17,7 @@ class Menu: UIView {
         let alto = DatosC.contenedor.altoP*0.9078;
         let OX = -ancho;
         let OY = DatosC.contenedor.altoP * 0.0922;
-        let frame = CGRectMake(OX, OY, ancho, alto);
+        let frame = CGRect(x: OX, y: OY, width: ancho, height: alto);
         self.padre=padre;
         super.init(frame: frame);
         cabecera();
@@ -52,7 +52,7 @@ class Menu: UIView {
     func cabecera(){
         let alto = DatosC.contenedor.altoP*0.2;
         let ancho = self.frame.width;
-        let frameVista = CGRectMake(0, 0, ancho, alto);
+        let frameVista = CGRect(x: 0, y: 0, width: ancho, height: alto);
         let vista = Cabecera(frame: frameVista);
         self.addSubview(vista);
         //vista.backgroundColor=UIColor.yellowColor();
@@ -65,32 +65,32 @@ class Menu: UIView {
         let OX = CGFloat(0);
         for n in 0...7{
             let OY = altoBot*CGFloat(n)+DatosC.contenedor.altoP*0.2;
-            let frame = CGRectMake(OX, OY, ancho, altoBot);
+            let frame = CGRect(x: OX, y: OY, width: ancho, height: altoBot);
             switch n {
             case 0:
                 let bot = BotonMenu(ima: "MenuCarrito", texto: "Mis Pedidos", frame: frame);
                 self.addSubview(bot);
-                bot.addTarget(self, action: #selector(Menu.pasaHistorial), forControlEvents: .TouchDown);
+                bot.addTarget(self, action: #selector(Menu.pasaHistorial), for: .touchDown);
                 break;
             case 4:
                 let bot = BotonMenu(ima: "BotonCerrar", texto: "Cerrar Sesión", frame: frame);
                 self.addSubview(bot);
-                bot.addTarget(self, action: #selector(Menu.cierraSesion), forControlEvents: .TouchDown);
+                bot.addTarget(self, action: #selector(Menu.cierraSesion), for: .touchDown);
                 break;
             case 1:
                 let bot = BotonMenu(ima: "ICO 1", texto: "¿Qué es la lonchera?", frame: frame);
                 self.addSubview(bot);
-                bot.addTarget(self, action: #selector(Menu.pasaSaludableInfo), forControlEvents: .TouchDown);
+                bot.addTarget(self, action: #selector(Menu.pasaSaludableInfo), for: .touchDown);
                 break;
             case 2:
                 let bot = BotonMenu(ima: "ICO 4", texto: "Tarjetas", frame: frame);
                 self.addSubview(bot);
-                bot.addTarget(self, action: #selector(Menu.pasaTarjetas), forControlEvents: .TouchDown);
+                bot.addTarget(self, action: #selector(Menu.pasaTarjetas), for: .touchDown);
                 break;
             case 3:
                 let bot = BotonMenu(ima: "ICO 5", texto: "Contacto", frame: frame);
                 self.addSubview(bot);
-                bot.addTarget(self, action: #selector(Menu.pasaContacto), forControlEvents: .TouchDown);
+                bot.addTarget(self, action: #selector(Menu.pasaContacto), for: .touchDown);
                 break;
             default:
                 break;
@@ -102,7 +102,7 @@ class Menu: UIView {
     //Método que permite pasar a la ventana del historial
     func pasaHistorial(){
         padre.muestra();
-        padre.performSegueWithIdentifier("Historial", sender: nil);
+        padre.performSegue(withIdentifier: "Historial", sender: nil);
     }
     
     //Método que cierra la sesión y destruye los datos cargados
@@ -114,19 +114,19 @@ class Menu: UIView {
     //Método que permite pasar a la ventana del historial
     func pasaSaludableInfo(){
         padre.muestra();
-        padre.performSegueWithIdentifier("SaludableInfo", sender: nil);
+        padre.performSegue(withIdentifier: "SaludableInfo", sender: nil);
     }
     
     //Método que permite pasar a la ventana de tarjetas
     func pasaTarjetas(){
         padre.muestra();
-        padre.performSegueWithIdentifier("Tarjetas", sender: nil);
+        padre.performSegue(withIdentifier: "Tarjetas", sender: nil);
     }
     
     //Método que permite pasar a la ventana de contacto
     func pasaContacto(){
         padre.muestra();
-        padre.performSegueWithIdentifier("Contacto", sender: nil);
+        padre.performSegue(withIdentifier: "Contacto", sender: nil);
     }
 
 }

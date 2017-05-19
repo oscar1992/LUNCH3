@@ -20,21 +20,21 @@ class BotFechaEntrega: UIButton {
         self.texto=texto;
         self.id=id;
         super.init(frame: frame);
-        let frameLab = CGRectMake(0, 0, frame.width, frame.height);
+        let frameLab = CGRect(x: 0, y: 0, width: frame.width, height: frame.height);
         let label = UILabel(frame:frameLab);
         label.text=texto;
-        label.textAlignment=NSTextAlignment.Center;
+        label.textAlignment=NSTextAlignment.center;
         label.font=UIFont(name: "SansBeam Head", size: label.frame.height);
-        self.addTarget(self, action: #selector(BotFechaEntrega.poneMetodoTimer(_:)), forControlEvents: .TouchDown);
-        label.userInteractionEnabled=false;
+        self.addTarget(self, action: #selector(BotFechaEntrega.poneMetodoTimer(_:)), for: .touchDown);
+        label.isUserInteractionEnabled=false;
         label.adjustsFontSizeToFitWidth=true;
-        self.backgroundColor=UIColor.whiteColor();
+        self.backgroundColor=UIColor.white;
         self.addSubview(label);
     }
     
-    func poneMetodoTimer(seneder: UIButton){
+    func poneMetodoTimer(_ seneder: UIButton){
         self.backgroundColor=UIColor.init(red: 0, green: 0.5, blue: 0.15, alpha: 1);
-         _ = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(BotFechaEntrega.poneMetodo), userInfo: nil, repeats: false);
+         _ = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(BotFechaEntrega.poneMetodo), userInfo: nil, repeats: false);
     }
     
     func poneMetodo(){

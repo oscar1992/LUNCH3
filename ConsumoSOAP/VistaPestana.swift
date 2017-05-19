@@ -8,6 +8,30 @@
 //
 
 import UIKit
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func <= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l <= r
+  default:
+    return !(rhs < lhs)
+  }
+}
+
 
 class VistaPestana: UIPageViewController, UIPageViewControllerDelegate, UIPageViewControllerDataSource{
     
@@ -31,7 +55,7 @@ class VistaPestana: UIPageViewController, UIPageViewControllerDelegate, UIPageVi
         //cargaPaginascategoria();
         //carga();
         //setViewControllers([paginas[0]], direction: UIPageViewControllerNavigationDirection.Forward , animated: false, completion: nil);
-        self.view.backgroundColor=UIColor.whiteColor();
+        self.view.backgroundColor=UIColor.white;
         
                 // Do any additional setup after loading the view.
     }
@@ -46,13 +70,13 @@ class VistaPestana: UIPageViewController, UIPageViewControllerDelegate, UIPageVi
                 //print("pagecontrol");
                 //subView.frame=CGRectZero;
                 //subView.hidden=true;
-                self.view.bringSubviewToFront(control!);
+                self.view.bringSubview(toFront: control!);
             }
         }
         //control?.currentPage=0;
         control?.currentPageIndicatorTintColor=UIColor.init(red: 0.51, green: 0.77, blue: 0.25, alpha: 1);
-        control?.pageIndicatorTintColor=UIColor.whiteColor();
-        control?.frame=CGRectMake(control!.frame.origin.x, (DatosC.contenedor.altoP*0.56), control!.frame.width, control!.frame.height)
+        control?.pageIndicatorTintColor=UIColor.white;
+        control?.frame=CGRect(x: control!.frame.origin.x, y: (DatosC.contenedor.altoP*0.56), width: control!.frame.width, height: control!.frame.height)
         super.viewDidLayoutSubviews()
     }
 
@@ -61,7 +85,7 @@ class VistaPestana: UIPageViewController, UIPageViewControllerDelegate, UIPageVi
         // Dispose of any resources that can be recreated.
     }
     
-    func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         
         
         
@@ -73,7 +97,7 @@ class VistaPestana: UIPageViewController, UIPageViewControllerDelegate, UIPageVi
             
             let actual = control?.currentPage;
             //print("acc: ", actual);
-            if(actual <= 0 || paginas[actual!] == NSNotFound){
+            if(actual! <= 0 || actual! > paginas.count){
                 //print("pre-reduce: ", actual);
                 previousIndex = paginas.count-1;
                 //print("reduce: ", previousIndex);
@@ -86,22 +110,22 @@ class VistaPestana: UIPageViewController, UIPageViewControllerDelegate, UIPageVi
         
     }
     
-    func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
-        let currentIndex = paginas.indexOf(viewController)!;
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+        let currentIndex = paginas.index(of: viewController)!;
         let nextIndex = abs((currentIndex + 1) % paginas.count);
         return paginas[nextIndex];
     }
     
     
-    func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int {
+    func presentationCount(for pageViewController: UIPageViewController) -> Int {
         return paginas.count;
     }
     
-    func presentationIndexForPageViewController(pageViewController: UIPageViewController) -> Int {
+    func presentationIndex(for pageViewController: UIPageViewController) -> Int {
         return 0;
     }
     
-    func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         //print("ABC: ", control!.currentPage);
         
         //self.setViewControllers((paginas), direction: UIPageViewControllerNavigationDirection.Forward, animated: false, completion: nil);
@@ -257,8 +281,8 @@ class VistaPestana: UIPageViewController, UIPageViewControllerDelegate, UIPageVi
                         let anchoL = DatosC.contenedor.anchoP*0.5;
                         let OX = (DatosC.contenedor.anchoP/2)-(anchoL/2);
                         let altoL=DatosC.contenedor.altoP*0.05;
-                        let Label=UILabel(frame: CGRectMake(OX,10, anchoL, altoL));
-                        Label.textAlignment=NSTextAlignment.Center;
+                        let Label=UILabel(frame: CGRect(x: OX,y: 10, width: anchoL, height: altoL));
+                        Label.textAlignment=NSTextAlignment.center;
                         Label.font=UIFont(name: "Gotham Bold", size: Label.frame.height/2);
                         Label.adjustsFontSizeToFitWidth=true;
                         var nombre = "";
@@ -305,8 +329,8 @@ class VistaPestana: UIPageViewController, UIPageViewControllerDelegate, UIPageVi
                         let anchoL = DatosC.contenedor.anchoP*0.5;
                         let OX = (DatosC.contenedor.anchoP/2)-(anchoL/2);
                         let altoL=DatosC.contenedor.altoP*0.05;
-                        let Label=UILabel(frame: CGRectMake(OX,10, anchoL, altoL));
-                        Label.textAlignment=NSTextAlignment.Center;
+                        let Label=UILabel(frame: CGRect(x: OX,y: 10, width: anchoL, height: altoL));
+                        Label.textAlignment=NSTextAlignment.center;
                         Label.font=UIFont(name: "Gotham Bold", size: Label.frame.height/2);
                         Label.adjustsFontSizeToFitWidth=true;
                         //Label.text=String(CGFloat(paginas.count));
@@ -351,10 +375,10 @@ class VistaPestana: UIPageViewController, UIPageViewControllerDelegate, UIPageVi
                     let espaciado = (CGFloat(DatosC.contenedor.anchoP)-((ancho*CGFloat(cant))+(borde*2)))
                     let espaciado2 = espaciado/CGFloat(cant-1);
                     let espaciado3 = DatosC.contenedor.altoP*0.071;
-                    let pos2=CGRectMake((borde+(p2*(self.ancho+espaciado2))), (borde*3)+((fila*(self.alto+espaciado3+borde))), ancho, alto);
+                    let pos2=CGRect(x: (borde+(p2*(self.ancho+espaciado2))), y: (borde*3)+((fila*(self.alto+espaciado3+borde))), width: ancho, height: alto);
                     //print("framecas: ",pos2)
                     casi.frame = pos2;
-                    if(m == 0 || m % 3 == 0){
+                    if(m == 0 || m.truncatingRemainder(dividingBy: 3) == 0){
                         //print("pinta?");
                         pintaEstante(fila, frameRef: pos2, vista: vistaInt, espaciado: espaciado3);// Posicion Producto
                     }else{
@@ -386,20 +410,20 @@ class VistaPestana: UIPageViewController, UIPageViewControllerDelegate, UIPageVi
         
         //print("ccss: ", paginas.count);
         if(paginas.count > 1){
-            setViewControllers([paginas[0]], direction: UIPageViewControllerNavigationDirection.Forward , animated: false, completion: nil);
+            setViewControllers([paginas[0]], direction: UIPageViewControllerNavigationDirection.forward , animated: false, completion: nil);
         }else if(paginas.count == 1){
-            setViewControllers([paginas[0]], direction: UIPageViewControllerNavigationDirection.Forward , animated: false, completion: nil);
+            setViewControllers([paginas[0]], direction: UIPageViewControllerNavigationDirection.forward , animated: false, completion: nil);
             for view in self.view.subviews{
                 if view is UIScrollView{
                     let vv = (view as! UIScrollView);
-                    vv.scrollEnabled = false;
+                    vv.isScrollEnabled = false;
                 }
             }
         }else{
             for view in self.view.subviews{
                 if view is UIScrollView{
                     let vv = (view as! UIScrollView);
-                    vv.scrollEnabled = false;
+                    vv.isScrollEnabled = false;
                 }
             }
             /*
@@ -422,12 +446,12 @@ class VistaPestana: UIPageViewController, UIPageViewControllerDelegate, UIPageVi
     //Método que calcula el tamaño de los productos de la alacena
     func frameProducto()-> CGRect{
         
-        return CGRectMake(0, 0, ancho, alto);
+        return CGRect(x: 0, y: 0, width: ancho, height: alto);
     }
     
     //Método que permite establecer la posición de las casillas y los productos en la página de la alacena manteniendo 
     //la configuración de un máximo de 6 productos en dos filas
-    func seteProductos(elementos: [ProductoView])->[Casilla]{
+    func seteProductos(_ elementos: [ProductoView])->[Casilla]{
         var casillas=[Casilla]();
         var p=CGFloat(0);
         var m = CGFloat(0);
@@ -458,7 +482,7 @@ class VistaPestana: UIPageViewController, UIPageViewControllerDelegate, UIPageVi
             let precio = String(ele.producto!.precio);
             casill.iniciaPrecio(precio);
             casill.addSubview(casill.precio!);
-            casill.bringSubviewToFront(casill.precio!);
+            casill.bringSubview(toFront: casill.precio!);
             m+=1;
             //ele.PanelOrigen=vistas[contadorVistas].view;
             casillas.append(casill);
@@ -484,7 +508,7 @@ class VistaPestana: UIPageViewController, UIPageViewControllerDelegate, UIPageVi
     }
     
     // Método que pone el fondo del panel de acuerdo al tipo de productos que va a mostrar
-    func FondoPanel(vista: UIViewController){
+    func FondoPanel(_ vista: UIViewController){
         for vista in self.view.subviews{
             if vista is UIImageView{
                 vista.removeFromSuperview();
@@ -509,17 +533,17 @@ class VistaPestana: UIPageViewController, UIPageViewControllerDelegate, UIPageVi
             imagen = UIImage(named: "CasillaVerde")!;
             break;
         }
-        let frame = CGRectMake(0, 0, self.view.frame.width, (DatosC.contenedor.altoP*0.78));
+        let frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: (DatosC.contenedor.altoP*0.78));
         let backImg = UIImageView(frame: frame);
         //backImg.contentMode = UIViewContentMode.ScaleAspectFit;
         backImg.image = imagen;
         vista.view.addSubview(backImg);
-        vista.view.sendSubviewToBack(backImg);
+        vista.view.sendSubview(toBack: backImg);
     }
     
     //Método que pinta la información con el panel que acompaña el producto debajo de él
-    func panelInfo(cas : Casilla, salud: Bool){
-        let frame = CGRectMake(0, cas.frame.height, cas.frame.width, DatosC.contenedor.altoP*0.07);
+    func panelInfo(_ cas : Casilla, salud: Bool){
+        let frame = CGRect(x: 0, y: cas.frame.height, width: cas.frame.width, height: DatosC.contenedor.altoP*0.07);
         let panel = UIView(frame: frame);
         var imagen: UIImage;
         var barra: UIImage;
@@ -530,22 +554,22 @@ class VistaPestana: UIPageViewController, UIPageViewControllerDelegate, UIPageVi
             imagen = UIImage(named: "LabelNoSaludable")!;
             barra = UIImage(named: "lineaGris")!;
         }
-        let frameBack = CGRectMake(0, 0, panel.frame.width, panel.frame.height);
+        let frameBack = CGRect(x: 0, y: 0, width: panel.frame.width, height: panel.frame.height);
         let backImg = UIImageView(frame: frameBack);
         backImg.image = imagen;
         if(salud){
             subImagen(backImg);
         }
         panel.addSubview(backImg);
-        let frameBarra = CGRectMake(cas.frame.width*0.1, frame.height/2, cas.frame.width*0.8, 3);
+        let frameBarra = CGRect(x: cas.frame.width*0.1, y: frame.height/2, width: cas.frame.width*0.8, height: 3);
         let backImg2 = UIImageView(frame: frameBarra);
         backImg2.image=barra;
-        backImg2.contentMode=UIViewContentMode.ScaleAspectFit;
+        backImg2.contentMode=UIViewContentMode.scaleAspectFit;
         //backImg2.backgroundColor=UIColor.redColor();
         panel.addSubview(backImg2);
-        let framePrecio = CGRectMake(0, 5, panel.frame.width, panel.frame.height/2);
+        let framePrecio = CGRect(x: 0, y: 5, width: panel.frame.width, height: panel.frame.height/2);
         let ox = (panel.frame.width/2)-(panel.frame.width/2)
-        let frameCalorias = CGRectMake(ox, panel.frame.height/2, panel.frame.width, panel.frame.height/2);
+        let frameCalorias = CGRect(x: ox, y: panel.frame.height/2, width: panel.frame.width, height: panel.frame.height/2);
         //let precio = "$"+String(cas.elemeto!.producto!.precio);
         var calorias = "";
         for cal in (cas.elemeto?.producto?.listaDatos)!{
@@ -554,27 +578,27 @@ class VistaPestana: UIPageViewController, UIPageViewControllerDelegate, UIPageVi
             }
         }
         let Lab1 = UILabel(frame: framePrecio);
-        let formateadorPrecio = NSNumberFormatter();
-        formateadorPrecio.numberStyle = .CurrencyStyle;
-        formateadorPrecio.locale = NSLocale(localeIdentifier: "es_CO");
+        let formateadorPrecio = NumberFormatter();
+        formateadorPrecio.numberStyle = .currency;
+        formateadorPrecio.locale = Locale(identifier: "es_CO");
         
-        Lab1.text = formateadorPrecio.stringFromNumber(cas.elemeto!.producto!.precio)!;
+        Lab1.text = formateadorPrecio.string(from: cas.elemeto!.producto!.precio as! NSNumber)!;
         let Lab2 = UILabel(frame: frameCalorias);
         
         Lab2.text = calorias + " calorías";
-        Lab1.textAlignment = NSTextAlignment.Center;
-        Lab2.textAlignment = NSTextAlignment.Center;
+        Lab1.textAlignment = NSTextAlignment.center;
+        Lab2.textAlignment = NSTextAlignment.center;
         Lab1.font=UIFont(name: "SansBeam Head", size: Lab1.frame.height/1.2)!;
         Lab2.font=UIFont(name: "SansBeamBody-Heavy", size: Lab2.frame.height/1.8)!;
         //Lab2.backgroundColor=UIColor.redColor();
         Lab1.adjustsFontSizeToFitWidth=true;
         Lab2.adjustsFontSizeToFitWidth=true;
         if(salud){
-            Lab1.textColor = UIColor.grayColor();
-            Lab2.textColor = UIColor.grayColor();
+            Lab1.textColor = UIColor.gray;
+            Lab2.textColor = UIColor.gray;
         }else{
-            Lab1.textColor = UIColor.grayColor();
-            Lab2.textColor = UIColor.grayColor();
+            Lab1.textColor = UIColor.gray;
+            Lab2.textColor = UIColor.gray;
         }
         panel.addSubview(Lab1);
         panel.addSubview(Lab2);
@@ -584,15 +608,15 @@ class VistaPestana: UIPageViewController, UIPageViewControllerDelegate, UIPageVi
         
     }
     
-    func pintaEstante(fila : CGFloat, frameRef: CGRect, vista : UIViewController, espaciado: CGFloat){
+    func pintaEstante(_ fila : CGFloat, frameRef: CGRect, vista : UIViewController, espaciado: CGFloat){
         let fila2 = fila + CGFloat(1);
         let desface = DatosC.contenedor.altoP*0.04;
-        let posE = CGRectMake(0, (((frameRef.height)*fila2)+(espaciado*fila))-desface+(borde*4), DatosC.contenedor.anchoP, DatosC.contenedor.altoP*0.27);
+        let posE = CGRect(x: 0, y: (((frameRef.height)*fila2)+(espaciado*fila))-desface+(borde*4), width: DatosC.contenedor.anchoP, height: DatosC.contenedor.altoP*0.27);
         //print("FF", frameRef);
         //print("PosE", posE);
         let estante = UIView(frame: posE);
         var imagen: UIImage;
-        let frameBack = CGRectMake(0, 0, estante.frame.width, estante.frame.height);
+        let frameBack = CGRect(x: 0, y: 0, width: estante.frame.width, height: estante.frame.height);
         switch (self.tipo!) {
         case 1:
             imagen = UIImage(named: "Shelf Energia")!;
@@ -644,7 +668,7 @@ class VistaPestana: UIPageViewController, UIPageViewControllerDelegate, UIPageVi
     }
     */
     //Método que inicia la casilla de referencia
-    func iniciaCasillaBaja(vista: UIView){
+    func iniciaCasillaBaja(_ vista: UIView){
         let casillaBaja = UIButton();
         //let casillaBaja2 = UIView();
         let ancho = CGFloat(DatosC.contenedor.anchoP*0.8);
@@ -652,10 +676,10 @@ class VistaPestana: UIPageViewController, UIPageViewControllerDelegate, UIPageVi
         let OX = CGFloat((DatosC.contenedor.anchoP/2)-(ancho/2));
         //let OY = (espacioIntercambio.frame.height/2)-(alto/2);
         let OY = (DatosC.contenedor.altoP*(0.6));
-        let frameCasilla = CGRectMake(OX, OY, ancho, alto);
+        let frameCasilla = CGRect(x: OX, y: OY, width: ancho, height: alto);
         //let frameCasilla2 = CGRectMake(OX+10, OY+10, ancho, alto);
         casillaBaja.frame=frameCasilla;
-        casillaBaja.addTarget(self, action: #selector(Panel!.devuelve(_:)), forControlEvents: .TouchDown);
+        casillaBaja.addTarget(self, action: #selector(Panel!.devuelve(_:)), for: .touchDown);
         casillaBaja.layer.zPosition=1;
         //casillaBaja2.frame=frameCasilla2;
         //casillaBaja.tipo=DatosC.contenedor.tipo;
@@ -674,33 +698,33 @@ class VistaPestana: UIPageViewController, UIPageViewControllerDelegate, UIPageVi
     }
     
     //Método que pone el fondo de la casilla baja
-    func fondoCasilla(cas: UIView){
+    func fondoCasilla(_ cas: UIView){
         let imagen = UIImage(named: "LoncheraVERDE");
-        let frameF = CGRectMake(0, 0, cas.frame.width, cas.frame.height);
+        let frameF = CGRect(x: 0, y: 0, width: cas.frame.width, height: cas.frame.height);
         let backImg = UIImageView(frame: frameF);
         backImg.image = imagen;
         cas.addSubview(backImg);
-        cas.sendSubviewToBack(backImg);
+        cas.sendSubview(toBack: backImg);
     }
     
-    func cargaImagen(prod: Producto){
-        let hilo = DISPATCH_QUEUE_PRIORITY_DEFAULT;
-        dispatch_async(dispatch_get_global_queue(hilo, 0)) {
+    func cargaImagen(_ prod: Producto){
+        let hilo = DispatchQueue.GlobalQueuePriority.default;
+        DispatchQueue.global(priority: hilo).async {
             
         }
     }
     
-    func devuelve(sender: UIButton){
+    func devuelve(_ sender: UIButton){
         print("Devuelve");
         Panel!.devuelve(sender);
     }
     
     //Método que permite poner la hojita en las saludables
-    func subImagen(vista : UIView){
+    func subImagen(_ vista : UIView){
         let ancho = vista.frame.width*0.3;
         let OX = vista.frame.width-(ancho/2);
         let OY = -(ancho/2)
-        let frame = CGRectMake(OX, OY, ancho, ancho);
+        let frame = CGRect(x: OX, y: OY, width: ancho, height: ancho);
         let subVista = UIView(frame: frame);
         DatosB.cont.poneFondoTot(subVista, fondoStr: "Hoja Verde", framePers: nil, identi: nil, scala: true);
         vista.addSubview(subVista);

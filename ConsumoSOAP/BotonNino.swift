@@ -15,7 +15,7 @@ class BotonNino: UIButton {
     var activo:Bool!;
     var imagen:UIImage!;
     var nombreNino:String!;
-    var fecha:NSDate!;
+    var fecha:Date!;
     var genero:Bool!;
     var nino: Ninos!;
     var loncheras = [LoncheraO]();
@@ -25,7 +25,7 @@ class BotonNino: UIButton {
     override init(frame: CGRect) {
         super.init(frame: frame);
         activo=false;
-        self.addTarget(self, action: #selector(BotonNino.accionM(_:)), forControlEvents: .TouchDown)
+        self.addTarget(self, action: #selector(BotonNino.accionM(_:)), for: .touchDown)
         
     }
     
@@ -33,7 +33,7 @@ class BotonNino: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func accionM(button:UIButton){
+    func accionM(_ button:UIButton){
         cambia();
     }
     
@@ -50,7 +50,7 @@ class BotonNino: UIButton {
                 //print("pasa",bb.nombreNino);
                 //print("NOMB: ", nombreNino);
                 bb.activo=false;
-                bb.panelNino.hidden=true;
+                bb.panelNino.isHidden=true;
                 //bb.backgroundColor=UIColor.lightGrayColor();
                 bb.cambiaFondo(false);
             }else{
@@ -61,16 +61,18 @@ class BotonNino: UIButton {
         
         self.activo=true;
         //self.panelNino.hidden=false;
-        DatosC.contenedor.loncheras = panelNino.Lonchera.deslizador.paginas;
+        //DatosC.contenedor.loncheras = panelNino.Lonchera.deslizador.paginas;
         DatosC.contenedor.iActual = 0;
+        /*
         if(panelNino.mesActual != nil){
             //DatosC.mesActual = panelNino!.mesActual!;
         }else{
             //DatosC.mesActual=Mes();
         }
+        */
         DatosC.contenedor.ninoActual = panelNino;
         self.cambiaFondo(true);
-        panelNino.hidden=false;
+        panelNino.isHidden=false;
         //print("FIN-------------------");
         
 /*
@@ -100,7 +102,7 @@ class BotonNino: UIButton {
     }
     
     //Método que Cambia el fondo de la pestaña del niño
-    func cambiaFondo(activ: Bool){
+    func cambiaFondo(_ activ: Bool){
         for vista in self.subviews{
             if vista is UIImageView{
                 vista.removeFromSuperview();
@@ -115,12 +117,12 @@ class BotonNino: UIButton {
             imagen = UIImage(named: "Pestana2")!;
             //print("No Activo");
         }
-        let frame = CGRectMake(0, 0, self.frame.width, self.frame.height);
+        let frame = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height);
         let backImg = UIImageView(frame: frame);
         //backImg.contentMode = UIViewContentMode.ScaleAspectFit;
         backImg.image = imagen;
         self.addSubview(backImg);
-        self.sendSubviewToBack(backImg);
+        self.sendSubview(toBack: backImg);
 
     }
     

@@ -25,9 +25,9 @@ class VistaGenero: UIView {
     func iniciatitulo(){
         let ancho = self.frame.width*0.5;
         let alto = self.frame.height*0.2;
-        let frameTitulo = CGRectMake(0, 0, ancho, alto);
+        let frameTitulo = CGRect(x: 0, y: 0, width: ancho, height: alto);
         let titulo = UILabel(frame: frameTitulo);
-        titulo.textColor=UIColor.whiteColor();
+        titulo.textColor=UIColor.white;
         titulo.text="Género";
         titulo.font=UIFont(name: "Gotham Bold", size: alto);
         self.addSubview(titulo);
@@ -37,8 +37,8 @@ class VistaGenero: UIView {
         let ancho = self.frame.width*0.15;
         let espacio = self.frame.width*0.06;
         let OY = self.frame.height*0.25;
-        let frameSelect1 = CGRectMake(0, OY, ancho, ancho);
-        let frameSelect2 = CGRectMake(0, (OY + ancho + espacio), ancho, ancho);
+        let frameSelect1 = CGRect(x: 0, y: OY, width: ancho, height: ancho);
+        let frameSelect2 = CGRect(x: 0, y: (OY + ancho + espacio), width: ancho, height: ancho);
         let select1 = Selector(frame: frameSelect1, genero: "Masculino");
         let select2 = Selector(frame: frameSelect2, genero: "Femenino");
         selects.append(select1);
@@ -47,16 +47,16 @@ class VistaGenero: UIView {
         //select2.backgroundColor=UIColor.yellowColor();
         self.addSubview(select2);
         self.addSubview(select1);
-        let frameLabel1 = CGRectMake((ancho), OY, (self.frame.width-ancho), ancho);
-        let frameLabel2 = CGRectMake((ancho), (OY + ancho + espacio), (self.frame.width-ancho), ancho);
+        let frameLabel1 = CGRect(x: (ancho), y: OY, width: (self.frame.width-ancho), height: ancho);
+        let frameLabel2 = CGRect(x: (ancho), y: (OY + ancho + espacio), width: (self.frame.width-ancho), height: ancho);
         let label1 = UILabel(frame: frameLabel1);
         let label2 = UILabel(frame: frameLabel2);
         label1.text="Hombre";
         label2.text="Mujer";
         label2.font=UIFont(name: "Gotham Bold", size: ancho);
         label1.font=UIFont(name: "Gotham Bold", size: ancho);
-        label1.textAlignment=NSTextAlignment.Center;
-        label2.textAlignment=NSTextAlignment.Center;
+        label1.textAlignment=NSTextAlignment.center;
+        label2.textAlignment=NSTextAlignment.center;
         self.addSubview(label1);
         self.addSubview(label2);
         

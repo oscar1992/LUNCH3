@@ -10,6 +10,8 @@ import UIKit
 
 class Predeterminadas: UIScrollView, UIScrollViewDelegate{
     
+    /*
+    
     var cajas = [CajaView]();
     let borde=CGFloat(20);
     var tamaño:CGFloat!;
@@ -60,7 +62,7 @@ class Predeterminadas: UIScrollView, UIScrollViewDelegate{
         let anchoTotal = (tamaño*CGFloat(cajas.count))+(espaciado*CGFloat(cajas.count-1));
         let inicia = (self.frame.width/2)-(anchoTotal/2)-(espaciado);
         for cc in cajas{
-            cc.frame=CGRectMake(((borde+tamaño+espaciado)*p)+inicia, self.frame.height*0.1, tamaño, tamaño);
+            cc.frame=CGRect(x: ((borde+tamaño+espaciado)*p)+inicia, y: self.frame.height*0.1, width: tamaño, height: tamaño);
             p+=1;
             cc.iniciaTexto();
             cc.setFondo(cc.caja.Color);
@@ -71,7 +73,7 @@ class Predeterminadas: UIScrollView, UIScrollViewDelegate{
         
         
         
-        self.contentSize=CGSizeMake(((borde*2)+(CGFloat(cajas.count)*(tamaño+espaciado))), self.frame.height)
+        self.contentSize=CGSize(width: ((borde*2)+(CGFloat(cajas.count)*(tamaño+espaciado))), height: self.frame.height)
         //cajas.removeAll();
     }
     
@@ -127,11 +129,11 @@ class Predeterminadas: UIScrollView, UIScrollViewDelegate{
             }
         }
         let fondo = UIImage(named: "FondoPredeterminadas");
-        let backImg = UIImageView(frame: CGRectMake(0,0,self.frame.width,self.frame.height));
+        let backImg = UIImageView(frame: CGRect(x: 0,y: 0,width: self.frame.width,height: self.frame.height));
         //backImg.contentMode = UIViewContentMode.ScaleAspectFit;
         backImg.image = fondo;
         self.addSubview(backImg);
-        self.sendSubviewToBack(backImg);
+        self.sendSubview(toBack: backImg);
     }
     /*
     // Only override drawRect: if you perform custom drawing.
@@ -140,5 +142,5 @@ class Predeterminadas: UIScrollView, UIScrollViewDelegate{
         // Drawing code
     }
     */
-
+*/
 }

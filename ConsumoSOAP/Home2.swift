@@ -32,7 +32,7 @@ class Home2: UIViewController {
         iniciaBotonAgregar();
         iniciaMenuLateral();
         //iniciaCargaCajas();
-        let fondo = CGRectMake(0, laBarra.frame.height, self.view.frame.width, (self.view.frame.height-laBarra.frame.height));
+        let fondo = CGRect(x: 0, y: laBarra.frame.height, width: self.view.frame.width, height: (self.view.frame.height-laBarra.frame.height));
         DatosB.cont.poneFondoTot(self.view, fondoStr: "FondoHome", framePers: fondo, identi: "FondoTot", scala: false);
         //print("carga home");
         predeterminadas.cargaSaludables();
@@ -46,19 +46,19 @@ class Home2: UIViewController {
     }
     
     //Método que oculta la barra en este viewcontroller
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden : Bool {
         return true
     }
     
     //Método que Inicia el Botoón del Menú
     func iniciaBotonMenu(){
         let ancho = DatosC.contenedor.altoP * 0.0922;
-        let frameBoton = CGRectMake(0, 0, ancho, ancho);
+        let frameBoton = CGRect(x: 0, y: 0, width: ancho, height: ancho);
         print("iniciaBoton");
         BotonMenu = UIButton(frame: frameBoton);
         //BotonMenu.backgroundColor=UIColor.redColor();
-        BotonMenu.addTarget(self, action: #selector(Home2.muestra), forControlEvents: .TouchDown);
-        DatosB.cont.poneFondoTot(BotonMenu, fondoStr: "MenuLat", framePers: CGRectMake(ancho/3, ancho/3, ancho*0.3, ancho*0.3), identi: nil, scala: false);
+        BotonMenu.addTarget(self, action: #selector(Home2.muestra), for: .touchDown);
+        DatosB.cont.poneFondoTot(BotonMenu, fondoStr: "MenuLat", framePers: CGRect(x: ancho/3, y: ancho/3, width: ancho*0.3, height: ancho*0.3), identi: nil, scala: false);
         self.view.addSubview(BotonMenu);
     }
     
@@ -66,10 +66,10 @@ class Home2: UIViewController {
     func iniciaBotonCarrito(){
         let OX = DatosC.contenedor.anchoP-(DatosC.contenedor.altoP * 0.0922);
         let ancho = DatosC.contenedor.altoP * 0.0922;
-        let frameBoton = CGRectMake(OX, 0, ancho, ancho);
+        let frameBoton = CGRect(x: OX, y: 0, width: ancho, height: ancho);
         botonCarrito = BotonCarrito(frame: frameBoton);
         //botonCarrito.backgroundColor=UIColor.blueColor();
-        self.view.bringSubviewToFront(botonCarrito);
+        self.view.bringSubview(toFront: botonCarrito);
         self.view.addSubview(botonCarrito);
     }
     
@@ -77,7 +77,7 @@ class Home2: UIViewController {
     func iniciaPredeterminadas(){
         //let cargaF = CargaFavoritos();
         //cargaF.consulta(DatosD.contenedor.padre.id);
-        let frame = CGRectMake(0, DatosC.contenedor.altoP * 0.12, DatosC.contenedor.anchoP, (DatosC.contenedor.altoP*0.16866));
+        let frame = CGRect(x: 0, y: DatosC.contenedor.altoP * 0.12, width: DatosC.contenedor.anchoP, height: (DatosC.contenedor.altoP*0.16866));
         predeterminadas = Pred2(frame: frame);
         
         //DatosB.cont.poneFondoTot(self.view, fondoStr: "FondoPredeterminadas", framePers: frame, identi: "FondoPred" , scala: false);
@@ -91,7 +91,7 @@ class Home2: UIViewController {
         let alto = DatosC.contenedor.altoP*0.4;
         let OX = (DatosC.contenedor.anchoP/2)-(ancho/2);
         let OY = DatosC.contenedor.altoP*0.30;
-        let frameLonchera = CGRectMake(OX, OY, ancho, alto);
+        let frameLonchera = CGRect(x: OX, y: OY, width: ancho, height: alto);
         lonchera = Lonchera2(frame: frameLonchera);
         //lonchera.backgroundColor=UIColor.blueColor();
         self.view.addSubview(lonchera);
@@ -103,7 +103,7 @@ class Home2: UIViewController {
         let alto = DatosC.contenedor.altoP*0.07;
         let OX = (DatosC.contenedor.anchoP/2)-(ancho/2);
         let OY = DatosC.contenedor.altoP*0.9;
-        let frameBoton = CGRectMake(OX, OY, ancho, alto);
+        let frameBoton = CGRect(x: OX, y: OY, width: ancho, height: alto);
         let boton = UIButton(frame: frameBoton);
         /*
         let frameLabel = CGRectMake(0, 0, ancho, alto);
@@ -115,7 +115,7 @@ class Home2: UIViewController {
         boton.addSubview(label);
          */
         DatosB.cont.poneFondoTot(boton, fondoStr: "BotonOrdenar2", framePers: nil, identi: nil, scala: false);
-        boton.addTarget(self, action: #selector(Home2.anade), forControlEvents: .TouchDown);
+        boton.addTarget(self, action: #selector(Home2.anade), for: .touchDown);
         
         self.view.addSubview(boton);
     }
@@ -125,7 +125,7 @@ class Home2: UIViewController {
         let ancho = DatosC.contenedor.anchoP*0.8
         let ox = (DatosC.contenedor.anchoP/2)-(ancho/2);
         let oy = (DatosC.contenedor.altoP/2)-(ancho/2);
-        let frameLet = CGRectMake(ox, oy, ancho, ancho);
+        let frameLet = CGRect(x: ox, y: oy, width: ancho, height: ancho);
         if(lonchera.estaLLena()){
             let letrero = LetreroAgregar(frame: frameLet, lonchera: lonchera);
             self.view.addSubview(letrero);
@@ -137,7 +137,7 @@ class Home2: UIViewController {
     }
     
     func leefuentes(){
-        let ff = UIFont.familyNames();
+        let ff = UIFont.familyNames;
         for nn in ff{
             print(nn);
         }
@@ -153,14 +153,14 @@ class Home2: UIViewController {
     }
     
     //Método que se llama desde un producto para mostrar su información
-    func iniciaPanelInfo(prod: Producto){
+    func iniciaPanelInfo(_ prod: Producto){
         let bordeL = CGFloat(self.view.frame.width*0.1);
         let bordeA = CGFloat(self.view.frame.height*0.09);
         
         
-        let frame = CGRectMake(bordeL, bordeA, self.view.frame.width*0.79, self.view.frame.height*0.9);
+        let frame = CGRect(x: bordeL, y: bordeA, width: self.view.frame.width*0.79, height: self.view.frame.height*0.9);
         //0.77let frameImagen = CGRectMake(bordeA, bordeA, frame.width-(2*bordeA), frame.height*0.4);
-        _ = CGRectMake(0, frame.height*0.9, frame.width, frame.height*0.1);
+        _ = CGRect(x: 0, y: frame.height*0.9, width: frame.width, height: frame.height*0.1);
         //let frameInfo = CGRectMake(0, frameImagen.height+frame.origin.y, frame.width, frame.height*0.4);
         panelInfo=DetalleProducto(frame: frame, prdo: prod);
         /*
@@ -184,11 +184,11 @@ class Home2: UIViewController {
          panelInfo?.backgroundColor=UIColor.whiteColor();
          */
         self.view.addSubview(panelInfo!);
-        self.view.bringSubviewToFront(panelInfo!);
+        self.view.bringSubview(toFront: panelInfo!);
         //print("infoProd:");
     }
     
-    func cierraPanelInfo(sender: AnyObject){
+    func cierraPanelInfo(_ sender: AnyObject){
         panelInfo?.removeFromSuperview();
     }
     
@@ -197,7 +197,7 @@ class Home2: UIViewController {
         mueveMenu(mov, vista: menu);
     }
     
-    func mueveMenu(mov: CGFloat, vista: UIView){
+    func mueveMenu(_ mov: CGFloat, vista: UIView){
         let tiempo = 0.3;
         var movi = CGFloat(0);
         if(sentido){
@@ -210,7 +210,7 @@ class Home2: UIViewController {
         UIView.beginAnimations("DeslizaMenu", context: nil);
         UIView.setAnimationBeginsFromCurrentState(true);
         UIView.setAnimationDuration(tiempo);
-        vista.frame = CGRectOffset(vista.frame, movi, 0);
+        vista.frame = vista.frame.offsetBy(dx: movi, dy: 0);
         UIView.commitAnimations();
     }
     
@@ -235,15 +235,15 @@ class Home2: UIViewController {
     }
     
     
-    let tut = BaseImagenes(transitionStyle: UIPageViewControllerTransitionStyle.Scroll,
-                           navigationOrientation: UIPageViewControllerNavigationOrientation.Horizontal,
+    let tut = BaseImagenes(transitionStyle: UIPageViewControllerTransitionStyle.scroll,
+                           navigationOrientation: UIPageViewControllerNavigationOrientation.horizontal,
                            options: nil);
     
     //Método que inicia el tutorial, si es la primera vez que inicia la app
     func iniciaTutorial(){
         if(DatosD.contenedor.padre.primeraVez==true){
             self.view.addSubview(tut.view);
-            tut.view.frame=CGRectMake(0, 0, self.view.frame.width*1, self.view.frame.height/1);
+            tut.view.frame=CGRect(x: 0, y: 0, width: self.view.frame.width*1, height: self.view.frame.height/1);
             
             print("TUTORIAL");
         }else{

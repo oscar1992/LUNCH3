@@ -99,19 +99,19 @@ class Contador2: UIView {
     func iniciaLabels(){
         let ancho = self.frame.width*0.4;
         let alto = self.frame.height*0.3;
-        let frameLV = CGRectMake(0, 15, ancho, alto);
-        let frameValo = CGRectMake(0, (alto), ancho, alto*1.3);
+        let frameLV = CGRect(x: 0, y: 15, width: ancho, height: alto);
+        let frameValo = CGRect(x: 0, y: (alto), width: ancho, height: alto*1.3);
         let OX = self.frame.width*0.5;
         let ancho2 = self.frame.width*0.3;
         let alto2 = self.frame.height/3;
         //print("OX: ", OX);
-        let frameLA = CGRectMake(OX, 10, ancho2, alto2);
-        let frameLC = CGRectMake(OX, frameLA.height, ancho2, alto2);
-        let frameLP = CGRectMake(OX, (frameLC.height+frameLC.origin.y-10), ancho2, alto2);
+        let frameLA = CGRect(x: OX, y: 10, width: ancho2, height: alto2);
+        let frameLC = CGRect(x: OX, y: frameLA.height, width: ancho2, height: alto2);
+        let frameLP = CGRect(x: OX, y: (frameLC.height+frameLC.origin.y-10), width: ancho2, height: alto2);
         let OX2 = OX+(ancho2/2);
-        let frameAzu=CGRectMake(OX2, frameLA.origin.y, ancho2, alto2);
-        let frameCal=CGRectMake(OX2, frameLC.origin.y, ancho2, alto2);
-        let framePro=CGRectMake(OX2, frameLP.origin.y, ancho2, alto2);
+        let frameAzu=CGRect(x: OX2, y: frameLA.origin.y, width: ancho2, height: alto2);
+        let frameCal=CGRect(x: OX2, y: frameLC.origin.y, width: ancho2, height: alto2);
+        let framePro=CGRect(x: OX2, y: frameLP.origin.y, width: ancho2, height: alto2);
         
         let labelV = UILabel();
         let labelA = UILabel();
@@ -147,29 +147,29 @@ class Contador2: UIView {
         seteaLabel1(labelA);
         seteaLabel1(labelC);
         seteaLabel1(labelP);
-        valor.textAlignment=NSTextAlignment.Center;
-        labelV.textAlignment=NSTextAlignment.Center;
+        valor.textAlignment=NSTextAlignment.center;
+        labelV.textAlignment=NSTextAlignment.center;
     }
     
-    func seteaLabel1(lab: UILabel){
-        lab.textColor=UIColor.whiteColor();
+    func seteaLabel1(_ lab: UILabel){
+        lab.textColor=UIColor.white;
         lab.font=UIFont(name: "SansBeamBody-Heavy", size: lab.frame.height/2);
-        lab.textAlignment=NSTextAlignment.Left;
+        lab.textAlignment=NSTextAlignment.left;
         self.addSubview(lab);
     }
     
     
-    func seteaLabel2(lab: UILabel){
-        lab.textColor=UIColor.whiteColor();
-        lab.textAlignment=NSTextAlignment.Right;
+    func seteaLabel2(_ lab: UILabel){
+        lab.textColor=UIColor.white;
+        lab.textAlignment=NSTextAlignment.right;
         lab.font=UIFont(name: "Gotham Book", size: lab.frame.height/2);
         self.addSubview(lab);
     }
     
-    func seteaLabel3(lab: UILabel){
-        lab.textColor=UIColor.whiteColor();
+    func seteaLabel3(_ lab: UILabel){
+        lab.textColor=UIColor.white;
         lab.font=UIFont(name: "SansBeamBody-Heavy", size: lab.frame.height*0.7);
-        lab.textAlignment=NSTextAlignment.Left;
+        lab.textAlignment=NSTextAlignment.left;
         self.addSubview(lab);
     }
     
@@ -179,7 +179,7 @@ class Contador2: UIView {
         let alto = self.frame.height*0.5;
         let OX = self.frame.width*0.4;
         let OY = (self.frame.height/2)-(alto/2);
-        let frameD=CGRectMake(OX, OY, ancho, alto);
+        let frameD=CGRect(x: OX, y: OY, width: ancho, height: alto);
         let divisor = UIView(frame: frameD);
         self.addSubview(divisor);
         DatosB.cont.poneFondoTot(divisor, fondoStr: "Dots", framePers: nil, identi: nil, scala: true);

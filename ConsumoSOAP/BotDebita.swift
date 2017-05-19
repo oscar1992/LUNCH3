@@ -14,9 +14,9 @@ class BotDebita: UIButton {
 
     init(frame: CGRect, vista: VistaTarjeta) {
         self.vista=vista;
-        vista.userInteractionEnabled=false;
+        vista.isUserInteractionEnabled=false;
         super.init(frame: frame);
-        self.addTarget(self, action: #selector(BotDebita.deb), forControlEvents: .TouchDown);
+        self.addTarget(self, action: #selector(BotDebita.deb), for: .touchDown);
     }
     
     func deb(){
@@ -34,7 +34,7 @@ class BotDebita: UIButton {
         //print("Padre: ", self.superview);
         //print("Abuelo: ", self.superview?.superview);
         //(self.superview?.superview as! VistaMetodos).cierra();
-        _ = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: #selector(BotDebita.autoDestruccion), userInfo: nil, repeats: false);
+        _ = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(BotDebita.autoDestruccion), userInfo: nil, repeats: false);
     }
     
     func autoDestruccion(){

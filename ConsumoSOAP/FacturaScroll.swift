@@ -13,14 +13,14 @@ class FacturaScroll: UIScrollView, UIScrollViewDelegate {
     override required init(frame: CGRect) {
         super.init(frame: frame);
         self.delegate=self;
-        self.backgroundColor=UIColor.yellowColor();
+        self.backgroundColor=UIColor.yellow;
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func pintaNinos(ninos: [BotonNino]){
+    func pintaNinos(_ ninos: [BotonNino]){
         let borde = CGFloat(20);
         let espaciado = CGFloat(self.frame.width*0.05);
         var p = CGFloat(0);
@@ -29,8 +29,8 @@ class FacturaScroll: UIScrollView, UIScrollViewDelegate {
         var altoScroll=CGFloat(0)
         
         for nino in ninos{
-            let vv = FacturaNino(frame: CGRectMake(borde, (borde+p*(alto+espaciado)), ancho-(2*borde), alto), nino: nino);
-            vv.backgroundColor=UIColor.whiteColor();
+            let vv = FacturaNino(frame: CGRect(x: borde, y: (borde+p*(alto+espaciado)), width: ancho-(2*borde), height: alto), nino: nino);
+            vv.backgroundColor=UIColor.white;
             vv.Nombre!.text = nino.nombreNino;
             //vv.nino=nino;
             self.addSubview(vv);
@@ -39,7 +39,7 @@ class FacturaScroll: UIScrollView, UIScrollViewDelegate {
             print("alt2",vv.frame.height);
             print("alt", altoScroll);
         }
-        self.contentSize=CGSizeMake(self.frame.width, (borde*2+(CGFloat(ninos.count)*(altoScroll+espaciado))))
+        self.contentSize=CGSize(width: self.frame.width, height: (borde*2+(CGFloat(ninos.count)*(altoScroll+espaciado))))
     }
     
     /*

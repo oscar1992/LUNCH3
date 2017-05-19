@@ -9,46 +9,46 @@
 import Foundation
 import UIKit
 
-class ConsultaLogin : NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
+class ConsultaLogin : NSObject, NSURLConnectionDelegate, XMLParserDelegate{
     
     
     
-    var resp: NSData! = nil
+    var resp: Data! = nil
     var estado:NSMutableString!
-    var parser=NSXMLParser()
+    var parser=XMLParser()
     var eeleDiccio=NSMutableDictionary()
     var element=NSString()
     var PLogin:LoginView?;
-    var task: NSURLSessionDataTask!;
+    var task: URLSessionDataTask!;
     var profundidad = 0;
     
     init(plogin: LoginView) {
         self.PLogin=plogin;
     }
     
-    func consulta(email: String!, pass: String!){
+    func consulta(_ email: String!, pass: String!){
         PLogin?.bloquea();
         _=email;
         let pas=pass;
         //print(ema, pas);
-        let mensajeEnviado:String = "<soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/' xmlns:enp='http://enpoint.lunch.com.co/'><soapenv:Header/><soapenv:Body><enp:login><email>"+email+"</email><pass>"+pas+"</pass></enp:login></soapenv:Body></soapenv:Envelope>"
+        let mensajeEnviado:String = "<soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/' xmlns:enp='http://enpoint.lunch.com.co/'><soapenv:Header/><soapenv:Body><enp:login><email>"+email+"</email><pass>"+pas!+"</pass></enp:login></soapenv:Body></soapenv:Envelope>"
         
         print("Mensaje: ", mensajeEnviado);
         let is_URL: String = "http://93.188.163.97:8080/Lunch2/adminEndpoint"
         
-        let lobj_Request = NSMutableURLRequest(URL: NSURL(string: is_URL)!)
-        let session = NSURLSession.sharedSession()
+        let lobj_Request = NSMutableURLRequest(url: URL(string: is_URL)!)
+        let session = URLSession.shared
         let _: NSError?
         
-        lobj_Request.HTTPMethod = "POST"
-        lobj_Request.HTTPBody = mensajeEnviado.dataUsingEncoding(NSUTF8StringEncoding)
+        lobj_Request.httpMethod = "POST"
+        lobj_Request.httpBody = mensajeEnviado.data(using: String.Encoding.utf8)
         lobj_Request.addValue("www.lunch.com", forHTTPHeaderField: "Host")
         lobj_Request.addValue("text/xml; charset=utf-8", forHTTPHeaderField: "Content-Type")
         lobj_Request.addValue(String(mensajeEnviado.characters.count), forHTTPHeaderField: "Content-Length")
         //lobj_Request.addValue("223", forHTTPHeaderField: "Content-Length")
         lobj_Request.addValue("\"bool\"", forHTTPHeaderField: "SOAPAction")
         
-        task = session.dataTaskWithRequest(lobj_Request, completionHandler: {data, response, error -> Void in
+        task = session.dataTask(with: lobj_Request as URLRequest, completionHandler: {data, response, error -> Void in
             //
             var nulo = false;
             if(data == nil){
@@ -58,18 +58,18 @@ class ConsultaLogin : NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
                 
                 //print("Response: \(response)")
             }else{
-                let strData = NSString(data: data!, encoding: NSUTF8StringEncoding)
+                let strData = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
                 
                 //print("Body: \(strData)")
                 
-                self.resp=strData?.dataUsingEncoding(NSUTF8StringEncoding)
-                self.parser=NSXMLParser(data: self.resp)
+                self.resp=strData?.data(using: String.Encoding.utf8.rawValue)
+                self.parser=XMLParser(data: self.resp)
                 self.parser.delegate=self
                 self.parser.parse();
                 self.PLogin?.Msg="Tu Usuario o Contraseña no son válidos";
                
             }
-            dispatch_async(dispatch_get_main_queue(),{
+            DispatchQueue.main.async(execute: {
                 print("nulo: ", nulo, "prof: ", self.profundidad);
                 if(nulo && self.profundidad<2){
                     print("reinicia");
@@ -167,10 +167,10 @@ class ConsultaLogin : NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
     var PterminoFecha:String?;
     var Pgenero:String?;
     
-    func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
-        element=elementName;
+    func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
+        element=elementName as NSString;
         //print("eleNA: ",element);
-        if(elementName as NSString).isEqualToString("loginResponse"){
+        if(elementName as NSString).isEqual(to: "loginResponse"){
             estado=NSMutableString();
             estado="";
         }
@@ -214,7 +214,7 @@ class ConsultaLogin : NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
     
     }
 
-    func parser(parser: NSXMLParser, foundCharacters string: String) {
+    func parser(_ parser: XMLParser, foundCharacters string: String) {
         if(id){
             Pid=Int(string);
             //print("Pid: ",Pid);
@@ -285,7 +285,7 @@ class ConsultaLogin : NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
         }
     }
     
-    func parser(parser: NSXMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
+    func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         //print("ff: ",elementName);
         if(elementName == "ns2:loginResponse"){
             //print("Pid", Pid);
@@ -325,10 +325,10 @@ class ConsultaLogin : NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
         let alto = vista.view.frame.height*0.4;
         let OX = (vista.view.frame.width/2)-(ancho/2);
         let OY = (vista.view.frame.height/2)-(alto/2);
-        let frameMensaje = CGRectMake(OX, OY, ancho, alto);
+        let frameMensaje = CGRect(x: OX, y: OY, width: ancho, height: alto);
         let mensaje = MensajeConexion(frame: frameMensaje, msg: nil);
         vista.view.addSubview(mensaje);
         mensaje.layer.zPosition=5;
-        vista.view.bringSubviewToFront(mensaje);
+        vista.view.bringSubview(toFront: mensaje);
     }
 }

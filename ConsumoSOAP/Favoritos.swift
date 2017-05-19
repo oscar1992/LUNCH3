@@ -22,13 +22,13 @@ class Favoritos: NSObject, NSCoding{
     
     required convenience init(coder decoder: NSCoder) {
         self.init();
-        self.id = decoder.decodeObjectForKey("id") as! Int;
-        self.nombre = decoder.decodeObjectForKey("nombre") as! String;
+        self.id = decoder.decodeInteger(forKey: "id");
+        self.nombre = decoder.decodeObject(forKey: "nombre") as! String;
         //self.items = decoder.decodeObjectForKey("id") as! Int;
     }
     
-    func encodeWithCoder(coder: NSCoder) {
-        if let id = id{coder.encodeObject(id, forKey: "id")};
-        if let nombre = nombre{coder.encodeObject(nombre, forKey: "nombre")};
+    func encode(with coder: NSCoder) {
+        if let id = id{coder.encode(id, forKey: "id")};
+        if let nombre = nombre{coder.encode(nombre, forKey: "nombre")};
     }
 }

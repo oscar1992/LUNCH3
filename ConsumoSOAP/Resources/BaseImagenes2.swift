@@ -19,7 +19,7 @@ class BaseImagenes2: UIPageViewController, UIPageViewControllerDelegate,  UIPage
         
         super.viewDidLoad()
         iniciaImagenes();
-        setViewControllers([paginas[0]], direction: UIPageViewControllerNavigationDirection.Forward , animated: false,completion: nil);
+        setViewControllers([paginas[0]], direction: UIPageViewControllerNavigationDirection.forward , animated: false,completion: nil);
         // Do any additional setup after loading the view.
     }
     
@@ -48,9 +48,9 @@ class BaseImagenes2: UIPageViewController, UIPageViewControllerDelegate,  UIPage
         let OY = self.view.frame.height*0.7;
         let ancho = self.view.frame.width*0.8;
         let alto = self.view.frame.height*0.1;
-        let frameFinal = CGRectMake(OX, OY, ancho, alto);
+        let frameFinal = CGRect(x: OX, y: OY, width: ancho, height: alto);
         let botFinal = UIButton(frame: frameFinal);
-        botFinal.addTarget(self, action: #selector(BaseImagenes.botFinal), forControlEvents: .TouchDown);
+        botFinal.addTarget(self, action: #selector(BaseImagenes.botFinal), for: .touchDown);
         //botFinal.backgroundColor=UIColor.redColor();
         pagina5.view.addSubview(botFinal);
         paginas.append(pagina);
@@ -61,10 +61,10 @@ class BaseImagenes2: UIPageViewController, UIPageViewControllerDelegate,  UIPage
         print("imagenes: ", paginas.count);
     }
     
-    func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         var index = (viewController as! VistaTut).orden;
         //print("Before")
-        let indant = paginas.indexOf(viewController);
+        let indant = paginas.index(of: viewController);
         let previousIndex = indant! - 1
         
         guard previousIndex >= 0 else {
@@ -78,9 +78,9 @@ class BaseImagenes2: UIPageViewController, UIPageViewControllerDelegate,  UIPage
         return paginas[previousIndex];
     }
     
-    func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         //print("After")
-        let indant = paginas.indexOf(viewController);
+        let indant = paginas.index(of: viewController);
         let previousIndex = indant! + 1
         
         guard previousIndex >= 0 else {
@@ -94,7 +94,7 @@ class BaseImagenes2: UIPageViewController, UIPageViewControllerDelegate,  UIPage
         return paginas[previousIndex];
     }
     
-    func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int {
+    func presentationCount(for pageViewController: UIPageViewController) -> Int {
         return paginas.count
     }
     

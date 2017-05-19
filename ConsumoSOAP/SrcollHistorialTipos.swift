@@ -16,21 +16,21 @@ class SrcollHistorialTipos: UIScrollView, UIScrollViewDelegate {
         //self.backgroundColor=UIColor.yellowColor();
     }
     
-    func cargaTipos(tipos: [((String, Int, Int), [Producto])]){
+    func cargaTipos(_ tipos: [((String, Int, Int), [Producto])]){
         let alto = DatosC.contenedor.altoP*0.3;
         let ancho = DatosC.contenedor.anchoP;
         let OX = CGFloat(0);
         var p = CGFloat(0);
         for tipo in tipos{
             let OY = p * alto;
-            let frameTipo = CGRectMake(OX, OY, ancho, alto);
+            let frameTipo = CGRect(x: OX, y: OY, width: ancho, height: alto);
             p += 1;
             let vista = VistaScrollTipo(frame: frameTipo, tipo: tipo, id: Int(p));
             self.addSubview(vista);
             print("tipos: ", tipo.0.0);
             
         }
-        self.contentSize=CGSizeMake(self.frame.width, (alto*p));
+        self.contentSize=CGSize(width: self.frame.width, height: (alto*p));
     }
     
     required init?(coder aDecoder: NSCoder) {

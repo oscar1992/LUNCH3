@@ -24,7 +24,7 @@ class ErrorZip: UIView {
         let altoIma = self.frame.height*0.3;
         let OXima = (self.frame.height/2)-(altoIma/2);
         let OYIma = self.frame.height*0.1;
-        let imagenFrame = CGRectMake(OXima, OYIma, altoIma, altoIma);
+        let imagenFrame = CGRect(x: OXima, y: OYIma, width: altoIma, height: altoIma);
         icono = UIView(frame: imagenFrame);
         DatosB.cont.poneFondoTot(icono, fondoStr: "ICO Triste", framePers: nil, identi: nil, scala: true);
         self.addSubview(icono);
@@ -36,34 +36,34 @@ class ErrorZip: UIView {
         let altoT = self.frame.height*0.3;
         let OXT = (self.frame.width/2)-(anchoT/2);
         let OYT =  (self.frame.height*0.4);
-        let frameT = CGRectMake(OXT, OYT, anchoT, altoT);
+        let frameT = CGRect(x: OXT, y: OYT, width: anchoT, height: altoT);
         let mensaje = UILabel(frame: frameT);
         mensaje.numberOfLines=2;
         mensaje.font=UIFont(name: "Gotham Bold", size: mensaje.frame.height);
         mensaje.adjustsFontSizeToFitWidth=true;
         mensaje.text="Error bajando imágenes, Revisa tu conexión a internet";
-        mensaje.textAlignment=NSTextAlignment.Center;
-        _ = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: #selector(ErrorZip.cierra), userInfo: nil, repeats: false);
+        mensaje.textAlignment=NSTextAlignment.center;
+        _ = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(ErrorZip.cierra), userInfo: nil, repeats: false);
         self.addSubview(mensaje);
         
     }
     
     func cierra(){
-        let fileManager = NSFileManager.defaultManager();
-        let nsDocumentDirectory = NSSearchPathDirectory.DocumentDirectory;
-        let nsUserDomainMask = NSSearchPathDomainMask.UserDomainMask;
-        var paths = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true).first;
-        var dir = (paths?.stringByAppendingString("/ZipI"))!;
-        var dir2 = (paths?.stringByAppendingString("/Imagenes"))!;
+        let fileManager = FileManager.default;
+        let nsDocumentDirectory = FileManager.SearchPathDirectory.documentDirectory;
+        let nsUserDomainMask = FileManager.SearchPathDomainMask.userDomainMask;
+        let paths = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true).first;
+        let dir = ((paths)! + "/ZipI");
+        let dir2 = ((paths)! + "/Imagenes");
         do{
-            try fileManager.removeItemAtPath(dir);
+            try fileManager.removeItem(atPath: dir);
             print("Borra Zips incompletos OK");
             
         }catch{
             print("No se pudo borrar Zips incompletos")
         }
         do{
-            try fileManager.removeItemAtPath(dir2);
+            try fileManager.removeItem(atPath: dir2);
             print("Borra Imagenes OK");
         }catch{
             print("No se pudo borrar Imagenes incompletas");

@@ -13,12 +13,12 @@ class Ninos: NSObject {
     
     var id: Int?;
     var nombre: String?;
-    var fechaNacimiento: NSDate?;
+    var fechaNacimiento: Date?;
     var padre : Int?;
     var genero:String?;
     var añoActual: AnoScroll?;
     
-    init(id: Int, nombre: String, fechaN: NSDate, padre:Int, genero: String) {
+    init(id: Int, nombre: String, fechaN: Date, padre:Int, genero: String) {
         self.id=id;
         self.nombre=nombre;
         self.fechaNacimiento=fechaN;

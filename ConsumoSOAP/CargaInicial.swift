@@ -71,15 +71,15 @@ class CargaInicial: NSObject {
                 porcion.append(DatosC.contenedor.productos[pp]);
             }
         }
-        let hilo = DISPATCH_QUEUE_PRIORITY_HIGH;
+        let hilo = DispatchQueue.GlobalQueuePriority.high;
         for prod in porcion{
             //let ima = NSUserDefaults.standardUserDefaults().objectForKey(String(prod.id));
             //if(ima == nil){
                 //print("Imagen de red: ", prod.id);
-                dispatch_async(dispatch_get_global_queue(hilo, 0)) {
+                DispatchQueue.global(priority: hilo).async {
                     var ok = false;
-                    let url = NSURL(string: prod.imagenString!)!
-                    let data = NSData(contentsOfURL : url);
+                    let url = URL(string: prod.imagenString!)!
+                    let data = try? Data(contentsOf: url);
                     if(data != nil){
                         let imagenD=UIImage(data: data!);
                         prod.imagen=imagenD;
@@ -92,7 +92,7 @@ class CargaInicial: NSObject {
                     }else{
                         //print("ImagenI");
                     }
-                    dispatch_async(dispatch_get_main_queue()) {
+                    DispatchQueue.main.async {
                         if(ok == false){
                             self.errores.append(prod);
                         }
@@ -104,7 +104,7 @@ class CargaInicial: NSObject {
         }
     }
     
-    func recoge(id: Int){
+    func recoge(_ id: Int){
         cant();
         //print("fin sub: ", id);
         valida += 1;
@@ -203,7 +203,7 @@ class CargaInicial: NSObject {
         }else{
             
             //
-            uneTinfo();
+            //uneTinfo();
             //cargaZip();
             
             print("Fin");
@@ -232,7 +232,7 @@ class CargaInicial: NSObject {
         //plogin.vista.addSubview(plogin.texto!);
     }
     
-    func sumaBarra(val: Float){
+    func sumaBarra(_ val: Float){
         let vista = DatosB.cont.loginView;
         if(vista.ingresa != nil){
             vista.barra.progress = val + 0.02;
@@ -250,8 +250,8 @@ class CargaInicial: NSObject {
     func poneCredenciales(){
         print("user: ", DatosD.contenedor.padre.email);
         print("user: ", DatosD.contenedor.padre.pass);
-        NSUserDefaults.standardUserDefaults().setObject(DatosD.contenedor.padre.email, forKey: "user");
-        NSUserDefaults.standardUserDefaults().setObject(DatosD.contenedor.padre.pass, forKey: "pass");
+        UserDefaults.standard.set(DatosD.contenedor.padre.email, forKey: "user");
+        UserDefaults.standard.set(DatosD.contenedor.padre.pass, forKey: "pass");
         
     }
     
@@ -307,11 +307,15 @@ class CargaInicial: NSObject {
     func uneTinfo(){
         print("TAMA TINFO: ", DatosB.cont.listaTInfo.count);
         for prod in DatosC.contenedor.productos{
+            var p = 0;
             for titm in DatosB.cont.listaTInfo{
                 if(titm.idProducto == prod.id){
+                    p += 1;
                     prod.listaDatos.append(titm);
+                    //print("tama info: ", p);
                 }
             }
+            //print("fin prod: ", prod);
         }
         for itemS in  DatosB.cont.prodSaludables{
             for prod in DatosC.contenedor.productos{

@@ -7,6 +7,30 @@
 //
 
 import Foundation
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 class NodoMapa: NSObject{
     var coordenadas: Direcciones;
@@ -44,7 +68,7 @@ class NodoMapa: NSObject{
     }
 
     
-    func angulo2(propia: Direcciones, evaluada: Direcciones)->Double{
+    func angulo2(_ propia: Direcciones, evaluada: Direcciones)->Double{
         var grados: Double;
         let p1 = (0*evaluada.longitud)+(1*evaluada.latitud);
         let r1 = sqrt(pow(propia.longitud, 2)+pow(propia.latitud, 2));
@@ -61,7 +85,7 @@ class NodoMapa: NSObject{
         return grados;
     }
     
-    func llevaAcero(propias: Direcciones, anteriores: Direcciones, siguientes: Direcciones){
+    func llevaAcero(_ propias: Direcciones, anteriores: Direcciones, siguientes: Direcciones){
         let pla = propias.latitud - propias.latitud;
         let plo = propias.longitud - propias.longitud;
         var ala:Double;
@@ -98,7 +122,7 @@ class NodoMapa: NSObject{
         print("siguinete: ", angulo2(propia, evaluada: siguiente));
     }
     
-    func anguloCercano(punto: Direcciones){
+    func anguloCercano(_ punto: Direcciones){
         print("punto: ", punto.latitud, "-- ", punto.longitud);
         let pla = coordenadas.latitud - coordenadas.latitud;
         let plo = coordenadas.longitud - coordenadas.longitud;

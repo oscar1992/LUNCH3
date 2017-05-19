@@ -7,6 +7,30 @@
 //
 
 import UIKit
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 class PantallaP: UIViewController {
     
@@ -25,8 +49,8 @@ class PantallaP: UIViewController {
         super.viewDidLoad();
         //consume();
         //print("inicia");
-        self.anchoP=UIScreen.mainScreen().bounds.width;
-        self.altoP=UIScreen.mainScreen().bounds.height;
+        self.anchoP=UIScreen.main.bounds.width;
+        self.altoP=UIScreen.main.bounds.height;
         self.espaciado=anchoP*0.01;
         //print("ancho: ",anchoP);
         DatosC.contenedor.anchoP=anchoP;
@@ -39,7 +63,7 @@ class PantallaP: UIViewController {
         //BotonAnadir.enabled=false;
         
         //botones+=[BotonAnadir];
-        BotonAnadir.addTarget(self, action: #selector(PantallaP.Anade(_:)), forControlEvents: .TouchDown);
+        BotonAnadir.addTarget(self, action: #selector(PantallaP.Anade(_:)), for: .touchDown);
         
 
         if(DatosD.contenedor.padre.primeraVez == true && DatosD.contenedor.ninos.count == 0){
@@ -64,7 +88,7 @@ class PantallaP: UIViewController {
     }
     
     //Método que se ejecuta antes de la aparición de la pantallaP y que carga los productos en las cajas predeterminadas
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         check_consumo();
         DatosC.contenedor.Check();
         //print("Va a anidar?")
@@ -77,7 +101,7 @@ class PantallaP: UIViewController {
                 for secu in DatosC.contenedor.secuencia{
                     if(secu.caja==caja.id){
                         //print("secu", secu.nombre);
-                        var sublista=[TItems]();
+                        let sublista=[TItems]();
                         for titem in DatosC.contenedor.titems{
                             
                             //print(titem.Combinacion," eq ",secu.id);
@@ -103,7 +127,7 @@ class PantallaP: UIViewController {
         }
         setFondo2();
         if(saludables == false){
-            poneSaludables();
+            //poneSaludables();
             saludables = true;
         }
         
@@ -116,7 +140,7 @@ class PantallaP: UIViewController {
     }
     
     //Método que
-    func anadeNinos(ninoe: Ninos?){
+    func anadeNinos(_ ninoe: Ninos?){
         /*
         var nino = ninoe;
         if(nino == nil){
@@ -155,7 +179,7 @@ class PantallaP: UIViewController {
     }
     
     //Método despreciado
-    func Anade(sender: AnyObject) {
+    func Anade(_ sender: AnyObject) {
         //anadeNinos(nil);
         /*
         DatosC.contenedor.ninos.last?.cambia();
@@ -189,7 +213,7 @@ class PantallaP: UIViewController {
         print("pini",pini);
         for btn in botones{
             //print("btn: ",btn.restorationIdentifier);
-            btn.frame=CGRectMake((pini+(anchoT*CGFloat(itera))), BotonAnadir.frame.origin.y, BotonAnadir.frame.width, BotonAnadir.frame.height);
+            btn.frame=CGRect(x: (pini+(anchoT*CGFloat(itera))), y: BotonAnadir.frame.origin.y, width: BotonAnadir.frame.width, height: BotonAnadir.frame.height);
             
             itera+=1;
         }
@@ -209,7 +233,7 @@ class PantallaP: UIViewController {
         for vista in self.view.subviews{
             if vista is VistaNino{
                 //print("CUANTOS", vista.superview);
-                vista.backgroundColor = UIColor.blueColor();
+                vista.backgroundColor = UIColor.blue;
                 vista.removeFromSuperview();
                 //vista.hidden=true;
             }
@@ -226,7 +250,7 @@ class PantallaP: UIViewController {
         for bnino in botones{
             //print("OX: ",((totalnini)));
             //print("WW: ", (LaBarra.frame.origin.y+LaBarra.frame.height))
-            let frame = CGRectMake((p*(anchoBnino)+totalnini), (LaBarra.frame.origin.y+LaBarra.frame.height), anchoBnino, altoBnino);
+            let frame = CGRect(x: (p*(anchoBnino)+totalnini), y: (LaBarra.frame.origin.y+LaBarra.frame.height), width: anchoBnino, height: altoBnino);
             
             
             bnino.frame=frame;
@@ -237,17 +261,17 @@ class PantallaP: UIViewController {
                     vista.removeFromSuperview();
                 }
             }
-            let lab = UILabel(frame: CGRectMake(0, 0, bnino.frame.width, bnino.frame.height));
+            let lab = UILabel(frame: CGRect(x: 0, y: 0, width: bnino.frame.width, height: bnino.frame.height));
             
             lab.font = UIFont(name: "SansBeam Head", size: 18);
             
-            lab.textColor = UIColor.whiteColor();
+            lab.textColor = UIColor.white;
             lab.text = bnino.nombreNino;
-            lab.textAlignment = NSTextAlignment.Center;
+            lab.textAlignment = NSTextAlignment.center;
             bnino.addSubview(lab);
             p += 1;
             self.view.addSubview(bnino);
-            let panelNino=VistaNino(frame: CGRectMake(0,(bnino.frame.height+bnino.frame.origin.y),anchoP,(altoP-bnino.frame.height)));
+            let panelNino=VistaNino(frame: CGRect(x: 0,y: (bnino.frame.height+bnino.frame.origin.y),width: anchoP,height: (altoP-bnino.frame.height)));
             //panelNino.backgroundColor=UIColor.redColor();
             bnino.panelNino=panelNino;
             self.view.addSubview(panelNino);
@@ -294,56 +318,56 @@ class PantallaP: UIViewController {
     //Método que establece el fondo de desta vista
     func setFondo2(){
         let fondo = UIImage(named: "FondoHome");
-        let backImg = UIImageView(frame: CGRectMake(0,0,UIScreen.mainScreen().bounds.width,UIScreen.mainScreen().bounds.height));
+        let backImg = UIImageView(frame: CGRect(x: 0,y: 0,width: UIScreen.main.bounds.width,height: UIScreen.main.bounds.height));
         //backImg.contentMode = UIViewContentMode.ScaleAspectFit;
         backImg.image = fondo;
         self.view.addSubview(backImg);
-        self.view.sendSubviewToBack(backImg);
+        self.view.sendSubview(toBack: backImg);
     }
     
     //Método que inicializa el botón del menú lateral
     func botonMenu(){
         let ancho = DatosC.contenedor.altoP * 0.0922;
-        let frameboton = CGRectMake(0, LaBarra.frame.origin.y, ancho, ancho);
-        let frameFondo = CGRectMake(ancho/3, ancho/3, ancho*0.3, ancho*0.3);
+        let frameboton = CGRect(x: 0, y: LaBarra.frame.origin.y, width: ancho, height: ancho);
+        let frameFondo = CGRect(x: ancho/3, y: ancho/3, width: ancho*0.3, height: ancho*0.3);
         //print("Boton", frameboton);
         let BotonMenu = UIButton(frame: frameboton);
         let fondo = UIImage(named: "MenuLat");
         let backImg = UIImageView(frame: frameFondo);
-        BotonMenu.backgroundColor = UIColor.redColor();
-        backImg.contentMode = UIViewContentMode.ScaleAspectFit;
+        BotonMenu.backgroundColor = UIColor.red;
+        backImg.contentMode = UIViewContentMode.scaleAspectFit;
         backImg.image = fondo;
         BotonMenu.addSubview(backImg);
-        BotonMenu.sendSubviewToBack(backImg);
+        BotonMenu.sendSubview(toBack: backImg);
         self.view.addSubview(BotonMenu);
     }
     //Método que inicializa el boton de añadir
     func botonAñadir(){
         
-        let frameBotAnadir = CGRectMake(DatosC.contenedor.anchoP*0.884, (LaBarra.frame.origin.y+LaBarra.frame.height), DatosC.contenedor.anchoP*0.116, DatosC.contenedor.anchoP*0.2);
+        let frameBotAnadir = CGRect(x: DatosC.contenedor.anchoP*0.884, y: (LaBarra.frame.origin.y+LaBarra.frame.height), width: DatosC.contenedor.anchoP*0.116, height: DatosC.contenedor.anchoP*0.2);
         BotonAnadir.frame = frameBotAnadir;
         let fondo = UIImage(named: "Agrega");
-        let frameFondo = CGRectMake(0, 0, frameBotAnadir.width, frameBotAnadir.height*0.6);
+        let frameFondo = CGRect(x: 0, y: 0, width: frameBotAnadir.width, height: frameBotAnadir.height*0.6);
         let backImg = UIImageView(frame: frameFondo);
         backImg.image = fondo;
         //backImg.contentMode = UIViewContentMode.ScaleAspectFit;
         self.BotonAnadir.addSubview(backImg);
-        self.BotonAnadir.sendSubviewToBack(backImg);
+        self.BotonAnadir.sendSubview(toBack: backImg);
         
     }
     
     //Mètodo que oculta la barra en este viewcontroller
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden : Bool {
         return true
     }
     
     func leefuentes(){
-        let ff = UIFont.familyNames();
+        let ff = UIFont.familyNames;
         for nn in ff{
             print(nn);
         }
     }
-    
+    /*
     func poneSaludables(){
         for nino in DatosC.contenedor.ninos{
             
@@ -374,7 +398,7 @@ class PantallaP: UIViewController {
                     //print("Tama: ", caja.secuencia.first?.lista);
                     if(caja.secuencia.first != nil){
                         for item in (caja.secuencia.first?.lista)!{
-                            let framePV = CGRectMake(0, 0, (lon?.subVista?.casillas.first?.frame.width)!, (lon?.subVista?.casillas.first?.frame.height)!);
+                            let framePV = CGRect(x: 0, y: 0, width: (lon?.subVista?.casillas.first?.frame.width)!, height: (lon?.subVista?.casillas.first?.frame.height)!);
                             let pv = ProductoView(frame: framePV, imagen: (item.productos?.imagen)!);
                             pv.tipo=(item.productos?.tipo)!;
                             //print(pv.tipo);
@@ -387,4 +411,5 @@ class PantallaP: UIViewController {
             }
         }
     }
+ */
 }

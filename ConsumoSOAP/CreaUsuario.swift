@@ -7,6 +7,19 @@
 //
 
 import UIKit
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
 
 class CreaUsuario: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     
@@ -26,13 +39,13 @@ class CreaUsuario: UIViewController, UITextFieldDelegate, UIImagePickerControlle
         poneFondo();
         DatosK.cont.arriba=true;
         self.view.accessibilityIdentifier="CRE";
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(CreaUsuario.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil);
+        NotificationCenter.default.addObserver(self, selector: #selector(CreaUsuario.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil);
         //NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(CreaUsuario.dismissKeyboard), name: UIKeyboardWillHideNotification, object: nil);
 
     }
     
-    func keyboardWillShow(notification: NSNotification) {
-        let frame = (notification.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
+    func keyboardWillShow(_ notification: Notification) {
+        let frame = (notification.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         print("Teclado: ", frame);
         DatosK.cont.tecladoFrame=frame;
         DatosK.cont.subeVistaCreaUsuario(self.view);
@@ -53,15 +66,15 @@ class CreaUsuario: UIViewController, UITextFieldDelegate, UIImagePickerControlle
         let OX = self.view.frame.width*0.2;
         let ancho = self.view.frame.width*0.6;
         let alto = self.view.frame.height*0.2;
-        let frameTit=CGRectMake(OX, OY, ancho, alto);
+        let frameTit=CGRect(x: OX, y: OY, width: ancho, height: alto);
         let titulo=UIView(frame: frameTit);
         DatosB.cont.poneFondoTot(titulo, fondoStr: "LogoLaLonchera", framePers: nil, identi: nil, scala: true);
-        self.view.sendSubviewToBack(titulo);
+        self.view.sendSubview(toBack: titulo);
         self.view.addSubview(titulo);
         framesText(OY+alto);
     }
     
-    func framesText(yini: CGFloat){
+    func framesText(_ yini: CGFloat){
         let ancho = self.view.frame.width*0.7;
         let espacioAlto = self.view.frame.height*0.4;
         let espacioU = espacioAlto/9;
@@ -69,16 +82,16 @@ class CreaUsuario: UIViewController, UITextFieldDelegate, UIImagePickerControlle
         var altov = CGFloat(0);
         for n in 0 ... 9{
             altov = (espacioU*CGFloat(n))+yini;
-            let frame=CGRectMake(OX, altov, ancho, espacioU);
+            let frame=CGRect(x: OX, y: altov, width: ancho, height: espacioU);
             switch n {
             case 0:
                 let vista = UILabel(frame:frame);
                 //vista.backgroundColor=UIColor.blueColor();
                 vista.text="Vamos a crear tu cuenta de usuario";
                 vista.adjustsFontSizeToFitWidth=true;
-                vista.textAlignment=NSTextAlignment.Center;
+                vista.textAlignment=NSTextAlignment.center;
                 vista.font=UIFont(name: "Gotham Bold", size: espacioU/2);
-                vista.textColor=UIColor.whiteColor();
+                vista.textColor=UIColor.white;
                 DatosK.cont.origen=vista.frame.origin.y;
                 self.view.addSubview(vista);
                 break;
@@ -87,22 +100,22 @@ class CreaUsuario: UIViewController, UITextFieldDelegate, UIImagePickerControlle
                 //vista.backgroundColor=UIColor.blueColor();
                 vista.text="Nombre y Apellido";
                 vista.adjustsFontSizeToFitWidth=true;
-                vista.textAlignment=NSTextAlignment.Center;
+                vista.textAlignment=NSTextAlignment.center;
                 vista.font=UIFont(name: "Gotham Bold", size: espacioU/2);
-                vista.textColor=UIColor.whiteColor();
+                vista.textColor=UIColor.white;
                 self.view.addSubview(vista);
                 break;
             case 2:
                 let vista = UITextField(frame:frame);
                 //vista.backgroundColor=UIColor.redColor();
-                vista.textColor=UIColor.whiteColor();
+                vista.textColor=UIColor.white;
                 vista.attributedPlaceholder = NSAttributedString(string: "Escribe tu nombre", attributes: [NSForegroundColorAttributeName : UIColor.init(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)]);
-                vista.textAlignment=NSTextAlignment.Center;
+                vista.textAlignment=NSTextAlignment.center;
                 vista.font=UIFont(name: "Gotham Bold", size: vista.frame.height/2);
                 vista.adjustsFontSizeToFitWidth=true;
                 vista.accessibilityIdentifier="nombre";
-                vista.autocapitalizationType=UITextAutocapitalizationType.None;
-                let framePers = CGRectMake(0, vista.frame.height-2, vista.frame.width, 2);
+                vista.autocapitalizationType=UITextAutocapitalizationType.none;
+                let framePers = CGRect(x: 0, y: vista.frame.height-2, width: vista.frame.width, height: 2);
                 DatosB.cont.poneFondoTot(vista, fondoStr: "Línea texto", framePers: framePers, identi: nil, scala: true);
                 self.view.addSubview(vista);
                 break;
@@ -111,23 +124,23 @@ class CreaUsuario: UIViewController, UITextFieldDelegate, UIImagePickerControlle
                 //vista.backgroundColor=UIColor.blueColor();
                 vista.text="Correo electrónico";
                 vista.adjustsFontSizeToFitWidth=true;
-                vista.textAlignment=NSTextAlignment.Center;
+                vista.textAlignment=NSTextAlignment.center;
                 vista.font=UIFont(name: "Gotham Bold", size: espacioU/2);
-                vista.textColor=UIColor.whiteColor();
+                vista.textColor=UIColor.white;
                 self.view.addSubview(vista);
                 break;
             case 4:
                 email = UITextField(frame:frame);
                 email.accessibilityIdentifier = "email";
-                email.textColor=UIColor.whiteColor();
+                email.textColor=UIColor.white;
                 email.attributedPlaceholder = NSAttributedString(string: "Escribe tu correo", attributes: [NSForegroundColorAttributeName : UIColor.init(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)]);
-                email.textAlignment=NSTextAlignment.Center;
+                email.textAlignment=NSTextAlignment.center;
                 email.font=UIFont(name: "Gotham Bold", size: email.frame.height/2);
                 email.adjustsFontSizeToFitWidth=true;
                 email.accessibilityIdentifier="email";
                 email.delegate=self;
-                email.autocapitalizationType=UITextAutocapitalizationType.None;
-                let framePers = CGRectMake(0, email.frame.height-2, email.frame.width, 2);
+                email.autocapitalizationType=UITextAutocapitalizationType.none;
+                let framePers = CGRect(x: 0, y: email.frame.height-2, width: email.frame.width, height: 2);
                 DatosB.cont.poneFondoTot(email, fondoStr: "Línea texto", framePers: framePers, identi: nil, scala: true);
                 self.view.addSubview(email);
                 break;
@@ -135,25 +148,25 @@ class CreaUsuario: UIViewController, UITextFieldDelegate, UIImagePickerControlle
                 let vista = UILabel(frame:frame);
                 vista.text="Contraseña";
                 vista.adjustsFontSizeToFitWidth=true;
-                vista.textAlignment=NSTextAlignment.Center;
+                vista.textAlignment=NSTextAlignment.center;
                 vista.font=UIFont(name: "Gotham Bold", size: espacioU/2);
-                vista.textColor=UIColor.whiteColor();
+                vista.textColor=UIColor.white;
                 self.view.addSubview(vista);
                 break;
             case 6:
                 pass = UITextField(frame:frame);
                 
-                pass.textColor=UIColor.whiteColor();
-                pass.textAlignment=NSTextAlignment.Center;
+                pass.textColor=UIColor.white;
+                pass.textAlignment=NSTextAlignment.center;
                 pass.attributedPlaceholder = NSAttributedString(string: "Escribe tu contraseña", attributes: [NSForegroundColorAttributeName : UIColor.init(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)]);
                 pass.font=UIFont(name: "Gotham Bold", size: pass.frame.height/2);
                 pass.adjustsFontSizeToFitWidth=true;
                 
                 pass.accessibilityIdentifier="pass1";
-                pass.autocapitalizationType=UITextAutocapitalizationType.None;
-                pass.secureTextEntry=true;
+                pass.autocapitalizationType=UITextAutocapitalizationType.none;
+                pass.isSecureTextEntry=true;
                 pass.delegate=self;
-                let framePers = CGRectMake(0, pass.frame.height-2, pass.frame.width, 2);
+                let framePers = CGRect(x: 0, y: pass.frame.height-2, width: pass.frame.width, height: 2);
                 DatosB.cont.poneFondoTot(pass, fondoStr: "Línea texto", framePers: framePers, identi: nil, scala: true);
                 self.view.addSubview(pass);
                 break;
@@ -161,23 +174,23 @@ class CreaUsuario: UIViewController, UITextFieldDelegate, UIImagePickerControlle
                 let vista = UILabel(frame:frame);
                 vista.text="Confirmar Contraseña";
                 vista.adjustsFontSizeToFitWidth=true;
-                vista.textAlignment=NSTextAlignment.Center;
+                vista.textAlignment=NSTextAlignment.center;
                 vista.font=UIFont(name: "Gotham Bold", size: espacioU/2);
-                vista.textColor=UIColor.whiteColor();
+                vista.textColor=UIColor.white;
                 self.view.addSubview(vista);
                 break;
             case 8:
                 let vista = UITextField(frame:frame);
-                vista.textColor=UIColor.whiteColor();
+                vista.textColor=UIColor.white;
                 vista.attributedPlaceholder = NSAttributedString(string: "Confirma tu contraseña", attributes: [NSForegroundColorAttributeName : UIColor.init(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)]);
-                vista.textAlignment=NSTextAlignment.Center;
+                vista.textAlignment=NSTextAlignment.center;
                 vista.font=UIFont(name: "Gotham Bold", size: vista.frame.height/2);
                 vista.adjustsFontSizeToFitWidth=true;
                 vista.accessibilityIdentifier="pass2";
                 
-                vista.autocapitalizationType=UITextAutocapitalizationType.None;
-                vista.secureTextEntry=true;
-                let framePers = CGRectMake(0, vista.frame.height-2, vista.frame.width, 2);
+                vista.autocapitalizationType=UITextAutocapitalizationType.none;
+                vista.isSecureTextEntry=true;
+                let framePers = CGRect(x: 0, y: vista.frame.height-2, width: vista.frame.width, height: 2);
                 DatosB.cont.poneFondoTot(vista, fondoStr: "Línea texto", framePers: framePers, identi: nil, scala: true);
                 self.view.addSubview(vista);
                 break;
@@ -188,12 +201,12 @@ class CreaUsuario: UIViewController, UITextFieldDelegate, UIImagePickerControlle
         generos(altov+espacioU);
     }
     
-    func textFieldDidEndEditing(textField: UITextField){
+    func textFieldDidEndEditing(_ textField: UITextField){
         //print("fin: ", textField.text, " acc: ", textField.accessibilityIdentifier);
         validaEmail(textField);
     }
     
-    func validaEmail(textField: UITextField){
+    func validaEmail(_ textField: UITextField){
         if(textField.text != "" && textField.accessibilityIdentifier=="email"){
             //print("comprueba");
             if(compruebaPatron(textField.text!)){
@@ -205,7 +218,7 @@ class CreaUsuario: UIViewController, UITextFieldDelegate, UIImagePickerControlle
                 let alto = self.view.frame.height*0.4;
                 let OX = (self.view.frame.width/2)-(ancho/2);
                 let OY = (self.view.frame.height/2)-(alto/2);
-                let frameMens = CGRectMake(OX, OY, ancho, alto);
+                let frameMens = CGRect(x: OX, y: OY, width: ancho, height: alto);
                 let msg = MensajeCrea(frame: frameMens, msg: "Correo no válido", gif: false);
                 msg.iniciaTimer();
                 self.view.addSubview(msg);
@@ -214,14 +227,14 @@ class CreaUsuario: UIViewController, UITextFieldDelegate, UIImagePickerControlle
             }
             
         }else if(textField.accessibilityIdentifier=="pass1"){
-            print("largo?")
-            if(textField.text?.characters.count<6){
+            print("largo?: ", textField.text?.characters.count);
+            if(textField.text?.characters.count<6 && textField.text?.characters.count != 0){
                 print("Menor");
                 let ancho = self.view.frame.width*0.8;
                 let alto = self.view.frame.height*0.4;
                 let OX = (self.view.frame.width/2)-(ancho/2);
                 let OY = (self.view.frame.height/2)-(alto/2);
-                let frameMens = CGRectMake(OX, OY, ancho, alto);
+                let frameMens = CGRect(x: OX, y: OY, width: ancho, height: alto);
                 let msg = MensajeCrea(frame: frameMens, msg: "La clave debe contener minimo 6 caracteres" , gif: false);
                 msg.iniciaTimer();
                 self.view.addSubview(msg);
@@ -233,13 +246,13 @@ class CreaUsuario: UIViewController, UITextFieldDelegate, UIImagePickerControlle
         }
     }
     
-    func compruebaPatron(texto: String)->Bool{
+    func compruebaPatron(_ texto: String)->Bool{
         var rueda = true;
         var p = 0;
         var a = false;
         var b = false;
         while(rueda){
-            let index = texto.startIndex.advancedBy(p);
+            let index = texto.characters.index(texto.startIndex, offsetBy: p);
             //print("car: ", texto[index])
             if(texto[index]=="@"){
                 //print("tiene arroba")
@@ -260,42 +273,42 @@ class CreaUsuario: UIViewController, UITextFieldDelegate, UIImagePickerControlle
         }
     }
     
-    func generos(yini: CGFloat){
+    func generos(_ yini: CGFloat){
         let ancho = self.view.frame.width*0.3;
         let OX = self.view.frame.width*0.15;
         let OY = yini;
         let alto = self.view.frame.height*0.1;
-        let frameGenero = CGRectMake(OX, OY, ancho, alto);
+        let frameGenero = CGRect(x: OX, y: OY, width: ancho, height: alto);
         let genero = VistaGenero(frame: frameGenero);
         genero.accessibilityIdentifier="genero";
         //self.view.addSubview(genero);
         iniciaFoto(yini);iniciaCheckTerminos(OY+alto);
     }
     
-    func iniciaFoto(yini: CGFloat){
+    func iniciaFoto(_ yini: CGFloat){
         let ancho = self.view.frame.width*0.4;
         let alto = self.view.frame.height*0.1;
         let OX = self.view.frame.width*0.45;
         let OY = yini;
-        let frameFoto = CGRectMake(OX, OY, ancho, alto);
+        let frameFoto = CGRect(x: OX, y: OY, width: ancho, height: alto);
         foto = VistaFoto(frame: frameFoto, padre: self);
         //self.view.addSubview(foto);
     }
     
-    func iniciaCheckTerminos(yini: CGFloat){
+    func iniciaCheckTerminos(_ yini: CGFloat){
         let ancho = self.view.frame.width*0.1;
         let ancho2 = self.view.frame.width*0.5;
         let alto = self.view.frame.height*0.03;
         let OX = self.view.frame.width*0.2;
         let OX2 = (OX+ancho);
         let OY = yini;
-        let frameCheck = CGRectMake(OX, OY, ancho, alto);
-        let frameLabel = CGRectMake(OX2, OY, ancho2, alto);
+        let frameCheck = CGRect(x: OX, y: OY, width: ancho, height: alto);
+        let frameLabel = CGRect(x: OX2, y: OY, width: ancho2, height: alto);
         let check = SelectorTerminos(frame: frameCheck);
         let texto = UILabel(frame: frameLabel);
         check.accessibilityIdentifier="terminos";
         texto.text="Acepto los términos y condiciones";
-        texto.textColor=UIColor.whiteColor();
+        texto.textColor=UIColor.white;
         texto.font=UIFont(name: "Gotham Bold", size: alto);
         texto.adjustsFontSizeToFitWidth=true;
         self.view.addSubview(check);
@@ -303,15 +316,15 @@ class CreaUsuario: UIViewController, UITextFieldDelegate, UIImagePickerControlle
         iniciaBotonCreacion(OY+(alto*2));
     }
     
-    func iniciaBotonCreacion(yini: CGFloat){
+    func iniciaBotonCreacion(_ yini: CGFloat){
         let ancho = self.view.frame.width*0.6;
         let alto = self.view.frame.height*0.1;
         let OX = self.view.frame.width*0.2;
         let OY = yini;
-        let frameBoton = CGRectMake(OX, OY, ancho, alto);
+        let frameBoton = CGRect(x: OX, y: OY, width: ancho, height: alto);
         bot = UIButton(frame: frameBoton);
         DatosB.cont.poneFondoTot(bot,fondoStr: "Botón Crear cuenta", framePers: nil, identi: "sele", scala: true);
-        bot.addTarget(self, action: #selector(CreaUsuario.sube2), forControlEvents: .TouchDown);
+        bot.addTarget(self, action: #selector(CreaUsuario.sube2), for: .touchDown);
         self.view.addSubview(bot);
     }
     
@@ -320,10 +333,10 @@ class CreaUsuario: UIViewController, UITextFieldDelegate, UIImagePickerControlle
         let ancho = DatosC.contenedor.altoP * 0.0922;
         let ancho2 = ancho/3;
         let centr = (ancho/2)-(ancho2/2);
-        let frameBoton = CGRectMake(0, 0, ancho, ancho);
+        let frameBoton = CGRect(x: 0, y: 0, width: ancho, height: ancho);
         let volver = UIButton(frame: frameBoton);
-        volver.addTarget(self, action: #selector(CreaUsuario.cierraVista), forControlEvents: .TouchDown);
-        let subFrame = CGRectMake(centr, centr, ancho2, ancho2);
+        volver.addTarget(self, action: #selector(CreaUsuario.cierraVista), for: .touchDown);
+        let subFrame = CGRect(x: centr, y: centr, width: ancho2, height: ancho2);
         DatosB.cont.poneFondoTot(volver, fondoStr: "FlechaVBlanco", framePers: subFrame, identi: nil, scala: true);
         self.view.addSubview(volver);
     }
@@ -338,10 +351,10 @@ class CreaUsuario: UIViewController, UITextFieldDelegate, UIImagePickerControlle
         if(datos.0==true){
             print("sube");
             let sube = SubePadre();
-            var datosFoto:NSData?
+            var datosFoto:Data?
             if(foto.contiene){
                 //print("data: ", foto.datos);
-                datosFoto=foto.datos;
+                datosFoto=foto.datos as! Data;
             }
             sube.subePadre(datos.1, email: datos.2, pass: datos.3, genero: datos.4 , foto: datosFoto, padre: self);
             
@@ -450,7 +463,7 @@ class CreaUsuario: UIViewController, UITextFieldDelegate, UIImagePickerControlle
             let alto = self.view.frame.height*0.4;
             let OX = (self.view.frame.width/2)-(ancho/2);
             let OY = (self.view.frame.height/2)-(alto/2);
-            let frameMens = CGRectMake(OX, OY, ancho, alto);
+            let frameMens = CGRect(x: OX, y: OY, width: ancho, height: alto);
             var msgT = "";
             if(bnomb==false){
                 msgT = msgT + "\nFalta tu nombre";
@@ -477,7 +490,7 @@ class CreaUsuario: UIViewController, UITextFieldDelegate, UIImagePickerControlle
                 msgT = msgT + "\nPreferimos una contraseña de minimo 6 caracteres por seguridad!";
             }
             if(emailExistente==true){
-                bot.enabled=true;
+                bot.isEnabled=true;
                 msgT = msgT + "\nEste correo ya existe! Seguro ya creaste un usuario!";
             }
             //print("msg: ", msgT);
@@ -494,19 +507,19 @@ class CreaUsuario: UIViewController, UITextFieldDelegate, UIImagePickerControlle
     }
     
     func cierraVista(){
-        self.dismissViewControllerAnimated(false, completion: nil);
+        self.dismiss(animated: false, completion: nil);
     }
     
-    func msgUsuarioExitoso(mensaje: String, adv: Bool){
+    func msgUsuarioExitoso(_ mensaje: String, adv: Bool){
         let ancho = self.view.frame.width*0.8;
         let alto = self.view.frame.height*0.4;
         let OX = (self.view.frame.width/2)-(ancho/2);
         let OY = (self.view.frame.height/2)-(alto/2);
-        let frameMens = CGRectMake(OX, OY, ancho, alto);
+        let frameMens = CGRect(x: OX, y: OY, width: ancho, height: alto);
         let msg = MensajeCrea(frame: frameMens, msg: mensaje, gif: false);
         if(adv){
             msg.iniciaImagen3();
-            _ = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: #selector(CreaUsuario.pasaHome), userInfo: nil, repeats: false);
+            _ = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(CreaUsuario.pasaHome), userInfo: nil, repeats: false);
         }else{
             msg.iniciaTimer();
         }
@@ -537,21 +550,21 @@ class CreaUsuario: UIViewController, UITextFieldDelegate, UIImagePickerControlle
     func inciaPicker(){
         let ImagePicker = UIImagePickerController()
         ImagePicker.delegate = self
-        ImagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-        self.presentViewController(ImagePicker, animated: true, completion: nil)
+        ImagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary
+        self.present(ImagePicker, animated: true, completion: nil)
     }
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
         var image = UIImage();
         image = (info[UIImagePickerControllerOriginalImage] as? UIImage)!
         foto.setFoto(image);
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
         
     }
 
     //Método que oculta la barra en este viewcontroller
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden : Bool {
         return true
     }
 }

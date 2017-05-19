@@ -21,7 +21,7 @@ class SubVista: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame);
-        self.label=UILabel(frame: CGRectMake(5,5,100,20));
+        self.label=UILabel(frame: CGRect(x: 5,y: 5,width: 100,height: 20));
         self.addSubview(label!);
         
         //print("Padre: ", self.superview?.frame)
@@ -95,7 +95,7 @@ class SubVista: UIView {
                     var p=CGFloat(0);
                     for _ in 0..<Int(esp){
                         
-                        let casilla=Casilla(frame: CGRectMake((0+((espacioA+bordelateral*2)*p)), (0+((alto+bordelateral)*f)), espacioA, alto));
+                        let casilla=Casilla(frame: CGRect(x: (0+((espacioA+bordelateral*2)*p)), y: (0+((alto+bordelateral)*f)), width: espacioA, height: alto));
                         if(DatosC.contenedor.loncheras.count>0){
                         
                         }
@@ -119,7 +119,7 @@ class SubVista: UIView {
                                 let prod = casillasAux[Int(cc)].producto;
                                 //print("P: ",casillasAux[Int(cc)].producto!.nombre);
                                 imagen=prod!.imagen!;
-                                let nn=CGRectMake(0, 0, casilla.frame.width, casilla.frame.height);
+                                let nn=CGRect(x: 0, y: 0, width: casilla.frame.width, height: casilla.frame.height);
                                 let icono=ProductoView(frame: nn, imagen: imagen);
                                 
                                 casilla.elemeto=icono;
@@ -197,7 +197,7 @@ class SubVista: UIView {
                 var p=CGFloat(0);
                     bordelateral = bordelateral*0.75;
                     for _ in 0..<Int(espB){
-                        let framecas=CGRectMake((0+((espacioA+bordelateral*2)*p)), (0+((alto+bordelateral)*f)), espacioA, alto);
+                        let framecas=CGRect(x: (0+((espacioA+bordelateral*2)*p)), y: (0+((alto+bordelateral)*f)), width: espacioA, height: alto);
                         let casilla=Casilla(frame: framecas);
                         
                         if(tipo<=5){//Max Tipos
@@ -215,7 +215,7 @@ class SubVista: UIView {
                                 //print("P: ",casillasAux[Int(cc)].producto!.nombre);
                                 imagen=prod!.imagen!;
                                 
-                                let nn=CGRectMake(0, 0, casilla.frame.width, casilla.frame.height);
+                                let nn=CGRect(x: 0, y: 0, width: casilla.frame.width, height: casilla.frame.height);
                                 print("ico: ",nn);
                                 if (casilla.tipo == nil) {
                                     casilla.tipo = casillas.count;
@@ -226,7 +226,7 @@ class SubVista: UIView {
                                 casilla.elemeto=icono;
                                 icono.producto=prod;
                                 casilla.elemeto?.tipo=prod!.tipo;
-                                casilla.bringSubviewToFront(icono);
+                                casilla.bringSubview(toFront: icono);
                                 casilla.seteaElemento(icono, tipo: casilla.tipo!, ima: imagen, prod: icono.producto!);
                                 casilla.elemeto?.Natural=true;
                                 
@@ -290,7 +290,7 @@ class SubVista: UIView {
                 
                 p=0;
                 for _ in 0..<Int(esp){
-                    let casilla=Casilla(frame: CGRectMake((0+(espacioB+bordelateral*2)*p), (0+(alto+bordelateral)), espacioB, alto));
+                    let casilla=Casilla(frame: CGRect(x: (0+(espacioB+bordelateral*2)*p), y: (0+(alto+bordelateral)), width: espacioB, height: alto));
                     //casilla.backgroundColor=UIColor.init(red: (0+(cc*0.2)), green: 1, blue: 1, alpha: 1);
                     if(tipo<=5){//Max tipos impares
                         casilla.tipo=Int(tipo+1);
@@ -305,13 +305,13 @@ class SubVista: UIView {
                             let prod = casillasAux[Int(cc)].producto;
                             //print("P: ",casillasAux[Int(cc)].producto!.nombre);
                             imagen=prod!.imagen!;
-                            let nn=CGRectMake(0, 0, casilla.frame.width, casilla.frame.height);
+                            let nn=CGRect(x: 0, y: 0, width: casilla.frame.width, height: casilla.frame.height);
                             let icono=ProductoView(frame: nn, imagen: imagen);
                             print("ico: ",nn);
                             casilla.elemeto=icono;
                             icono.producto=prod;
                             casilla.elemeto?.tipo=prod!.tipo;
-                            casilla.bringSubviewToFront(icono);
+                            casilla.bringSubview(toFront: icono);
                             casilla.seteaElemento(icono, tipo: casilla.tipo!, ima: imagen, prod: icono.producto!);
                             casilla.elemeto?.Natural=true;
                             if(DatosC.contenedor.loncheras[DatosC.contenedor.iActual].saludable == true){
@@ -393,7 +393,7 @@ class SubVista: UIView {
         let OX = -CGFloat(ancho-self.frame.width)/2;
         let alto = DatosC.contenedor.tamaLonchera.height*1.2;
         let OY = -CGFloat(alto-self.frame.height)/2;
-        frameLonchera = CGRectMake(OX, OY, ancho, alto);
+        frameLonchera = CGRect(x: OX, y: OY, width: ancho, height: alto);
         //print("Tama BackLon: ", frameLonchera);
         backImg = UIImageView(frame: frameLonchera!);
         //backImg!.contentMode = UIViewContentMode.ScaleAspectFit;
@@ -401,7 +401,7 @@ class SubVista: UIView {
         
         cambiaFondo(self.verde);
         self.addSubview(backImg!);
-        self.sendSubviewToBack(backImg!);
+        self.sendSubview(toBack: backImg!);
     }
     
     //Método qye cambia el tamaño del fondo
@@ -435,7 +435,7 @@ class SubVista: UIView {
 
     // Método que cambia entre os dos fondos dependeindo del parámetro
     
-    func cambiaFondo(verde: Bool){
+    func cambiaFondo(_ verde: Bool){
         self.verde=verde;
         let fondo: UIImage?;
         if(verde){
@@ -445,11 +445,11 @@ class SubVista: UIView {
         }
         //backImg!.contentMode = UIViewContentMode.ScaleAspectFit;
         backImg!.image = fondo;
-        self.sendSubviewToBack(backImg!);
+        self.sendSubview(toBack: backImg!);
     }
     
     //Método que pone un fondo de colres la primera vez que se elige una lonchera predeterminada
-    func fondoColores(ncolor: Int){
+    func fondoColores(_ ncolor: Int){
         
 
         let fondo: UIImage?;
@@ -470,14 +470,15 @@ class SubVista: UIView {
             fondo = UIImage(named: "LoncheraRoja");
             break;
         }
-        CasillasColores(ncolor);
+        //CasillasColores(ncolor);
         //backImg!.contentMode = UIViewContentMode.ScaleAspectFit;
         backImg!.image = fondo;
-        self.sendSubviewToBack(backImg!);
+        self.sendSubview(toBack: backImg!);
     }
     
     //Método que pone los colores de las casillas la primera vez
-    func CasillasColores(ncolor: Int){
+    /*
+    func CasillasColores(_ ncolor: Int){
         let lonc = DatosC.contenedor.lonchera;
         
             for cas in (lonc.subVista?.casillas)!{
@@ -506,14 +507,14 @@ class SubVista: UIView {
                     break;
                 }
                 
-                let frame = CGRectMake(0, 0, cas.frame.width, cas.frame.height);
+                let frame = CGRect(x: 0, y: 0, width: cas.frame.width, height: cas.frame.height);
                 let backImg = UIImageView(frame: frame);
                 //backImg.contentMode = UIViewContentMode.ScaleAspectFit;
                 backImg.image = imagen;
                 cas.addSubview(backImg);
-                cas.sendSubviewToBack(backImg);
+                cas.sendSubview(toBack: backImg);
             }
         
-    }
+    }*/
 
 }

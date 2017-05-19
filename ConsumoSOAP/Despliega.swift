@@ -19,18 +19,18 @@ class Despliega: UIScrollView , UIScrollViewDelegate{
         super.init(frame: frame);
         self.delegate=self;
         let alto = self.frame.height;
-        self.frame = CGRectMake(0, self.frame.origin.y, self.frame.width, (alto*3.5));
+        self.frame = CGRect(x: 0, y: self.frame.origin.y, width: self.frame.width, height: (alto*3.5));
         var p = 0;
-        self.backgroundColor=UIColor.blueColor();
+        self.backgroundColor=UIColor.blue;
         if(object_getClassName(tipo) == object_getClassName(FechaEntrega)){
             //print("es fecha");
             for fecha in DatosB.cont.FechasEntrega{
-                let frame = CGRectMake(0, alto*CGFloat(p), self.frame.width, alto-10);
+                let frame = CGRect(x: 0, y: alto*CGFloat(p), width: self.frame.width, height: alto-10);
                 let vistaAux = BotDespliega(frame: frame, fecha: fecha, hora: nil);
-                vistaAux.backgroundColor=UIColor.redColor();
-                vistaAux.addTarget(self, action: #selector(Despliega.botEli(_:)), forControlEvents: .TouchDown);
-                self.bringSubviewToFront(vistaAux);
-                let fechaL = UILabel(frame: CGRectMake(0, 0, self.frame.width, alto));
+                vistaAux.backgroundColor=UIColor.red;
+                vistaAux.addTarget(self, action: #selector(Despliega.botEli(_:)), for: .touchDown);
+                self.bringSubview(toFront: vistaAux);
+                let fechaL = UILabel(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: alto));
                 fechaL.text=fecha.fecha;
                 vistaAux.addSubview(fechaL);
                 bot.append(vistaAux);
@@ -42,12 +42,12 @@ class Despliega: UIScrollView , UIScrollViewDelegate{
             if(fecha != nil){
                 for hora in DatosB.cont.HorasEntrega{
                     if(hora.fechaEntrega.idFecha==fecha?.idFecha){
-                        let frame = CGRectMake(0, alto*CGFloat(p), self.frame.width, alto-10);
+                        let frame = CGRect(x: 0, y: alto*CGFloat(p), width: self.frame.width, height: alto-10);
                         let vistaAux = BotDespliega(frame: frame, fecha: nil, hora: hora);
-                        vistaAux.backgroundColor=UIColor.redColor();
-                        vistaAux.addTarget(self, action: #selector(Despliega.botEli2), forControlEvents: .TouchDown);
-                        self.bringSubviewToFront(vistaAux);
-                        let fechaL = UILabel(frame: CGRectMake(0, 0, self.frame.width, alto));
+                        vistaAux.backgroundColor=UIColor.red;
+                        vistaAux.addTarget(self, action: #selector(Despliega.botEli2), for: .touchDown);
+                        self.bringSubview(toFront: vistaAux);
+                        let fechaL = UILabel(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: alto));
                         fechaL.text=hora.horaInicial+" - "+hora.horaFinal;
                         vistaAux.addSubview(fechaL);
                         bot.append(vistaAux);
@@ -57,13 +57,13 @@ class Despliega: UIScrollView , UIScrollViewDelegate{
                 }
                 print("bot: ", bot.count);
                 if(bot.count==0){
-                    self.frame = CGRectMake(0, self.frame.origin.y, self.frame.width, (0));
+                    self.frame = CGRect(x: 0, y: self.frame.origin.y, width: self.frame.width, height: (0));
                     self.removeFromSuperview();
                 }
             }else{
                 //print("vacio");
                 self.removeFromSuperview();
-                self.frame = CGRectMake(0, self.frame.origin.y, self.frame.width, (0));
+                self.frame = CGRect(x: 0, y: self.frame.origin.y, width: self.frame.width, height: (0));
                 p=0;
             }
             
@@ -71,13 +71,13 @@ class Despliega: UIScrollView , UIScrollViewDelegate{
         
         let altoC = alto*CGFloat(p);
         //print("altoc: ", altoC);
-        self.contentSize=CGSizeMake(self.frame.width, altoC);
+        self.contentSize=CGSize(width: self.frame.width, height: altoC);
         //print("alto: ", self.contentSize," vers ", self.frame.height);
     }
     
     
     
-    func botEli(sender:BotDespliega){
+    func botEli(_ sender:BotDespliega){
         //print("mata: ", sender.fecha!.fecha);
         //padre.fecha=sender.fecha;
         padre.texto.text=sender.fecha!.fecha;
@@ -85,12 +85,12 @@ class Despliega: UIScrollView , UIScrollViewDelegate{
         self.removeFromSuperview();
     }
     
-    func botEli2(sender:BotDespliega){
+    func botEli2(_ sender:BotDespliega){
         //padre.fecha=nil;
         
         padre.texto2.text=(sender.hora?.horaInicial)!+" - "+(sender.hora?.horaFinal)!;
         padre.hora=(sender.hora?.horaInicial)!+" - "+(sender.hora?.horaFinal)!;
-        self.frame = CGRectMake(0, self.frame.origin.y, self.frame.width, (0));
+        self.frame = CGRect(x: 0, y: self.frame.origin.y, width: self.frame.width, height: (0));
         self.removeFromSuperview();
     }
     

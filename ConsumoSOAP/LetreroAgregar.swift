@@ -20,7 +20,7 @@ class LetreroAgregar: UIView {
         iniciaMensaje();
         enviaLonchera(lonchera);
         DatosB.cont.poneFondoTot(self, fondoStr: "Base 1", framePers: nil, identi: nil, scala: false);
-        _ = NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: #selector(LetreroAgregar.cierraVista), userInfo: nil, repeats: false);
+        _ = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(LetreroAgregar.cierraVista), userInfo: nil, repeats: false);
         
     }
     
@@ -28,7 +28,7 @@ class LetreroAgregar: UIView {
         let altoIma = self.frame.height*0.3;
         let OXima = (self.frame.height/2)-(altoIma/2);
         let OYIma = self.frame.height*0.1;
-        let imagenFrame = CGRectMake(OXima, OYIma, altoIma, altoIma);
+        let imagenFrame = CGRect(x: OXima, y: OYIma, width: altoIma, height: altoIma);
         icono = UIView(frame: imagenFrame);
         DatosB.cont.poneFondoTot(icono, fondoStr: "ICO Cart", framePers: nil, identi: nil, scala: true);
         self.addSubview(icono);
@@ -39,21 +39,21 @@ class LetreroAgregar: UIView {
         let ancho = self.frame.width*0.6;
         let OX = (self.frame.width/2)-(ancho/2)
         let OY = (icono.frame.height + icono.frame.origin.y);
-        texto = UILabel(frame: CGRectMake(OX, OY, ancho, self.frame.height*0.25));
+        texto = UILabel(frame: CGRect(x: OX, y: OY, width: ancho, height: self.frame.height*0.25));
         texto.text = "¡Listo! Agregaste esta lonchera a tu carrito de compras";
         //texto.lineBreakMode=NSLineBreakMode.ByWordWrapping;
         //texto.numberOfLines=2;
         texto.adjustsFontSizeToFitWidth=true;
         
-        texto.textColor=UIColor.lightGrayColor();
+        texto.textColor=UIColor.lightGray;
         texto.numberOfLines=0;
-        texto.textAlignment=NSTextAlignment.Center;
+        texto.textAlignment=NSTextAlignment.center;
         texto.font=UIFont(name: "SansBeam Head", size: (texto.frame.height/2));
         self.addSubview(texto);
     }
 
     
-    func enviaLonchera(lonchera: Lonchera2){
+    func enviaLonchera(_ lonchera: Lonchera2){
         DatosB.cont.agregaLonchera(lonchera);
         //DatosB.cont.loncheras.append(lonchera);
         for cas in lonchera.casillas{

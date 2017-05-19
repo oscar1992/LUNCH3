@@ -23,14 +23,14 @@ class Tag: NSObject, NSCoding{
     
     required convenience init(coder decoder: NSCoder) {
         self.init();
-        self.idTag = decoder.decodeObjectForKey("idTag") as! Int;
-        self.nombreTag = decoder.decodeObjectForKey("nombreTag") as! String;
-        self.idProducto = decoder.decodeObjectForKey("idProducto") as! Int;
+        self.idTag = decoder.decodeInteger(forKey: "idTag");
+        self.nombreTag = decoder.decodeObject(forKey: "nombreTag") as! String;
+        self.idProducto = decoder.decodeInteger(forKey: "idProducto");
     }
     
-    func encodeWithCoder(coder: NSCoder) {
-        if let idTag = idTag {coder.encodeObject(idTag, forKey: "idTag")};
-        if let nombreTag = nombreTag {coder.encodeObject(nombreTag, forKey: "nombreTag")};
-        if let idProducto = idProducto {coder.encodeObject(idProducto, forKey: "idProducto")};
+    func encode(with coder: NSCoder) {
+        if let idTag = idTag {coder.encode(idTag, forKey: "idTag")};
+        if let nombreTag = nombreTag {coder.encode(nombreTag, forKey: "nombreTag")};
+        if let idProducto = idProducto {coder.encode(idProducto, forKey: "idProducto")};
     }
 }

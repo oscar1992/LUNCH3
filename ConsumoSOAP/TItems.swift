@@ -12,6 +12,7 @@ class TItems: NSObject, NSCoding {
     
     var id:Int!;
     var productos : Producto!;
+    var padre:Int!
     //var favo : Favoritos!;
     
     convenience init(id: Int) {
@@ -21,12 +22,14 @@ class TItems: NSObject, NSCoding {
     
     required convenience init(coder decoder: NSCoder) {
         self.init();
-        self.id = decoder.decodeObjectForKey("id") as! Int;
-        self.productos = decoder.decodeObjectForKey("productos") as! Producto;
+        self.id = decoder.decodeInteger(forKey: "id");
+        self.padre = decoder.decodeInteger(forKey: "padre");
+        self.productos = decoder.decodeObject(forKey: "productos") as! Producto;
     }
     
-    func encodeWithCoder(coder: NSCoder) {
-        if let id = id{coder.encodeObject(id, forKey: "id")};
-        if let productos = productos{coder.encodeObject(productos, forKey: "productos")};
+    func encode(with coder: NSCoder) {
+        if let id = id{coder.encode(id, forKey: "id")};
+        if let padre = padre{coder.encode(padre, forKey: "padre")};
+        if let productos = productos{coder.encode(productos, forKey: "productos")};
     }
 }

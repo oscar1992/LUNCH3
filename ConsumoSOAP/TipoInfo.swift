@@ -25,17 +25,17 @@ class TipoInfo:NSObject, NSCoding{
     
     required convenience init(coder decoder: NSCoder) {
         self.init();
-        self.id = decoder.decodeObjectForKey("id") as! Int;
-        self.tipo = decoder.decodeObjectForKey("tipo") as! String;
-        self.valor = decoder.decodeObjectForKey("valor") as! Float;
-        self.idProducto = decoder.decodeObjectForKey("idProducto") as! Int;
+        self.id = decoder.decodeInteger(forKey: "id");
+        self.tipo = decoder.decodeObject(forKey: "tipo") as! String;
+        self.valor = decoder.decodeFloat(forKey: "valor") as! Float;
+        self.idProducto = decoder.decodeInteger(forKey: "idProducto");
     }
     
-    func encodeWithCoder(coder: NSCoder) {
-        if let id = id { coder.encodeObject(id, forKey: "id") }
-        if let tipo = tipo { coder.encodeObject(tipo, forKey: "tipo")};
-        if let valor = valor { coder.encodeObject(valor, forKey: "valor")};
-        if let idProducto = idProducto { coder.encodeObject(idProducto, forKey: "idProducto")};
+    func encode(with coder: NSCoder) {
+        if let id = id { coder.encode(id, forKey: "id") }
+        if let tipo = tipo { coder.encode(tipo, forKey: "tipo")};
+        if let valor = valor { coder.encode(valor, forKey: "valor")};
+        if let idProducto = idProducto { coder.encode(idProducto, forKey: "idProducto")};
         
     }
 

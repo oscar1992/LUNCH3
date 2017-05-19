@@ -17,7 +17,7 @@ class MesScroll: UIScrollView, UIScrollViewDelegate {
         super.init(frame: frame);
         self.delegate=self;
         //qself.alpha=0.5;
-        self.backgroundColor=UIColor.yellowColor();
+        self.backgroundColor=UIColor.yellow;
         //ordenaAño();
         
         
@@ -40,7 +40,7 @@ class MesScroll: UIScrollView, UIScrollViewDelegate {
             self.addSubview(año);
         }
         //print("años :", años.count);
-        self.contentSize=CGSizeMake(self.frame.width, (((borde*2)+(alto+espaciado))));
+        self.contentSize=CGSize(width: self.frame.width, height: (((borde*2)+(alto+espaciado))));
     }
     
 }

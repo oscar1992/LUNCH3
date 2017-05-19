@@ -17,17 +17,17 @@ class PFactura: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad();
-        self.view.backgroundColor = UIColor.blueColor();
-        let scrollFrame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height*0.85);
+        self.view.backgroundColor = UIColor.blue;
+        let scrollFrame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height*0.85);
         fscroll = FacturaScroll(frame: scrollFrame);
         leeNinos();
         
         self.view.addSubview(fscroll);
-        navegacion = UIView(frame: CGRectMake(0, (self.view.frame.height*0.85), self.view.frame.width, (self.view.frame.height*0.15)));
-        navegacion!.backgroundColor=UIColor.brownColor();
-        regresa = UIButton(frame: CGRectMake(0, 0, navegacion!.frame.width/2, navegacion!.frame.height));
-        regresa?.backgroundColor=UIColor.redColor();
-        regresa?.addTarget(self, action: #selector(PFactura.regresa(_:)), forControlEvents: .TouchDown);
+        navegacion = UIView(frame: CGRect(x: 0, y: (self.view.frame.height*0.85), width: self.view.frame.width, height: (self.view.frame.height*0.15)));
+        navegacion!.backgroundColor=UIColor.brown;
+        regresa = UIButton(frame: CGRect(x: 0, y: 0, width: navegacion!.frame.width/2, height: navegacion!.frame.height));
+        regresa?.backgroundColor=UIColor.red;
+        regresa?.addTarget(self, action: #selector(PFactura.regresa(_:)), for: .touchDown);
         navegacion?.addSubview(regresa!);
         self.view.addSubview(navegacion!);
         // Do any additional setup after loading the view.
@@ -58,8 +58,8 @@ class PFactura: UIViewController {
         fscroll.pintaNinos(ninos);
     }
     
-    func regresa(sender: AnyObject){
-        self.dismissViewControllerAnimated(true, completion: nil);
+    func regresa(_ sender: AnyObject){
+        self.dismiss(animated: true, completion: nil);
     }
     /*
     // MARK: - Navigation

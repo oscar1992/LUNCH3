@@ -7,9 +7,33 @@
 //
 
 import UIKit
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 class Dia: UIButton{
-    
+    /*
     var numDia:Int?;
     var diaSenama:Int?;
     var nSemana:Int?
@@ -17,24 +41,24 @@ class Dia: UIButton{
     var lonchera : LoncheraO?;
     var mes: Mes!;
     var activo = false;
-    var timer:NSTimer!;
+    var timer:Timer!;
     var tocado = false;
     var ano: AnoScroll?;
-    var fecha: NSDate!;
+    var fecha: Date!;
     var bloqueoCambioDia = false;
     
     init(frame: CGRect, nDia: Int, mes: Mes) {
         super.init(frame: frame);
-        let calendar = NSCalendar.currentCalendar();
-        let fecha = NSDateComponents();
+        let calendar = Calendar.current;
+        var fecha = DateComponents();
         numDia=nDia;
         fecha.year = mes.ano;
         fecha.month=mes.NumeroMes;
         fecha.day=nDia;
-        self.fecha = NSCalendar.currentCalendar().dateFromComponents(fecha);
+        self.fecha = Calendar.current.date(from: fecha);
         self.mes = mes;
-        let ds = calendar.component(.Weekday, fromDate: self.fecha);
-        let sm = calendar.component(.WeekOfMonth, fromDate: self.fecha);
+        let ds = (calendar as NSCalendar).component(.weekday, from: self.fecha);
+        let sm = (calendar as NSCalendar).component(.weekOfMonth, from: self.fecha);
         //print("ff: ", ds);
         diaSenama = ds;
         nSemana = sm;
@@ -43,23 +67,23 @@ class Dia: UIButton{
     }
     
     //Método que inicia le fecha del día cuando se crea el día
-    func iniciaFecha(Año: Int, Mes: Int, Dia: Int){
-        let arma = NSDateComponents();
+    func iniciaFecha(_ Año: Int, Mes: Int, Dia: Int){
+        var arma = DateComponents();
         //print("Año: ", Año);
         arma.year = Año;
         arma.month = Mes;
         arma.day = Dia;
-        fecha = NSCalendar.currentCalendar().dateFromComponents(arma);
+        fecha = Calendar.current.date(from: arma);
         
     }
     
     //Método que establece el fondo de desta vista
-    func setFondo2(qq : Int){
-        diaTit=UILabel(frame: CGRectMake(0,0,self.frame.width,self.frame.height/2));
-        diaTit!.textColor=UIColor.whiteColor();
+    func setFondo2(_ qq : Int){
+        diaTit=UILabel(frame: CGRect(x: 0,y: 0,width: self.frame.width,height: self.frame.height/2));
+        diaTit!.textColor=UIColor.white;
         diaTit!.font = UIFont(name: "SansBeam Head", size: 35);
-        diaTit!.textAlignment=NSTextAlignment.Center;
-        diaTit!.text=String(numDia);
+        diaTit!.textAlignment=NSTextAlignment.center;
+        diaTit!.text=String(describing: numDia);
         //print("nn: ", numDia);
         self.addSubview(diaTit!);
         for vista in self.subviews{
@@ -87,23 +111,23 @@ class Dia: UIButton{
         }
         //print("Fondo dia: ", self.frame);
         
-        let backImg = UIImageView(frame: CGRectMake(0,0,self.frame.width-(self.frame.width*0.01),self.frame.height-(self.frame.height*0.01)));
+        let backImg = UIImageView(frame: CGRect(x: 0,y: 0,width: self.frame.width-(self.frame.width*0.01),height: self.frame.height-(self.frame.height*0.01)));
         //backImg.contentMode = UIViewContentMode.ScaleAspectFit;
         backImg.image = fondo;
         backImg.accessibilityIdentifier = "Fondo";
         //backImg.userInteractionEnabled = false;
         self.addSubview(backImg);
-        self.sendSubviewToBack(backImg);
+        self.sendSubview(toBack: backImg);
         
         
     }
     
-    func Activa (sender : AnyObject){
+    func Activa (_ sender : AnyObject){
         //print("Activo despues: ", tocado);
         tocado = true;
     }
     
-    func Activa2(sender : AnyObject){
+    func Activa2(_ sender : AnyObject){
         if(tocado){
             if(self.activo==true){
                 barraOpciones();
@@ -126,7 +150,7 @@ class Dia: UIButton{
     }
     
     //Método que establece la lonchera del día
-    func seteaLonchera(lonc: LoncheraO){
+    func seteaLonchera(_ lonc: LoncheraO){
         self.lonchera=lonc;
         var imagen : UIImage;
         var nombre = "";
@@ -167,7 +191,7 @@ class Dia: UIButton{
          */
         let alto = self.frame.height*0.5;
         let ancho = self.frame.width*0.7;
-        let frameCaja = CGRectMake(self.frame.width-ancho, alto, ancho, alto);
+        let frameCaja = CGRect(x: self.frame.width-ancho, y: alto, width: ancho, height: alto);
         imagen = UIImage(named: nombre)!;
         let back = UIImageView(frame: frameCaja);
         back.accessibilityValue = "locheraIcono";
@@ -176,21 +200,21 @@ class Dia: UIButton{
         //back.userInteractionEnabled=false;
         //self.setFondo2(3);
         self.addSubview(back);
-        self.bringSubviewToFront(back);
+        self.bringSubview(toFront: back);
         //print("copia lonchera: ", back.image);
         //self.addTarget(self, action: #selector(Dia.Activa(_:)), forControlEvents: .TouchDown);
     }
     
     //Método que reconoce el touch del Día
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         print("tocando: ", tocado);
         //tocado = true;
         Activa(self);
-        timer = NSTimer.scheduledTimerWithTimeInterval(0.9, target: self, selector: #selector(Dia.Activa2(_:)), userInfo: nil, repeats: false);
+        timer = Timer.scheduledTimer(timeInterval: 0.9, target: self, selector: #selector(Dia.Activa2(_:)), userInfo: nil, repeats: false);
     }
     
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         print("fin tocado");
         timer = nil;
         tocado = false;
@@ -210,7 +234,7 @@ class Dia: UIButton{
                 print("Se sale");
             }
             let OY = self.frame.origin.y - alto;
-            let barraFrame=CGRectMake(OX, OY, ancho, alto);
+            let barraFrame=CGRect(x: OX, y: OY, width: ancho, height: alto);
             let barra = BarraOpciones(frame: barraFrame);
             barra.dia=self;
             //barra.backgroundColor = UIColor.redColor();
@@ -221,7 +245,7 @@ class Dia: UIButton{
     }
   
     //Método que bloquea los días del calendario
-    func bloqueadesbloqueaDias(bloquea: Bool){
+    func bloqueadesbloqueaDias(_ bloquea: Bool){
         mes.BloqueaDias(bloquea);
     }
     
@@ -231,7 +255,7 @@ class Dia: UIButton{
         let OY = self.frame.height*0.6;
         let ancho = self.frame.width*0.4;
         let alto = self.frame.height*0.4;
-        let frameCirculo = CGRectMake(OX, OY, ancho, alto);
+        let frameCirculo = CGRect(x: OX, y: OY, width: ancho, height: alto);
         let circulo = UIView(frame: frameCirculo);
         self.superview!.addSubview(circulo);
     }
@@ -247,13 +271,13 @@ class Dia: UIButton{
                     if(nino.activo == true){
                         //print("Nino Activo");
                         for lonc in nino.loncheras{
-                            let fechaArma = NSDateComponents();
+                            var fechaArma = DateComponents();
                             fechaArma.year = self.mes.ano;
                             fechaArma.month = self.mes.NumeroMes!;
                             fechaArma.day = self.numDia!;
                             
                             
-                            let fechaCompara = NSCalendar.currentCalendar().dateFromComponents(fechaArma);
+                            let fechaCompara = Calendar.current.date(from: fechaArma);
                             if(fechaCompara == lonc.fecha){
                                 //print("Fecharama: ", fechaCompara);
                                 //print("Fecha: ",lonc.fecha);
@@ -277,25 +301,26 @@ class Dia: UIButton{
             //print("prodo: ", cas.elemeto);
         //}
         DatosD.contenedor.diasCopia.append(self);
-        DatosD.contenedor.diasCopia.sortInPlace({$0.numDia<$1.numDia});
-        DatosD.contenedor.diasCopia.sortInPlace({$0.mes.NumeroMes<$1.mes.NumeroMes});
+        DatosD.contenedor.diasCopia.sort(by: {$0.numDia<$1.numDia});
+        DatosD.contenedor.diasCopia.sort(by: {$0.mes.NumeroMes<$1.mes.NumeroMes});
         for dia in DatosD.contenedor.diasCopia{
             
             print("EE: ", dia.numDia);
         }
         
         var sobrePaso = false;
+        /*
         for nino in DatosC.contenedor.ninos{
                 if(nino.activo == true){
                     //print("Nino act", nino.nombreNino);
                     //var sobrePases = 0;
                     for diaC in DatosD.contenedor.diasCopia{
-                        let fechaArma = NSDateComponents();
+                        var fechaArma = DateComponents();
                         fechaArma.year = self.mes.ano;
                         fechaArma.month = self.mes.NumeroMes!;
                         fechaArma.day = diaC.numDia!;
                         
-                        var fechaCompara = NSCalendar.currentCalendar().dateFromComponents(fechaArma);
+                        var fechaCompara = Calendar.current.date(from: fechaArma);
                         print("FechaComp: ", fechaCompara, " pasa: ", sobrePaso);
                         for lonc in nino.panelNino.Lonchera.deslizador.paginas{
                             
@@ -314,9 +339,9 @@ class Dia: UIButton{
                             //print("FECHACCOP: ", fechaCompara, " FECHALONC: ", lonc.fecha);
                             if(sobrePaso){
                                 fechaArma.month = self.mes.NumeroMes!;
-                                fechaArma.month += 1;
+                                fechaArma.month = fechaArma.month! + 1;
                                 //print("Se pasa: ", fechaArma.month);
-                                fechaCompara = NSCalendar.currentCalendar().dateFromComponents(fechaArma);
+                                fechaCompara = Calendar.current.date(from: fechaArma);
                                 //print("FEcha Nueva: ", fechaCompara);
                                 //sobrePaso=false;
                             }
@@ -351,10 +376,10 @@ class Dia: UIButton{
                     
             }
         }
-        
+        */
     }
     //Método que copia los productos que estan dentro de la lonchera
-    func copiaLonchera(objetivo: LoncheraO, fuente: LoncheraO){
+    func copiaLonchera(_ objetivo: LoncheraO, fuente: LoncheraO){
         var p = 0;
         //for cas in (fuente.subVista?.casillas)!{
             //print("cas 2: ", cas.elemeto?.producto);
@@ -374,7 +399,7 @@ class Dia: UIButton{
             
             if (fuente.subVista?.casillas[p].elemeto != nil){
                 let ele = fuente.subVista?.casillas[p].elemeto!.copiarse();
-                ele!.frame = CGRectMake(0, 0, casO.frame.width, casO.frame.height);
+                ele!.frame = CGRect(x: 0, y: 0, width: casO.frame.width, height: casO.frame.height);
                 /*
                 print("ele", ele);
                 print("ele.tipo",casO.tipo);
@@ -395,14 +420,15 @@ class Dia: UIButton{
         //print("Vuelve");
         var cambia = false;
         var semanaNueva = [LoncheraO]();
-        let fechaArma = NSDateComponents();
+        var fechaArma = DateComponents();
         fechaArma.year = self.mes.ano;
         fechaArma.month = self.mes.NumeroMes!;
         fechaArma.day = self.numDia!;
-        let fechaCompara = NSCalendar.currentCalendar().dateFromComponents(fechaArma);
-        let calendar = NSCalendar.currentCalendar();
-        let nsemana = calendar.components(.WeekOfMonth, fromDate: fechaCompara!);
+        let fechaCompara = Calendar.current.date(from: fechaArma);
+        let calendar = Calendar.current;
+        let nsemana = (calendar as NSCalendar).components(.weekOfMonth, from: fechaCompara!);
         DatosD.contenedor.calendario.volver(self);
+        /*
         for nino in DatosC.contenedor.ninos{
             if(nino.activo == true){
                 for lonc in nino.panelNino.Lonchera.deslizador.paginas{
@@ -420,6 +446,7 @@ class Dia: UIButton{
                 
             }
         }
+ */
         if(cambia){
             //print("cambia");
             for dia in self.mes.dias{
@@ -429,18 +456,18 @@ class Dia: UIButton{
                 }else{
                     //print("dia: ", dia.nSemana, " - ", nsemana.weekOfMonth);
                     var p = 0;
-                    if(dia.nSemana! == Int(nsemana.weekOfMonth)){
+                    if(dia.nSemana! == Int(nsemana.weekOfMonth!)){
                         //print("DiaA: ", dia.numDia);
                         //print("Año: ", fechaArma.year);
                         //print("Mes: ", fechaArma.month);
                         //print("Dia: ", fechaArma.day);
                         //let scrol = ano;
-                        let recuDia = ano!.traeDia(fechaArma.year, Mes: fechaArma.month, DiaN: dia.numDia!);
+                        let recuDia = ano!.traeDia(fechaArma.year!, Mes: fechaArma.month!, DiaN: dia.numDia!);
                         let loncheraVacia = LoncheraO();
                         loncheraVacia.inicia(p);
                         fechaArma.day = dia.numDia!;
-                        let fechaCompara = NSCalendar.currentCalendar().dateFromComponents(fechaArma);
-                        let diasemana = calendar.components(.Weekday, fromDate: fechaCompara!);
+                        let fechaCompara = Calendar.current.date(from: fechaArma);
+                        let diasemana = (calendar as NSCalendar).components(.weekday, from: fechaCompara!);
                         //print("ff: ", dia.numDia, " - ", self.mes.dias.last?.numDia);
                         if(recuDia?.lonchera != nil){
                             copiaLonchera(loncheraVacia, fuente: (recuDia?.lonchera)!);
@@ -461,24 +488,24 @@ class Dia: UIButton{
                             let semAux = semanaNueva;
                             semanaNueva = mesPartidoPosterior(fechaArma, fechaCompara2: fechaCompara!, calendar: calendar, p: p, anterior: false)+semAux;
                             //print("NMES: ", fechaArma.month);
-                            fechaArma.month+1;
+                            fechaArma.month!+1;
                         }
                         p += 1;
                     }
                 }
                 
             }
-            let diaSemana = calendar.components(.Weekday, fromDate: fechaCompara!);
+            let diaSemana = (calendar as NSCalendar).components(.weekday, from: fechaCompara!);
             
             
-            cambiaSemana(semanaNueva, diaSemana: (diaSemana.weekday-1));
+            cambiaSemana(semanaNueva, diaSemana: (diaSemana.weekday!-1));
         }else{
             for nino in DatosC.contenedor.ninos{
                 if(nino.activo == true){
                     
                     let des = nino.panelNino.Lonchera.deslizador;
                     print("QQ: ", self.diaSenama!-1);
-                    des.mueveAPosicion(self.diaSenama!-1);
+                    des?.mueveAPosicion(self.diaSenama!-1);
                 }
             }
             
@@ -488,19 +515,20 @@ class Dia: UIButton{
     
     
     // Método que completa la semana ciuando el mes no termina un sábado (7)
-    func mesPartidoPosterior(fechaArma : NSDateComponents, fechaCompara2: NSDate, calendar: NSCalendar, p: Int, anterior: Bool)->[LoncheraO]{
+    func mesPartidoPosterior(_ fechaArma2 : DateComponents, fechaCompara2: Date, calendar: Calendar, p: Int, anterior: Bool)->[LoncheraO]{
         var semanaRetorna = [LoncheraO]();
+        var fechaArma = fechaArma2;
         //print("aaaa: ",anterior);
         if(anterior){
             fechaArma.month = self.mes.NumeroMes!+1;
             fechaArma.day = 1;
             var fechaCompara = fechaCompara2;
-            let diasemana = calendar.components(.Weekday, fromDate: fechaCompara);
+            let diasemana = (calendar as NSCalendar).components(.weekday, from: fechaCompara);
             //print("diasemana: ", diasemana.weekday);
-            for rest in diasemana.weekday ... 6 {
-                fechaCompara = NSCalendar.currentCalendar().dateFromComponents(fechaArma)!;
-                let recuDia = ano!.traeDia(fechaArma.year, Mes: fechaArma.month, DiaN: (fechaArma.day));
-                let loncheraVacia = LoncheraO();
+            for rest in diasemana.weekday ..< 6? {
+                fechaCompara = Calendar.current.date(from: fechaArma)!;
+                let recuDia = ano!.traeDia(fechaArma.year, Mes: fechaArma.month, DiaN: (fechaArma.day)!);
+                //let loncheraVacia = LoncheraO(coder: <#NSCoder#>);
                 loncheraVacia.inicia(p);
                 if(recuDia?.lonchera != nil){
                     copiaLonchera(loncheraVacia, fuente: (recuDia?.lonchera)!);
@@ -526,13 +554,13 @@ class Dia: UIButton{
                 p += 1;
             }
             var fechaCompara = fechaCompara2;
-            let diasemana = calendar.components(.Weekday, fromDate: fechaCompara);
+            let diasemana = (calendar as NSCalendar).components(.weekday, from: fechaCompara);
             fechaArma.day = ultimoDia!.numDia! - (diasemana.weekday-2);
             //print("Dia: ", fechaArma.day);
             //print("Week day: ", diasemana.weekday);
-            for _ in 0 ... diasemana.weekday-2{
-                fechaCompara = NSCalendar.currentCalendar().dateFromComponents(fechaArma)!;
-                let recuDia = ano!.traeDia(fechaArma.year, Mes: fechaArma.month, DiaN: (fechaArma.day));
+            for _ in 0 ... diasemana.weekday!-2{
+                fechaCompara = Calendar.current.date(from: fechaArma)!;
+                let recuDia = ano!.traeDia(fechaArma.year!, Mes: fechaArma.month, DiaN: (fechaArma.day));
                 let loncheraVacia = LoncheraO();
                 loncheraVacia.inicia(p);
                 if(recuDia?.lonchera != nil){
@@ -561,7 +589,7 @@ class Dia: UIButton{
     }
     
     //Método que permitirá reemplazar los valores del home por los de una semana nueva
-    func cambiaSemana(semanaN: [LoncheraO], diaSemana: Int){
+    func cambiaSemana(_ semanaN: [LoncheraO], diaSemana: Int){
         
         for nino in DatosC.contenedor.ninos{
             if(nino.activo == true){
@@ -582,16 +610,16 @@ class Dia: UIButton{
     
     //Método que bloqueará los días anteriores a la semana actual
     func bloqueaDiasAnteriores(){
-        let fechaAct = NSDate();
-        let cal = NSCalendar.currentCalendar();
-        let fechaComp = NSDateComponents();
-        fechaComp.year = cal.component(.Year, fromDate: fechaAct);
-        fechaComp.month = cal.component(.Month, fromDate: fechaAct);
-        let diaS = cal.component(.Weekday, fromDate: NSCalendar.currentCalendar().dateFromComponents(fechaComp)!);
+        let fechaAct = Date();
+        let cal = Calendar.current;
+        var fechaComp = DateComponents();
+        fechaComp.year = (cal as NSCalendar).component(.year, from: fechaAct);
+        fechaComp.month = (cal as NSCalendar).component(.month, from: fechaAct);
+        let diaS = (cal as NSCalendar).component(.weekday, from: Calendar.current.date(from: fechaComp)!);
         print("diaS: ", diaS);
-        fechaComp.day = cal.component(.Day, fromDate: fechaAct)+(diaS);
+        fechaComp.day = (cal as NSCalendar).component(.day, from: fechaAct)+(diaS);
         print("aña: ",(7-diaS));
-        if(fechaComp.isValidDateInCalendar(cal)){
+        if(fechaComp.isValidDate(in: cal)){
             
         }else{
             fechaComp.day=1;
@@ -603,7 +631,7 @@ class Dia: UIButton{
             
         }
         
-        let fechaLim = NSCalendar.currentCalendar().dateFromComponents(fechaComp);
+        let fechaLim = Calendar.current.date(from: fechaComp);
         //print("Fecha COmp: ", fechaComp);
         
        
@@ -630,7 +658,7 @@ class Dia: UIButton{
         
     }
     
-    func bloquePasoDia(bloq: Bool){
+    func bloquePasoDia(_ bloq: Bool){
         for mes in ano!.meses{
             for dia in mes.dias{
                 dia.bloqueoCambioDia=bloq;
@@ -645,5 +673,5 @@ class Dia: UIButton{
         // Drawing code
     }
     */
-    
+    */
 }

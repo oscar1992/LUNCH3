@@ -27,9 +27,9 @@ class BusquedaProductos: UIView {
         let OY = CGFloat(0);
         let ancho = CGFloat(0);
         let alto = CGFloat(0);
-        let frameInput = CGRectMake(OX, OY, ancho, alto);
+        let frameInput = CGRect(x: OX, y: OY, width: ancho, height: alto);
         let barra=UIView(frame: frameInput);
-        let texto = UITextField(frame: CGRectMake(0, 0, ancho, alto));
+        let texto = UITextField(frame: CGRect(x: 0, y: 0, width: ancho, height: alto));
         barra.addSubview(texto);
         self.addSubview(barra);
     }

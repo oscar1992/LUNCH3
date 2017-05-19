@@ -33,7 +33,7 @@ class MensajeConexion: UIView {
         let alto = ancho;
         let OX = (self.frame.width/2)-(ancho/2);
         let OY = self.frame.height*0.1;
-        let frameIco = CGRectMake(OX, OY, ancho, alto);
+        let frameIco = CGRect(x: OX, y: OY, width: ancho, height: alto);
         icono = UIView(frame: frameIco);
         self.addSubview(icono);
         DatosB.cont.poneFondoTot(icono, fondoStr: "ICO Triste", framePers: nil, identi: nil, scala: true);
@@ -41,7 +41,7 @@ class MensajeConexion: UIView {
         let altoT = self.frame.height*0.3;
         let OXT = (self.frame.width/2)-(anchoT/2);
         let OYT = OY + alto + (self.frame.height*0.1);
-        let frameT = CGRectMake(OXT, OYT, anchoT, altoT);
+        let frameT = CGRect(x: OXT, y: OYT, width: anchoT, height: altoT);
         let mensaje = UILabel(frame: frameT);
         if(msg == nil){
             mensaje.text="Revisa tu conexión a internet";
@@ -57,7 +57,7 @@ class MensajeConexion: UIView {
     }
     
     func iniciaTimer(){
-        _ = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: #selector(MensajeConexion.cierra), userInfo: nil, repeats: false);
+        _ = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(MensajeConexion.cierra), userInfo: nil, repeats: false);
     }
     
     func cierra(){
@@ -65,8 +65,8 @@ class MensajeConexion: UIView {
     }
     
     func cancelaCredenciales(){
-        NSUserDefaults.standardUserDefaults().objectForKey("user")==nil;
-        NSUserDefaults.standardUserDefaults().objectForKey("pass")==nil;
+        UserDefaults.standard.object(forKey: "user")==nil;
+        UserDefaults.standard.object(forKey: "pass")==nil;
     }
     
 
@@ -74,13 +74,13 @@ class MensajeConexion: UIView {
     func subVista(){
         let OX = -((DatosC.contenedor.anchoP-self.frame.width)/2)
         let OY = -((DatosC.contenedor.altoP-self.frame.height)/2)
-        let frameVista = CGRectMake(OX, OY, (DatosC.contenedor.anchoP), (DatosC.contenedor.altoP));
-        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Light);
+        let frameVista = CGRect(x: OX, y: OY, width: (DatosC.contenedor.anchoP), height: (DatosC.contenedor.altoP));
+        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light);
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.frame=frameVista;
         //let vistaFondo = UIView(frame: frameVista);
         //vistaFondo.backgroundColor=UIColor.yellowColor();
         self.addSubview(blurEffectView);
-        self.sendSubviewToBack(blurEffectView);
+        self.sendSubview(toBack: blurEffectView);
     }
 }

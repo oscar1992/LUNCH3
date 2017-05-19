@@ -28,7 +28,7 @@ class VistaTarjetas: UIViewController, UIWebViewDelegate {
     }
     
     //Método que oculta la barra en este viewcontroller
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden : Bool {
         return true
     }
     
@@ -37,17 +37,17 @@ class VistaTarjetas: UIViewController, UIWebViewDelegate {
         let ancho = DatosC.contenedor.altoP * 0.0922;
         let ancho2 = ancho/3;
         let centr = (ancho/2)-(ancho2/2);
-        let frameBoton = CGRectMake(0, 0, ancho, ancho);
+        let frameBoton = CGRect(x: 0, y: 0, width: ancho, height: ancho);
         let volver = UIButton(frame: frameBoton);
-        volver.addTarget(self, action: #selector(VistaTarjetas.vuelve), forControlEvents: .TouchDown);
-        let subFrame = CGRectMake(centr, centr, ancho2, ancho2);
+        volver.addTarget(self, action: #selector(VistaTarjetas.vuelve), for: .touchDown);
+        let subFrame = CGRect(x: centr, y: centr, width: ancho2, height: ancho2);
         DatosB.cont.poneFondoTot(volver, fondoStr: "Volver", framePers: subFrame, identi: nil, scala: true);
         self.view.addSubview(volver);
     }
     
     //Método que cierra la ventana
     func vuelve(){
-        self.dismissViewControllerAnimated(true, completion: nil);
+        self.dismiss(animated: true, completion: nil);
     }
     
     //Método que permite poner el boton de añadir tarjeta
@@ -56,9 +56,9 @@ class VistaTarjetas: UIViewController, UIWebViewDelegate {
         let alto = DatosC.contenedor.altoP*0.07;
         let OX = (DatosC.contenedor.anchoP/2)-(ancho/2);
         let OY = DatosC.contenedor.altoP*0.9;
-        let frameBoton = CGRectMake(OX, OY, ancho, alto);
+        let frameBoton = CGRect(x: OX, y: OY, width: ancho, height: alto);
         let boton = UIButton(frame: frameBoton);
-        boton.addTarget(self, action: #selector(VistaTarjetas.vista), forControlEvents: .TouchDown);
+        boton.addTarget(self, action: #selector(VistaTarjetas.vista), for: .touchDown);
         DatosB.cont.poneFondoTot(boton, fondoStr: "Botón Agregar Tarjeta", framePers: nil, identi: nil, scala: true);
         self.view.addSubview(boton);
     }
@@ -68,32 +68,32 @@ class VistaTarjetas: UIViewController, UIWebViewDelegate {
         let ancho = self.view.frame.width*1;
         let OX = self.view.frame.width*0;
         let alto = self.view.frame.height*1;
-        let frameWeb = CGRectMake(OX, OY, ancho, alto);
+        let frameWeb = CGRect(x: OX, y: OY, width: ancho, height: alto);
         vistaWeb = UIWebView(frame: frameWeb);
         gifCarga(vistaWeb);
         vistaWeb.delegate=self;
         self.view.addSubview(vistaWeb);
         let add = AddCard();
-        vistaWeb.loadRequest(add.add());
+        vistaWeb.loadRequest(add.add() as URLRequest);
         let anchoB = vistaWeb.frame.width*0.05;
         let OXB = vistaWeb.frame.width-anchoB;
         let OYB = CGFloat(0);
-        let frameCerrar = CGRectMake(OXB, OYB, anchoB, anchoB);
+        let frameCerrar = CGRect(x: OXB, y: OYB, width: anchoB, height: anchoB);
         let botCerrar = UIButton(frame: frameCerrar);
-        botCerrar.addTarget(self, action: #selector(VistaTarjetas.cerrarVista), forControlEvents: .TouchDown);
+        botCerrar.addTarget(self, action: #selector(VistaTarjetas.cerrarVista), for: .touchDown);
         DatosB.cont.poneFondoTot(botCerrar, fondoStr: "BotonCerrar", framePers: nil, identi: nil, scala: true);
         vistaWeb.addSubview(botCerrar);
     }
     
     func cerrarVista(){
         vistaWeb.removeFromSuperview();
-        let storage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
+        let storage = HTTPCookieStorage.shared
         for cookie in storage.cookies! {
             storage.deleteCookie(cookie)
         }
     }
     
-    func webViewDidFinishLoad(webView: UIWebView) {
+    func webViewDidFinishLoad(_ webView: UIWebView) {
         print("Carga Web");
         for vista in webView.subviews{
             if(vista.accessibilityIdentifier == "gif"){
@@ -101,7 +101,7 @@ class VistaTarjetas: UIViewController, UIWebViewDelegate {
                 
             }
         }
-        if let cookies = NSHTTPCookieStorage.sharedHTTPCookieStorage().cookies {
+        if let cookies = HTTPCookieStorage.shared.cookies {
             for cookie in cookies {
                 
                 print("Nomb: ", cookie.name);
@@ -121,12 +121,12 @@ class VistaTarjetas: UIViewController, UIWebViewDelegate {
     }
     
     
-    func gifCarga(vistaPadre: UIView){
+    func gifCarga(_ vistaPadre: UIView){
         let gif = UIImage.gifImageWithName("Cargando");
-        let vista = UIImageView(frame: CGRectMake(0, 0, vistaPadre.frame.width, vistaPadre.frame.height));
+        let vista = UIImageView(frame: CGRect(x: 0, y: 0, width: vistaPadre.frame.width, height: vistaPadre.frame.height));
         vista.image = gif;
         vista.accessibilityIdentifier = "gif";
-        vista.contentMode = UIViewContentMode.ScaleAspectFit;
+        vista.contentMode = UIViewContentMode.scaleAspectFit;
         vistaPadre.addSubview(vista);
     }
     

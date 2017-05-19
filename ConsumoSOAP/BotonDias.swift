@@ -43,30 +43,30 @@ class BotonDias: UIButton {
         }
         var imagen: UIImage;
         if(Activo){
-            letra.textColor = UIColor.whiteColor();
+            letra.textColor = UIColor.white;
             imagen = UIImage(named: "DiaS")!;
             //print("Activo");
         }else{
-            letra.textColor = UIColor.blackColor();
+            letra.textColor = UIColor.black;
             imagen = UIImage(named: "DiaN")!;
             //print("No Activo");
         }
-        let frame = CGRectMake(0, 0, self.frame.width, self.frame.height);
+        let frame = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height);
         let backImg = UIImageView(frame: frame);
-        backImg.contentMode = UIViewContentMode.ScaleAspectFit;
+        backImg.contentMode = UIViewContentMode.scaleAspectFit;
         backImg.image = imagen;
         self.addSubview(backImg);
-        self.sendSubviewToBack(backImg);
+        self.sendSubview(toBack: backImg);
         
     }
     
     // Método que ponen la letra dependiendo del número asigando
-    func poneLetra(id: Int){
+    func poneLetra(_ id: Int){
         self.id=id;
-        let letraFrame = CGRectMake(0, 0, self.frame.width, self.frame.height);
+        let letraFrame = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height);
         letra = UILabel(frame: letraFrame);
         letra.font = UIFont(name: "SansBeamHead-Bold", size: 20);
-        letra.textAlignment = NSTextAlignment.Center;
+        letra.textAlignment = NSTextAlignment.center;
         //letra.toggleBoldface(nil);
         switch id{
         case 0:

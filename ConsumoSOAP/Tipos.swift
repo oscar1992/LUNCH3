@@ -32,16 +32,16 @@ class Tipos: UIViewController {
         let ancho = DatosC.contenedor.altoP * 0.0922;
         let ancho2 = ancho/3;
         let centr = (ancho/2)-(ancho2/2);
-        let frameBoton = CGRectMake(0, 0, ancho, ancho);
+        let frameBoton = CGRect(x: 0, y: 0, width: ancho, height: ancho);
         let volver = UIButton(frame: frameBoton);
-        volver.addTarget(self, action: #selector(Tipos.vuelve), forControlEvents: .TouchDown);
-        let subFrame = CGRectMake(centr, centr, ancho2, ancho2);
+        volver.addTarget(self, action: #selector(Tipos.vuelve), for: .touchDown);
+        let subFrame = CGRect(x: centr, y: centr, width: ancho2, height: ancho2);
         DatosB.cont.poneFondoTot(volver, fondoStr: "Volver", framePers: subFrame, identi: nil, scala: true);
         self.view.addSubview(volver);
     }
     
     func vuelve(){
-        self.dismissViewControllerAnimated(true, completion: nil);
+        self.dismiss(animated: true, completion: nil);
     }
     
     func fondo(){
@@ -51,17 +51,17 @@ class Tipos: UIViewController {
     func iniciaScroll(){
         let alto = DatosC.contenedor.altoP*0.8;
         let OY = DatosC.contenedor.altoP*0.2;
-        let frameScroll = CGRectMake(0, OY, self.view.frame.width, alto);
+        let frameScroll = CGRect(x: 0, y: OY, width: self.view.frame.width, height: alto);
         scroll = SrcollHistorialTipos(frame: frameScroll);
         self.view.addSubview(scroll);
     }
     
-    func actuaScroll(tipos: [((String, Int, Int), [Producto])]){
+    func actuaScroll(_ tipos: [((String, Int, Int), [Producto])]){
         scroll.cargaTipos(tipos);
     }
     
     //Método que oculta la barra en este viewcontroller
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden : Bool {
         return true
     }
 }

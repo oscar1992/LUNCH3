@@ -7,6 +7,19 @@
 //
 
 import UIKit
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
 
 class Olvida2: UIViewController , UITextFieldDelegate{
     
@@ -25,12 +38,12 @@ class Olvida2: UIViewController , UITextFieldDelegate{
         setFondo();
         hideKeyboardWhenTappedAround();
         //iniciaBotonVolver();
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(LoginView.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil);
+        NotificationCenter.default.addObserver(self, selector: #selector(LoginView.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil);
         DatosB.cont.olvida2=self;
     }
     
-    func keyboardWillShow(notification: NSNotification) {
-        let frame = (notification.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
+    func keyboardWillShow(_ notification: Notification) {
+        let frame = (notification.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         //print("Teclado: ", frame);
         DatosK.cont.tecladoFrame=frame;
         DatosK.cont.subeVista(self.view);
@@ -41,31 +54,31 @@ class Olvida2: UIViewController , UITextFieldDelegate{
         let OX = self.view.frame.width*0.2;
         let ancho = self.view.frame.width*0.6;
         let alto = self.view.frame.height*0.2;
-        let frameTit=CGRectMake(OX, OY, ancho, alto);
+        let frameTit=CGRect(x: OX, y: OY, width: ancho, height: alto);
         let titulo=UIView(frame: frameTit);
-        titulo.userInteractionEnabled=false;
+        titulo.isUserInteractionEnabled=false;
         DatosB.cont.poneFondoTot(titulo, fondoStr: "LogoLaLonchera", framePers: nil, identi: nil, scala: true);
-        self.view.sendSubviewToBack(titulo);
+        self.view.sendSubview(toBack: titulo);
         self.view.addSubview(titulo);
         iniciaTextoCuenta(OY+alto)
     }
     
-    func iniciaTextoCuenta(yini: CGFloat){
+    func iniciaTextoCuenta(_ yini: CGFloat){
         let OY = yini;
         let OX = self.view.frame.width*0.2;
         let ancho = self.view.frame.width*0.6;
         let alto = self.view.frame.height*0.2;
-        let frameLabel = CGRectMake(OX, OY, ancho, alto);
-        let frameBot = CGRectMake(OX, OY+(alto/4), ancho, alto/2);
+        let frameLabel = CGRect(x: OX, y: OY, width: ancho, height: alto);
+        let frameBot = CGRect(x: OX, y: OY+(alto/4), width: ancho, height: alto/2);
         let label = UILabel(frame: frameLabel);
         label.text = "En esta pestaña podrás recuperar tu contraseña";
         label.numberOfLines=3;
-        label.textAlignment=NSTextAlignment.Center;
+        label.textAlignment=NSTextAlignment.center;
         label.font=UIFont(name: "Gotham Bold", size: label.frame.height/6);
         label.adjustsFontSizeToFitWidth=true;
-        label.textColor=UIColor.whiteColor();
+        label.textColor=UIColor.white;
         let bot = UIButton(frame: frameBot);
-        bot.addTarget(self, action: #selector(LoginView.cuentaNueva(_:)), forControlEvents: .TouchDown);
+        bot.addTarget(self, action: #selector(LoginView.cuentaNueva(_:)), for: .touchDown);
         self.view.addSubview(bot);
         //label.bringSubviewToFront(bot);
         //bot.backgroundColor=UIColor.blueColor();
@@ -78,92 +91,92 @@ class Olvida2: UIViewController , UITextFieldDelegate{
         let OX = self.view.frame.width*0.3;
         let ancho = self.view.frame.width*0.4;
         let alto = self.view.frame.height*0.05;
-        let frameLabel = CGRectMake(OX, OY, ancho, alto);
+        let frameLabel = CGRect(x: OX, y: OY, width: ancho, height: alto);
         let labEmail = UILabel(frame: frameLabel);
         labEmail.text = "Contraseña Nueva";
-        labEmail.textAlignment=NSTextAlignment.Center;
+        labEmail.textAlignment=NSTextAlignment.center;
         labEmail.font=UIFont(name: "Gotham Bold", size: labEmail.frame.height/2);
-        labEmail.textColor=UIColor.grayColor();
+        labEmail.textColor=UIColor.gray;
         labEmail.adjustsFontSizeToFitWidth=true;
         //labEmail.backgroundColor=UIColor.redColor();
         self.view.addSubview(labEmail);
         iniciaTextPass1(OY+alto)
     }
     
-    func iniciaTextPass1(yini: CGFloat){
+    func iniciaTextPass1(_ yini: CGFloat){
         let OY = yini;
         let OX = self.view.frame.width*0.2;
         let ancho = self.view.frame.width*0.6;
         let alto = self.view.frame.height*0.05;
-        let frameText = CGRectMake(OX, OY, ancho, alto);
+        let frameText = CGRect(x: OX, y: OY, width: ancho, height: alto);
         pass1 = UITextField(frame: frameText);
         pass1.placeholder="Escribe tu nueva Contraseña"
-        pass1.textColor=UIColor.grayColor();
-        pass1.textAlignment=NSTextAlignment.Center;
+        pass1.textColor=UIColor.gray;
+        pass1.textAlignment=NSTextAlignment.center;
         pass1.font=UIFont(name: "Gotham Bold", size: pass1.frame.height/2);
         pass1.adjustsFontSizeToFitWidth=true;
-        pass1.autocapitalizationType=UITextAutocapitalizationType.None;
+        pass1.autocapitalizationType=UITextAutocapitalizationType.none;
         //email.backgroundColor=UIColor.yellowColor();
-        let framePers = CGRectMake(0, pass1.frame.height-2, pass1.frame.width, 2);
+        let framePers = CGRect(x: 0, y: pass1.frame.height-2, width: pass1.frame.width, height: 2);
         DatosB.cont.poneFondoTot(pass1, fondoStr: "Línea texto", framePers: framePers, identi: nil, scala: true);
         self.view.addSubview(pass1);
         //iniciaBoton(OY+alto);
         iniciaLab2(OY+alto);
     }
     
-    func iniciaLab2(yini: CGFloat){
+    func iniciaLab2(_ yini: CGFloat){
         let OY = yini;
         let OX = self.view.frame.width*0.3;
         let ancho = self.view.frame.width*0.4;
         let alto = self.view.frame.height*0.05;
-        let frameLabel = CGRectMake(OX, OY, ancho, alto);
+        let frameLabel = CGRect(x: OX, y: OY, width: ancho, height: alto);
         let labEmail = UILabel(frame: frameLabel);
         labEmail.text = "Confirma";
-        labEmail.textAlignment=NSTextAlignment.Center;
+        labEmail.textAlignment=NSTextAlignment.center;
         labEmail.font=UIFont(name: "Gotham Bold", size: labEmail.frame.height/2);
-        labEmail.textColor=UIColor.grayColor();
+        labEmail.textColor=UIColor.gray;
         labEmail.adjustsFontSizeToFitWidth=true;
         //labEmail.backgroundColor=UIColor.redColor();
         self.view.addSubview(labEmail);
         iniciaTextPass2(OY+alto)
     }
     
-    func iniciaTextPass2(yini: CGFloat){
+    func iniciaTextPass2(_ yini: CGFloat){
         let OY = yini;
         let OX = self.view.frame.width*0.2;
         let ancho = self.view.frame.width*0.6;
         let alto = self.view.frame.height*0.05;
-        let frameText = CGRectMake(OX, OY, ancho, alto);
+        let frameText = CGRect(x: OX, y: OY, width: ancho, height: alto);
         pass2 = UITextField(frame: frameText);
         pass2.placeholder="Confirma tu nueva contraseña"
-        pass2.textColor=UIColor.grayColor();
-        pass2.textAlignment=NSTextAlignment.Center;
+        pass2.textColor=UIColor.gray;
+        pass2.textAlignment=NSTextAlignment.center;
         pass2.font=UIFont(name: "Gotham Bold", size: pass2.frame.height/2);
         pass2.adjustsFontSizeToFitWidth=true;
         pass2.delegate=self;
         pass2
-            .autocapitalizationType=UITextAutocapitalizationType.None;
+            .autocapitalizationType=UITextAutocapitalizationType.none;
         //email.backgroundColor=UIColor.yellowColor();
-        let framePers = CGRectMake(0, pass2.frame.height-2, pass2.frame.width, 2);
+        let framePers = CGRect(x: 0, y: pass2.frame.height-2, width: pass2.frame.width, height: 2);
         DatosB.cont.poneFondoTot(pass2, fondoStr: "Línea texto", framePers: framePers, identi: nil, scala: true);
         self.view.addSubview(pass2);
         iniciaBotones(OY+alto);
         //iniciaContrasena(OY+alto);
     }
     
-    func iniciaBotones(yini: CGFloat){
+    func iniciaBotones(_ yini: CGFloat){
         let OY = yini+self.view.frame.height*0.05;
         let OX = self.view.frame.width*0.2;
         let ancho = self.view.frame.width*0.6;
         let alto = self.view.frame.height*0.05;
-        let frameBot = CGRectMake(OX, OY, ancho, alto);
-        let framebot2 = CGRectMake(OX, OY+(alto*1.7), ancho, alto);
+        let frameBot = CGRect(x: OX, y: OY, width: ancho, height: alto);
+        let framebot2 = CGRect(x: OX, y: OY+(alto*1.7), width: ancho, height: alto);
         ingresa = UIButton(frame: frameBot);
         let ingresa2 = UIButton(frame: framebot2);
         DatosB.cont.poneFondoTot(ingresa, fondoStr: "Botón enviar", framePers: nil, identi: nil, scala: true);
         DatosB.cont.poneFondoTot(ingresa2, fondoStr: "Botón Cancelar", framePers: nil, identi: nil, scala: true);
-        ingresa.addTarget(self, action: #selector(Olvida2.cambiaPass), forControlEvents: .TouchDown);
-        ingresa2.addTarget(self, action: #selector(Olvida2.cierraVista), forControlEvents: .TouchDown);
+        ingresa.addTarget(self, action: #selector(Olvida2.cambiaPass), for: .touchDown);
+        ingresa2.addTarget(self, action: #selector(Olvida2.cierraVista), for: .touchDown);
         self.view.addSubview(ingresa);
         self.view.addSubview(ingresa2);
     }
@@ -171,14 +184,14 @@ class Olvida2: UIViewController , UITextFieldDelegate{
     func setFondo(){
         let OY = self.view.frame.height/2;
         let ancho = self.view.frame.width;
-        let frame1 = CGRectMake(0, 0, ancho, OY);
-        let frame2 = CGRectMake(0, OY, ancho, OY);
+        let frame1 = CGRect(x: 0, y: 0, width: ancho, height: OY);
+        let frame2 = CGRect(x: 0, y: OY, width: ancho, height: OY);
         let fondo1 = UIView(frame: frame1);
         let fondo2 = UIView(frame: frame2);
         self.view.addSubview(fondo1);
         self.view.addSubview(fondo2);
-        self.view.sendSubviewToBack(fondo1);
-        self.view.sendSubviewToBack(fondo2);
+        self.view.sendSubview(toBack: fondo1);
+        self.view.sendSubview(toBack: fondo2);
         DatosB.cont.poneFondoTot(fondo1, fondoStr: "FondoDegradado", framePers: nil, identi: nil, scala: false);
         DatosB.cont.poneFondoTot(fondo2, fondoStr: "FondoBlanco", framePers: nil, identi: nil, scala: false);
     }
@@ -195,7 +208,7 @@ class Olvida2: UIViewController , UITextFieldDelegate{
     }
     
     //Método que oculta la barra en este viewcontroller
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden : Bool {
         return true
     }
     
@@ -204,10 +217,10 @@ class Olvida2: UIViewController , UITextFieldDelegate{
         let ancho = DatosC.contenedor.altoP * 0.0922;
         let ancho2 = ancho/3;
         let centr = (ancho/2)-(ancho2/2);
-        let frameBoton = CGRectMake(0, 0, ancho, ancho);
+        let frameBoton = CGRect(x: 0, y: 0, width: ancho, height: ancho);
         let volver = UIButton(frame: frameBoton);
-        volver.addTarget(self, action: #selector(Olvida1.cierraVista), forControlEvents: .TouchDown);
-        let subFrame = CGRectMake(centr, centr, ancho2, ancho2);
+        volver.addTarget(self, action: #selector(Olvida1.cierraVista), for: .touchDown);
+        let subFrame = CGRect(x: centr, y: centr, width: ancho2, height: ancho2);
         DatosB.cont.poneFondoTot(volver, fondoStr: "FlechaVBlanco", framePers: subFrame, identi: nil, scala: true);
         self.view.addSubview(volver);
     }
@@ -217,8 +230,8 @@ class Olvida2: UIViewController , UITextFieldDelegate{
         DatosK.cont.bajaVista(self.view);
         plogin.pass.text="";
         plogin.desbloquea();
-        NSUserDefaults.standardUserDefaults().setObject(nil, forKey: "user");
-        NSUserDefaults.standardUserDefaults().setObject(nil, forKey: "pass");
+        UserDefaults.standard.set(nil, forKey: "user");
+        UserDefaults.standard.set(nil, forKey: "pass");
         
     }
     
@@ -235,7 +248,7 @@ class Olvida2: UIViewController , UITextFieldDelegate{
         
     }
     
-    func finCambia(cambi: Bool){
+    func finCambia(_ cambi: Bool){
         desbloquea();
         if(cambi){
             if(plogin != nil){
@@ -248,17 +261,17 @@ class Olvida2: UIViewController , UITextFieldDelegate{
             DatosB.cont.cargaProductos=true;
             DatosC.elimina();
             DatosD.elimina();
-            self.dismissViewControllerAnimated(true, completion: nil);
+            self.dismiss(animated: true, completion: nil);
         }else{
             let ancho = self.view.frame.width*0.8;
             let alto = self.view.frame.height*0.4;
             let OX = (self.view.frame.width/2)-(ancho/2);
             let OY = (self.view.frame.height/2)-(alto/2);
-            let frameMensaje = CGRectMake(OX, OY, ancho, alto);
+            let frameMensaje = CGRect(x: OX, y: OY, width: ancho, height: alto);
             let mensaje = MensajeConexion(frame: frameMensaje, msg: nil);
             self.view.addSubview(mensaje);
             mensaje.layer.zPosition=5;
-            self.view.bringSubviewToFront(mensaje);
+            self.view.bringSubview(toFront: mensaje);
         }
         
     }
@@ -266,24 +279,24 @@ class Olvida2: UIViewController , UITextFieldDelegate{
     func pasa(){
         aprueba=true;
         //DatosB.cont.loginView.ingresa.enabled=true;
-        self.performSegueWithIdentifier("Ingresa3", sender: nil);
+        self.performSegue(withIdentifier: "Ingresa3", sender: nil);
     }
     
-    func padre(pass: String)->Padre{
+    func padre(_ pass: String)->Padre{
         let padre = DatosD.contenedor.padre;
         padre.pass=pass;
         print("pad: ",padre.nombre);
         return padre;
     }
     
-    func textFieldDidEndEditing(textField: UITextField){
+    func textFieldDidEndEditing(_ textField: UITextField){
         //print("fin: ", textField.text);
         if(textField.text != pass1.text){
             print("Diferentes");
             msgValidacion("Las contraseñas no coinciden");
-            ingresa.enabled=false;
+            ingresa.isEnabled=false;
         }else{
-            ingresa.enabled=true;
+            ingresa.isEnabled=true;
         }
     }
     
@@ -295,12 +308,12 @@ class Olvida2: UIViewController , UITextFieldDelegate{
         }
     }
     
-    func msgValidacion(mensaje: String){
+    func msgValidacion(_ mensaje: String){
         let ancho = self.view.frame.width*0.8;
         let alto = self.view.frame.height*0.4;
         let OX = (self.view.frame.width/2)-(ancho/2);
         let OY = (self.view.frame.height/2)-(alto/2);
-        let frameMens = CGRectMake(OX, OY, ancho, alto);
+        let frameMens = CGRect(x: OX, y: OY, width: ancho, height: alto);
         let msg = MensajeCrea(frame: frameMens, msg: mensaje, gif: false);
         msg.iniciaTimer();
         self.view.addSubview(msg);
@@ -309,11 +322,11 @@ class Olvida2: UIViewController , UITextFieldDelegate{
     func bloquea(){
         let ancho = self.view.frame.width;
         let alto = self.view.frame.height;
-        let rect = CGRectMake(0, 0, ancho, alto);
+        let rect = CGRect(x: 0, y: 0, width: ancho, height: alto);
         //vistaBloq = UIView(frame: rect);
-        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Light);
+        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light);
         vistaBloq = UIVisualEffectView(effect: blurEffect)
-        vistaBloq.backgroundColor=UIColor.blueColor();
+        vistaBloq.backgroundColor=UIColor.blue;
         vistaBloq.frame=rect;
         self.view.addSubview(vistaBloq);
     }

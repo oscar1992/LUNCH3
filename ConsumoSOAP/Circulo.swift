@@ -17,7 +17,7 @@ class Circulo: UIButton {
         super.init(frame: frame);
         Fondo(Activo);
         self.accessibilityValue = "Circulo";
-        self.addTarget(self, action: #selector(Circulo.activa(_:)), forControlEvents: .TouchDown);
+        self.addTarget(self, action: #selector(Circulo.activa(_:)), for: .touchDown);
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -25,7 +25,7 @@ class Circulo: UIButton {
     }
     
     //Método que pone el Fondo del círculo
-    func Fondo(activo: Bool){
+    func Fondo(_ activo: Bool){
         for vista in self.subviews{
             if vista is UIImageView{
                 vista.removeFromSuperview();
@@ -38,16 +38,16 @@ class Circulo: UIButton {
             imagen = UIImage(named: "CirculoN")!;
         }
         
-        let frameBack = CGRectMake(0, 0, self.frame.width, self.frame.height);
+        let frameBack = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height);
         let backImg = UIImageView (frame: frameBack);
         backImg.image=imagen;
-        backImg.contentMode=UIViewContentMode.ScaleAspectFit;
+        backImg.contentMode=UIViewContentMode.scaleAspectFit;
         self.addSubview(backImg);
-        self.sendSubviewToBack(backImg);
+        self.sendSubview(toBack: backImg);
     }
     
     //Método que selecciona el día para ser copiado
-    func activa(sender: UIButton){
+    func activa(_ sender: UIButton){
         print("Activa?: ", Activo);
         if(Activo){
             var p = 0;
@@ -57,7 +57,7 @@ class Circulo: UIButton {
                 }
                 p += 1;
             }
-            DatosD.contenedor.diasCopia.removeAtIndex(p);
+            DatosD.contenedor.diasCopia.remove(at: p);
             Fondo(false);
             Activo = false;
         }else{

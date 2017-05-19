@@ -15,16 +15,16 @@ class BotonMenu: UIButton {
     init(ima: String, texto: String, frame: CGRect){
         super.init(frame: frame);
         //self.backgroundColor=UIColor.yellowColor();
-        let icoFrame = CGRectMake(self.frame.width*0.1, self.frame.height*0.25, self.frame.width*0.3, self.frame.height*0.5);
+        let icoFrame = CGRect(x: self.frame.width*0.1, y: self.frame.height*0.25, width: self.frame.width*0.3, height: self.frame.height*0.5);
         let ico = UIView(frame: icoFrame);
         self.addSubview(ico);
         DatosB.cont.poneFondoTot(ico, fondoStr: ima, framePers: nil, identi: nil, scala: true);
-        let frameTexto = CGRectMake(icoFrame.width+(self.frame.width*0.2), 0, self.frame.width*0.4, self.frame.height);
+        let frameTexto = CGRect(x: icoFrame.width+(self.frame.width*0.2), y: 0, width: self.frame.width*0.4, height: self.frame.height);
         let textoL = UILabel(frame: frameTexto);
         self.addSubview(textoL);
         textoL.text=texto;
-        textoL.textColor=UIColor.whiteColor();
-        textoL.textAlignment=NSTextAlignment.Center;
+        textoL.textColor=UIColor.white;
+        textoL.textAlignment=NSTextAlignment.center;
         textoL.font=UIFont(name: "Gotham Medium", size: self.frame.height/3);
         textoL.adjustsFontSizeToFitWidth=true;
         textoL.numberOfLines=0;

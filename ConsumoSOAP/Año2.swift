@@ -15,7 +15,7 @@ class An_o2: UIView {
     
     
     
-    init(frame: CGRect, fechaI: NSDate){
+    init(frame: CGRect, fechaI: Date){
         super.init(frame: frame);
         
     }

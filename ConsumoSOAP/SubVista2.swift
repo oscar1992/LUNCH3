@@ -17,11 +17,11 @@ class SubVista2: UIWebView, UIWebViewDelegate{
         super.init(frame: frame);
         self.delegate=self;
         self.hideKeyboardWhenTappedAround();
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SubVista2.keyboardWillHide(_:)), name: UIKeyboardWillShowNotification, object: nil);
+        NotificationCenter.default.addObserver(self, selector: #selector(SubVista2.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil);
     }
     
-    func keyboardWillHide(notification: NSNotification) {
-        let frame = (notification.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
+    func keyboardWillHide(_ notification: Notification) {
+        let frame = (notification.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         //print("Teclado: ", frame);
         print("bajaweb??");
         DatosK.cont.tecladoFrame=frame;
@@ -35,7 +35,7 @@ class SubVista2: UIWebView, UIWebViewDelegate{
         fatalError("init(coder:) has not been implemented")
     }
     
-    func webViewDidFinishLoad(webView: UIWebView) {
+    func webViewDidFinishLoad(_ webView: UIWebView) {
         print("Carga Web");
         for vista in webView.subviews{
             if(vista.accessibilityIdentifier == "gif"){
@@ -44,7 +44,7 @@ class SubVista2: UIWebView, UIWebViewDelegate{
             }
         }
         
-        if let cookies = NSHTTPCookieStorage.sharedHTTPCookieStorage().cookies {
+        if let cookies = HTTPCookieStorage.shared.cookies {
             for cookie in cookies {
                 print("Nomb: ", cookie.name);
                 if(cookie.name == "pmntz_add_success" && cookie.value == "true"){

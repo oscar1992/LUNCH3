@@ -14,10 +14,10 @@ class Contenedor: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame);
-        deslizador=VistaLonchera(transitionStyle: UIPageViewControllerTransitionStyle.Scroll,
-                                 navigationOrientation: UIPageViewControllerNavigationOrientation.Horizontal,
+        deslizador=VistaLonchera(transitionStyle: UIPageViewControllerTransitionStyle.scroll,
+                                 navigationOrientation: UIPageViewControllerNavigationOrientation.horizontal,
                                  options: nil);
-        deslizador.view.frame=CGRectMake(0, 0, self.frame.width, self.frame.height);
+        deslizador.view.frame=CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height);
         self.addSubview((deslizador?.view)!);
         //print("Cont: ",self.frame.height);
     }

@@ -27,9 +27,9 @@ class VistaWeb2: UIView {
         let anchoB = self.frame.width*0.07;
         let OXB = self.frame.width-(anchoB*1);
         let OYB = CGFloat(0);
-        let frameCerrar = CGRectMake(OXB, OYB, anchoB, anchoB);
+        let frameCerrar = CGRect(x: OXB, y: OYB, width: anchoB, height: anchoB);
         botCerrar = UIButton(frame: frameCerrar);
-        botCerrar.addTarget(self, action: #selector(VistaWeb2.cerrarVista), forControlEvents: .TouchDown);
+        botCerrar.addTarget(self, action: #selector(VistaWeb2.cerrarVista), for: .touchDown);
         DatosB.cont.poneFondoTot(botCerrar, fondoStr: "BotonCerrar", framePers: nil, identi: nil, scala: true);
         self.addSubview(botCerrar);
     }
@@ -37,7 +37,7 @@ class VistaWeb2: UIView {
     func cerrarVista(){
         print("boton");
         self.removeFromSuperview();
-        let storage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
+        let storage = HTTPCookieStorage.shared
         for cookie in storage.cookies! {
             storage.deleteCookie(cookie)
         }
@@ -45,13 +45,13 @@ class VistaWeb2: UIView {
     
     func iniciaTitulo(){
         let alto = self.frame.width*0.1;
-        let frameTitulo = CGRectMake(0.5, 0, self.frame.width*0.93, alto);
+        let frameTitulo = CGRect(x: 0.5, y: 0, width: self.frame.width*0.93, height: alto);
         titulo = UILabel(frame: frameTitulo);
         titulo.text = texto;
         //titulo.text="Selecciona la tarjeta de crédito con la que deseas pagar la orden";
         titulo.font=UIFont(name: "SansBeam Head", size: titulo.frame.height/2);
         titulo.adjustsFontSizeToFitWidth=true;
-        titulo.textAlignment=NSTextAlignment.Center;
+        titulo.textAlignment=NSTextAlignment.center;
         self.addSubview(titulo);
     }
     
@@ -61,12 +61,12 @@ class VistaWeb2: UIView {
         }
     }
     
-    func gifCarga(vistaPadre: UIView){
+    func gifCarga(_ vistaPadre: UIView){
         let gif = UIImage.gifImageWithName("Cargando");
-        let vista = UIImageView(frame: CGRectMake(0, 0, vistaPadre.frame.width, vistaPadre.frame.height));
+        let vista = UIImageView(frame: CGRect(x: 0, y: 0, width: vistaPadre.frame.width, height: vistaPadre.frame.height));
         vista.image = gif;
         vista.accessibilityIdentifier = "gif";
-        vista.contentMode = UIViewContentMode.ScaleAspectFit;
+        vista.contentMode = UIViewContentMode.scaleAspectFit;
         vistaPadre.addSubview(vista);
     }
     

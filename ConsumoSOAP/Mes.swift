@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 class Mes: UIView{
-    
+    /*
     var NumeroMes: Int!;
     var dias = [Dia]();
     var nSemanas: Int?;
@@ -25,32 +25,32 @@ class Mes: UIView{
         iniciaDias();
         //print("nmes: ", nmes);
         //self.backgroundColor=UIColor.clearColor().colorWithAlphaComponent(0.0);
-        self.backgroundColor=UIColor.darkGrayColor();
+        self.backgroundColor=UIColor.darkGray;
         //self.userInteractionEnabled=false;
-        self.sendSubviewToBack(self);
+        self.sendSubview(toBack: self);
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func BloqueaDias(bloquea: Bool){
+    func BloqueaDias(_ bloquea: Bool){
         //print("BLoquea");
         //self.ano.BloqueaDias(bloquea);
     }
     
     func iniciaDias(){
-        let calendar = NSCalendar.currentCalendar();
-        let fecha = NSDateComponents();
-        var aux : NSDateComponents!;
+        let calendar = Calendar.current;
+        var fecha = DateComponents();
+        var aux : DateComponents!;
         fecha.year=ano;
         fecha.month=NumeroMes;
         var pases = 0;
         for nDia in 1 ... 31{
             aux = fecha;
             fecha.day = nDia;
-            if(fecha.isValidDateInCalendar(calendar)){
-                let dia = Dia(frame: CGRectMake(0, 0, 10, 10), nDia: fecha.day, mes: self);
+            if(fecha.isValidDate(in: calendar)){
+                let dia = Dia(frame: CGRect(x: 0, y: 0, width: 10, height: 10), nDia: fecha.day!, mes: self);
                 dia.activo=true;
                 //rprint("dia: ", dia.numDia);
                 dias.append(dia);
@@ -58,13 +58,13 @@ class Mes: UIView{
             }else{
                 pases += 1;
                 //print("erronea")
-                aux.day = aux.day - pases;
+                aux.day = aux.day! - pases;
             }
         }
         //print("aux: ", aux);
-        let fecha2 = calendar.dateFromComponents(aux);
+        let fecha2 = calendar.date(from: aux);
         //print("fevha final: ", fecha2);
-        nSemanas = calendar.component(.WeekOfMonth, fromDate: fecha2!);
+        nSemanas = (calendar as NSCalendar).component(.weekOfMonth, from: fecha2!);
         
     }
     
@@ -112,4 +112,5 @@ class Mes: UIView{
             break;
         }
     }
+ */
 }

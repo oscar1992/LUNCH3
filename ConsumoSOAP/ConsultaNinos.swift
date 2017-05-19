@@ -9,17 +9,17 @@
 import Foundation
 import UIKit
 
-class ConsultaNinos: NSObject , NSURLConnectionDelegate, NSXMLParserDelegate{
+class ConsultaNinos: NSObject , NSURLConnectionDelegate, XMLParserDelegate{
     
-    var resp: NSData! = nil
+    var resp: Data! = nil
     var estado:NSMutableString!
-    var parser=NSXMLParser()
+    var parser=XMLParser()
     var eeleDiccio=NSMutableDictionary()
     var element=NSString();
-    var task: NSURLSessionDataTask!;
+    var task: URLSessionDataTask!;
     var profundidad = 0;
         
-    func consulta(Plogin: LoginView, aprueba: Bool){
+    func consulta(_ Plogin: LoginView, aprueba: Bool){
         let padre = DatosD.contenedor.padre;
         //print("pp:", padre.id);
         let mensajeEnviado:String
@@ -36,34 +36,34 @@ class ConsultaNinos: NSObject , NSURLConnectionDelegate, NSXMLParserDelegate{
         
         let is_URL: String = "http://93.188.163.97:8080/Lunch2/clienteEndpoint"
         
-        let lobj_Request = NSMutableURLRequest(URL: NSURL(string: is_URL)!)
-        let session = NSURLSession.sharedSession()
+        let lobj_Request = NSMutableURLRequest(url: URL(string: is_URL)!)
+        let session = URLSession.shared
         let _: NSError?
         
-        lobj_Request.HTTPMethod = "POST"
-        lobj_Request.HTTPBody = mensajeEnviado.dataUsingEncoding(NSUTF8StringEncoding)
+        lobj_Request.httpMethod = "POST"
+        lobj_Request.httpBody = mensajeEnviado.data(using: String.Encoding.utf8)
         lobj_Request.addValue("www.lunch.com", forHTTPHeaderField: "Host")
         lobj_Request.addValue("text/xml; charset=utf-8", forHTTPHeaderField: "Content-Type")
         lobj_Request.addValue(String(mensajeEnviado.characters.count), forHTTPHeaderField: "Content-Length")
         //lobj_Request.addValue("223", forHTTPHeaderField: "Content-Length")
         lobj_Request.addValue("\"bool\"", forHTTPHeaderField: "SOAPAction")
         
-        let task = session.dataTaskWithRequest(lobj_Request, completionHandler: {data, response, error -> Void in
+        let task = session.dataTask(with: lobj_Request as URLRequest, completionHandler: {data, response, error -> Void in
             var nulo = false;
             if(data == nil){
                 print("NULOOOO en consulta Ninos");
                 nulo = true;
             }else{
                 //print(self.resp)
-                let strData = NSString(data: data!, encoding: NSUTF8StringEncoding)
-                self.resp=strData?.dataUsingEncoding(NSUTF8StringEncoding)
-                self.parser=NSXMLParser(data: self.resp)
+                let strData = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
+                self.resp=strData?.data(using: String.Encoding.utf8.rawValue)
+                self.parser=XMLParser(data: self.resp)
                 self.parser.delegate=self
                 self.parser.parse();
                 self.consume(Plogin);
                 //Plogin.desbloquea();
             }
-            dispatch_async(dispatch_get_main_queue(),{
+            DispatchQueue.main.async(execute: {
                 if(nulo && self.profundidad<2){
                     self.profundidad += 1;
                     self.task.cancel();
@@ -93,16 +93,16 @@ class ConsultaNinos: NSObject , NSURLConnectionDelegate, NSXMLParserDelegate{
     var Bpadre=false;
     var Bgenero=false;
     
-    var id=Int?();
+    var id = 0;
     var nombre=String();
-    var fechaNaci=NSDate()
+    var fechaNaci=Date()
     var padre=Int();
     var genero=String();
     
-    func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
-        element=elementName;
+    func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
+        element=elementName as NSString;
         //print("ETIQUETA: ",element);
-        if(elementName as NSString).isEqualToString("ninosPorPadreResponse"){
+        if(elementName as NSString).isEqual(to: "ninosPorPadreResponse"){
             estado=NSMutableString();
             estado="";
         }
@@ -129,10 +129,10 @@ class ConsultaNinos: NSObject , NSURLConnectionDelegate, NSXMLParserDelegate{
         }
     }
     
-    func parser(parser: NSXMLParser, foundCharacters string: String) {
+    func parser(_ parser: XMLParser, foundCharacters string: String) {
         
         if(Bid){
-            id=Int(string);
+            id=Int(string)!;
             Bid=false;
         }
         if(Bnombre){
@@ -148,12 +148,12 @@ class ConsultaNinos: NSObject , NSURLConnectionDelegate, NSXMLParserDelegate{
             Bpadre=false;
         }
         if(Bfecha){
-            let dateFormatter = NSDateFormatter();
+            let dateFormatter = DateFormatter();
             dateFormatter.dateFormat = "yyyy-MM-dd";
             
-            let ss=(string as NSString).substringWithRange(NSRange(location: 0, length: 10));
+            let ss=(string as NSString).substring(with: NSRange(location: 0, length: 10));
             //print("ff:", ss);
-            let fecha=dateFormatter.dateFromString(ss);
+            let fecha=dateFormatter.date(from: ss);
             //print("fff", fecha);
             fechaNaci=fecha!;
             Bfecha=false;
@@ -162,18 +162,18 @@ class ConsultaNinos: NSObject , NSURLConnectionDelegate, NSXMLParserDelegate{
         
     }
     
-    func parser(parser: NSXMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
+    func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         if(elementName == "return"){
             if(id != nil){
                 //print("trae");
-                let nino=Ninos(id: id!, nombre: nombre, fechaN: fechaNaci, padre: padre, genero: genero);
+                let nino=Ninos(id: id, nombre: nombre, fechaN: fechaNaci, padre: padre, genero: genero);
                 DatosD.contenedor.ninos.append(nino);
                 
             }
         }
     }
     
-    func consume(Plogin: LoginView){
+    func consume(_ Plogin: LoginView){
         //let cargaI=ConsultaProductos();
         //let cargaII=CargaTItems();
         let cargaIII=CargaSecuencia();
@@ -203,11 +203,11 @@ class ConsultaNinos: NSObject , NSURLConnectionDelegate, NSXMLParserDelegate{
         let alto = vista.view.frame.height*0.4;
         let OX = (vista.view.frame.width/2)-(ancho/2);
         let OY = (vista.view.frame.height/2)-(alto/2);
-        let frameMensaje = CGRectMake(OX, OY, ancho, alto);
+        let frameMensaje = CGRect(x: OX, y: OY, width: ancho, height: alto);
         let mensaje = MensajeConexion(frame: frameMensaje, msg: nil);
         vista.view.addSubview(mensaje);
         mensaje.layer.zPosition=5;
-        vista.view.bringSubviewToFront(mensaje);
+        vista.view.bringSubview(toFront: mensaje);
     }
 
 }

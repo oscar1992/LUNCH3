@@ -17,7 +17,7 @@ class Selector: UIButton {
         self.nombre=genero;
         super.init(frame: frame);
         actuaIma();
-        self.addTarget(self, action: #selector(Selector.cambia(_:)), forControlEvents: .TouchDown);
+        self.addTarget(self, action: #selector(Selector.cambia(_:)), for: .touchDown);
     }
     
     func actuaIma(){
@@ -29,7 +29,7 @@ class Selector: UIButton {
         }
     }
     
-    func cambia(sender: AnyObject){
+    func cambia(_ sender: AnyObject){
         for sel in (self.superview as! VistaGenero).selects{
             sel.seleccion=false;
             sel.actuaIma();

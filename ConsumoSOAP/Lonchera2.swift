@@ -39,7 +39,7 @@ class Lonchera2: UIView {
     func iniciaCasillas(){
         let oox = (self.frame.width/2)-((self.frame.width*0.9)/2);
         let ooy = (self.frame.height/2)-((self.frame.height*0.8)/2);
-        let frameRef = CGRectMake(oox, ooy, (self.frame.width*0.9), (self.frame.height*0.8));
+        let frameRef = CGRect(x: oox, y: ooy, width: (self.frame.width*0.9), height: (self.frame.height*0.8));
         let vistaRef = UIView(frame: frameRef);
         //vistaRef.backgroundColor=UIColor.blueColor();
         self.addSubview(vistaRef);
@@ -51,7 +51,7 @@ class Lonchera2: UIView {
         for n in 0...3{
             let OX = ((ancho+bordelateral) * p)+(bordelateral/2);
             let OY = ((alto+bordelateral) * l)+(bordelateral/2);
-            let frameCas = CGRectMake((OX), OY, ancho, alto);
+            let frameCas = CGRect(x: (OX), y: OY, width: ancho, height: alto);
             let cas = Casilla(frame: frameCas);
             vistaRef.addSubview(cas);
             cas.tipo=n+1;
@@ -72,7 +72,7 @@ class Lonchera2: UIView {
         let alto = DatosC.contenedor.altoP*0.110;
         let OX = (self.frame.width/2)-(ancho/2);
         let OY = self.frame.height+(self.frame.height*0.1);
-        let frameLetrero = CGRectMake(OX, OY, ancho, alto);
+        let frameLetrero = CGRect(x: OX, y: OY, width: ancho, height: alto);
         contador = Contador2(frame: frameLetrero);
         //contador.backgroundColor=UIColor.blueColor();
         DatosB.cont.poneFondoTot(contador, fondoStr: "TablaValor", framePers: nil, identi: "Contador", scala: false);
@@ -80,8 +80,7 @@ class Lonchera2: UIView {
     }
     
     //Método que permite poner un elemento en una casilla
-    func setCasilla(tipo: Int, prod: Producto, salud: Bool){
-        
+    func setCasilla(_ tipo: Int, prod: Producto, salud: Bool){
         if(salud){
             for cas in casillas{
                 //print("tipo: ", prod.tipo);
@@ -99,20 +98,23 @@ class Lonchera2: UIView {
                     let OX = (cas.frame.width/2)-(ancho/2);
                     let OY = (cas.frame.height/2)-(alto/2);
                     let imagenN = prod.imagen;
-                    let prodN=ProductoView(frame: CGRectMake(OX, OY, ancho, alto), imagen: prod.imagen!);
+                    let prodN=ProductoView(frame: CGRect(x: OX, y: OY, width: ancho, height: alto), imagen: prod.imagen!);
                     prodN.producto=prod;
                     prodN.padre=cas;
-                    prodN.espacioPadre=CGRectMake(OX, OY, ancho, alto);
+                    prodN.espacioPadre=CGRect(x: OX, y: OY, width: ancho, height: alto);
                     prodN.tipo=cas.tipo;
                     prodN.Natural=true;
                     prodN.PanelOrigen=nil;
                     prodN.Panel2=nil;
+                    //print("ima: ", prodN.producto?.imagen);
+                    
+                    //prodN.producto?.imagen=imagenN;
                     cas.elemeto=prodN;
                     cas.addSubview(prodN);
                 }
             }
         }else{
-            print("Tipo: ", tipo);
+            //print("Tipo: ", tipo);
             let cas = casillas[tipo-1];
             if(cas.elemeto != nil){
                 cas.elemeto?.elimina();
@@ -126,24 +128,30 @@ class Lonchera2: UIView {
             let OX = (cas.frame.width/2)-(ancho/2);
             let OY = (cas.frame.height/2)-(alto/2);
             let imagenN = prod.imagen;
-            let prodN=ProductoView(frame: CGRectMake(OX, OY, ancho, alto), imagen: prod.imagen!);
+            print("ima: ", prod.imagen!);
+            let prodN=ProductoView(frame: CGRect(x: OX, y: OY, width: ancho, height: alto), imagen: prod.imagen!);
             prodN.producto=prod;
             prodN.padre=cas;
-            prodN.espacioPadre=CGRectMake(OX, OY, ancho, alto);
+            prodN.espacioPadre=CGRect(x: OX, y: OY, width: ancho, height: alto);
             prodN.tipo=cas.tipo;
             prodN.Natural=true;
             prodN.PanelOrigen=nil;
             prodN.Panel2=nil;
+            print("cant: ", prodN.producto?.listaDatos.count);
+            //print("nombreima: ", prodN.producto?.imagenString);
+            let ima = UIImageView(image: prod.imagen!);
             cas.elemeto=prodN;
+            //cas.elemeto!.imagen=ima;
+            
             cas.addSubview(prodN);
         }
         
-        actualizaContador();
+        //actualizaContador();
     }
     
     //Método que evalua los valores de los productos y el color de la lonchera
     func actualizaContador(){
-        //print("actua")
+        print("actua")
         valor=0;
         var valor2=0;
         var calorias:Int=0;
@@ -152,14 +160,16 @@ class Lonchera2: UIView {
         salud = true;
         for cas in casillas{
             if(cas.elemeto != nil){
-                //print("ele?: ", cas.elemeto?.producto?.nombre);
+                print("ele?: ", cas.elemeto?.producto?.listaDatos.count);
                 for dato in (cas.elemeto?.producto?.listaDatos)!{
+                    print("dato: ", dato.id);
                     switch dato.id {
                     case 1:
                         calorias += Int(dato.valor);
                         break;
                     case 3:
                         azucar += Int(dato.valor);
+                        print("azucar: ", azucar);
                         break;
                     case 4:
                         proteina += Int(dato.valor);
@@ -181,14 +191,14 @@ class Lonchera2: UIView {
             
         }
         
-        let formateadorPrecio = NSNumberFormatter();
-        formateadorPrecio.numberStyle = .CurrencyStyle;
-        formateadorPrecio.locale = NSLocale(localeIdentifier: "es_CO");
+        let formateadorPrecio = NumberFormatter();
+        formateadorPrecio.numberStyle = .currency;
+        formateadorPrecio.locale = Locale(identifier: "es_CO");
         contador.azucar.text=String(azucar)+" g";
         contador.calorias.text=String(calorias)+" cal";
         contador.proteina.text=String(proteina)+" g";
         if(valor != nil){
-            contador.valor.text=formateadorPrecio.stringFromNumber(valor)!;
+            contador.valor.text=formateadorPrecio.string(from: valor as! NSNumber)!;
         }
         
         cambiaColor(salud);
@@ -204,7 +214,7 @@ class Lonchera2: UIView {
     }
     
     //Método que cambia el color de la lonchera de verde a blanco
-    func cambiaColor(salud: Bool){
+    func cambiaColor(_ salud: Bool){
         if(salud){
             DatosB.cont.poneFondoTot(self, fondoStr: "LoncheraVerde", framePers: nil, identi: "loncheraB", scala: false);
             for cas in casillas{
@@ -264,7 +274,7 @@ class Lonchera2: UIView {
         //let BAOX=(OX+ancho);
         
         let Bancho=(self.frame.width*0.1173);
-        let frame = CGRectMake(OX, OY, Bancho, Bancho);
+        let frame = CGRect(x: OX, y: OY, width: Bancho, height: Bancho);
         botfavo?.frame=frame;
         
         //print("frameF: ",frame);
@@ -277,7 +287,7 @@ class Lonchera2: UIView {
         botfavo?.sendSubviewToBack(backImg);
         */
         DatosB.cont.poneFondoTot(botfavo, fondoStr: "FAVG", framePers: nil, identi: "Favo", scala: true);
-        botfavo?.addTarget(self, action: #selector(Lonchera2.letreroNombre), forControlEvents: .TouchDown);
+        botfavo?.addTarget(self, action: #selector(Lonchera2.letreroNombre), for: .touchDown);
         self.addSubview(botfavo!);
         
     }
@@ -447,11 +457,11 @@ class Lonchera2: UIView {
     }
     
     //Método que puestra el letrero cuando se agrega/quita un afavorita
-    func letreroFavorito(sub: Int){
+    func letreroFavorito(_ sub: Int){
         let ancho = DatosC.contenedor.anchoP*0.8
         let ox = (DatosC.contenedor.anchoP/2)-(ancho/2);
         let oy = (DatosC.contenedor.altoP/2)-(ancho/2);
-        let frameFav = CGRectMake(ox, oy, ancho, ancho);
+        let frameFav = CGRect(x: ox, y: oy, width: ancho, height: ancho);
         let letrero = RespuestaFavorita(frame: frameFav, sub: sub);
         //letrero.backgroundColor=UIColor.blueColor();
         
@@ -462,7 +472,7 @@ class Lonchera2: UIView {
     
     //Método que cierra el letrero del mensaje
     func cierraLetrero(){
-        botfavo.enabled=true;
+        botfavo.isEnabled=true;
         //letrero.removeFromSuperview();
         if(vista != nil){
             vista.removeFromSuperview();
@@ -472,18 +482,18 @@ class Lonchera2: UIView {
     
     //Método que pide el nombre de la lonchera favorita nueva
     func letreroNombre(){
-        botfavo.enabled=false;
+        botfavo.isEnabled=false;
         print("favorita: ", estaLLena());
         if(!favorita){
             if(estaLLena()==true){
                 let ancho = DatosC.contenedor.anchoP*0.8
                 let ox = (DatosC.contenedor.anchoP/2)-(ancho/2);
                 let oy = (DatosC.contenedor.altoP/2)-(ancho/2);
-                let frameFav = CGRectMake(ox, oy, ancho, ancho);
+                let frameFav = CGRect(x: ox, y: oy, width: ancho, height: ancho);
                 vista = LetreroFavorita(frame: frameFav);
                 self.superview?.addSubview(vista);
             }else{
-                botfavo.enabled=true;
+                botfavo.isEnabled=true;
             }
         }else{
             print("elimina");

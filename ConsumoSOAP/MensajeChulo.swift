@@ -17,9 +17,9 @@ class MensajeChulo: UIView {
         let ancho = DatosC.contenedor.anchoP*0.8
         let ox = (DatosC.contenedor.anchoP/2)-(ancho/2);
         let oy = (DatosC.contenedor.altoP/2)-(ancho/2);
-        let frameLet = CGRectMake(ox, oy, ancho, ancho);
+        let frameLet = CGRect(x: ox, y: oy, width: ancho, height: ancho);
         super.init(frame: frameLet);
-        _ = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: #selector(MensajeChulo.cierraVista), userInfo: nil, repeats: false);
+        _ = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(MensajeChulo.cierraVista), userInfo: nil, repeats: false);
         iniciaFondo();
         iniciaImagen();
         iniciaMensaje();
@@ -33,7 +33,7 @@ class MensajeChulo: UIView {
         let altoIma = self.frame.height*0.3;
         let OXima = (self.frame.height/2)-(altoIma/2);
         let OYIma = self.frame.height*0.1;
-        let imagenFrame = CGRectMake(OXima, OYIma, altoIma, altoIma);
+        let imagenFrame = CGRect(x: OXima, y: OYIma, width: altoIma, height: altoIma);
         icono = UIView(frame: imagenFrame);
         DatosB.cont.poneFondoTot(icono, fondoStr: "ChuloVerdeMejor", framePers: nil, identi: nil, scala: true);
         self.addSubview(icono);
@@ -43,14 +43,14 @@ class MensajeChulo: UIView {
         let ancho = self.frame.width*0.6;
         let OX = (self.frame.width/2)-(ancho/2)
         let OY = (icono.frame.height + icono.frame.origin.y);
-        texto = UILabel(frame: CGRectMake(OX, OY, ancho, self.frame.height*0.25));
+        texto = UILabel(frame: CGRect(x: OX, y: OY, width: ancho, height: self.frame.height*0.25));
         texto.text = "¡Agregaste el producto a tu Lonchera!";
         //texto.lineBreakMode=NSLineBreakMode.ByWordWrapping;
         //texto.numberOfLines=2;
         texto.adjustsFontSizeToFitWidth=true;
-        texto.textColor=UIColor.lightGrayColor();
+        texto.textColor=UIColor.lightGray;
         texto.numberOfLines=0;
-        texto.textAlignment=NSTextAlignment.Center;
+        texto.textAlignment=NSTextAlignment.center;
         texto.font=UIFont(name: "SansBeam Head", size: (texto.frame.height/2));
         self.addSubview(texto);
     }

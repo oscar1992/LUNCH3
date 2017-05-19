@@ -32,16 +32,16 @@ class ListCard: NSObject, NSURLConnectionDelegate, UIWebViewDelegate{
         uid = String(DatosD.contenedor.padre.id!);
         email = String(trataEmail(DatosD.contenedor.padre.email!));
         sesionId = "AwXytakRpysZKMW8PoWyB6F9FhYx6W";
-        timeStamp = String(Int(NSDate().timeIntervalSince1970));
+        timeStamp = String(Int(Date().timeIntervalSince1970));
     
     }
     
     //Método que cambia el @ forzado a su equivalente en UTF8 Encoded
-    func trataEmail(email: String)->String{
+    func trataEmail(_ email: String)->String{
         var retorna = email;
         for letra in email.characters{
             if(letra == "@"){
-                retorna.replaceRange(retorna.rangeOfString("@")!, with: "%40");
+                retorna.replaceSubrange(retorna.range(of: "@")!, with: "%40");
             }
             
         }
@@ -51,7 +51,7 @@ class ListCard: NSObject, NSURLConnectionDelegate, UIWebViewDelegate{
     //Método que genera la cadena para ahcer el request del servicio de paymentez
     func lista(){
         let cadenaSHA = "application_code="+aplicationCode+"&uid="+uid+"&"+timeStamp+"&"+sesionId;
-        let datos = cadenaSHA.dataUsingEncoding(NSUTF8StringEncoding);
+        let datos = cadenaSHA.data(using: String.Encoding.utf8);
         print("Pre SHA: ", cadenaSHA);
         envia += "https://ccapi-stg.paymentez.com/api/cc/list?";
         envia += "application_code="+aplicationCode;
@@ -60,10 +60,10 @@ class ListCard: NSObject, NSURLConnectionDelegate, UIWebViewDelegate{
         envia += "&auth_token="+String(sha256(datos!));
         //envia += "&"+timeStamp;
         //envia += "&"+sesionId;
-        let url = NSURL(string: envia);
+        let url = URL(string: envia);
         print("Envia: ", url!);
-        let request = NSURLRequest(URL: url!);
-        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) {(response, data, error) in
+        let request = URLRequest(url: url!);
+        NSURLConnection.sendAsynchronousRequest(request, queue: OperationQueue.main) {(response, data, error) in
             //print(NSString(data: data!, encoding: NSUTF8StringEncoding));
             if(data != nil){
                 print("No nulo");
@@ -75,29 +75,32 @@ class ListCard: NSObject, NSURLConnectionDelegate, UIWebViewDelegate{
     }
     
     //Método que hashea una cadena de texto introducido a travez del encriptado SHA256
-    func sha256(data : NSData) -> String {
-        let res = NSMutableData(length: Int(CC_SHA256_DIGEST_LENGTH))
-        CC_SHA256(data.bytes, CC_LONG(data.length), UnsafeMutablePointer(res!.mutableBytes))
-        return limpia(String(res!));
+    func sha256(_ data : Data) -> String {
+        var res = NSMutableData(length: Int(CC_SHA256_DIGEST_LENGTH))
+        let mutableRaw = UnsafeMutableRawPointer(&res);
+        let pointerOpa = OpaquePointer(mutableRaw);
+        let contextPtr = UnsafeMutablePointer<UInt8>(pointerOpa)
+        CC_SHA256((data as NSData).bytes, CC_LONG(data.count), contextPtr)
+        return limpia(String(describing: res!));
     }
     
     //Método que quita espacios y simbolos del SHA generado
-    func limpia(num: String)->String{
+    func limpia(_ num: String)->String{
         var cambia = num;
         //var pos = [Range<String.Index>]();
         var p = 0;
         for letra in cambia.characters{
             if(letra == " "){
                 //pos.append(cambia.rangeOfString(" ")!);
-                cambia.replaceRange(cambia.rangeOfString(" ")!, with: "");
+                cambia.replaceSubrange(cambia.range(of: " ")!, with: "");
                 //print("Cambia: ", cambia);
             }
             if(letra == "<"){
-                cambia.replaceRange(cambia.rangeOfString("<")!, with: "");
+                cambia.replaceSubrange(cambia.range(of: "<")!, with: "");
                 //print("Cambia: ", cambia);
             }
             if(letra == ">"){
-                cambia.replaceRange(cambia.rangeOfString(">")!, with: "");
+                cambia.replaceSubrange(cambia.range(of: ">")!, with: "");
                 //print("Cambia: ", cambia);
             }
             p += 1;
@@ -106,9 +109,9 @@ class ListCard: NSObject, NSURLConnectionDelegate, UIWebViewDelegate{
     }
     
     //Método que lee los datos del JSON
-    func leeJSON(data: NSData){
+    func leeJSON(_ data: Data){
         do{
-            let json = try NSJSONSerialization.JSONObjectWithData(data, options: []) as! NSArray;
+            let json = try JSONSerialization.jsonObject(with: data, options: []) as! NSArray;
             //print("json: ", json);
             for ele in json{
                 //print(ele);
@@ -178,7 +181,7 @@ class ListCard: NSObject, NSURLConnectionDelegate, UIWebViewDelegate{
             }
         }
         for tarjeta in tarjetas{
-            let frame = CGRectMake(OX, (OY+(alto*P)), ancho, alto);
+            let frame = CGRect(x: OX, y: (OY+(alto*P)), width: ancho, height: alto);
             let tarjetaV = VistaTarjeta(frame: frame, tarjeta: tarjeta);
             tarjetaV.vista = vistaT;
             vistaBase.addSubview(tarjetaV);
@@ -207,8 +210,8 @@ class ListCard: NSObject, NSURLConnectionDelegate, UIWebViewDelegate{
                 }
             }
             for tarjeta in tarjetas{
-                let frame = CGRectMake(0, 0, ancho, alto);
-                let frameB = CGRectMake(OX, (OY+(alto*P)), ancho, alto);
+                let frame = CGRect(x: 0, y: 0, width: ancho, height: alto);
+                let frameB = CGRect(x: OX, y: (OY+(alto*P)), width: ancho, height: alto);
                 let tarjetaV = VistaTarjeta(frame: frame, tarjeta: tarjeta);
                 tarjetaV.elimina.removeFromSuperview();
                 let bot = BotDebita(frame: frameB, vista: tarjetaV);
@@ -235,7 +238,7 @@ class ListCard: NSObject, NSURLConnectionDelegate, UIWebViewDelegate{
         let ancho = vistaBase.frame.width;
         let OX = CGFloat(0);
         let alto = vistaBase.frame.height;
-        let frameWeb = CGRectMake(OX, OY, ancho, alto);
+        let frameWeb = CGRect(x: OX, y: OY, width: ancho, height: alto);
         let add = AddCard();
         if(vistaWeb != nil){
             vistaWeb.removeFromSuperview();
@@ -243,7 +246,7 @@ class ListCard: NSObject, NSURLConnectionDelegate, UIWebViewDelegate{
         vistaWeb = SubVista2(frame: frameWeb, list: self);
         //vistaWeb.delegate=self;
         vistaBase.addSubview(vistaWeb);
-        vistaWeb.loadRequest(add.add());
+        vistaWeb.loadRequest(add.add() as URLRequest);
         
         //for vv in vistaBase.subviews{
             //print("hijo: ", vv)
@@ -260,7 +263,7 @@ class ListCard: NSObject, NSURLConnectionDelegate, UIWebViewDelegate{
         //vistaBase.superview?.removeFromSuperview();
         vistaBase.removeFromSuperview();
         //boton2.superview?.hidden=true;
-        let storage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
+        let storage = HTTPCookieStorage.shared
         for cookie in storage.cookies! {
             storage.deleteCookie(cookie)
         }

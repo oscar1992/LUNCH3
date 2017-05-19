@@ -15,7 +15,7 @@ class VistaMetodos: UIView {
         let alto = DatosC.contenedor.altoP*0.4;
         let OX = (DatosC.contenedor.anchoP/2)-(ancho/2);
         let OY = (DatosC.contenedor.altoP/2)-(alto/2);
-        let frameMens = CGRectMake(OX, OY, ancho, alto);
+        let frameMens = CGRect(x: OX, y: OY, width: ancho, height: alto);
         super.init(frame: frameMens);
         iniciaOpciones(opciones);
         fondo();
@@ -23,14 +23,14 @@ class VistaMetodos: UIView {
         cierraBot();
     }
     
-    func iniciaOpciones(opciones: [String]){
+    func iniciaOpciones(_ opciones: [String]){
         let ancho = self.frame.width;
         let alto = self.frame.height/5;
         let OX = CGFloat(0);
         var p = CGFloat(0);
         for opc in opciones{
             let OY = alto*p+(self.frame.height/2)-((alto*CGFloat(opciones.count))/2);
-            let frameBot = CGRectMake(OX, OY, ancho, alto);
+            let frameBot = CGRect(x: OX, y: OY, width: ancho, height: alto);
             let bot=BotMetodoPago(frame: frameBot, texto: opc);
             self.addSubview(bot);
             p += 1;
@@ -41,13 +41,13 @@ class VistaMetodos: UIView {
         DatosB.cont.poneFondoTot(self, fondoStr: "Base 2", framePers: nil, identi: nil, scala: false);
         let OX = -((DatosC.contenedor.anchoP)-(self.frame.width))/2;
         let OY = -((DatosC.contenedor.altoP)-(self.frame.height))/2;
-        let frameB = CGRectMake(OX, OY, DatosC.contenedor.anchoP, DatosC.contenedor.altoP);
-        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Light);
+        let frameB = CGRect(x: OX, y: OY, width: DatosC.contenedor.anchoP, height: DatosC.contenedor.altoP);
+        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light);
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.frame=frameB;
         //blurEffectView.layer.zPosition=5;
         self.addSubview(blurEffectView);
-        self.sendSubviewToBack(blurEffectView);
+        self.sendSubview(toBack: blurEffectView);
     }
     
     
@@ -56,12 +56,12 @@ class VistaMetodos: UIView {
         let alto = self.frame.height/6;
         let OX = CGFloat(0);
         let OY = CGFloat(0);
-        let frame = CGRectMake(OX, OY, ancho, alto);
+        let frame = CGRect(x: OX, y: OY, width: ancho, height: alto);
         let titulo = UILabel(frame: frame);
         titulo.text="Selecciona tu método de pago:";
         titulo.font=UIFont(name: "SansBeam Head", size: titulo.frame.height);
         titulo.adjustsFontSizeToFitWidth=true;
-        titulo.textAlignment=NSTextAlignment.Center;
+        titulo.textAlignment=NSTextAlignment.center;
         self.addSubview(titulo);
     }
     
@@ -69,10 +69,10 @@ class VistaMetodos: UIView {
         let ancho = self.frame.width*0.1;
         let OX = self.frame.width*0.9;
         let OY = CGFloat(0);
-        let frame = CGRectMake(OX, OY, ancho, ancho);
+        let frame = CGRect(x: OX, y: OY, width: ancho, height: ancho);
         let botcer = UIButton(frame: frame);
         DatosB.cont.poneFondoTot(botcer, fondoStr: "BotonCerrar", framePers: nil, identi: nil, scala: true);
-        botcer.addTarget(self, action: #selector(VistaMetodos.cierra), forControlEvents: .TouchDown);
+        botcer.addTarget(self, action: #selector(VistaMetodos.cierra), for: .touchDown);
         self.addSubview(botcer);
     }
     

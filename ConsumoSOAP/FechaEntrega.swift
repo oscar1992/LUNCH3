@@ -24,42 +24,43 @@ class FechaEntrega: NSObject {
     }
     
     func fechaSig()->String{
-        let calendar = NSCalendar.currentCalendar();
-        let fechaComp = NSDateComponents();
-        let nyear = calendar.components(.Year, fromDate: NSDate());
-        let nmes = calendar.components(.Month, fromDate: NSDate());
-        let nsemana = calendar.components(.WeekOfMonth, fromDate: NSDate());
-        let diasemana = calendar.component(.Weekday, fromDate: NSDate());
-        let hora = calendar.component(.Hour, fromDate: NSDate());
-        _ = calendar.components(.Day, fromDate: NSDate());
+        let calendar = Calendar.current;
+        var fechaComp = DateComponents();
+        let nyear = (calendar as NSCalendar).components(.year, from: Date());
+        let nmes = (calendar as NSCalendar).components(.month, from: Date());
+        let nsemana = (calendar as NSCalendar).components(.weekOfMonth, from: Date());
+        let diasemana = (calendar as NSCalendar).component(.weekday, from: Date());
+        let hora = (calendar as NSCalendar).component(.hour, from: Date());
+        let ndia = (calendar as NSCalendar).component(.day, from: Date());
         fechaComp.year = nyear.year;
         fechaComp.month = nmes.month;
-        fechaComp.weekOfMonth = nsemana.weekOfMonth+1;
+        fechaComp.weekOfMonth = nsemana.weekOfMonth!+1;
         fechaComp.weekday = 1;
+        fechaComp.day = ndia;
         print("Dia Semana: ", diasemana," Hora: ", hora);
         if(diasemana == 7 && hora >= 18){
-            fechaComp.weekOfMonth = nsemana.weekOfMonth+2;
+            fechaComp.weekOfMonth = nsemana.weekOfMonth!+2;
         }
         
-        //print("pre fecha: ", fechaComp.day);
-        let fechaa = calendar.dateFromComponents(fechaComp);
-        //print("pre fecha: ", fechaa);
-        if(fechaComp.day>=23&&fechaComp.day<=31){
-            fechaComp.month += 1;
-            if(fechaComp.month>12){
+        print("pre fecha: ", fechaComp.day);
+        let fechaa = calendar.date(from: fechaComp);
+        print("pre fecha: ", fechaa);
+        if(fechaComp.day!>=23&&fechaComp.day!<=31){
+            fechaComp.month = fechaComp.month! + 1;
+            if(fechaComp.month!>12){
                 fechaComp.month=1;
-                fechaComp.year += 1;
+                fechaComp.year = fechaComp.year! + 1;
             }
         }
-        let fecha = calendar.dateFromComponents(fechaComp);
+        let fecha = calendar.date(from: fechaComp);
         
-        let formateador:NSDateFormatter=NSDateFormatter();
+        let formateador:DateFormatter=DateFormatter();
         
-        formateador.locale = NSLocale.init(localeIdentifier: "es_CO");
+        formateador.locale = Locale.init(identifier: "es_CO");
         formateador.dateFormat="yyyy-MM-dd hh:mm:ss-";
-        var fecha1 = formateador.stringFromDate(fecha!)+"04";
+        var fecha1 = formateador.string(from: fecha!)+"04";
         formateador.dateFormat="EEEE dd 'de' MMMM";
-        fechaMuestra = formateador.stringFromDate(fecha!);
+        fechaMuestra = formateador.string(from: fecha!);
         print("Fecha Siguiente: ", fecha1);
         print("Fecha Siguiente2: ", fechaMuestra);
         return fecha1;

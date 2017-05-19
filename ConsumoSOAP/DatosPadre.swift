@@ -7,6 +7,30 @@
 //
 
 import UIKit
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
 
@@ -42,7 +66,7 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
         iniciaBotonVolver();
         iniciaFondo()
         poliogono();
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(DatosPadre.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil);
+        NotificationCenter.default.addObserver(self, selector: #selector(DatosPadre.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil);
         carrito=DatosB.cont.carrito;
         DatosB.cont.datosPadre=self;
         listaCiudad();
@@ -50,8 +74,8 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
         // Do any additional setup after loading the view.
     }
     
-    func keyboardWillShow(notification: NSNotification) {
-        let frame = (notification.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
+    func keyboardWillShow(_ notification: Notification) {
+        let frame = (notification.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         //print("Teclado: ", frame);
         DatosK.cont.tecladoFrame=frame;
         DatosK.cont.subeVistaCantidad(self.view, cant: 150);
@@ -61,7 +85,7 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
     
     //Método que inicia el fondo de los datops
     func iniciaFondo(){
-        let fondo = CGRectMake(0, laBarra.frame.height, self.view.frame.width, (self.view.frame.height-laBarra.frame.height));
+        let fondo = CGRect(x: 0, y: laBarra.frame.height, width: self.view.frame.width, height: (self.view.frame.height-laBarra.frame.height));
         DatosB.cont.poneFondoTot(self.view, fondoStr: "FondoHome", framePers: fondo, identi: "FondoCar", scala: false);
     }
     
@@ -70,17 +94,17 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
         let ancho = DatosC.contenedor.altoP * 0.0922;
         let ancho2 = ancho/3;
         let centr = (ancho/2)-(ancho2/2);
-        let frameBoton = CGRectMake(0, 0, ancho, ancho);
+        let frameBoton = CGRect(x: 0, y: 0, width: ancho, height: ancho);
         let volver = UIButton(frame: frameBoton);
-        volver.addTarget(self, action: #selector(DatosPadre.vuelve), forControlEvents: .TouchDown);
-        let subFrame = CGRectMake(centr, centr, ancho2, ancho2);
+        volver.addTarget(self, action: #selector(DatosPadre.vuelve), for: .touchDown);
+        let subFrame = CGRect(x: centr, y: centr, width: ancho2, height: ancho2);
         DatosB.cont.poneFondoTot(volver, fondoStr: "Volver", framePers: subFrame, identi: nil, scala: true);
         self.view.addSubview(volver);
     }
     
     //Método que cierra la ventana
     func vuelve(){
-        self.dismissViewControllerAnimated(true, completion: nil);
+        self.dismiss(animated: true, completion: nil);
     }
 
     override func didReceiveMemoryWarning() {
@@ -95,51 +119,51 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
         let OX = (DatosC.contenedor.anchoP/2)-(ancho/2);
         let OY = DatosC.contenedor.altoP*0.15
         ;
-        let frameNomb = CGRectMake(OX, OY, ancho, alto);
+        let frameNomb = CGRect(x: OX, y: OY, width: ancho, height: alto);
         let nom = UILabel(frame: frameNomb);
         nom.text=DatosD.contenedor.padre.nombre;
         nom.font=UIFont(name: "SansBeamBody-Heavy", size: nom.frame.height);
-        nom.textAlignment=NSTextAlignment.Center;
+        nom.textAlignment=NSTextAlignment.center;
         nom.textColor=UIColor.init(red: 0.51, green: 0.77, blue: 0.25, alpha: 1);
         self.view.addSubview(nom);
         let ancho2 = DatosC.contenedor.anchoP*0.8;
         let OX2=(DatosC.contenedor.anchoP/2)-(ancho2/2);
-        let frame2 = CGRectMake(OX2, OY+alto, ancho2, alto);
+        let frame2 = CGRect(x: OX2, y: OY+alto, width: ancho2, height: alto);
         let text = UILabel(frame: frame2);
         text.text="Confírmanos tus datos de entrega:";
-        text.textAlignment=NSTextAlignment.Center;
+        text.textAlignment=NSTextAlignment.center;
         text.adjustsFontSizeToFitWidth=true;
         self.view.addSubview(text);
         iniciaTabDireccion((text.frame.height+text.frame.origin.y));
     }
     
     //Método que inicia la tabla de los datos de la dirreción
-    func iniciaTabDireccion(yini: CGFloat){
+    func iniciaTabDireccion(_ yini: CGFloat){
         let ancho = DatosC.contenedor.anchoP;
         let bordeTxt = (ancho*0.02);
         let alto = DatosC.contenedor.anchoP*0.06;
-        let frameBarra = CGRectMake(0, (yini+borde), ancho, alto);
+        let frameBarra = CGRect(x: 0, y: (yini+borde), width: ancho, height: alto);
         let vista = UIView(frame: frameBarra);
-        let frameText = CGRectMake(bordeTxt, 0, ancho, alto);
+        let frameText = CGRect(x: bordeTxt, y: 0, width: ancho, height: alto);
         let texto = UILabel(frame: frameText);
         texto.text="Dirección";
         texto.font=UIFont(name: "SansBeamBody-Book", size: texto.frame.height/2);
         vista.addSubview(texto);
         vista.backgroundColor=UIColor.init(red: 0.51, green: 0.77, blue: 0.25, alpha: 1);
-        let frameVista2=CGRectMake(0, (frameBarra.origin.y+alto), ancho, alto);
-        let frameVista3=CGRectMake(0, (frameVista2.origin.y+alto), ancho, alto);
-        let frameVista4=CGRectMake(0, (frameVista3.origin.y+alto), ancho*0.5, alto);
-        let frameVista5=CGRectMake(ancho*0.5, (frameVista3.origin.y+alto), ancho*0.5, alto);
+        let frameVista2=CGRect(x: 0, y: (frameBarra.origin.y+alto), width: ancho, height: alto);
+        let frameVista3=CGRect(x: 0, y: (frameVista2.origin.y+alto), width: ancho, height: alto);
+        let frameVista4=CGRect(x: 0, y: (frameVista3.origin.y+alto), width: ancho*0.5, height: alto);
+        let frameVista5=CGRect(x: ancho*0.5, y: (frameVista3.origin.y+alto), width: ancho*0.5, height: alto);
         let vista2 = UIView(frame: frameVista2);
         let vista3 = UIView(frame: frameVista3);
         let vista4 = UIView(frame: frameVista4);
         vista5 = UIButton(frame: frameVista5);
-        vista5.addTarget(self, action: #selector(DatosPadre.muestraCiudad), forControlEvents: .TouchDown);
-        vista2.backgroundColor=UIColor.whiteColor();
-        vista3.backgroundColor=UIColor.whiteColor();
-        vista4.backgroundColor=UIColor.whiteColor();
-        vista5.backgroundColor=UIColor.whiteColor();
-        let frameText2=CGRectMake(bordeTxt, 0, ancho, alto);
+        vista5.addTarget(self, action: #selector(DatosPadre.muestraCiudad), for: .touchDown);
+        vista2.backgroundColor=UIColor.white;
+        vista3.backgroundColor=UIColor.white;
+        vista4.backgroundColor=UIColor.white;
+        vista5.backgroundColor=UIColor.white;
+        let frameText2=CGRect(x: bordeTxt, y: 0, width: ancho, height: alto);
         
         direccion1 = UITextField(frame: frameText2);
         direccion2 = UITextField(frame: frameText2);
@@ -153,10 +177,10 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
         direccion2.text="Edificio / Casa / Apartamento";
         direccion3.text="Barrio";
         direccion4.text="Ciudad v";
-        direccion1.textColor=UIColor.grayColor();
-        direccion2.textColor=UIColor.grayColor();
-        direccion3.textColor=UIColor.grayColor();
-        direccion4.textColor=UIColor.grayColor();
+        direccion1.textColor=UIColor.gray;
+        direccion2.textColor=UIColor.gray;
+        direccion3.textColor=UIColor.gray;
+        direccion4.textColor=UIColor.gray;
         direccion1.delegate=self;
         direccion2.delegate=self;
         direccion3.delegate=self;
@@ -171,40 +195,40 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
     }
     
     func muestraCiudad(){
-        vistaCiudad.hidden=false;
+        vistaCiudad.isHidden=false;
     }
     
     func listaCiudad(){
         print("lista");
         let lista = ["Bogotá"];
-        let frame = CGRectMake(vista5.frame.origin.x, vista5.frame.origin.y+vista5.frame.height, vista5.frame.width, vista5.frame.height*CGFloat(lista.count));
+        let frame = CGRect(x: vista5.frame.origin.x, y: vista5.frame.origin.y+vista5.frame.height, width: vista5.frame.width, height: vista5.frame.height*CGFloat(lista.count));
         vistaCiudad = UIView(frame: frame);
-        vistaCiudad.hidden=true;
+        vistaCiudad.isHidden=true;
         var n = 0;
         for bott in lista{
-            let frameBot = CGRectMake(0, vista5.frame.height*CGFloat(n), frame.width, (frame.height/CGFloat(lista.count))*0.9);
+            let frameBot = CGRect(x: 0, y: vista5.frame.height*CGFloat(n), width: frame.width, height: (frame.height/CGFloat(lista.count))*0.9);
             print("nomb: ", frameBot)
             let bot = UIButton(frame: frameBot);
-            let frameNom = CGRectMake(frame.width*0.2, 0, frame.width, vista5.frame.height);
+            let frameNom = CGRect(x: frame.width*0.2, y: 0, width: frame.width, height: vista5.frame.height);
             let lab = UILabel(frame: frameNom);
-            lab.textColor=UIColor.grayColor();
+            lab.textColor=UIColor.gray;
             lab.text=bott;
             bot.addSubview(lab);
-            bot.backgroundColor=UIColor.whiteColor();
-            bot.addTarget(self, action: #selector(DatosPadre.botCiudad(_:)), forControlEvents: .TouchDown);
+            bot.backgroundColor=UIColor.white;
+            bot.addTarget(self, action: #selector(DatosPadre.botCiudad(_:)), for: .touchDown);
             vistaCiudad.addSubview(bot);
             n += 1;
         }
         
-        vistaCiudad.backgroundColor=UIColor.whiteColor();
+        vistaCiudad.backgroundColor=UIColor.white;
         self.view.addSubview(vistaCiudad);
     }
     
-    func botCiudad(sender: UIButton){
-        vistaCiudad.hidden=true;
+    func botCiudad(_ sender: UIButton){
+        vistaCiudad.isHidden=true;
         for vista in sender.subviews{
             if vista is UILabel{
-                var lab = vista as! UILabel;
+                let lab = vista as! UILabel;
                 print("qq: ", lab.text);
                 direccion4.text=lab.text;
             }
@@ -213,22 +237,22 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
     }
     
     //Método que inicia la tabla de la direccion
-    func iniciaTabTelefono(yini: CGFloat){
+    func iniciaTabTelefono(_ yini: CGFloat){
         let ancho = DatosC.contenedor.anchoP;
         let bordeTxt = (ancho*0.02);
         let alto = DatosC.contenedor.anchoP*0.06;
-        let frameBarra = CGRectMake(0, (yini+borde), ancho, alto);
+        let frameBarra = CGRect(x: 0, y: (yini+borde), width: ancho, height: alto);
         let vista = UIView(frame: frameBarra);
-        let frameText = CGRectMake(bordeTxt, 0, ancho, alto);
+        let frameText = CGRect(x: bordeTxt, y: 0, width: ancho, height: alto);
         let texto = UILabel(frame: frameText);
         texto.text="Teléfono / Celular";
         texto.font=UIFont(name: "SansBeamBody-Book", size: texto.frame.height/2);
         vista.addSubview(texto);
         vista.backgroundColor=UIColor.init(red: 0.51, green: 0.77, blue: 0.25, alpha: 1);
-        let frameVista2=CGRectMake(0, (frameBarra.origin.y+alto), ancho, alto);
+        let frameVista2=CGRect(x: 0, y: (frameBarra.origin.y+alto), width: ancho, height: alto);
         let vista2 = UIView(frame: frameVista2);
-        vista2.backgroundColor=UIColor.whiteColor();
-        let frameText2=CGRectMake(bordeTxt, 0, ancho, alto);
+        vista2.backgroundColor=UIColor.white;
+        let frameText2=CGRect(x: bordeTxt, y: 0, width: ancho, height: alto);
         telefono = UITextField(frame: frameText2);
         vista2.addSubview(telefono);
         telefono.text=DatosD.contenedor.padre.telefono;
@@ -238,24 +262,24 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
     }
     
     //Método que inicia la tabla de la fecha de netrega
-    func iniciaTabFechaEntrega(yini: CGFloat){
+    func iniciaTabFechaEntrega(_ yini: CGFloat){
         let ancho = DatosC.contenedor.anchoP;
         let bordeTxt = (ancho*0.02);
         let alto = DatosC.contenedor.anchoP*0.06;
-        let frameBarra = CGRectMake(0, (yini+borde), ancho, alto);
+        let frameBarra = CGRect(x: 0, y: (yini+borde), width: ancho, height: alto);
         let vista = UIView(frame: frameBarra);
-        let frameText = CGRectMake(bordeTxt, 0, ancho, alto);
+        let frameText = CGRect(x: bordeTxt, y: 0, width: ancho, height: alto);
         let texto = UILabel(frame: frameText);
         texto.text="Fecha de entrega";
         texto.font=UIFont(name: "SansBeamBody-Book", size: texto.frame.height/2);
         vista.addSubview(texto);
         vista.backgroundColor=UIColor.init(red: 0.51, green: 0.77, blue: 0.25, alpha: 1);
-        let frameVista2=CGRectMake(0, (frameBarra.origin.y+alto), ancho, alto);
+        let frameVista2=CGRect(x: 0, y: (frameBarra.origin.y+alto), width: ancho, height: alto);
         let vista2 = UIButton(frame: frameVista2);
 
-        vista2.addTarget(self, action: #selector(DatosPadre.listaDesplegable1(_:)), forControlEvents: .TouchDown);
-        vista2.backgroundColor=UIColor.whiteColor();
-        let frameText2=CGRectMake(bordeTxt, 0, ancho, alto);
+        vista2.addTarget(self, action: #selector(DatosPadre.listaDesplegable1(_:)), for: .touchDown);
+        vista2.backgroundColor=UIColor.white;
+        let frameText2=CGRect(x: bordeTxt, y: 0, width: ancho, height: alto);
         self.texto = UILabel(frame: frameText2);
         self.texto.text="Selecciona la Fecha";
         vista2.addSubview(self.texto);
@@ -266,23 +290,23 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
     }
     
     //Método que inicia la tabla de la fecha de netrega
-    func iniciaTabHoraEntrega(yini: CGFloat){
+    func iniciaTabHoraEntrega(_ yini: CGFloat){
         let ancho = DatosC.contenedor.anchoP;
         let bordeTxt = (ancho*0.02);
         let alto = DatosC.contenedor.anchoP*0.06;
-        let frameBarra = CGRectMake(0, (yini+borde), ancho, alto);
+        let frameBarra = CGRect(x: 0, y: (yini+borde), width: ancho, height: alto);
         let vista = UIView(frame: frameBarra);
-        let frameText = CGRectMake(bordeTxt, 0, ancho, alto);
+        let frameText = CGRect(x: bordeTxt, y: 0, width: ancho, height: alto);
         let texto = UILabel(frame: frameText);
         texto.text="Hora de entrega";
         texto.font=UIFont(name: "SansBeamBody-Book", size: texto.frame.height/2);
         vista.addSubview(texto);
         vista.backgroundColor=UIColor.init(red: 0.51, green: 0.77, blue: 0.25, alpha: 1);
-        let frameVista2=CGRectMake(0, (frameBarra.origin.y+alto), ancho, alto);
+        let frameVista2=CGRect(x: 0, y: (frameBarra.origin.y+alto), width: ancho, height: alto);
         let vista2 = UIButton(frame: frameVista2);
         //vista2.addTarget(self, action: #selector(DatosPadre.listaDesplegable2(_:)), forControlEvents: .TouchDown);
         vista2.backgroundColor=UIColor.init(red: 0.51, green: 0.77, blue: 0.25, alpha: 1);
-        let frameText2=CGRectMake(bordeTxt, 0, ancho, alto);
+        let frameText2=CGRect(x: bordeTxt, y: 0, width: ancho, height: alto);
         self.texto2 = UILabel(frame: frameText2);
         vista2.addSubview(self.texto2);
         self.texto2.text="Te entregaremos el pedido durante el día";
@@ -293,23 +317,23 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
     }
     
     //Método que inicia la tabla de la fecha de netrega
-    func iniciaTabMetodo(yini: CGFloat){
+    func iniciaTabMetodo(_ yini: CGFloat){
         let ancho = DatosC.contenedor.anchoP;
         let bordeTxt = (ancho*0.02);
         let alto = DatosC.contenedor.anchoP*0.06;
-        let frameBarra = CGRectMake(0, (yini+borde), ancho, alto);
+        let frameBarra = CGRect(x: 0, y: (yini+borde), width: ancho, height: alto);
         let vista = UIView(frame: frameBarra);
-        let frameText = CGRectMake(bordeTxt, 0, ancho, alto);
+        let frameText = CGRect(x: bordeTxt, y: 0, width: ancho, height: alto);
         let texto = UILabel(frame: frameText);
         texto.text="Forma de pago";
         texto.font=UIFont(name: "SansBeamBody-Book", size: texto.frame.height/2);
         vista.addSubview(texto);
         vista.backgroundColor=UIColor.init(red: 0.51, green: 0.77, blue: 0.25, alpha: 1);
-        let frameVista2=CGRectMake(0, (frameBarra.origin.y+alto), ancho, alto);
+        let frameVista2=CGRect(x: 0, y: (frameBarra.origin.y+alto), width: ancho, height: alto);
         let vista2 = UIButton(frame: frameVista2);
-        vista2.backgroundColor=UIColor.whiteColor();
-        vista2.addTarget(self, action: #selector(DatosPadre.iniciaListaDesplegableMetodo(_:)), forControlEvents: .TouchDown);
-        let frameText2=CGRectMake(bordeTxt, 0, ancho, alto);
+        vista2.backgroundColor=UIColor.white;
+        vista2.addTarget(self, action: #selector(DatosPadre.iniciaListaDesplegableMetodo(_:)), for: .touchDown);
+        let frameText2=CGRect(x: bordeTxt, y: 0, width: ancho, height: alto);
         metodo = UILabel(frame: frameText2);
         vista2.addSubview(metodo);
         metodo.text="Selecciona tu forma de pago";
@@ -318,7 +342,7 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
         iniciabotonPedido(vista2.frame.origin.y+vista2.frame.height);
     }
     
-    func iniciaListaDesplegableMetodo(sender: UIButton){
+    func iniciaListaDesplegableMetodo(_ sender: UIButton){
         bloqueador();
         let Datos = ["Crédito"];
         let despliega = VistaMetodos(opciones: Datos);
@@ -329,19 +353,19 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
     
     
     //Método que inicia el boton del pedido
-    func iniciabotonPedido(yini: CGFloat){
+    func iniciabotonPedido(_ yini: CGFloat){
         let ancho = DatosC.contenedor.anchoP*0.6;
         let alto = DatosC.contenedor.anchoP*0.1;
         let OX = (DatosC.contenedor.anchoP/2)-(ancho/2);
-        let frameBarra = CGRectMake(OX, (yini+borde), ancho, alto);
+        let frameBarra = CGRect(x: OX, y: (yini+borde), width: ancho, height: alto);
         boton = UIButton(frame: frameBarra);
         DatosB.cont.poneFondoTot(boton, fondoStr: "Botón Hacer pedido", framePers: nil, identi: nil, scala: true);
-        boton.addTarget(self, action: #selector(DatosPadre.valida), forControlEvents: .TouchDown);
+        boton.addTarget(self, action: #selector(DatosPadre.valida), for: .touchDown);
         self.view.addSubview(boton);
         
     }
    
-    func listaDesplegable1(vistai: UIView){
+    func listaDesplegable1(_ vistai: UIView){
         bloqueador();
             print("Vista");
             var opc = [(String, String, Int)]();
@@ -370,7 +394,7 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
         */
     }
     
-    func listaDesplegable2(vistai: UIView){
+    func listaDesplegable2(_ vistai: UIView){
         
         print("Vista");
         if(idFecha != nil){
@@ -420,15 +444,15 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
         }
     
     //Método que oculta la barra en este viewcontroller
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden : Bool {
         return true
     }
     
-    func textFieldDidBeginEditing(textField: UITextField) {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
         textField.text = "";
     }
     
-    func textFieldDidEndEditing(textField: UITextField){
+    func textFieldDidEndEditing(_ textField: UITextField){
         print("oooo");
         if(textField.text != ""&&tieneNumeros(textField.text!)){
             //let cons = ConsultaD();
@@ -441,12 +465,12 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
         
     }
     
-    func iniciaMensaje(direcciones: [Direcciones]){
+    func iniciaMensaje(_ direcciones: [Direcciones]){
         let ancho = self.view.frame.width*0.8;
         let alto = self.view.frame.height*0.4;
         let OX = (self.view.frame.width/2)-(ancho/2);
         let OY = (self.view.frame.height/2)-(alto/2);
-        let frameMens = CGRectMake(OX, OY, ancho, alto);
+        let frameMens = CGRect(x: OX, y: OY, width: ancho, height: alto);
         vistaDir = VistaDirecciones(frame: frameMens, direc: direcciones);
         self.view.addSubview(vistaDir);
     }
@@ -543,12 +567,12 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
         }
     }
     
-    func tieneNumeros(texto: String)->Bool{
+    func tieneNumeros(_ texto: String)->Bool{
         var pasa = true;
         var p = 0;
         var tiene=false;
         while (pasa) {
-            let indice = texto.startIndex.advancedBy(p);
+            let indice = texto.characters.index(texto.startIndex, offsetBy: p);
             do{
                 let char = String(texto[indice]);
                 let num = try Int(char);
@@ -568,12 +592,12 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
         return tiene;
     }
     
-    func tieneLetras(texto: String)->Bool{
+    func tieneLetras(_ texto: String)->Bool{
         var pasa = true;
         var p = 0;
         var tiene=true;
         while (pasa) {
-            let indice = texto.startIndex.advancedBy(p);
+            let indice = texto.characters.index(texto.startIndex, offsetBy: p);
             do{
                 let char = String(texto[indice]);
                 let num = try (Int(char));
@@ -624,7 +648,7 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
             aprobado = true;
         }
         subeP.subePedido(DatosD.contenedor.padre, fechaPedido: fechaActual(), fechaEntrega: fecha, horaEntrega: hora, valor: valor(), cantidad: cant(), metodo: metodoV, aprobado: aprobado);
-        boton.enabled=false;
+        boton.isEnabled=false;
     }
     
     func muestraMensajeExito(){
@@ -637,19 +661,19 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
     
     func cierraPadre(){
         
-        self.dismissViewControllerAnimated(true, completion: nil);
-        carrito.dismissViewControllerAnimated(false, completion: nil);
+        self.dismiss(animated: true, completion: nil);
+        carrito.dismiss(animated: false, completion: nil);
         DatosB.cont.listaLoncheras=[(Lonchera2, Int)]();
         DatosB.cont.loncheras=[Lonchera2]();
         DatosB.cont.home2.botonCarrito.cant.text="0";
     }
     
     func fechaActual()->String{
-        let date = NSDate();
-        let formateador:NSDateFormatter=NSDateFormatter();
-        formateador.locale = NSLocale.init(localeIdentifier: "es_CO");
+        let date = Date();
+        let formateador:DateFormatter=DateFormatter();
+        formateador.locale = Locale.init(identifier: "es_CO");
         formateador.dateFormat="yyyy-MM-dd hh:mm:ss-";
-        return  formateador.stringFromDate(date)+"04";
+        return  formateador.string(from: date)+"04";
     }
     
     func cant()->Int{
@@ -674,10 +698,10 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
     func bloqueador(){
         let ancho = self.view.frame.width;
         let alto = self.view.frame.height;
-        let frameB = CGRectMake(0, 0, ancho, alto);
+        let frameB = CGRect(x: 0, y: 0, width: ancho, height: alto);
         bloq = UIView(frame: frameB);
         self.view.addSubview(bloq);
-        bloq.backgroundColor=UIColor.clearColor();
+        bloq.backgroundColor=UIColor.clear;
     }
     
     func desbloqueador(){

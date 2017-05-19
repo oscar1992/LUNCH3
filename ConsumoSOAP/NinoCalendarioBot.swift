@@ -9,7 +9,7 @@
 import UIKit
 
 class NinoCalendarioBot: UIButton {
-    
+    /*
     var ninoInt: BotonNino?;
     var id: Int!;
     var activo : Bool = false;
@@ -18,7 +18,7 @@ class NinoCalendarioBot: UIButton {
     
     init(frame: CGRect, idNIno: Ninos, primera: Bool){
         super.init(frame: frame);
-        self.addTarget(self, action: #selector(NinoCalendarioBot.activa(_:)),forControlEvents: .TouchDown);
+        self.addTarget(self, action: #selector(NinoCalendarioBot.activa(_:)),for: .touchDown);
         self.id = idNIno.id;
         //print("nino:", idNIno)
         if(primera){
@@ -36,7 +36,7 @@ class NinoCalendarioBot: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setID(iid: Int){
+    func setID(_ iid: Int){
         //print("Setea: ", iid);
         self.id=iid;
     }
@@ -51,7 +51,7 @@ class NinoCalendarioBot: UIButton {
     
     
     // Método que se llama al presionar un apestaña, la cual activa la actual y desactiva las demás
-    func activa(sender: AnyObject){
+    func activa(_ sender: AnyObject){
         let ninos = (self.superview as! CalendarioNinos).ninos;
         for nino in ninos{
             //print("ninos: ", self.id, " nino.id", nino.id);
@@ -66,14 +66,14 @@ class NinoCalendarioBot: UIButton {
                 //nino.Ano?.calcuaMes((nino.Ano?.contentOffset.y)!);
                 //self.Ano!.calcuaMes(self.Ano!.contentOffset.y);
                 //nino.Ano.hidden = false;
-                self.Ano!.hidden = false;
+                self.Ano!.isHidden = false;
             }else{
                 //print("no");
                 nino.activo = false;
                 //self.activo = false;
                 //nino.backgroundColor = UIColor.lightGrayColor();
                 Fondo(false, quien: nino);
-                nino.Ano!.hidden = true;
+                nino.Ano!.isHidden = true;
                 //self.Ano.hidden = true;
             }
             
@@ -81,7 +81,7 @@ class NinoCalendarioBot: UIButton {
     }
     
     //Método que cambia el fondo de las pestañas de los niños del calendario
-    func Fondo(activo : Bool, quien: UIView){
+    func Fondo(_ activo : Bool, quien: UIView){
         for vista in quien.subviews{
             if vista is UIImageView{
                 vista.removeFromSuperview();
@@ -93,22 +93,22 @@ class NinoCalendarioBot: UIButton {
         }else{
             img = UIImage(named: "Pestana2");
         }
-        let frameBack = CGRectMake(0, 0, self.frame.width, self.frame.height);
+        let frameBack = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height);
         //print("frame", activo);
         let backImg = UIImageView(frame: frameBack);
         backImg.image=img;
         quien.addSubview(backImg);
-        quien.sendSubviewToBack(backImg);
+        quien.sendSubview(toBack: backImg);
     }
     
     //Método que inicia el scroll con los meses adentro
-    func iniciaScroll(nino: Ninos){
+    func iniciaScroll(_ nino: Ninos){
         
         let ancho = DatosC.contenedor.anchoP*0.89;
         let alto = DatosC.contenedor.altoP*0.54;
         let OX = DatosC.contenedor.anchoP*0.053;
         let OY = DatosC.contenedor.altoP*0.22;
-        let frameScroll = CGRectMake(OX, OY, ancho, alto);
+        let frameScroll = CGRect(x: OX, y: OY, width: ancho, height: alto);
         //print("reinicia: ", Ano);
         //print("tama: ", DatosD.contenedor.calendario.pestañasNinos!.ninos.count);
         for nino in (DatosD.contenedor.calendario.pestañasNinos!.ninos){
@@ -132,5 +132,5 @@ class NinoCalendarioBot: UIButton {
         
         
     }
-
+*/
 }

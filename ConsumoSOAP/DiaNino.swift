@@ -19,16 +19,16 @@ class DiaNino: UIView {
     
     override required init(frame: CGRect) {
         super.init(frame: frame);
-        self.backgroundColor=UIColor.blueColor();
+        self.backgroundColor=UIColor.blue;
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func inicia(framePadre: CGRect)->Int{
+    func inicia(_ framePadre: CGRect)->Int{
         
-        Fecha=UILabel(frame : CGRectMake(25, 0, 200, 30));
+        Fecha=UILabel(frame : CGRect(x: 25, y: 0, width: 200, height: 30));
         Fecha?.text=lonchera?.fechaVisible?.text;
         self.addSubview(Fecha!);
         var p = 0;
@@ -38,10 +38,10 @@ class DiaNino: UIView {
         for ele in (lonchera?.subVista?.casillas)!{
             if(ele.elemeto?.producto != nil){
                 //print("ele: ", ele.elemeto?.producto?.nombre);
-                let vproducto=UIView(frame: CGRectMake(0, ((alto+espaciado)*CGFloat(p))+borde, framePadre.width, alto));
-                    vproducto.backgroundColor=UIColor.lightGrayColor();
-                let nombre = UILabel(frame: CGRectMake(0, 0, vproducto.frame.width/2, vproducto.frame.height));
-                let precio = UILabel(frame: CGRectMake(vproducto.frame.width/2, 0, vproducto.frame.width/2, vproducto.frame.height));
+                let vproducto=UIView(frame: CGRect(x: 0, y: ((alto+espaciado)*CGFloat(p))+borde, width: framePadre.width, height: alto));
+                    vproducto.backgroundColor=UIColor.lightGray;
+                let nombre = UILabel(frame: CGRect(x: 0, y: 0, width: vproducto.frame.width/2, height: vproducto.frame.height));
+                let precio = UILabel(frame: CGRect(x: vproducto.frame.width/2, y: 0, width: vproducto.frame.width/2, height: vproducto.frame.height));
                 nombre.text=ele.elemeto?.producto?.nombre;
                 precio.text=String(ele.elemeto!.producto!.precio);
                 vproducto.addSubview(nombre);

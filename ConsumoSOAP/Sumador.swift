@@ -26,11 +26,11 @@ class Sumador: UIView {
         let ancho1 = DatosC.contenedor.anchoP*0.5;
         let ancho2 = DatosC.contenedor.anchoP*0.3;
         let alto = DatosC.contenedor.altoP*0.07;
-        let frame1 = CGRectMake(borde, (borde), ancho1, alto);
-        let frame2 = CGRectMake(borde, (alto), ancho1, alto);
+        let frame1 = CGRect(x: borde, y: (borde), width: ancho1, height: alto);
+        let frame2 = CGRect(x: borde, y: (alto), width: ancho1, height: alto);
         let OX1 = self.frame.width - (ancho2+borde);
-        let frame3 = CGRectMake(OX1, (borde), ancho2, alto);
-        let frame4 = CGRectMake(OX1, (alto), ancho2, alto);
+        let frame3 = CGRect(x: OX1, y: (borde), width: ancho2, height: alto);
+        let frame4 = CGRect(x: OX1, y: (alto), width: ancho2, height: alto);
         let msg1 = UILabel(frame: frame1);
         labelPedido = UILabel(frame: frame3);
         let msg2 = UILabel(frame: frame2);
@@ -40,10 +40,10 @@ class Sumador: UIView {
         msg2.font=UIFont(name: "Gotham Bold", size: msg2.frame.height*0.4);
         labelPrecio.font=UIFont(name: "Gotham Bold", size: msg2.frame.height*0.4);
         labelPedido.font=UIFont(name: "Gotham Bold", size: msg2.frame.height*0.4);
-        labelPrecio.textAlignment=NSTextAlignment.Right;
-        labelPedido.textAlignment=NSTextAlignment.Right;
-        msg1.textAlignment=NSTextAlignment.Left;
-        msg2.textAlignment=NSTextAlignment.Left;
+        labelPrecio.textAlignment=NSTextAlignment.right;
+        labelPedido.textAlignment=NSTextAlignment.right;
+        msg1.textAlignment=NSTextAlignment.left;
+        msg2.textAlignment=NSTextAlignment.left;
         msg2.text = "Valor Total";
         msg1.textColor=UIColor.init(red: 0, green: 0.5, blue: 0.15, alpha: 1);
         msg2.textColor=UIColor.init(red: 0, green: 0.5, blue: 0.15, alpha: 1);
@@ -54,12 +54,14 @@ class Sumador: UIView {
     }
     
     //Método que cambia los valores del las etiquetas
-    func actuaPrecios(precTot: Int, envio: Int){
-        let formateadorPrecio = NSNumberFormatter();
-        formateadorPrecio.numberStyle = .CurrencyStyle;
-        formateadorPrecio.locale = NSLocale(localeIdentifier: "es_CO");
-        labelPedido.text=formateadorPrecio.stringFromNumber(envio)!;
-        labelPrecio.text=formateadorPrecio.stringFromNumber(precTot)!;
+    func actuaPrecios(_ precTot: Int, envio: Int){
+        let formateadorPrecio = NumberFormatter();
+        formateadorPrecio.numberStyle = .currency;
+        formateadorPrecio.locale = Locale(identifier: "es_CO");
+        
+        labelPedido.text=formateadorPrecio.string(from: NSNumber(value: envio));
+        //labelPedido.text=formateadorPrecio.string(from: NSNumber((envio)))!;
+        labelPrecio.text=formateadorPrecio.string(from: NSNumber(value: precTot))!;
     }
     
     required init?(coder aDecoder: NSCoder) {

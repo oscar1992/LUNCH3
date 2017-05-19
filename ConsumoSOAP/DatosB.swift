@@ -63,7 +63,7 @@ class DatosB: NSObject {
     }
     
     //Método que pone el fondo de TODO!
-    func poneFondoTot(vista: UIView, fondoStr: String, framePers: CGRect?, identi: String?, scala: Bool){
+    func poneFondoTot(_ vista: UIView, fondoStr: String, framePers: CGRect?, identi: String?, scala: Bool){
         //print("PoneFondo: ", fondoStr);
         
         if(identi != nil){
@@ -78,7 +78,7 @@ class DatosB: NSObject {
         }
         var frameFondo:CGRect!;
         if(framePers == nil){
-            frameFondo = CGRectMake(0, 0, vista.frame.width, vista.frame.height);
+            frameFondo = CGRect(x: 0, y: 0, width: vista.frame.width, height: vista.frame.height);
         }else{
             frameFondo = framePers;
         }
@@ -86,7 +86,7 @@ class DatosB: NSObject {
         let backImg=UIImageView(frame: frameFondo);
         
         if(scala){
-            backImg.contentMode=UIViewContentMode.ScaleAspectFit;
+            backImg.contentMode=UIViewContentMode.scaleAspectFit;
         }
         
         backImg.image=img;
@@ -95,11 +95,11 @@ class DatosB: NSObject {
             backImg.accessibilityIdentifier=identi;
         }
         vista.addSubview(backImg);
-        vista.sendSubviewToBack(backImg);
+        vista.sendSubview(toBack: backImg);
     }
     
     //Método que agrega una lonchera y evalua
-    func agregaLonchera(lonc: Lonchera2){
+    func agregaLonchera(_ lonc: Lonchera2){
         let nlon = Lonchera2(frame: lonc.frame);
         nlon.nombr=lonc.nombr;
 
@@ -167,7 +167,7 @@ class DatosB: NSObject {
     }
     
     //Método que cuenta las casillas llenas
-    func casillasLlenas(casillas: [Casilla])->Int{
+    func casillasLlenas(_ casillas: [Casilla])->Int{
         var can = 0;
         for cas in casillas{
             if(cas.elemeto != nil){
@@ -178,7 +178,7 @@ class DatosB: NSObject {
     }
     
     //Método que evalua si las loncheras tienen los mismos productos
-    func mismosProductos(lonc1: Lonchera2, lonc2: Lonchera2)-> Bool{
+    func mismosProductos(_ lonc1: Lonchera2, lonc2: Lonchera2)-> Bool{
         if (casillasLlenas(lonc1.casillas)==casillasLlenas(lonc2.casillas)){
             var l1 = [Producto]();
             var l2 = [Producto]();
@@ -200,7 +200,7 @@ class DatosB: NSObject {
     }
     
     //Método que evalua si las listas contiene los mismos productos en las mismas cantidades
-    func comparaListaProductos(lista1 :[Producto], lista2: [Producto])-> Bool{
+    func comparaListaProductos(_ lista1 :[Producto], lista2: [Producto])-> Bool{
         var prodCants = [(Producto, Int)]();
         for prod1 in lista1{
             if(prodCants.isEmpty){
@@ -270,7 +270,7 @@ class DatosB: NSObject {
     }
     
     //Método que transfiere de una lista plana a una lista con propiedades
-    func conciliador(lista: [Producto])->NSArray{
+    func conciliador(_ lista: [Producto])->NSArray{
         let array = NSArray();
         for prod in lista{
             array.setValue(prod, forKey: String(prod.id));
@@ -279,11 +279,11 @@ class DatosB: NSObject {
     }
     
     //Método que permite guardar una lista de datos en el dispositivo
-    func guardaLista(lista: [Producto], nombre: String)->Bool{
+    func guardaLista(_ lista: [Producto], nombre: String)->Bool{
         if(!nombre.isEmpty){
-            let defaults = NSUserDefaults.standardUserDefaults();
-            let datosManejables = NSKeyedArchiver.archivedDataWithRootObject(conciliador(lista));
-            defaults.setObject(datosManejables, forKey: "Productos");
+            let defaults = UserDefaults.standard;
+            let datosManejables = NSKeyedArchiver.archivedData(withRootObject: conciliador(lista));
+            defaults.set(datosManejables, forKey: "Productos");
             defaults.synchronize()
             return true;
         }else{
@@ -292,9 +292,9 @@ class DatosB: NSObject {
     }
     
     //Método que permite recuperar una lista del dispositivo
-    func recuperaLista(nombre: String)->AnyObject?{
+    func recuperaLista(_ nombre: String)->AnyObject?{
         if(!nombre.isEmpty){
-            return NSUserDefaults.standardUserDefaults().objectForKey(nombre);
+            return UserDefaults.standard.object(forKey: nombre) as AnyObject;
         }else{
             return nil;
         }

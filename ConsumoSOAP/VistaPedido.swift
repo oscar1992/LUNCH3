@@ -30,7 +30,7 @@ class VistaPedido: UIView {
         let OX = CGFloat(ancho*0.05);
         for n in 0...5{
             let OY = alto * CGFloat(n);
-            let frame1 = CGRectMake(OX, OY, ancho, alto);
+            let frame1 = CGRect(x: OX, y: OY, width: ancho, height: alto);
             switch n {
             case 0:
                 parLabels(frame1, text1: "Pedido#:", text2: String(pedido.id!));
@@ -57,13 +57,13 @@ class VistaPedido: UIView {
         }
     }
     
-    func parLabels(frame1 : CGRect, text1: String, text2: String){
-        let frame2 = CGRectMake(frame1.width, frame1.origin.y, frame1.width, frame1.height);
+    func parLabels(_ frame1 : CGRect, text1: String, text2: String){
+        let frame2 = CGRect(x: frame1.width, y: frame1.origin.y, width: frame1.width, height: frame1.height);
         let lab1 = UILabel(frame: frame1);
         let lab2 = UILabel(frame: frame2);
         lab1.text=text1;
         lab2.text=text2;
-        lab2.textAlignment=NSTextAlignment.Left;
+        lab2.textAlignment=NSTextAlignment.left;
         lab1.font=UIFont(name: "Gotham Bold", size: frame1.height/2);
         lab2.font=UIFont(name: "SansBeam Head", size: frame1.height/2);
         self.addSubview(lab1);
@@ -74,11 +74,11 @@ class VistaPedido: UIView {
         let ancho = self.frame.width*0.1;
         let OX = self.frame.width - (ancho+(self.frame.width*0.05));
         let OY = self.frame.height*0.02;
-        let frameBot = CGRectMake(OX, OY, ancho, ancho);
+        let frameBot = CGRect(x: OX, y: OY, width: ancho, height: ancho);
         let botEditar = UIButton(frame: frameBot);
         //self.addSubview(botEditar);
         DatosB.cont.poneFondoTot(botEditar, fondoStr: "BotonCerrar", framePers: nil, identi: nil, scala: true);
-        botEditar.addTarget(self, action: #selector(VistaPedido.cancela), forControlEvents: .TouchDown);
+        botEditar.addTarget(self, action: #selector(VistaPedido.cancela), for: .touchDown);
     }
     
     func cancela(){
@@ -90,15 +90,15 @@ class VistaPedido: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func formateadorFecha(fechai: String)->String{
-        let formateador:NSDateFormatter=NSDateFormatter();
-        formateador.locale = NSLocale.init(localeIdentifier: "es_CO");
+    func formateadorFecha(_ fechai: String)->String{
+        let formateador:DateFormatter=DateFormatter();
+        formateador.locale = Locale.init(identifier: "es_CO");
         formateador.dateFormat="yyyy-MM-dd hh:mm:ss";
         print("fecha i: ", fechai);
-        let fechaN = formateador.dateFromString(fechai);
+        let fechaN = formateador.date(from: fechai);
         print("fecha n: ", fechaN);
         formateador.dateFormat="EEEE dd 'de' MMMM";
-        return formateador.stringFromDate(fechaN!);
+        return formateador.string(from: fechaN!);
     }
 
 }

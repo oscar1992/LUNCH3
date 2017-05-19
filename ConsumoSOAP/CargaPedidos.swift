@@ -8,17 +8,17 @@
 
 import UIKit
 
-class CargaPedidos: NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
-    var resp: NSData! = nil
+class CargaPedidos: NSObject, NSURLConnectionDelegate, XMLParserDelegate{
+    var resp: Data! = nil
     var estado:NSMutableString!
-    var parser=NSXMLParser()
+    var parser=XMLParser()
     var eeleDiccio=NSMutableDictionary()
     var element=NSString();
     var padre: Padre!;
     var pedidosN=[Pedido]();
     var pedidosE=[Pedido]();
     
-    func cargaPedidos(padre: Padre){
+    func cargaPedidos(_ padre: Padre){
         self.padre=padre;
         var mensajeEnviado:String = "<soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/' xmlns:enp='http://enpoint.lunch.com.co/'><soapenv:Header/><soapenv:Body><enp:pedidosPorPadre>";
         
@@ -28,12 +28,12 @@ class CargaPedidos: NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
         
         let is_URL: String = "http://93.188.163.97:8080/Lunch2/clienteEndpoint"
         
-        let lobj_Request = NSMutableURLRequest(URL: NSURL(string: is_URL)!)
-        let session = NSURLSession.sharedSession()
+        let lobj_Request = NSMutableURLRequest(url: URL(string: is_URL)!)
+        let session = URLSession.shared
         let _: NSError?
         
-        lobj_Request.HTTPMethod = "POST"
-        lobj_Request.HTTPBody = mensajeEnviado.dataUsingEncoding(NSUTF8StringEncoding)
+        lobj_Request.httpMethod = "POST"
+        lobj_Request.httpBody = mensajeEnviado.data(using: String.Encoding.utf8)
         lobj_Request.addValue("www.lunch.com", forHTTPHeaderField: "Host")
         lobj_Request.addValue("text/xml; charset=utf-8", forHTTPHeaderField: "Content-Type")
         lobj_Request.addValue(String(mensajeEnviado.characters.count), forHTTPHeaderField: "Content-Length")
@@ -42,22 +42,22 @@ class CargaPedidos: NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
         
         //print("mensg: ", mensajeEnviado);
         
-        let task = session.dataTaskWithRequest(lobj_Request, completionHandler: {data, response, error -> Void in
+        let task = session.dataTask(with: lobj_Request as URLRequest, completionHandler: {data, response, error -> Void in
             //print("Response: \(response)")
-            let strData = NSString(data: data!, encoding: NSUTF8StringEncoding)
-            self.resp=strData?.dataUsingEncoding(NSUTF8StringEncoding)
+            let strData = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
+            self.resp=strData?.data(using: String.Encoding.utf8.rawValue)
             
             //print("Body: \(strData)")
             
             if error != nil
             {
-                print("Error: " + error!.description)
+                print("Error: " , error!)
             }
             //print(self.resp)
-            self.parser=NSXMLParser(data: self.resp)
+            self.parser=XMLParser(data: self.resp)
             self.parser.delegate=self
             self.parser.parse();
-            dispatch_async(dispatch_get_main_queue(),{
+            DispatchQueue.main.async(execute: {
                 print("cargaPedidos");
                 if(!self.pedidosE.isEmpty){
                     DatosB.cont.historial.actuaScroll2(self.pedidosE);
@@ -97,8 +97,8 @@ class CargaPedidos: NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
     var bcancelado = false;
     
     
-    func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
-        if(elementName as NSString).isEqualToString("listaSaludResponse"){
+    func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
+        if(elementName as NSString).isEqual(to: "listaSaludResponse"){
             estado=NSMutableString();
             estado="";
         }
@@ -137,7 +137,7 @@ class CargaPedidos: NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
     
     
     
-    func parser(parser: NSXMLParser, foundCharacters string: String) {
+    func parser(_ parser: XMLParser, foundCharacters string: String) {
         if(bcantidad){
             cantidad = Int(string);
             bcantidad = false;
@@ -185,7 +185,7 @@ class CargaPedidos: NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
         }
     }
     
-    func parser(parser: NSXMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
+    func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         if(elementName == "return"){
             let pedido = Pedido(id: id, idPadre: self.padre.id!, fechaPedido: fechaPedido, fechaEntrega: fechaEntrega, horaEntrega: horaEntrega, valor: valor, cantidad: cantidad, metodo: metodo, entregado: entregado, cancelado: cancelado);
             print("ent: ", pedido.entregado);

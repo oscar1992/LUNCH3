@@ -7,6 +7,30 @@
 //
 
 import UIKit
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func <= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l <= r
+  default:
+    return !(rhs < lhs)
+  }
+}
+
 
 class BaseTutorial: UIPageViewController, UIPageViewControllerDelegate, UIPageViewControllerDataSource {
     
@@ -21,12 +45,12 @@ class BaseTutorial: UIPageViewController, UIPageViewControllerDelegate, UIPageVi
         iniciaFondo();
         iniciaImagenes();
         
-        setViewControllers([paginas[3]], direction: UIPageViewControllerNavigationDirection.Forward , animated: false,completion: nil);
+        setViewControllers([paginas[3]], direction: UIPageViewControllerNavigationDirection.forward , animated: false,completion: nil);
         
     }
     
     func iniciaFondo()  {
-        self.view.backgroundColor=UIColor.blueColor();
+        self.view.backgroundColor=UIColor.blue;
         //self.view.alpha=0.5;
     }
     
@@ -50,12 +74,12 @@ class BaseTutorial: UIPageViewController, UIPageViewControllerDelegate, UIPageVi
     }
     
     
-    func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         print("ccc");
-        let currentIndex = paginas.indexOf(viewController as! VistaTut);
+        let currentIndex = paginas.index(of: viewController as! VistaTut);
             var previousIndex = abs((currentIndex! - 1) % paginas.count);
             let actual = currentIndex;
-            if(actual <= 0 || paginas[actual!] == NSNotFound){
+            if(actual! <= 0 || actual! > paginas.count){
                 previousIndex = paginas.count-1;
             }
             //setViewControllers([paginas[previousIndex]], direction: UIPageViewControllerNavigationDirection.Forward , animated: false,completion:nil);
@@ -65,9 +89,9 @@ class BaseTutorial: UIPageViewController, UIPageViewControllerDelegate, UIPageVi
 
     }
     
-    func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         
-        let currentIndex = paginas.indexOf((viewController as! VistaTut))!;
+        let currentIndex = paginas.index(of: (viewController as! VistaTut))!;
         let nextIndex = abs((currentIndex + 1) % paginas.count);
         //setViewControllers([paginas[nextIndex]], direction: UIPageViewControllerNavigationDirection.Forward , animated: false,completion:nil);
         print("next: ", nextIndex);

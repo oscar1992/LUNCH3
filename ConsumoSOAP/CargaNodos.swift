@@ -64,7 +64,7 @@ class CargaNodos: NSObject {
         nodos.append(nodo4);
     }
     
-    func cercania(punto: Direcciones){
+    func cercania(_ punto: Direcciones){
         var qq = [(Double, Double, NodoMapa)]();
         for nodo in nodos{
             let lat = abs(nodo.coordenadas.latitud)-abs(punto.latitud);

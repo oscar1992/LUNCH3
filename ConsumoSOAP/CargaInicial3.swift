@@ -10,9 +10,9 @@ import UIKit
 
 class CargaInicial3: NSObject {
     
-    let nsDocumentDirectory = NSSearchPathDirectory.DocumentDirectory;
-    let nsUserDomainMask    = NSSearchPathDomainMask.UserDomainMask;
-    let fileManager = NSFileManager.defaultManager();
+    let nsDocumentDirectory = FileManager.SearchPathDirectory.documentDirectory;
+    let nsUserDomainMask    = FileManager.SearchPathDomainMask.userDomainMask;
+    let fileManager = FileManager.default;
     
     var cIni: CargaInicial!;
     
@@ -20,7 +20,7 @@ class CargaInicial3: NSObject {
         self.cIni=cInicial;
     }
     
-    func comparaFechas(tipo: AnyClass){
+    func comparaFechas(_ tipo: AnyClass){
         switch tipo {
         case is Producto.Type:
             comparaProductos();
@@ -37,10 +37,10 @@ class CargaInicial3: NSObject {
     func comparaProductos(){
         print("Compara Producto");
         var listaIds = [Int]();
-        var listaFechas = [NSDate]();
+        var listaFechas = [Date]();
         for prod in DatosC.contenedor.productos{
             listaIds.append(prod.id);
-            listaFechas.append(prod.ultimaActualizacion);
+            listaFechas.append(prod.ultimaActualizacion as Date);
         }
         let productosN = ProductosNuevos(ids: listaIds, fechas: listaFechas, cInicial: self);
     }
@@ -48,30 +48,30 @@ class CargaInicial3: NSObject {
     func comparaProductoSaludables(){
         print("Compara PSaludables");
         var listaIds = [Int]();
-        var listaFechas = [NSDate]();
+        var listaFechas = [Date]();
         for prodS in DatosB.cont.prodSaludables{
             listaIds.append(prodS.id);
-            listaFechas.append(prodS.ultimaActualizacion);
+            listaFechas.append(prodS.ultimaActualizacion as Date);
         }
         let productoSN=ProductosSaludablesNuevos(ids: listaIds, fechas: listaFechas, cInicial: self);
     }
     
-    func cambiaProductosNuevos(traeNuevos:[Producto]){
+    func cambiaProductosNuevos(_ traeNuevos:[Producto]){
         for prodN in traeNuevos{
             print("Nuevos: ", prodN.id, " - ", prodN.nombre, " - ", prodN.disponible);
             var i = 0;
              for prodV in DatosC.contenedor.productos{
                  i += 1;
                 if(prodV.disponible == false){
-                    let indiceV = DatosC.contenedor.productos.indexOf(prodV);
-                    DatosC.contenedor.productos.removeAtIndex(indiceV!);
+                    let indiceV = DatosC.contenedor.productos.index(of: prodV);
+                    DatosC.contenedor.productos.remove(at: indiceV!);
                     print("Elimina: ", prodV.nombre);
                 }
                 if(prodV.id == prodN.id
                     ){
                     print("Reemplaza: ", prodV.nombre, "disp: ", prodN.disponible);
-                    let indiceV = DatosC.contenedor.productos.indexOf(prodV);
-                    DatosC.contenedor.productos.removeAtIndex(indiceV!);
+                    let indiceV = DatosC.contenedor.productos.index(of: prodV);
+                    DatosC.contenedor.productos.remove(at: indiceV!);
                     DatosC.contenedor.productos.append(prodN);
                     print("NuevoV: ", prodN.nombre);
                     print("ViejoFecha: ", prodV.ultimaActualizacion);
@@ -115,7 +115,7 @@ class CargaInicial3: NSObject {
     }
     
     //Método que busca y comprueba si el producto ya está en la lista
-    func  existeProducto(lista: [Producto], idProd: Int) -> Bool {
+    func  existeProducto(_ lista: [Producto], idProd: Int) -> Bool {
         var retorna = false;
         for prod in lista{
             if(prod.id == idProd){
@@ -125,13 +125,13 @@ class CargaInicial3: NSObject {
         return retorna;
     }
  
-    func cambiaProductosSaludablesNuevos(traeNuevos: [ProductoSaludable]){
+    func cambiaProductosSaludablesNuevos(_ traeNuevos: [ProductoSaludable]){
         for prodSN in traeNuevos{
             for prodSV in DatosB.cont.prodSaludables{
                 if(prodSV.id == prodSN.id){
                     //print("Reemplaza: ", prodSV.produ.nombre);
-                    let indiceV = DatosB.cont.prodSaludables.indexOf(prodSV);
-                    DatosB.cont.prodSaludables.removeAtIndex(indiceV!);
+                    let indiceV = DatosB.cont.prodSaludables.index(of: prodSV);
+                    DatosB.cont.prodSaludables.remove(at: indiceV!);
                     DatosB.cont.prodSaludables.append(prodSN);
                     print("NuevoSV: ", prodSV.produ.nombre);
                 }
@@ -156,24 +156,24 @@ class CargaInicial3: NSObject {
     func persisteProductos(){
         let paths = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true).first;
         var datosURL : String!;
-        datosURL = (paths?.stringByAppendingString("/Productos"))!;
+        datosURL = ((paths)! + "/Productos");
         for prod in DatosC.contenedor.productos{
             //print("Persiste: ", prod.nombre," dispo: ", prod.disponible);
             
-            let rutaEle = datosURL?.stringByAppendingString("/"+String(prod.id));
-            let contenido = NSKeyedArchiver.archivedDataWithRootObject(prod);
-            fileManager.createFileAtPath(rutaEle!, contents: contenido, attributes: nil);
+            let rutaEle = (datosURL)! + ("/"+String(prod.id));
+            let contenido = NSKeyedArchiver.archivedData(withRootObject: prod);
+            fileManager.createFile(atPath: rutaEle, contents: contenido, attributes: nil);
         }
     }
     
     func persisteProdutosSaludables(){
         let paths = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true).first;
         var datosURL : String!;
-        datosURL = (paths?.stringByAppendingString("/ProductoSaludable"))!;
+        datosURL = ((paths)! + "/ProductoSaludable");
         for prod in DatosB.cont.prodSaludables{
-            let rutaEle = datosURL?.stringByAppendingString("/"+String(prod.id));
-            let contenido = NSKeyedArchiver.archivedDataWithRootObject(prod);
-            fileManager.createFileAtPath(rutaEle!, contents: contenido, attributes: nil);
+            let rutaEle = (datosURL)! + ("/"+String(prod.id));
+            let contenido = NSKeyedArchiver.archivedData(withRootObject: prod);
+            fileManager.createFile(atPath: rutaEle, contents: contenido, attributes: nil);
         }
     }
     
@@ -181,12 +181,12 @@ class CargaInicial3: NSObject {
     func eliminaProductos(){
         let paths = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true).first;
         var datosURL : String!;
-        datosURL = (paths?.stringByAppendingString("/Productos"))!;
+        datosURL = ((paths)! + "/Productos");
         for prod in DatosC.contenedor.productos{
-            let rutaEle = datosURL?.stringByAppendingString("/"+String(prod.id));
-            if(fileManager.fileExistsAtPath(rutaEle!)){
+            let rutaEle = (datosURL)! + ("/"+String(prod.id));
+            if(fileManager.fileExists(atPath: rutaEle)){
                 do{
-                    try fileManager.removeItemAtPath(rutaEle!)
+                    try fileManager.removeItem(atPath: rutaEle)
                     //print("BorraP OK: ", rutaEle);
                 }catch{
                   print("No se pudo borarar: ", rutaEle);
@@ -201,12 +201,12 @@ class CargaInicial3: NSObject {
     func eliminaProductosSaludables(){
         let paths = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true).first;
         var datosURL : String!;
-        datosURL = (paths?.stringByAppendingString("/ProductoSaludable"))!;
+        datosURL = ((paths)! + "/ProductoSaludable");
         for prod in DatosB.cont.prodSaludables{
-            let rutaEle = datosURL?.stringByAppendingString("/"+String(prod.id));
-            if(fileManager.fileExistsAtPath(rutaEle!)){
+            let rutaEle = (datosURL)! + ("/"+String(prod.id));
+            if(fileManager.fileExists(atPath: rutaEle)){
                 do{
-                    try fileManager.removeItemAtPath(rutaEle!)
+                    try fileManager.removeItem(atPath: rutaEle)
                     //print("BorraPS : OK");
                 }catch{
                     print("No se pudo borrar Saludable: ", rutaEle);

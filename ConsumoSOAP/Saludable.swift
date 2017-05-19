@@ -22,15 +22,15 @@ class Saludable: NSObject, NSCoding {
     
     required convenience init(coder decoder: NSCoder) {
         self.init();
-        self.idSalud = decoder.decodeObjectForKey("idSalud") as! Int;
-        self.nombre = decoder.decodeObjectForKey("nombre") as! String;
-        self.productos = decoder.decodeObjectForKey("productos") as? [Producto];
+        self.idSalud = decoder.decodeInteger(forKey: "idSalud");
+        self.nombre = decoder.decodeObject(forKey: "nombre") as! String;
+        self.productos = decoder.decodeObject(forKey: "productos") as? [Producto];
     }
     
-    func encodeWithCoder(coder: NSCoder) {
+    func encode(with coder: NSCoder) {
         
-        if let idSalud = idSalud{coder.encodeObject(idSalud, forKey: "idSalud")};
-        if let nombre = nombre{coder.encodeObject(nombre, forKey: "nombre")};
+        if let idSalud = idSalud{coder.encode(idSalud, forKey: "idSalud")};
+        if let nombre = nombre{coder.encode(nombre, forKey: "nombre")};
         //if let productos = [Producto]{coder.encodeObject(productos, forKey: "nombre")};
     }
 }

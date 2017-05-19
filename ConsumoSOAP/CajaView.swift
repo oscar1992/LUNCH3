@@ -8,9 +8,44 @@
 
 import UIKit
 import Foundation
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func <= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l <= r
+  default:
+    return !(rhs < lhs)
+  }
+}
+
 
 class CajaView: UIButton {
-    
+    /*
     var caja : Caja!;
     var Secuencia:String!;
     var ordenActual:Int=0;
@@ -21,7 +56,7 @@ class CajaView: UIButton {
     
     required override init(frame: CGRect) {
         super.init(frame: frame);
-        self.addTarget(self, action: #selector(CajaView.muestra(_:)), forControlEvents: .TouchDown);
+        self.addTarget(self, action: #selector(CajaView.muestra(_:)), for: .touchDown);
         sobrepaso = false;
         //iniciaTexto();
     }
@@ -31,14 +66,14 @@ class CajaView: UIButton {
     }
     
     //Método que pone los productos de una predeterminada en el home
-    func muestra(button:UIButton){
+    func muestra(_ button:UIButton){
         if(caja.secuencia.count != 0){
             
         
         
         let vistaN=self.superview?.superview! as! VistaNino;
         let desliza = vistaN.Lonchera.deslizador as VistaLonchera;
-        DatosC.contenedor.lonchera = desliza.paginas[(desliza.control?.currentPage)!];
+        /*DatosC.contenedor.lonchera = desliza.paginas[(desliza.control?.currentPage)!];
         if(desliza.quien<0){
             desliza.quien=0;
         }
@@ -53,7 +88,7 @@ class CajaView: UIButton {
         //print("QUIEN: ", (desliza.control?.currentPage)!);
         let subVista = DatosC.contenedor.lonchera;self.caja.secuencia[ordenActual].lista.count
         
-
+*/
         let alto = subVista.subVista?.casillas[0].frame.height;
         let ancho = subVista.subVista?.casillas[0].frame.width;
         var p=0;
@@ -96,7 +131,7 @@ class CajaView: UIButton {
                 
                 print("casi: ",casi.tipo, " prod: ", caja.secuencia[ordenActual].lista.count);
                 if(casi.tipo <= caja.secuencia[ordenActual].lista.count && (casi.tipo != nil || sobrepaso)){
-                    let nn=CGRectMake(0, 0, ancho!, alto!);
+                    let nn=CGRect(x: 0, y: 0, width: ancho!, height: alto!);
                     var tit : TItems;
                     if(casi.tipo == nil){
                         print("sobreindice: ", caja.secuencia[ordenActual].lista.count);
@@ -114,7 +149,7 @@ class CajaView: UIButton {
                     casi.activo=true;
                     casi.elemeto?.Natural = true;
                     casi.tipo = p+1;
-                    casi.bringSubviewToFront(icono);
+                    casi.bringSubview(toFront: icono);
                     casi.elemeto?.tipo = tit.productos?.tipo;
                     DatosC.contenedor.lonchera.subVista!.casillas[p]=casi;
                     DatosC.contenedor.lonchera.subVista!.casillas[p].addSubview(icono);
@@ -128,7 +163,7 @@ class CajaView: UIButton {
                 
                 if(Titem.productos?.tipo==casi.tipo){
                     
-                    let nn=CGRectMake(0, 0, ancho!, alto!);
+                    let nn=CGRect(x: 0, y: 0, width: ancho!, height: alto!);
                     let icono=ProductoView(frame: nn, imagen: Titem.productos!.imagen!);
                     icono.tipo=casi.tipo;
                     icono.producto=Titem.productos;
@@ -177,9 +212,9 @@ class CajaView: UIButton {
             sobreIndice = 4;
             subVista.subVista?.crea();
         }
-            DatosC.contenedor.lonchera.color = self.caja.id;
+            //DatosC.contenedor.lonchera.color = self.caja.id;
             //print("id: ", caja.id);
-        DatosC.contenedor.lonchera.contador!.actua();
+        //DatosC.contenedor.lonchera.contador!.actua();
         //DatosC.contenedor.lonchera.contador?.actua();
         ordenActual+=1;
         if(ordenActual>=caja.secuencia.count){
@@ -189,7 +224,7 @@ class CajaView: UIButton {
         }
     }
     //Método que establece el fondo de la caja
-    func setFondo(nom: String){
+    func setFondo(_ nom: String){
         for vista in self.subviews{
             if vista is UIImageView{
                 vista.removeFromSuperview();
@@ -216,12 +251,12 @@ class CajaView: UIButton {
             break;
         }
         
-        let frame = CGRectMake(0, 0, self.frame.width, self.frame.height);
+        let frame = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height);
         let backImg = UIImageView(frame: frame);
         //backImg.contentMode = UIViewContentMode.ScaleAspectFit;
         backImg.image = imagen;
         self.addSubview(backImg);
-        self.sendSubviewToBack(backImg);
+        self.sendSubview(toBack: backImg);
     }
     
     //Método que inicia el texto que acompaña a las loncheras
@@ -230,7 +265,7 @@ class CajaView: UIButton {
         let OY = self.frame.height;
         let alto = DatosC.contenedor.altoP*0.0554;
         let ancho = self.frame.width;
-        let frameTexto = CGRectMake(0, OY, ancho, alto);
+        let frameTexto = CGRect(x: 0, y: OY, width: ancho, height: alto);
         texto = UILabel(frame: frameTexto);
         self.addSubview(texto);
         //print("frame: ", frameTexto);
@@ -238,22 +273,23 @@ class CajaView: UIButton {
     }
     
     //Método que le da el nombre a las cajas
-    func setNombre(nombre: String){
+    func setNombre(_ nombre: String){
         //print("sett: ", nombre);
         texto.font = UIFont(name: "SansBeam Head", size: 16);
-        texto.textAlignment = NSTextAlignment.Center;
-        texto.textColor = UIColor.whiteColor();
+        texto.textAlignment = NSTextAlignment.center;
+        texto.textColor = UIColor.white;
         texto.text = nombre;
     }
     
     //Método que elimina una caja de la vista
     func elimina(){
         if(selimina){
-        self.frame = CGRectMake(0, 0, 0, 0);
-        self.backgroundColor = UIColor.blackColor();
+        self.frame = CGRect(x: 0, y: 0, width: 0, height: 0);
+        self.backgroundColor = UIColor.black;
         //print("Elimina: ", self.superview);
         //DatosC.contenedor.Pantallap.view.addSubview(self);
         self.removeFromSuperview();
         }
     }
+ */
 }

@@ -13,17 +13,17 @@ class VistaTut: UIViewController {
     //var nomb: String;
     var orden:Int!;
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
-        super.init(nibName: nil, bundle: nil);
-        self.view.backgroundColor=UIColor.grayColor();
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        inicia();
+    }
+    
+    func inicia() {
+        self.view.backgroundColor=UIColor.gray;
        // DatosB.cont.poneFondoTot(self.view, fondoStr: nomb, framePers: nil, identi: nil, scala: false);
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

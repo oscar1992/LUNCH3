@@ -24,12 +24,12 @@ class Cabecera: UIView {
         let alto = self.frame.height*0.3;
         let OX = CGFloat(0);
         let OY = self.frame.height*0.7;
-        let frame = CGRectMake(OX, OY, ancho, alto);
+        let frame = CGRect(x: OX, y: OY, width: ancho, height: alto);
         let nombre = UILabel(frame: frame);
         nombre.text = DatosD.contenedor.padre.nombre;
-        nombre.textAlignment=NSTextAlignment.Center;
+        nombre.textAlignment=NSTextAlignment.center;
         nombre.font = UIFont(name: "Gotham Medium", size: alto/2);
-        nombre.textColor=UIColor.whiteColor();
+        nombre.textColor=UIColor.white;
         self.addSubview(nombre);
     }
 

@@ -15,14 +15,14 @@ class Casilla: UIButton {
     var lonchera:LoncheraO!;
     var activo:Bool = true;
     var elemeto:ProductoView?;
-    var ultimaPosicion:CGPoint=CGPointMake(0,0);
+    var ultimaPosicion:CGPoint=CGPoint(x: 0,y: 0);
     var precio : UILabel!;
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.addTarget(self, action: #selector(Casilla.toca(_:)), forControlEvents: .TouchDown);
-        precio = UILabel(frame: CGRectMake(0, self.frame.height*0.9, self.frame.width, self.frame.height*0.1));
-        precio!.backgroundColor = UIColor.whiteColor();
+        self.addTarget(self, action: #selector(Casilla.toca(_:)), for: .touchDown);
+        precio = UILabel(frame: CGRect(x: 0, y: self.frame.height*0.9, width: self.frame.width, height: self.frame.height*0.1));
+        precio!.backgroundColor = UIColor.white;
         setFondo(true);
         //self.addSubview(precio!);
         //self.backgroundColor=UIColor.magentaColor();
@@ -49,7 +49,7 @@ class Casilla: UIButton {
     */
     
     // Método que se llama al tocar la casilla
-    func toca(sender: AnyObject){
+    func toca(_ sender: AnyObject){
         //print("activo: ", activo);
         if(activo == true){
             
@@ -60,26 +60,26 @@ class Casilla: UIButton {
                     if(BotNino.loncheras.count == 0){
                         BotNino.loncheras = DatosC.contenedor.loncheras;
                     }
-                    DatosC.contenedor.lonchera = BotNino.loncheras[DatosC.contenedor.iActual];
+                    //DatosC.contenedor.lonchera = BotNino.loncheras[DatosC.contenedor.iActual];
                     //print("Cambia: ");
                 }
                 
             }
-            DatosC.contenedor.tipo=tipo;
+            DatosC.contenedor.tipo=tipo!;
             //print("tipo: ", DatosC.contenedor.tipo);
             print("cas frame: ", self.frame);
             //print("QQ: ", DatosC.contenedor.lonchera.fechaVisible?.text);
             //DatosC.contenedor.lonchera=DatosC.contenedor.loncheras[DatosC.contenedor.iActual];
-            for cs in (DatosC.contenedor.lonchera.subVista?.casillas)!{
+            /*for cs in (DatosC.contenedor.lonchera.subVista?.casillas)!{
                 cs.elemeto?.Natural=false;
-            }
-            DatosB.cont.home2.performSegueWithIdentifier("Seleccion", sender: nil);
+            }*/
+            DatosB.cont.home2.performSegue(withIdentifier: "Seleccion", sender: nil);
             //print("fin tocado2");
         }
     }
     
     //Método que permite poner un producto nuevo dentro de la casilla
-    func seteaElemento(ele: ProductoView, tipo: Int, ima: UIImage, prod: Producto){
+    func seteaElemento(_ ele: ProductoView, tipo: Int, ima: UIImage, prod: Producto){
         activo = false;
         elemeto = ele;
         elemeto!.producto=prod;
@@ -110,15 +110,15 @@ class Casilla: UIButton {
         //self.bringSubviewToFront(precio!);
     }
     //Mètodo que le da el tamaño al label del precio
-    func iniciaPrecio(texto: String){
+    func iniciaPrecio(_ texto: String){
         //print("tt: ", texto);
         precio!.text = texto;
-        precio!.frame=CGRectMake(0, self.frame.height*0.8, self.frame.width, self.frame.height*0.2);
-        self.bringSubviewToFront(precio!);
+        precio!.frame=CGRect(x: 0, y: self.frame.height*0.8, width: self.frame.width, height: self.frame.height*0.2);
+        self.bringSubview(toFront: precio!);
     }
     
     //Método que establece el fondo de una casilla
-    func setFondo(verde: Bool){
+    func setFondo(_ verde: Bool){
         
         for vista in self.subviews{
             if vista is UIImageView{
@@ -133,7 +133,7 @@ class Casilla: UIButton {
             imagen = UIImage(named: "CasillaBlanca")!;
         }
 
-        let frame = CGRectMake(0, 0, self.frame.width, self.frame.height);
+        let frame = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height);
         let backImg = UIImageView(frame: frame);
         //backImg.contentMode = UIViewContentMode.ScaleAspectFit;
         backImg.image = imagen;
@@ -178,14 +178,14 @@ class Casilla: UIButton {
             let ancho = frame.width*0.4;
             let OX = (frame.width/2)-(ancho/2);
             let OY = (frame.height/2)-(ancho/2);
-            let frame2 = CGRectMake(OX, OY, ancho, ancho);
+            let frame2 = CGRect(x: OX, y: OY, width: ancho, height: ancho);
             let backImg2 = UIImageView(frame: frame2);
             backImg2.image=imagen2;
-            backImg2.contentMode=UIViewContentMode.ScaleAspectFit;
+            backImg2.contentMode=UIViewContentMode.scaleAspectFit;
             self.addSubview(backImg2);
-            self.sendSubviewToBack(backImg2);
+            self.sendSubview(toBack: backImg2);
         }
-        self.sendSubviewToBack(backImg);
+        self.sendSubview(toBack: backImg);
 
     }
     

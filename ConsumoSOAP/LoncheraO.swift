@@ -17,7 +17,7 @@ class LoncheraO: UIViewController {
     var subVista:SubVista?;
     var padre:VistaLonchera?;
     var contador : Contador?;
-    var fecha: NSDate?;
+    var fecha: Date?;
     var fechaVisible: UILabel?;
     var saludable:Bool?;
     var botfavo:UIButton?;
@@ -26,19 +26,26 @@ class LoncheraO: UIViewController {
     var msg:UILabel?;
     var cuadromsg:UIView?;
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
-        super.init(nibName: nil, bundle: nil);
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    
+    func inicia() {
         
         subVista = SubVista();
         subVista!.padre=self.view;
         botrem=UIButton();
         botrem?.titleLabel?.text="REM";
         saludable = true;
-        botrem?.addTarget(self, action: #selector(self.remcasilla(_:)), forControlEvents: .TouchDown);
+        botrem?.addTarget(self, action: #selector(self.remcasilla(_:)), for: .touchDown);
         botadd=UIButton();
         botfavo=UIButton();
-        botadd!.addTarget(self, action: #selector(self.addcasilla(_:)), forControlEvents: .TouchDown);
-        botfavo!.addTarget(self, action: #selector(self.anadeFavorito(_:)), forControlEvents: .TouchDown);
+        botadd!.addTarget(self, action: #selector(self.addcasilla(_:)), for: .touchDown);
+        botfavo!.addTarget(self, action: #selector(self.anadeFavorito(_:)), for: .touchDown);
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     func ordena(){
@@ -53,9 +60,9 @@ class LoncheraO: UIViewController {
         let OX=(self.view.frame.width/2)-(ancho/2);
         let OY=(self.view.frame.origin.y)+(alto);
         //print("OX ->",((self.view.frame.width/2)-(ancho/2)));
-        subVista?.frame=CGRectMake(OX, OY, ancho, alto2);
+        subVista?.frame=CGRect(x: OX, y: OY, width: ancho, height: alto2);
         //subVista?.backgroundColor=UIColor.purpleColor();
-        DatosC.contenedor.tamaLonchera=CGRectMake(OX, OY, ancho, alto2);
+        DatosC.contenedor.tamaLonchera=CGRect(x: OX, y: OY, width: ancho, height: alto2);
         //print("Tama Lonchera: ",DatosC.contenedor.tamaLonchera );
         self.view.addSubview(subVista!);
         //let BAOX=(OX+ancho);
@@ -72,37 +79,35 @@ class LoncheraO: UIViewController {
         //botfavo?.backgroundColor = UIColor.yellowColor();
         //self.view.addSubview(botfavo!);
         inciaContador();
-        self.view.bringSubviewToFront(botfavo!);
-        self.view.bringSubviewToFront(botadd!);
-        self.view.bringSubviewToFront(botrem!);
+        self.view.bringSubview(toFront: botfavo!);
+        self.view.bringSubview(toFront: botadd!);
+        self.view.bringSubview(toFront: botrem!);
         self.view.addSubview(contador!);
         
     }
     
-    func inicia(id: Int){
+    func inicia(_ id: Int){
         
         ordena();
         self.id=id;
         self.label=UILabel();
         self.label!.text=("Id: "+String(id));
-        self.label!.frame=CGRectMake(5, 5, 100, 20);
+        self.label!.frame=CGRect(x: 5, y: 5, width: 100, height: 20);
         //self.view.addSubview(self.label!);
         self.subVista?.crea();
         fechaActual(self.id!);
         let yFEcha = DatosC.contenedor.altoP*0.0239;
         let anchoFecha = DatosC.contenedor.anchoP*0.24;
         let altoFecha = DatosC.contenedor.altoP*0.04;
-        fechaVisible?.frame=CGRectMake(0, yFEcha, anchoFecha,altoFecha);
+        fechaVisible?.frame=CGRect(x: 0, y: yFEcha, width: anchoFecha,height: altoFecha);
         fondoFecha();
         self.view.addSubview(fechaVisible!);
         
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+
     
-    func addcasilla(button: UIButton){
+    func addcasilla(_ button: UIButton){
         //limpia();
         print("ID: ", self.id);
         if(self.subVista!.campos<6){
@@ -118,7 +123,7 @@ class LoncheraO: UIViewController {
         //print(self.subVista!.campos);
     }
     
-    func remcasilla(button: UIButton){
+    func remcasilla(_ button: UIButton){
         //limpia();
         if(self.subVista?.casillas.last?.elemeto != nil){
             print("No nulo");
@@ -146,40 +151,40 @@ class LoncheraO: UIViewController {
     }
     
     //Método que muestra la fecha actual por lonchera
-    func fechaActual(id: Int){
-        let fecha=NSDate();
-        let fechac=NSDateComponents();
-        let calendar=NSCalendar.currentCalendar();
-        let añoS=calendar.components(.Year , fromDate: fecha);
-        let mesS=calendar.components(.Month , fromDate: fecha);
-        let diaS=calendar.components(.Day , fromDate: fecha);
-        let diaSemana=calendar.components(.Weekday, fromDate: fecha);
-        let rest = diaSemana.weekday - (id+1); // Corrimiento de Inicio de semana
+    func fechaActual(_ id: Int){
+        let fecha=Date();
+        var fechac=DateComponents();
+        let calendar=Calendar.current;
+        let añoS=(calendar as NSCalendar).components(.year , from: fecha);
+        let mesS=(calendar as NSCalendar).components(.month , from: fecha);
+        let diaS=(calendar as NSCalendar).components(.day , from: fecha);
+        let diaSemana=(calendar as NSCalendar).components(.weekday, from: fecha);
+        let rest = diaSemana.weekday! - (id+1); // Corrimiento de Inicio de semana
         
         
         fechac.year=añoS.year;
         fechac.month=mesS.month;
-        fechac.day=(diaS.day-rest)+7;//Asignación de una semana más
+        fechac.day=(diaS.day!-rest)+7;//Asignación de una semana más
         
         
-        let fechaf=NSCalendar.currentCalendar().dateFromComponents(fechac);
+        let fechaf=Calendar.current.date(from: fechac);
         self.fecha=fechaf;
         
         //print("num día: ", diaS.year);
-        let formateadpr:NSDateFormatter=NSDateFormatter();
-        formateadpr.locale = NSLocale.init(localeIdentifier: "es_CO");
+        let formateadpr:DateFormatter=DateFormatter();
+        formateadpr.locale = Locale.init(identifier: "es_CO");
         formateadpr.dateFormat = "EEE dd/MM/yy";
         fechaVisible=UILabel();
-        fechaVisible?.text=(formateadpr.stringFromDate(fechaf!).uppercaseString);
-        fechaVisible?.textAlignment = NSTextAlignment.Right;
+        fechaVisible?.text=(formateadpr.string(from: fechaf!).uppercased());
+        fechaVisible?.textAlignment = NSTextAlignment.right;
         fechaVisible?.font = UIFont(name: "SansBeam Head", size: 18);
-        fechaVisible?.textColor = UIColor.whiteColor();
+        fechaVisible?.textColor = UIColor.white;
        
     }
     
     //Método que permite cambiar la fecha de acuerdo al día que llegue como parámetro
     
-    func cambiaFecha(fecha: NSDate){
+    func cambiaFecha(_ fecha: Date){
         //print("Cambia FEcha");
         /*
         let fechac=NSDateComponents();
@@ -191,18 +196,18 @@ class LoncheraO: UIViewController {
         fechac.day=(dia);
         let fechaf=NSCalendar.currentCalendar().dateFromComponents(fechac);
          */
-        let formateadpr:NSDateFormatter=NSDateFormatter();
-        formateadpr.locale = NSLocale.init(localeIdentifier: "es_CO");
+        let formateadpr:DateFormatter=DateFormatter();
+        formateadpr.locale = Locale.init(identifier: "es_CO");
         formateadpr.dateFormat = "EEE dd/MM/yy";
         //print("Previa: ",fechaVisible!.text);
-        let ff=(formateadpr.stringFromDate(fecha).uppercaseString);
+        let ff=(formateadpr.string(from: fecha).uppercased());
         self.fecha = fecha;
         //print("Cambia: ",ff);
         fechaVisible!.text=ff;
     }
     
     //Método que permite añadir o eliminar una lonchera favorita a la lista de las loncheras del padre
-    func anadeFavorito(sender: AnyObject){
+    func anadeFavorito(_ sender: AnyObject){
         print("Ingresa? ", nfavorita);
         if(nfavorita == nil){
             var prodos = [Producto]();
@@ -217,7 +222,7 @@ class LoncheraO: UIViewController {
             sube.bot = self.botfavo;
             let cargaFav=(self.view.superview?.superview?.superview?.superview?.superview as! VistaNino);
             //cargaFav.EspacioLoncheras.cargaFavoritos();
-            sube.predeter = cargaFav.EspacioLoncheras;
+            //sube.predeter = cargaFav.EspacioLoncheras;
             //sube.evalua(prodos);
             mensajeFavorito(true);
         }else{
@@ -237,12 +242,12 @@ class LoncheraO: UIViewController {
     func fondoFecha(){
         let fondoFecha = UIImage(named: "FechaFondo");
         
-        let frameFondo = CGRectMake(fechaVisible!.frame.origin.x, fechaVisible!.frame.origin.y, fechaVisible!.frame.width+15, fechaVisible!.frame.height);
+        let frameFondo = CGRect(x: fechaVisible!.frame.origin.x, y: fechaVisible!.frame.origin.y, width: fechaVisible!.frame.width+15, height: fechaVisible!.frame.height);
         //print("fechaf frame: ", fechaVisible!.frame)
         let backImg = UIImageView(frame: frameFondo);
         backImg.image = fondoFecha;
         self.view.addSubview(backImg);
-        self.view.sendSubviewToBack(backImg);
+        self.view.sendSubview(toBack: backImg);
     }
     
     //Método que inicializa el Boton de añadir
@@ -264,15 +269,15 @@ class LoncheraO: UIViewController {
         //let BAOX=(OX+ancho);
         let BAOY=(OY);
         let Bancho=(self.view.frame.width*0.1173);
-        let frame = CGRectMake(OX, BAOY, Bancho, Bancho);
-        let frame2 = CGRectMake(0, 0, frame.width, frame.height);
+        let frame = CGRect(x: OX, y: BAOY, width: Bancho, height: Bancho);
+        let frame2 = CGRect(x: 0, y: 0, width: frame.width, height: frame.height);
         //print("frame+: ",frame);
         let backImg = UIImageView(frame: frame2);
         //backImg.contentMode = UIViewContentMode.ScaleAspectFit;
         botadd?.frame=frame;
         backImg.image = imagen;
         botadd?.addSubview(backImg);
-        botadd?.sendSubviewToBack(backImg);
+        botadd?.sendSubview(toBack: backImg);
         //botadd?.backgroundColor = UIColor.redColor();
         self.view.addSubview(botadd!);
         
@@ -288,15 +293,15 @@ class LoncheraO: UIViewController {
         //let BAOX=(OX+ancho);
         let BAOY=(OY+(10));
         let Bancho=(self.view.frame.width*0.1173);
-        let frame = CGRectMake(OX, BAOY, Bancho, Bancho);
-        let frame2 = CGRectMake(0, 0, frame.width, frame.height);
+        let frame = CGRect(x: OX, y: BAOY, width: Bancho, height: Bancho);
+        let frame2 = CGRect(x: 0, y: 0, width: frame.width, height: frame.height);
         //print("frameF: ",frame);
         let backImg = UIImageView(frame: frame2);
         botfavo?.frame=frame;
-        backImg.contentMode = UIViewContentMode.ScaleAspectFit;
+        backImg.contentMode = UIViewContentMode.scaleAspectFit;
         backImg.image = imagen;
         botfavo?.addSubview(backImg);
-        botfavo?.sendSubviewToBack(backImg);
+        botfavo?.sendSubview(toBack: backImg);
         self.view.addSubview(botfavo!);
         
     }
@@ -310,15 +315,15 @@ class LoncheraO: UIViewController {
         //let BAOX=(OX+ancho);
         let BAOY=(OY+(10));
         let Bancho=(self.view.frame.width*0.1173);
-        let frame = CGRectMake(OX, BAOY, Bancho, Bancho);
-        let frame2 = CGRectMake(0, 0, frame.width, frame.height);
+        let frame = CGRect(x: OX, y: BAOY, width: Bancho, height: Bancho);
+        let frame2 = CGRect(x: 0, y: 0, width: frame.width, height: frame.height);
         //print("frameF: ",frame);
         let backImg = UIImageView(frame: frame2);
         botrem?.frame=frame;
-        backImg.contentMode = UIViewContentMode.ScaleAspectFit;
+        backImg.contentMode = UIViewContentMode.scaleAspectFit;
         backImg.image = imagen;
         botrem?.addSubview(backImg);
-        botrem?.sendSubviewToBack(backImg);
+        botrem?.sendSubview(toBack: backImg);
         self.view.addSubview(botrem!);
     }
     
@@ -326,29 +331,29 @@ class LoncheraO: UIViewController {
     func inciaContador(){
         let ancho = DatosC.contenedor.anchoP*0.854;
         let OX = (DatosC.contenedor.anchoP/2)-(ancho/2);
-        contador=Contador(frame: CGRectMake(OX, (subVista!.frame.height+subVista!.frame.origin.y+(+DatosC.contenedor.altoP*0.055)), ancho, DatosC.contenedor.altoP*0.07));
+        contador=Contador(frame: CGRect(x: OX, y: (subVista!.frame.height+subVista!.frame.origin.y+(+DatosC.contenedor.altoP*0.055)), width: ancho, height: DatosC.contenedor.altoP*0.07));
         contador!.id=self.id;
         contador!.lonc = self;
     }
     
-    func mensajeFavorito(ingresa: Bool){
+    func mensajeFavorito(_ ingresa: Bool){
         let ancho = self.view.frame.width*0.8;
         let alto = self.view.frame.height*0.6;
         let OX = (self.view.frame.width/2)-(ancho/2);
         let OY = (self.view.frame.height/2)-(alto/2);
-        let frameCuadro = CGRectMake(OX, OY, ancho, alto);
+        let frameCuadro = CGRect(x: OX, y: OY, width: ancho, height: alto);
         cuadromsg = UIView (frame: frameCuadro);
-        cuadromsg!.backgroundColor = UIColor.greenColor();
-        msg = UILabel(frame: CGRectMake(0, 0, ancho, alto));
+        cuadromsg!.backgroundColor = UIColor.green;
+        msg = UILabel(frame: CGRect(x: 0, y: 0, width: ancho, height: alto));
         if(ingresa){
             msg!.text = "Lonchera añadida a Favoritos";
         }else{
             msg!.text = "Lonchera removida de Favoritos";
         }
-        msg?.textAlignment=NSTextAlignment.Center;
+        msg?.textAlignment=NSTextAlignment.center;
         cuadromsg!.addSubview(msg!);
         self.view.addSubview(cuadromsg!);
-        _ = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(LoncheraO.cierraMsg), userInfo: nil, repeats: false);
+        _ = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(LoncheraO.cierraMsg), userInfo: nil, repeats: false);
         
     }
     

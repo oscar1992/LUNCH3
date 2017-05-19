@@ -27,15 +27,15 @@ class DeleteCard: NSObject, NSURLConnectionDelegate{
         uid = String(DatosD.contenedor.padre.id!);
         email = String(trataEmail(DatosD.contenedor.padre.email!));
         sesionId = "AwXytakRpysZKMW8PoWyB6F9FhYx6W";
-        timeStamp = String(Int(NSDate().timeIntervalSince1970));
+        timeStamp = String(Int(Date().timeIntervalSince1970));
         
     }
     
-    func trataEmail(email: String)->String{
+    func trataEmail(_ email: String)->String{
         var retorna = email;
         for letra in email.characters{
             if(letra == "@"){
-                retorna.replaceRange(retorna.rangeOfString("@")!, with: "%40");
+                retorna.replaceSubrange(retorna.range(of: "@")!, with: "%40");
             }
             
         }
@@ -45,7 +45,7 @@ class DeleteCard: NSObject, NSURLConnectionDelegate{
     //Método que genera la cadena para ahcer el request del servicio de paymentez
     func borra(){
         let cadenaSHA = "application_code="+aplicationCode+"&card_reference="+tarjeta.referencia+"&uid="+uid+"&"+timeStamp+"&"+sesionId;
-        let datos = cadenaSHA.dataUsingEncoding(NSUTF8StringEncoding);
+        let datos = cadenaSHA.data(using: String.Encoding.utf8);
         print("Pre SHA: ", cadenaSHA);
         envia += "https://ccapi-stg.paymentez.com/api/cc/delete?";
         envia += "card_reference="+tarjeta.referencia;
@@ -54,13 +54,13 @@ class DeleteCard: NSObject, NSURLConnectionDelegate{
         envia += "&auth_timestamp="+timeStamp;
         envia += "&auth_token="+String(sha256(datos!));
 
-        let url = NSURL(string: envia);
+        let url = URL(string: envia);
         print("Envia: ", url!);
-        let request = NSMutableURLRequest(URL: url!);
-        request.HTTPMethod = "POST";
-        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) {(response, data, error) in
+        let request = NSMutableURLRequest(url: url!);
+        request.httpMethod = "POST";
+        NSURLConnection.sendAsynchronousRequest(request as URLRequest, queue: OperationQueue.main) {(response, data, error) in
             //print(NSString(data: data!, encoding: NSUTF8StringEncoding));
-            let httpStatus = response as? NSHTTPURLResponse;
+            let httpStatus = response as? HTTPURLResponse;
             if  httpStatus!.statusCode == 200{
                 print("Borrado");
                 self.vista.consultaTarjetas();
@@ -71,29 +71,32 @@ class DeleteCard: NSObject, NSURLConnectionDelegate{
     }
     
     //Método que hashea una cadena de texto introducido a travez del encriptado SHA256
-    func sha256(data : NSData) -> String {
-        let res = NSMutableData(length: Int(CC_SHA256_DIGEST_LENGTH))
-        CC_SHA256(data.bytes, CC_LONG(data.length), UnsafeMutablePointer(res!.mutableBytes))
-        return limpia(String(res!));
+    func sha256(_ data : Data) -> String {
+        var res = NSMutableData(length: Int(CC_SHA256_DIGEST_LENGTH))
+        let mutableRaw = UnsafeMutableRawPointer(&res);
+        let pointerOpa = OpaquePointer(mutableRaw);
+        let contextPtr = UnsafeMutablePointer<UInt8>(pointerOpa)
+        CC_SHA256((data as NSData).bytes, CC_LONG(data.count), contextPtr);
+        return limpia(String(describing: res!));
     }
     
     //Método que quita espacios y simbolos del SHA generado
-    func limpia(num: String)->String{
+    func limpia(_ num: String)->String{
         var cambia = num;
         //var pos = [Range<String.Index>]();
         var p = 0;
         for letra in cambia.characters{
             if(letra == " "){
                 //pos.append(cambia.rangeOfString(" ")!);
-                cambia.replaceRange(cambia.rangeOfString(" ")!, with: "");
+                cambia.replaceSubrange(cambia.range(of: " ")!, with: "");
                 //print("Cambia: ", cambia);
             }
             if(letra == "<"){
-                cambia.replaceRange(cambia.rangeOfString("<")!, with: "");
+                cambia.replaceSubrange(cambia.range(of: "<")!, with: "");
                 //print("Cambia: ", cambia);
             }
             if(letra == ">"){
-                cambia.replaceRange(cambia.rangeOfString(">")!, with: "");
+                cambia.replaceSubrange(cambia.range(of: ">")!, with: "");
                 //print("Cambia: ", cambia);
             }
             p += 1;

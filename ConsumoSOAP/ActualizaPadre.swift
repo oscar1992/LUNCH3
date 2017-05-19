@@ -8,15 +8,15 @@
 
 import UIKit
 
-class ActualizaPadre: NSObject, NSURLConnectionDelegate, NSXMLParserDelegate {
+class ActualizaPadre: NSObject, NSURLConnectionDelegate, XMLParserDelegate {
     
-    var resp: NSData! = nil
+    var resp: Data! = nil
     var estado:NSMutableString!
-    var parser=NSXMLParser()
+    var parser=XMLParser()
     var eeleDiccio=NSMutableDictionary()
     var element=NSString()
     var vista:Olvida2?;
-    func actualizaPadre(padre: Padre){
+    func actualizaPadre(_ padre: Padre){
         var mensajeEnviado:String = "<soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/' xmlns:enp='http://enpoint.lunch.com.co/'><soapenv:Header/><soapenv:Body><enp:actualizaPadre><padre><contrasena>"+padre.pass!+"</contrasena>";
         
         mensajeEnviado+="<direccion>"+padre.direccion!+"</direccion><email>"+padre.email!+"</email>"
@@ -38,25 +38,25 @@ class ActualizaPadre: NSObject, NSURLConnectionDelegate, NSXMLParserDelegate {
         //print("Mensaje: ", mensajeEnviado);
         
         let is_URL: String = "http://93.188.163.97:8080/Lunch2/clienteEndpoint"
-        let lobj_Request = NSMutableURLRequest(URL: NSURL(string: is_URL)!)
-        let session = NSURLSession.sharedSession()
+        let lobj_Request = NSMutableURLRequest(url: URL(string: is_URL)!)
+        let session = URLSession.shared
         let _: NSError?
         
-        lobj_Request.HTTPMethod = "POST"
-        lobj_Request.HTTPBody = mensajeEnviado.dataUsingEncoding(NSUTF8StringEncoding)
+        lobj_Request.httpMethod = "POST"
+        lobj_Request.httpBody = mensajeEnviado.data(using: String.Encoding.utf8)
         lobj_Request.addValue("www.lunch.com", forHTTPHeaderField: "Host")
         lobj_Request.addValue("text/xml; charset=utf-8", forHTTPHeaderField: "Content-Type")
         lobj_Request.addValue(String(mensajeEnviado.characters.count), forHTTPHeaderField: "Content-Length")
         //lobj_Request.addValue("223", forHTTPHeaderField: "Content-Length")
         lobj_Request.addValue("\"bool\"", forHTTPHeaderField: "SOAPAction")
         
-        let task = session.dataTaskWithRequest(lobj_Request, completionHandler: {data, response, error -> Void in
+        let task = session.dataTask(with: lobj_Request as URLRequest, completionHandler: {data, response, error -> Void in
             //print("Response: \(response)")
             var vustaOK=false;
             if(data != nil){
-                let strData = NSString(data: data!, encoding: NSUTF8StringEncoding)
-                self.resp=strData?.dataUsingEncoding(NSUTF8StringEncoding)
-                self.parser=NSXMLParser(data: self.resp)
+                let strData = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
+                self.resp=strData?.data(using: String.Encoding.utf8.rawValue)
+                self.parser=XMLParser(data: self.resp)
                 self.parser.delegate=self
                 self.parser.parse();
                 vustaOK=true;
@@ -66,7 +66,7 @@ class ActualizaPadre: NSObject, NSURLConnectionDelegate, NSXMLParserDelegate {
                 
             }
             
-            dispatch_async(dispatch_get_main_queue(),{
+            DispatchQueue.main.async(execute: {
                 //DatosB.cont.olvida2.aprueba=true;
                 if(self.vista != nil){
                     self.vista!.finCambia(vustaOK);
@@ -101,10 +101,10 @@ class ActualizaPadre: NSObject, NSURLConnectionDelegate, NSXMLParserDelegate {
     var PterminoFecha:String?;
     var Pgenero:String?;
     
-    func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
-        element=elementName;
+    func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
+        element=elementName as NSString;
         //print("eleNA: ",element);
-        if(elementName as NSString).isEqualToString("loginResponse"){
+        if(elementName as NSString).isEqual(to: "loginResponse"){
             estado=NSMutableString();
             estado="";
         }
@@ -148,7 +148,7 @@ class ActualizaPadre: NSObject, NSURLConnectionDelegate, NSXMLParserDelegate {
         
     }
     
-    func parser(parser: NSXMLParser, foundCharacters string: String) {
+    func parser(_ parser: XMLParser, foundCharacters string: String) {
         if(id){
             Pid=Int(string);
             //print("Pid: ",Pid);
@@ -218,7 +218,7 @@ class ActualizaPadre: NSObject, NSURLConnectionDelegate, NSXMLParserDelegate {
         }
     }
     
-    func parser(parser: NSXMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
+    func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         //print("ff: ",elementName);
         if(elementName == "ns2:loginResponse"){
             //print("Pid", Pid);

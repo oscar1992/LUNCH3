@@ -15,7 +15,7 @@ class SelectorTerminos: UIButton {
     override init (frame: CGRect){
         super.init(frame: frame);
         actuaIma();
-        self.addTarget(self, action: #selector(SelectorTerminos.cambia(_:)), forControlEvents: .TouchDown);
+        self.addTarget(self, action: #selector(SelectorTerminos.cambia(_:)), for: .touchDown);
     }
     
     func actuaIma(){
@@ -27,7 +27,7 @@ class SelectorTerminos: UIButton {
         }
     }
     
-    func cambia(sender: AnyObject){
+    func cambia(_ sender: AnyObject){
         if(seleccion){
             seleccion=false;
         }else{

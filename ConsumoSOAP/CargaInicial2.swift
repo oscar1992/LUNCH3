@@ -11,9 +11,9 @@ import UIKit
 
 class CargaInicial2 : NSObject{
     
-    let nsDocumentDirectory = NSSearchPathDirectory.DocumentDirectory;
-    let nsUserDomainMask    = NSSearchPathDomainMask.UserDomainMask;
-    let fileManager = NSFileManager.defaultManager();
+    let nsDocumentDirectory = FileManager.SearchPathDirectory.documentDirectory;
+    let nsUserDomainMask    = FileManager.SearchPathDomainMask.userDomainMask;
+    let fileManager = FileManager.default;
     var cInicial : CargaInicial?;
     
     //Constructor que pidecomo parámetro la clase desde la cual se llama para poder seguir iterando;
@@ -23,43 +23,43 @@ class CargaInicial2 : NSObject{
     }
     
     //Método que guarda varios tipos de listas en el dispositivo
-    func guarda(lista: [AnyObject], tipo: AnyClass){
+    func guarda(_ lista: [AnyObject], tipo: AnyClass){
         cInicial!.iniciaEvaluacion();
         let paths = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true).first;
         var datosURL : String!;
         switch tipo {
         case is Producto.Type:
-            datosURL = (paths?.stringByAppendingString("/Productos"))!;
+            datosURL = ((paths)! + "/Productos");
             break;
         case is TipoInfo.Type:
-            datosURL = (paths?.stringByAppendingString("/TipoInfo"))!;
+            datosURL = ((paths)! + "/TipoInfo");
             break;
         case is Tag.Type:
-            datosURL = (paths?.stringByAppendingString("/Tag"))!;
+            datosURL = ((paths)! + "/Tag");
             break;
         case is Saludable.Type:
-            datosURL = (paths?.stringByAppendingString("/Saludable"))!;
+            datosURL = ((paths)! + "/Saludable");
             break;
         case is Favoritos.Type:
-            datosURL = (paths?.stringByAppendingString("/Favoritos"))!;
+            datosURL = ((paths)! + "/Favoritos");
             break;
         case is TItems.Type:
-            datosURL = (paths?.stringByAppendingString("/TItems"))!;
+            datosURL = ((paths)! + "/TItems");
             break;
         case is ProductoSaludable.Type:
-            datosURL = (paths?.stringByAppendingString("/ProductoSaludable"))!;
+            datosURL = ((paths)! + "/ProductoSaludable");
             break;
         case is UIImage:
-            datosURL = (paths?.stringByAppendingString("/Imagenes"))!;
+            datosURL = ((paths)! + "/Imagenes");
             break;
         default:
             print("Tipo desconocido: ", tipo);
             break;
         }
         
-        if(!fileManager.fileExistsAtPath(datosURL!)){
+        if(!fileManager.fileExists(atPath: datosURL!)){
             do{
-                try fileManager.createDirectoryAtPath(datosURL!, withIntermediateDirectories: false, attributes: nil);
+                try fileManager.createDirectory(atPath: datosURL!, withIntermediateDirectories: false, attributes: nil);
                 //print("OK creacion directorio: ", datosURL);
                 //print("Guarda ", tipo, "tama", lista.count);
                 var p = 0;
@@ -67,54 +67,54 @@ class CargaInicial2 : NSObject{
                     switch tipo {
                     case is Producto.Type:
                         let prod = (ele as! Producto);
-                        let rutaEle = datosURL?.stringByAppendingString("/"+String(prod.id));
-                        let contenido = NSKeyedArchiver.archivedDataWithRootObject(prod);
-                        fileManager.createFileAtPath(rutaEle!, contents: contenido, attributes: nil);
+                        let rutaEle = (datosURL)! + ("/"+String(prod.id));
+                        let contenido = NSKeyedArchiver.archivedData(withRootObject: prod);
+                        fileManager.createFile(atPath: rutaEle, contents: contenido, attributes: nil);
                         
                         break;
                     case is TipoInfo.Type:
                         let obj = (ele as! TipoInfo);
-                        let rutaEle = datosURL?.stringByAppendingString("/"+String(p));
+                        let rutaEle = (datosURL)! + ("/"+String(p));
                         print("P: ", p);
-                        let contenido = NSKeyedArchiver.archivedDataWithRootObject(obj);
-                        fileManager.createFileAtPath(rutaEle!, contents: contenido, attributes: nil);
+                        let contenido = NSKeyedArchiver.archivedData(withRootObject: obj);
+                        fileManager.createFile(atPath: rutaEle, contents: contenido, attributes: nil);
                         p += 1;
                         break;
                     case is Tag.Type:
                         let obj = (ele as! Tag);
-                        let rutaEle = datosURL?.stringByAppendingString("/"+String(obj.idTag));
-                        let contenido = NSKeyedArchiver.archivedDataWithRootObject(obj);
-                        fileManager.createFileAtPath(rutaEle!, contents: contenido, attributes: nil);
+                        let rutaEle = (datosURL)! + ("/"+String(obj.idTag));
+                        let contenido = NSKeyedArchiver.archivedData(withRootObject: obj);
+                        fileManager.createFile(atPath: rutaEle, contents: contenido, attributes: nil);
                         
                         break;
                     case is Saludable.Type:
                         let obj = (ele as! Saludable);
-                        let rutaEle = datosURL?.stringByAppendingString("/"+String(obj.idSalud));
-                        let contenido = NSKeyedArchiver.archivedDataWithRootObject(obj);
-                        fileManager.createFileAtPath(rutaEle!, contents: contenido, attributes: nil);
+                        let rutaEle = (datosURL)! + ("/"+String(obj.idSalud));
+                        let contenido = NSKeyedArchiver.archivedData(withRootObject: obj);
+                        fileManager.createFile(atPath: rutaEle, contents: contenido, attributes: nil);
                         
                         break;
                     case is Favoritos.Type:
                         let obj = (ele as! Favoritos);
-                        let rutaEle = datosURL?.stringByAppendingString("/"+String(obj.id));
-                        let contenido = NSKeyedArchiver.archivedDataWithRootObject(obj);
-                        fileManager.createFileAtPath(rutaEle!, contents: contenido, attributes: nil);
+                        let rutaEle = (datosURL)! + ("/"+String(obj.id));
+                        let contenido = NSKeyedArchiver.archivedData(withRootObject: obj);
+                        fileManager.createFile(atPath: rutaEle, contents: contenido, attributes: nil);
                         
                         break;
                     case is TItems.Type:
                         let obj = (ele as! TItems);
                         //print("TIMEM a guardar: ", obj.id);
-                        let rutaEle = datosURL?.stringByAppendingString("/"+String(obj.id));
-                        let contenido = NSKeyedArchiver.archivedDataWithRootObject(obj);
-                        fileManager.createFileAtPath(rutaEle!, contents: contenido, attributes: nil);
+                        let rutaEle = (datosURL)! + ("/"+String(obj.id));
+                        let contenido = NSKeyedArchiver.archivedData(withRootObject: obj);
+                        fileManager.createFile(atPath: rutaEle, contents: contenido, attributes: nil);
                         
                         break;
                     case is ProductoSaludable.Type:
                         let obj = (ele as! ProductoSaludable);
                         //print("Producto Saludable: ", obj.id);
-                        let rutaEle = datosURL?.stringByAppendingString("/"+String(obj.id));
-                        let contenido = NSKeyedArchiver.archivedDataWithRootObject(obj);
-                        fileManager.createFileAtPath(rutaEle!, contents: contenido, attributes: nil);
+                        let rutaEle = (datosURL)! + ("/"+String(obj.id));
+                        let contenido = NSKeyedArchiver.archivedData(withRootObject: obj);
+                        fileManager.createFile(atPath: rutaEle, contents: contenido, attributes: nil);
                         break;
                     default:
                         print("Tipo desconocido: ", tipo);
@@ -133,42 +133,42 @@ class CargaInicial2 : NSObject{
     }
     
     //Método que lee los archivos almacenados en el dispositivo
-    func lee(tipo: AnyClass){
+    func lee(_ tipo: AnyClass){
         print("Inica Lectura: ", tipo);
         let paths = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true).first;
         var datosURL : String!;
         switch tipo {
         case is Producto.Type:
-            datosURL = (paths?.stringByAppendingString("/Productos"))!;
+            datosURL = ((paths)! + "/Productos");
             break;
         case is TipoInfo.Type:
-            datosURL = (paths?.stringByAppendingString("/TipoInfo"))!;
+            datosURL = ((paths)! + "/TipoInfo");
             break;
         case is Tag.Type:
-            datosURL = (paths?.stringByAppendingString("/Tag"))!;
+            datosURL = ((paths)! + "/Tag");
             break;
         case is Saludable.Type:
-            datosURL = (paths?.stringByAppendingString("/Saludable"))!;
+            datosURL = ((paths)! + "/Saludable");
             break;
         case is Favoritos.Type:
-            datosURL = (paths?.stringByAppendingString("/Favoritos"))!;
+            datosURL = ((paths)! + "/Favoritos");
             break;
         case is TItems.Type:
-            datosURL = (paths?.stringByAppendingString("/TItems"))!;
+            datosURL = ((paths)! + "/TItems");
             break;
         case is ProductoSaludable.Type:
-            datosURL = (paths?.stringByAppendingString("/ProductoSaludable"))!;
+            datosURL = ((paths)! + "/ProductoSaludable");
             break;
         case is UIImage.Type:
             //print("Lee imagenes");
-            datosURL = (paths?.stringByAppendingString("/Imagenes"))!;
+            datosURL = ((paths)! + "/Imagenes");
             break;
         default:
             print("LEE Tipo desconocido: ", tipo);
             break;
         }
         do{
-            let lista = try fileManager.contentsOfDirectoryAtPath(datosURL!);
+            let lista = try fileManager.contentsOfDirectory(atPath: datosURL!);
             carga(tipo, lista: lista, ruta: datosURL);
             //print("tama: ", lista.count);
             //for ll in lista{
@@ -184,15 +184,24 @@ class CargaInicial2 : NSObject{
         
     }
     
-    func carga(tipo: AnyClass, lista: [String], ruta: String){
+    func carga(_ tipo: AnyClass, lista: [String], ruta: String){
         switch tipo {
         case is Producto.Type:
             DatosC.contenedor.productos.removeAll();
             for ele in lista{
-                let rutaEle = ruta.stringByAppendingString("/"+ele);
-                let prod = (NSKeyedUnarchiver.unarchiveObjectWithData(fileManager.contentsAtPath(rutaEle)!));
-                //print("FECHA PROD: ",(prod as! Producto).id);
-                DatosC.contenedor.productos.append(prod as! Producto);
+                let rutaEle = ruta + ("/"+ele);
+                print("Ruta: ", rutaEle);
+                if(fileManager.fileExists(atPath: rutaEle)){
+                    print("Existe: ", fileManager.contents(atPath: rutaEle)) ;
+                    let data = fileManager.contents(atPath: rutaEle)!
+                    
+                    let prod = (NSKeyedUnarchiver.unarchiveObject(with: data));
+                    //print("FECHA PROD: ",(prod as! Producto).id);
+                    DatosC.contenedor.productos.append(prod as! Producto);
+                }else{
+                    print("NO existe")
+                }
+                
             }
             
             break;
@@ -200,8 +209,8 @@ class CargaInicial2 : NSObject{
             DatosB.cont.listaTInfo.removeAll();
             //print("TAMAINFO: ", lista.count);
             for ele in lista{
-                let rutaEle = ruta.stringByAppendingString("/"+ele);
-                let prod = (NSKeyedUnarchiver.unarchiveObjectWithData(fileManager.contentsAtPath(rutaEle)!));
+                let rutaEle = ruta + ("/"+ele);
+                let prod = (NSKeyedUnarchiver.unarchiveObject(with: fileManager.contents(atPath: rutaEle)!));
                 //print("TIPOINFO: ", (prod as! TipoInfo).valor);
                 DatosB.cont.listaTInfo.append(prod as! TipoInfo);
             }
@@ -210,40 +219,41 @@ class CargaInicial2 : NSObject{
         case is Tag.Type:
             DatosD.contenedor.tags.removeAll();
             for ele in lista{
-                let rutaEle = ruta.stringByAppendingString("/"+ele);
-                let prod = (NSKeyedUnarchiver.unarchiveObjectWithData(fileManager.contentsAtPath(rutaEle)!));
+                let rutaEle = ruta + ("/"+ele);
+                let prod = (NSKeyedUnarchiver.unarchiveObject(with: fileManager.contents(atPath: rutaEle)!));
                 DatosD.contenedor.tags.append(prod as! Tag);
             }
             break;
         case is Saludable.Type:
             DatosB.cont.saludables.removeAll();
             for ele in lista{
-                let rutaEle = ruta.stringByAppendingString("/"+ele);
-                let prod = (NSKeyedUnarchiver.unarchiveObjectWithData(fileManager.contentsAtPath(rutaEle)!));
+                let rutaEle = ruta + ("/"+ele);
+                let prod = (NSKeyedUnarchiver.unarchiveObject(with: fileManager.contents(atPath: rutaEle)!));
                 DatosB.cont.saludables.append(prod as! Saludable);
             }
             break;
         case is Favoritos.Type:
             DatosB.cont.favoritos.removeAll();
             for ele in lista{
-                let rutaEle = ruta.stringByAppendingString("/"+ele);
-                let prod = (NSKeyedUnarchiver.unarchiveObjectWithData(fileManager.contentsAtPath(rutaEle)!));
+                let rutaEle = ruta + ("/"+ele);
+                let prod = (NSKeyedUnarchiver.unarchiveObject(with: fileManager.contents(atPath: rutaEle)!));
                 DatosB.cont.favoritos.append(prod as! Favoritos);
             }
             break;
         case is TItems.Type:
             DatosB.cont.itemsFavo.removeAll();
             for ele in lista{
-                let rutaEle = ruta.stringByAppendingString("/"+ele);
-                let prod = (NSKeyedUnarchiver.unarchiveObjectWithData(fileManager.contentsAtPath(rutaEle)!));
+                let rutaEle = ruta + ("/"+ele);
+                let prod = (NSKeyedUnarchiver.unarchiveObject(with: fileManager.contents(atPath: rutaEle)!));
+                print("item: ", prod);
                 DatosB.cont.itemsFavo.append(prod as! TItems);
             }
             break;
         case is ProductoSaludable.Type:
             DatosB.cont.prodSaludables.removeAll();
             for ele in lista{
-                let rutaEle = ruta.stringByAppendingString("/"+ele);
-                let prod = (NSKeyedUnarchiver.unarchiveObjectWithData(fileManager.contentsAtPath(rutaEle)!));
+                let rutaEle = ruta + ("/"+ele);
+                let prod = (NSKeyedUnarchiver.unarchiveObject(with: fileManager.contents(atPath: rutaEle)!));
                 let prodS = (prod as! ProductoSaludable);
                 for pp in DatosC.contenedor.productos{
                     if(prodS.produ.id == pp.id){
@@ -259,8 +269,8 @@ class CargaInicial2 : NSObject{
         case is UIImage.Type:
             //print("Carga Imagenes");
             for ele in lista{
-                let rutaEle = ruta.stringByAppendingString("/"+ele);
-                let ima = (NSKeyedUnarchiver.unarchiveObjectWithData(fileManager.contentsAtPath(rutaEle)!));
+                let rutaEle = ruta + ("/"+ele);
+                let ima = (NSKeyedUnarchiver.unarchiveObject(with: fileManager.contents(atPath: rutaEle)!));
                 for prod in DatosC.contenedor.productos{
                     if(prod.id == Int(ele)){
                         //print("Asigna: ", prod.nombre, "ele: ", ele, " tt: ", ima);
@@ -276,35 +286,35 @@ class CargaInicial2 : NSObject{
         print("Carga: ", tipo);
     }
     
-    func exixte(tipo: AnyClass)->Bool{
+    func exixte(_ tipo: AnyClass)->Bool{
         var retorna = false;
         print("Inicia Comprobación: ",tipo);
         let paths = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true).first;
         var datosURL:String!;
         switch tipo {
         case is Producto.Type:
-            datosURL = (paths?.stringByAppendingString("/Productos"))!;
+            datosURL = ((paths)! + "/Productos");
             break;
         case is TipoInfo.Type:
-            datosURL = (paths?.stringByAppendingString("/TipoInfo"))!;
+            datosURL = ((paths)! + "/TipoInfo");
             break;
         case is Tag.Type:
-            datosURL = (paths?.stringByAppendingString("/Tag"))!;
+            datosURL = ((paths)! + "/Tag");
             break;
         case is Saludable.Type:
-            datosURL = (paths?.stringByAppendingString("/Saludable"))!;
+            datosURL = ((paths)! + "/Saludable");
             break;
         case is Favoritos.Type:
-            datosURL = (paths?.stringByAppendingString("/Favoritos"))!;
+            datosURL = ((paths)! + "/Favoritos");
             break;
         case is TItems.Type:
-            datosURL = (paths?.stringByAppendingString("/TItems"))!;
+            datosURL = ((paths)! + "/TItems");
             break;
         case is ProductoSaludable.Type:
-            datosURL = (paths?.stringByAppendingString("/ProductoSaludable"))!;
+            datosURL = ((paths)! + "/ProductoSaludable");
             break;
         case is UIImage.Type:
-            datosURL = (paths?.stringByAppendingString("/Imagenes"))!;
+            datosURL = ((paths)! + "/Imagenes");
             break;
         default:
             print("Tipo desconocido: ", tipo);
@@ -313,11 +323,11 @@ class CargaInicial2 : NSObject{
         if(!datosURL.isEmpty){
             //if(fileManager.fileExistsAtPath(datosURL)){
                 do{
-                    let lista = try fileManager.contentsOfDirectoryAtPath(datosURL);
+                    let lista = try fileManager.contentsOfDirectory(atPath: datosURL);
                     if(lista.count == 0){
                         print("Sin datos");
                         do{
-                            try fileManager.removeItemAtPath(datosURL);
+                            try fileManager.removeItem(atPath: datosURL);
                         }catch{
                             print("Error borrando directorio");
                         }
@@ -344,19 +354,19 @@ class CargaInicial2 : NSObject{
     }
     
     //Método que guarda las imágenes, independiente del método de guardar datos, ya que el switch no reconoce la clase como un tipo
-    func guardaImagenes(lista: [Producto]){
+    func guardaImagenes(_ lista: [Producto]){
         cInicial!.iniciaEvaluacion();
         let paths = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true).first;
         var datosURL : String!;
-        datosURL = (paths?.stringByAppendingString("/Imagenes"))!;
-        if(!fileManager.fileExistsAtPath(datosURL!)){
+        datosURL = ((paths)! + "/Imagenes");
+        if(!fileManager.fileExists(atPath: datosURL!)){
             do{
-                try fileManager.createDirectoryAtPath(datosURL!, withIntermediateDirectories: false, attributes: nil);
+                try fileManager.createDirectory(atPath: datosURL!, withIntermediateDirectories: false, attributes: nil);
                 for ele in lista{
                     let obj = (ele);
-                    let rutaEle = datosURL?.stringByAppendingString("/"+String(obj.id));
-                    let contenido = NSKeyedArchiver.archivedDataWithRootObject(obj.imagen!);
-                    fileManager.createFileAtPath(rutaEle!, contents: contenido, attributes: nil);
+                    let rutaEle = (datosURL)! + ("/"+String(obj.id));
+                    let contenido = NSKeyedArchiver.archivedData(withRootObject: obj.imagen!);
+                    fileManager.createFile(atPath: rutaEle, contents: contenido, attributes: nil);
                 }
             }catch{
                 

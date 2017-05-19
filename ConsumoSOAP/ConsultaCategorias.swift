@@ -9,46 +9,46 @@
 import Foundation
 import UIKit
 
-class ConsultaCatergorias: NSObject, NSURLConnectionDelegate, NSXMLParserDelegate {
+class ConsultaCatergorias: NSObject, NSURLConnectionDelegate, XMLParserDelegate {
     
-    var resp: NSData! = nil
+    var resp: Data! = nil
     var estado:NSMutableString!
-    var parser=NSXMLParser()
+    var parser=XMLParser()
     var eeleDiccio=NSMutableDictionary()
     var element=NSString()
     var profundidad = 0;
-    var task : NSURLSessionDataTask!;
+    var task : URLSessionDataTask!;
     
     func consulta(){
         let mensajeEnviado:String = "<soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/' xmlns:enp='http://enpoint.lunch.com.co/'><soapenv:Header/><soapenv:Body><enp:listaCategoriaEntity/></soapenv:Body></soapenv:Envelope>"
         
         let is_URL: String = "http://93.188.163.97:8080/Lunch2/adminEndpoint"
         
-        let lobj_Request = NSMutableURLRequest(URL: NSURL(string: is_URL)!)
-        let session = NSURLSession.sharedSession()
+        let lobj_Request = NSMutableURLRequest(url: URL(string: is_URL)!)
+        let session = URLSession.shared
         let _: NSError?
         
-        lobj_Request.HTTPMethod = "POST"
-        lobj_Request.HTTPBody = mensajeEnviado.dataUsingEncoding(NSUTF8StringEncoding)
+        lobj_Request.httpMethod = "POST"
+        lobj_Request.httpBody = mensajeEnviado.data(using: String.Encoding.utf8)
         lobj_Request.addValue("www.lunch.com", forHTTPHeaderField: "Host")
         lobj_Request.addValue("text/xml; charset=utf-8", forHTTPHeaderField: "Content-Type")
         lobj_Request.addValue(String(mensajeEnviado.characters.count), forHTTPHeaderField: "Content-Length")
         //lobj_Request.addValue("223", forHTTPHeaderField: "Content-Length")
         lobj_Request.addValue("\"bool\"", forHTTPHeaderField: "SOAPAction")
         
-        task = session.dataTaskWithRequest(lobj_Request, completionHandler: {data, response, error -> Void in
+        task = session.dataTask(with: lobj_Request as URLRequest, completionHandler: {data, response, error -> Void in
             var nulo = false;
             if(data == nil){
                 nulo = true;
                 print("Nulo en Categorias");
             }else{
-                let strData = NSString(data: data!, encoding: NSUTF8StringEncoding)
-                self.resp=strData?.dataUsingEncoding(NSUTF8StringEncoding)
-                self.parser=NSXMLParser(data: self.resp)
+                let strData = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
+                self.resp=strData?.data(using: String.Encoding.utf8.rawValue)
+                self.parser=XMLParser(data: self.resp)
                 self.parser.delegate=self
                 self.parser.parse();
             }
-            dispatch_async(dispatch_get_main_queue(),{
+            DispatchQueue.main.async(execute: {
                 if(nulo) && self.profundidad<2{
                     self.profundidad += 1;
                     self.task.cancel();
@@ -72,8 +72,8 @@ class ConsultaCatergorias: NSObject, NSURLConnectionDelegate, NSXMLParserDelegat
     var nombre : String?;
     var tipo : Int = -1;
     
-    func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
-        if(elementName as NSString).isEqualToString("listaCategoriaEntityResponse"){
+    func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
+        if(elementName as NSString).isEqual(to: "listaCategoriaEntityResponse"){
             estado=NSMutableString();
             estado="";
         }
@@ -92,7 +92,7 @@ class ConsultaCatergorias: NSObject, NSURLConnectionDelegate, NSXMLParserDelegat
         }
     }
     
-    func parser(parser: NSXMLParser, foundCharacters string: String) {
+    func parser(_ parser: XMLParser, foundCharacters string: String) {
         if(idCategoria){
             categoria = Int(string);
             idCategoria = false;
@@ -110,7 +110,7 @@ class ConsultaCatergorias: NSObject, NSURLConnectionDelegate, NSXMLParserDelegat
         //print("dd: ",string);
     }
     
-    func parser(parser: NSXMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
+    func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         
         if(elementName == "return"){
             /*
@@ -132,10 +132,10 @@ class ConsultaCatergorias: NSObject, NSURLConnectionDelegate, NSXMLParserDelegat
         let alto = vista.view.frame.height*0.4;
         let OX = (vista.view.frame.width/2)-(ancho/2);
         let OY = (vista.view.frame.height/2)-(alto/2);
-        let frameMensaje = CGRectMake(OX, OY, ancho, alto);
+        let frameMensaje = CGRect(x: OX, y: OY, width: ancho, height: alto);
         let mensaje = MensajeConexion(frame: frameMensaje, msg: nil);
         vista.view.addSubview(mensaje);
         mensaje.layer.zPosition=5;
-        vista.view.bringSubviewToFront(mensaje);
+        vista.view.bringSubview(toFront: mensaje);
     }
 }

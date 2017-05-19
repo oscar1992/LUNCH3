@@ -12,24 +12,24 @@ class ConsultaD: NSObject{
     
     var direcciones = [Direcciones]();
     
-    func consulta(direcc: String, padre: DatosPadre){
-        
-        let requestURL: NSURL = NSURL(string: "https://maps.googleapis.com/maps/api/geocode/json?address="+cambiaEspacios(direcc)+"&region=co&key=AIzaSyBggWRu3CeBU_bQGS-up8C8RIYN6aj8R9g")!;
-        let urlRequest: NSMutableURLRequest = NSMutableURLRequest(URL: requestURL)
-        let session = NSURLSession.sharedSession()
-        let task = session.dataTaskWithRequest(urlRequest) {
+    func consulta(_ direcc: String, padre: DatosPadre){
+        /*
+        let requestURL: URL = URL(string: "https://maps.googleapis.com/maps/api/geocode/json?address="+cambiaEspacios(direcc)+"&region=co&key=AIzaSyBggWRu3CeBU_bQGS-up8C8RIYN6aj8R9g")!;
+        let urlRequest: NSMutableURLRequest = NSMutableURLRequest(url: requestURL)
+        let session = URLSession.shared
+        let task = session.dataTask(with: urlRequest as URLRequest, completionHandler: {
             (data, response, error) -> Void in
             
-            let httpResponse = response as! NSHTTPURLResponse
+            let httpResponse = response as! HTTPURLResponse
             let statusCode = httpResponse.statusCode
             
             if (statusCode == 200) {
                 
                 
                 do{
-                    let json = try NSJSONSerialization.JSONObjectWithData(data!, options:.AllowFragments);
+                    let json = try JSONSerialization.jsonObject(with: data!, options:.allowFragments);
                     
-                    if let results = json["results"] as? [[String: AnyObject]]{
+                    if let results = (json["results"] as! [[String: AnyObject]]){
                         var direccion:String?;
                         var ciudadS: String?;
                         var latitud: String?;
@@ -102,7 +102,7 @@ class ConsultaD: NSObject{
                         self.direcciones.append(dir);
                         
                     }
-                    dispatch_async(dispatch_get_main_queue(),{
+                    DispatchQueue.main.async(execute: {
                         padre.iniciaMensaje(self.direcciones);
                         }
                     );
@@ -115,21 +115,21 @@ class ConsultaD: NSObject{
                 }
                 //print("Everyone is fine, file downloaded successfully.")
             }
-        }
+        }) 
         
         task.resume()
-        
+        */
     }
     
-    func cambiaEspacios(texto:String)->String{
+    func cambiaEspacios(_ texto:String)->String{
         var texto2 = texto;
         var pasa = true;
         var p = 0;
         while (pasa) {
-            let indice = texto2.startIndex.advancedBy(p);
+            let indice = texto2.characters.index(texto2.startIndex, offsetBy: p);
             //print("cara: ", texto2[indice]);
             if(texto2[indice]==" "){
-                texto2.replaceRange(Range.init(start: texto2.startIndex.advancedBy(p), end: texto2.startIndex.advancedBy(p+1)), with: "+");
+                texto2.replaceSubrange((texto2.characters.index(texto2.startIndex, offsetBy: p) ..< texto2.characters.index(texto2.startIndex, offsetBy: p+1)), with: "+");
             }
             p += 1;
             if(p >= texto.characters.count){

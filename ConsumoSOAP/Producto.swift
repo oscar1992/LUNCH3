@@ -23,9 +23,9 @@ class Producto: NSObject, NSCoding{
     var salud:Bool!;
     var listaDatos=[TipoInfo]();
     var categoria: Int!;
-    var ultimaActualizacion: NSDate!;
+    var ultimaActualizacion: Date!;
     
-    convenience init(id: Int, nombre: String, precio : Int, imagen: UIImage?, imagenString: String?, tipo: Int, disponible: Bool, salud: Bool, categoria: Int, ultimaActualizacion: NSDate) {
+    convenience init(id: Int, nombre: String, precio : Int, imagen: UIImage?, imagenString: String?, tipo: Int, disponible: Bool, salud: Bool, categoria: Int, ultimaActualizacion: Date) {
         self.init();
         self.id=id;
         self.nombre=nombre;
@@ -45,29 +45,33 @@ class Producto: NSObject, NSCoding{
     
     required convenience init(coder decoder: NSCoder) {
         self.init();
-        self.id = decoder.decodeObjectForKey("id") as! Int;
-        self.nombre = decoder.decodeObjectForKey("nombre") as! String;
-        self.precio = decoder.decodeObjectForKey("precio") as! Int;
-        self.imagen = decoder.decodeObjectForKey("imagen") as? UIImage;
-        self.imagenString = decoder.decodeObjectForKey("imagenString") as? String;
-        self.tipo = decoder.decodeObjectForKey("tipo") as! Int;
-        self.disponible = decoder.decodeObjectForKey("disponible") as! Bool;
-        self.salud = decoder.decodeObjectForKey("salud") as! Bool;
-        self.categoria = decoder.decodeObjectForKey("categoria") as! Int;
-        self.ultimaActualizacion = decoder.decodeObjectForKey("ultimaActualizacion") as! NSDate;
+        //print("decod: ", decoder.decodeObject(forKey: "nombre") as Any);
+        self.id = decoder.decodeInteger(forKey: "idd");
+        //self.id = decoder.decodeObject(forKey: "idd") as! Int;
+        self.nombre = decoder.decodeObject(forKey: "nombre") as! String;
+        self.precio = decoder.decodeInteger(forKey: "precio");
+        self.imagen = decoder.decodeObject(forKey: "imagen") as? UIImage;
+        self.imagenString = decoder.decodeObject(forKey: "imagenString") as? String;
+        self.tipo = decoder.decodeInteger(forKey: "tipo");
+        self.disponible = decoder.decodeBool(forKey: "disponible");
+        self.salud = decoder.decodeBool(forKey: "salud");
+        self.categoria = decoder.decodeInteger(forKey: "categoria");
+        self.ultimaActualizacion = decoder.decodeObject(forKey: "ultimaActualizacion") as! Date;
     }
     
-    func encodeWithCoder(coder: NSCoder) {
-        if let id = id { coder.encodeObject(id, forKey: "id") }
-        if let nombre = nombre { coder.encodeObject(nombre, forKey: "nombre") }
-        if let precio = precio { coder.encodeObject(precio, forKey: "precio") }
-        if let imagen = imagen { coder.encodeObject(imagen, forKey: "imagen") }
-        if let imagenString = imagenString { coder.encodeObject(imagenString, forKey: "imagenString") }
-        if let tipo = tipo { coder.encodeObject(tipo, forKey: "tipo") }
-        if let disponible = disponible { coder.encodeObject(disponible, forKey: "disponible") }
-        if let salud = salud { coder.encodeObject(salud, forKey: "salud") }
-        if let categoria = categoria { coder.encodeObject(categoria, forKey: "categoria") }
-        if let ultimaActualizacion = ultimaActualizacion{ coder.encodeObject(ultimaActualizacion, forKey:  "ultimaActualizacion")}
+    func encode(with coder: NSCoder) {
+        
+        if let id = id { coder.encode(id, forKey: "idd"); print("qq: "); }
+        //print("Guarda Prod: ", coder.decodeObject(forKey: "id"));
+        if let nombre = nombre { coder.encode(nombre, forKey: "nombre") }
+        if let precio = precio { coder.encode(precio, forKey: "precio") }
+        if let imagen = imagen { coder.encode(imagen, forKey: "imagen") }
+        if let imagenString = imagenString { coder.encode(imagenString, forKey: "imagenString") }
+        if let tipo = tipo { coder.encode(tipo, forKey: "tipo") }
+        if let disponible = disponible { coder.encode(disponible, forKey: "disponible") }
+        if let salud = salud { coder.encode(salud, forKey: "salud") }
+        if let categoria = categoria { coder.encode(categoria, forKey: "categoria") }
+        if let ultimaActualizacion = ultimaActualizacion{ coder.encode(ultimaActualizacion, forKey:  "ultimaActualizacion")}
     }
     
     //MARK: Porpiedades

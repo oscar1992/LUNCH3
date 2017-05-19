@@ -22,21 +22,21 @@ class ScrollNEntregadas: UIScrollView, UIScrollViewDelegate {
         }
     }
     
-    func cargaPedidos(pedidos: [Pedido]){
+    func cargaPedidos(_ pedidos: [Pedido]){
         limpia();
         let alto = DatosC.contenedor.altoP*0.3;
         let ancho = DatosC.contenedor.anchoP;
         let OX = CGFloat(0);
         var p = CGFloat(0);
-        var espacio = DatosC.contenedor.altoP*0.02;
+        let espacio = DatosC.contenedor.altoP*0.02;
         for ped in pedidos{
             let OY = (alto+espacio) * p;
-            let frame = CGRectMake(OX, OY, ancho, alto);
+            let frame = CGRect(x: OX, y: OY, width: ancho, height: alto);
             let vista = VistaPedido(frame: frame, pedido: ped);
             self.addSubview(vista);
             p += 1;
         }
-        self.contentSize=CGSizeMake(ancho, ((alto+espacio)*p));
+        self.contentSize=CGSize(width: ancho, height: ((alto+espacio)*p));
     }
     
     required init?(coder aDecoder: NSCoder) {

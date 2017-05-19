@@ -32,25 +32,25 @@ class VistaDirecciones: UIView {
         var p = CGFloat(0);
         for dir in direc{
             let OY = alto*p;
-            let frameBot = CGRectMake(OX, OY, ancho, alto);
+            let frameBot = CGRect(x: OX, y: OY, width: ancho, height: alto);
             print("frame: ", frameBot);
             iniciaBoton(frameBot, dir: dir);
             p += 1;
         }
     }
     
-    func iniciaBoton(frame: CGRect, dir: Direcciones){
+    func iniciaBoton(_ frame: CGRect, dir: Direcciones){
         let bot = BotDirecciones(frame: frame, dir: dir);
-        let frameDir = CGRectMake(0, 0, frame.width, frame.height);
+        let frameDir = CGRect(x: 0, y: 0, width: frame.width, height: frame.height);
         let labdir = UILabel(frame: frameDir);
         labdir.text=dir.direccion;
         bot.addSubview(labdir);
-        bot.addTarget(self, action: #selector(VistaDirecciones.dir(_:)), forControlEvents: .TouchDown);
+        bot.addTarget(self, action: #selector(VistaDirecciones.dir(_:)), for: .touchDown);
         self.addSubview(bot);
-        bot.backgroundColor=UIColor.greenColor();
+        bot.backgroundColor=UIColor.green;
     }
     
-    func dir(bot: BotDirecciones){
+    func dir(_ bot: BotDirecciones){
         DatosB.cont.nodos.cercania(bot.direccion);
     }
     
@@ -58,9 +58,9 @@ class VistaDirecciones: UIView {
         let ancho = self.frame.width*0.1;
         let OX = self.frame.width-ancho;
         let OY = CGFloat(0);
-        let frameBot = CGRectMake(OX, OY, ancho, ancho);
+        let frameBot = CGRect(x: OX, y: OY, width: ancho, height: ancho);
         let bot = UIButton(frame: frameBot);
-        bot.addTarget(self, action: #selector(VistaDirecciones.cerrarVista), forControlEvents: .TouchDown);
+        bot.addTarget(self, action: #selector(VistaDirecciones.cerrarVista), for: .touchDown);
         self.addSubview(bot);
         DatosB.cont.poneFondoTot(bot, fondoStr: "BotonCerrar", framePers: nil, identi: nil, scala: true);
     }

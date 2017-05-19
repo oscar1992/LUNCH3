@@ -20,8 +20,8 @@ class FacturaNino: UIView {
     required init(frame: CGRect, nino: BotonNino) {
         super.init(frame: frame);
         
-        Nombre = UILabel(frame: CGRectMake((self.frame.width/2-100), 0, CGFloat(100), 30));
-        print("sema: ",nino.nombreNino,"--" ,nino.panelNino.mesActual);
+        Nombre = UILabel(frame: CGRect(x: (self.frame.width/2-100), y: 0, width: CGFloat(100), height: 30));
+        //print("sema: ",nino.nombreNino,"--" ,nino.panelNino.mesActual);
         _=0;
         _=CGFloat(10);
         _ = CGFloat(30);
@@ -53,7 +53,7 @@ class FacturaNino: UIView {
         }
          */
         print(yini);
-        self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.width, yini)
+        self.frame = CGRect(x: self.frame.origin.x, y: self.frame.origin.y, width: self.frame.width, height: yini)
         self.addSubview(Nombre!);
         
     }

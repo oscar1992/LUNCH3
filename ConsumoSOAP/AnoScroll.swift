@@ -7,9 +7,44 @@
 //
 
 import UIKit
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func >= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l >= r
+  default:
+    return !(lhs < rhs)
+  }
+}
+
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 class AnoScroll: UIScrollView, UIScrollViewDelegate {
-    
+    /*
     var padre:Calendario!;
     //var años = [An_o]();
     var Nino : Ninos!;
@@ -17,7 +52,7 @@ class AnoScroll: UIScrollView, UIScrollViewDelegate {
     var meses = [Mes]();
     var slide = UIView();
     var primera = true;
-    private var posMeses = [(CGFloat, CGFloat, Mes)]();
+    fileprivate var posMeses = [(CGFloat, CGFloat, Mes)]();
     
     required init(frame: CGRect, nino: Ninos) {
         super.init(frame: frame);
@@ -48,10 +83,10 @@ class AnoScroll: UIScrollView, UIScrollViewDelegate {
     //Método que calcula los meses siguientes a ser pintados
     func iniciaTiempo(){
         let ff=padre.fechaActual;
-        let calendar=NSCalendar.currentCalendar();
+        let calendar=Calendar.current;
         
-        var AñoActual = calendar.component(.Year, fromDate: ff!);
-        var mesActual=calendar.component(.Month, fromDate: ff!);
+        var AñoActual = (calendar as NSCalendar).component(.year, from: ff! as Date);
+        var mesActual=(calendar as NSCalendar).component(.month, from: ff! as Date);
         //Armo año nuevo
         
         for _ in mesActual ... (mesActual+proyeccion){
@@ -81,7 +116,7 @@ class AnoScroll: UIScrollView, UIScrollViewDelegate {
                     X = 0;
                     fila += 1;
                 }
-                let frameDia = CGRectMake(anchoD*CGFloat(X), altoD*CGFloat(fila), anchoD, altoD);
+                let frameDia = CGRect(x: anchoD*CGFloat(X), y: altoD*CGFloat(fila), width: anchoD, height: altoD);
                 dia.frame=frameDia;
                 dia.ano=self;
                 dia.mes = mes;
@@ -93,17 +128,17 @@ class AnoScroll: UIScrollView, UIScrollViewDelegate {
                 dia.setFondo2(1);
                 dia.addSubview(dia.diaTit!);
                 //print("nn: ", dia.diaSenama);
-                slide.bringSubviewToFront(dia);
+                slide.bringSubview(toFront: dia);
                 slide.addSubview(dia);
                 
                 X += 1;
             }
         }
-        let frameSlide = CGRectMake(0, 0, self.frame.width, (CGFloat(fila+1)*(altoD)));
+        let frameSlide = CGRect(x: 0, y: 0, width: self.frame.width, height: (CGFloat(fila+1)*(altoD)));
         //print("frame: ", frameSlide);
         slide.frame=frameSlide;
         //slide.backgroundColor=UIColor.yellowColor();
-        self.contentSize = CGSizeMake(slide.frame.width, slide.frame.height);
+        self.contentSize = CGSize(width: slide.frame.width, height: slide.frame.height);
         self.addSubview(slide);
     }
     
@@ -136,14 +171,14 @@ class AnoScroll: UIScrollView, UIScrollViewDelegate {
                 
             
             let fecha = lonc.fecha;
-            let formateador:NSDateFormatter=NSDateFormatter();
-            formateador.locale = NSLocale.init(localeIdentifier: "es_CO");
+            let formateador:DateFormatter=DateFormatter();
+            formateador.locale = Locale.init(identifier: "es_CO");
             formateador.dateFormat="yyyy";
-            let año = Int(formateador.stringFromDate(fecha!));
+            let año = Int(formateador.string(from: fecha! as Date));
             formateador.dateFormat="MM";
-            let mes = Int(formateador.stringFromDate(fecha!));
+            let mes = Int(formateador.string(from: fecha! as Date));
             formateador.dateFormat="dddd";
-            let dia = Int(formateador.stringFromDate(fecha!));
+            let dia = Int(formateador.string(from: fecha! as Date));
             //print ("Año: ", año);
             //print ("Mes: ", mes);
             //f.id = idNino;print ("Día: ", dia);
@@ -181,7 +216,7 @@ class AnoScroll: UIScrollView, UIScrollViewDelegate {
         
     }
     //Método que trae un día del calendario
-    func traeDia(año: Int, Mes: Int, DiaN: Int)->Dia?{
+    func traeDia(_ año: Int, Mes: Int, DiaN: Int)->Dia?{
         var diaR : Dia?;
         //for nino in (añoActual.padre.padre.pestañasNinos?.ninos)!{
             //print("Nino: ",nino.activo, "NN: ", nino.ninoInt?.nombreNino);
@@ -228,7 +263,7 @@ class AnoScroll: UIScrollView, UIScrollViewDelegate {
         meses.last?.dias.last?.bloqueaDiasAnteriores();
     }
     
-    func scrollViewDidScroll(scrollView: UIScrollView){
+    func scrollViewDidScroll(_ scrollView: UIScrollView){
         if(self.contentOffset.y > 0){
             //padre.textoMes!.text =
             calcuaMes(self.contentOffset.y);
@@ -236,7 +271,7 @@ class AnoScroll: UIScrollView, UIScrollViewDelegate {
         }
     }
     
-    func scrollViewDidEndDecelerating(scrollView: UIScrollView){
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView){
         //print("CCCC: ", self.contentOffset, "ppp: ", padre.textoMes);
         if(self.contentOffset.y > 0){
             //padre.textoMes!.text =
@@ -245,7 +280,7 @@ class AnoScroll: UIScrollView, UIScrollViewDelegate {
         
     }
     
-    func calcuaMes(posY: CGFloat)->String{
+    func calcuaMes(_ posY: CGFloat)->String{
         //print("calcula: ", posY);
         var ret:String!;
         ret = "";
@@ -322,9 +357,9 @@ class AnoScroll: UIScrollView, UIScrollViewDelegate {
         }
         */
         
-        let año = NSCalendar.currentCalendar().component(.Year, fromDate: NSDate());
-        let mes = NSCalendar.currentCalendar().component(.Month, fromDate: NSDate());
-        let dia = NSCalendar.currentCalendar().component(.Day, fromDate: NSDate());
+        let año = (Calendar.current as NSCalendar).component(.year, from: Date());
+        let mes = (Calendar.current as NSCalendar).component(.month, from: Date());
+        let dia = (Calendar.current as NSCalendar).component(.day, from: Date());
         print("tt: ",self.traeDia(año, Mes: mes, DiaN: dia)?.fecha);
         self.traeDia(año, Mes: mes, DiaN: dia)?.setFondo2(4);
     }
@@ -363,7 +398,7 @@ class AnoScroll: UIScrollView, UIScrollViewDelegate {
     }
     
     //Método que pinta el dia de la entrega de acuerdo a la semana
-    func pintaDiaEntrega(mes: Mes, semana: Int){
+    func pintaDiaEntrega(_ mes: Mes, semana: Int){
         var mesT = mes;
         var semanaT = semana;
         //print("sema: ", semanaT, " messema: ", mes.nSemanas);
@@ -414,9 +449,9 @@ class AnoScroll: UIScrollView, UIScrollViewDelegate {
     
     func offsetVisible(){
         //calcuaMes(self.contentOffset.y);
-        let mascara = UIView(frame: CGRectMake(0, self.frame.origin.y, DatosC.contenedor.anchoP, self.frame.height));
+        let mascara = UIView(frame: CGRect(x: 0, y: self.frame.origin.y, width: DatosC.contenedor.anchoP, height: self.frame.height));
         mascara.alpha = 1;
-        mascara.backgroundColor=UIColor.redColor();
+        mascara.backgroundColor=UIColor.red;
         //self.padre.view.maskView=mascara;
         //self.layer.mask?.bounds = CGRectMake(0, self.frame.origin.y, DatosC.contenedor.anchoP, self.frame.height);
         //print("mak: ", self.layer.mask!.bounds);
@@ -425,9 +460,9 @@ class AnoScroll: UIScrollView, UIScrollViewDelegate {
     
     //Método que ubica el scroll en el día Actual
     func posicionaDiaActual()->CGFloat{
-        let año = NSCalendar.currentCalendar().component(.Year, fromDate: NSDate());
-        let mes = NSCalendar.currentCalendar().component(.Month, fromDate: NSDate());
-        let dia = NSCalendar.currentCalendar().component(.Day, fromDate: NSDate());
+        let año = (Calendar.current as NSCalendar).component(.year, from: Date());
+        let mes = (Calendar.current as NSCalendar).component(.month, from: Date());
+        let dia = (Calendar.current as NSCalendar).component(.day, from: Date());
         print("tt: ",self.traeDia(año, Mes: mes, DiaN: dia)?.fecha);
         return (self.traeDia(año, Mes: mes, DiaN: dia)?.frame.origin.y)!
     }
@@ -438,5 +473,5 @@ class AnoScroll: UIScrollView, UIScrollViewDelegate {
         // Drawing code
     }
     */
-
+*/
 }

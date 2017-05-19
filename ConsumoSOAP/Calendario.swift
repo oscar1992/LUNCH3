@@ -9,10 +9,10 @@
 import UIKit
 
 class Calendario: UIViewController {
-
+/*
     //var mesScroll:MesScroll!;
     var subPanel:UIView?;
-    var fechaActual: NSDate?;
+    var fechaActual: Date?;
     var pestañasNinos : CalendarioNinos?;
     
     var textoMes:UILabel!;
@@ -44,11 +44,11 @@ class Calendario: UIViewController {
     }
     
     //Método que permite continuar a la pantalla del Reporte-Factura
-    func avanza(sender: AnyObject){
+    func avanza(_ sender: AnyObject){
         //leeMes();
         //DatosC.contenedor.ninoActual!.mesActual=DatosC.mesActual;
         //print("NN: ", DatosC.contenedor.ninoActual?.padre?.nombreNino);
-        self.performSegueWithIdentifier("Factura", sender: nil);
+        self.performSegue(withIdentifier: "Factura", sender: nil);
     }
 
     
@@ -57,7 +57,7 @@ class Calendario: UIViewController {
         let OY = DatosC.contenedor.altoP*0.06;
         let alto = DatosC.contenedor.altoP*0.04;
         let ancho = DatosC.contenedor.anchoP*0.8;
-        let frame = CGRectMake(0, OY, ancho, alto);
+        let frame = CGRect(x: 0, y: OY, width: ancho, height: alto);
         
         
         pestañasNinos = CalendarioNinos();
@@ -69,7 +69,7 @@ class Calendario: UIViewController {
     
     // Método que inicia el calendario con al fecha actual
     func iniciafechaActual(){
-        fechaActual=NSDate();
+        fechaActual=Date();
         
          
         /// Fecha simulada 
@@ -85,10 +85,10 @@ class Calendario: UIViewController {
         //LΩos años deben empesar en la primera compra del cliente en el historial
         //let añoActual=calendar.component(.Year, fromDate: fechaActual!);
         //let mesActual=calendar.component(.Month, fromDate: fechaActual!);
-        let formateador:NSDateFormatter=NSDateFormatter();
-        formateador.locale = NSLocale.init(localeIdentifier: "es_CO");
+        let formateador:DateFormatter=DateFormatter();
+        formateador.locale = Locale.init(identifier: "es_CO");
         formateador.dateFormat="yyyy-MM-dd";
-        print("fecha Actual: ", formateador.stringFromDate(fechaActual!));
+        print("fecha Actual: ", formateador.string(from: fechaActual!));
     }
     
     //Método que inicia el botón de devolver
@@ -97,23 +97,23 @@ class Calendario: UIViewController {
         let alto = ancho;
         let OX = CGFloat(0);
         let OY = CGFloat(0);
-        let frameBot = CGRectMake(OX, OY, ancho, alto);
+        let frameBot = CGRect(x: OX, y: OY, width: ancho, height: alto);
         let volver = UIButton(frame: frameBot);
-        let frameFondo = CGRectMake((ancho/2)-((ancho*0.5)/2), (alto/2)-((alto*0.5)/2), ancho*0.5, alto*0.5);
+        let frameFondo = CGRect(x: (ancho/2)-((ancho*0.5)/2), y: (alto/2)-((alto*0.5)/2), width: ancho*0.5, height: alto*0.5);
         let img = UIImage(named: "Volver");
         let backImg=UIImageView(frame: frameFondo);
         backImg.image=img;
-        backImg.contentMode=UIViewContentMode.ScaleAspectFit;
+        backImg.contentMode=UIViewContentMode.scaleAspectFit;
         volver.addSubview(backImg);
         //volver.backgroundColor=UIColor.redColor();
         //volver.backgroundColor = UIColor.redColor();
-        volver.addTarget(self, action: #selector(Calendario.volver(_:)), forControlEvents: .TouchDown);
+        volver.addTarget(self, action: #selector(Calendario.volver(_:)), for: .touchDown);
         self.view.addSubview(volver);
-        self.view.bringSubviewToFront(volver);
+        self.view.bringSubview(toFront: volver);
     }
     
     //Método que devuelve a la vista del home
-    func volver(sender: UIButton){
+    func volver(_ sender: UIButton){
         //print("volv");
         for nino in DatosC.contenedor.ninos{
             if (nino.activo==true){
@@ -125,16 +125,16 @@ class Calendario: UIViewController {
             }
         }
         
-        self.dismissViewControllerAnimated(true, completion: nil);
+        self.dismiss(animated: true, completion: nil);
     }
     
     func Fondo(){
         let img = UIImage(named: "FondoCalendario");
-        let frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height);
+        let frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height);
         let back = UIImageView(frame: frame);
         back.image=img;
         self.view.addSubview(back);
-        self.view.sendSubviewToBack(back);
+        self.view.sendSubview(toBack: back);
     }
     
     //Método que inicia el labl del mes actual
@@ -144,7 +144,7 @@ class Calendario: UIViewController {
         let alto = DatosC.contenedor.altoP*0.09;
         let OX = (DatosC.contenedor.anchoP/2)-(ancho/2);
         let OY = DatosC.contenedor.altoP*0.1;
-        let frameTexto = CGRectMake(OX, OY, ancho, alto);
+        let frameTexto = CGRect(x: OX, y: OY, width: ancho, height: alto);
         textoMes = UILabel(frame: frameTexto);
         //textoMes.backgroundColor=UIColor.redColor();
         for nino in (pestañasNinos?.ninos)!{
@@ -153,11 +153,11 @@ class Calendario: UIViewController {
             }
         }
         textoMes.textColor=UIColor.init(red: 0.02, green: 0.58, blue: 0.29, alpha: 1);
-        textoMes.textAlignment=NSTextAlignment.Center;
+        textoMes.textAlignment=NSTextAlignment.center;
         textoMes.font=UIFont(name: "SansBeaM Head", size: alto);
         textoMes.accessibilityIdentifier = "Mes";
         self.view.addSubview(textoMes);
-        self.view.bringSubviewToFront(textoMes);
+        self.view.bringSubview(toFront: textoMes);
     }
     
     //Método que remueve el label del mes
@@ -166,7 +166,7 @@ class Calendario: UIViewController {
             if(vv.accessibilityIdentifier == "Mes"){
                 print("Posee");
                 let text = vv as! UILabel;
-                text.textColor=UIColor.redColor();
+                text.textColor=UIColor.red;
                 //vv.removeFromSuperview();
             }
         }
@@ -183,7 +183,7 @@ class Calendario: UIViewController {
         let espacio = (DatosC.contenedor.anchoP/2)-(ancho/2);
         //print("VistaActual: ", OY);
         for i in 0...7{
-            let labFrame = CGRectMake((OX*CGFloat(i))+espacio, OY, OX, alto);
+            let labFrame = CGRect(x: (OX*CGFloat(i))+espacio, y: OY, width: OX, height: alto);
             //print("ff: ", labFrame);
             let lab = UILabel(frame: labFrame);
             switch i {
@@ -211,7 +211,7 @@ class Calendario: UIViewController {
             default:
                 break;
             }
-            lab.textAlignment=NSTextAlignment.Center;
+            lab.textAlignment=NSTextAlignment.center;
             lab.textColor=UIColor.init(red: 0.02, green: 0.58, blue: 0.29, alpha: 1);
             lab.font=UIFont(name: "SansBeam Head", size: alto*0.8);
             self.view.addSubview(lab);
@@ -226,18 +226,18 @@ class Calendario: UIViewController {
         let OY = DatosC.contenedor.altoP*0.77;
         let altoMsg = DatosC.contenedor.anchoP*0.23;
         let OX = (DatosC.contenedor.anchoP/2)-((alto+altoMsg)/2);
-        let framePed = CGRectMake(OX, OY, ancho, alto);
-        let frameMesg = CGRectMake(OX+ancho, OY, altoMsg, alto);
+        let framePed = CGRect(x: OX, y: OY, width: ancho, height: alto);
+        let frameMesg = CGRect(x: OX+ancho, y: OY, width: altoMsg, height: alto);
         let msg = UILabel(frame: frameMesg);
         msg.text = "En este día recibiras tu pedido";
         msg.font=UIFont(name: "SansBeamHead-Medium", size: alto/4);
         //msg.lineBreakMode = NSLineBreakMode.ByWordWrapping;
-        msg.textColor=UIColor.grayColor();
+        msg.textColor=UIColor.gray;
         msg.numberOfLines=0;
         let img = UIImage(named: "Convencion");
         let backImg = UIImageView(frame: framePed);
         backImg.image=img;
-        backImg.contentMode=UIViewContentMode.ScaleAspectFit;
+        backImg.contentMode=UIViewContentMode.scaleAspectFit;
         self.view.addSubview(backImg);
         self.view.addSubview(msg);
     }
@@ -248,19 +248,19 @@ class Calendario: UIViewController {
         let alto = DatosC.contenedor.altoP*0.06;
         let OY = DatosC.contenedor.altoP*0.88;
         let OX = (DatosC.contenedor.anchoP/2)-(ancho/2);
-        let frameBot = CGRectMake(OX, OY, ancho, alto);
+        let frameBot = CGRect(x: OX, y: OY, width: ancho, height: alto);
         let bot = UIButton(frame: frameBot);
-        let frameback = CGRectMake(0, 0, ancho, alto);
+        let frameback = CGRect(x: 0, y: 0, width: ancho, height: alto);
         let img = UIImage(named: "ConfirmarPedido");
         let backimg = UIImageView(frame: frameback);
         backimg.image=img;
-        backimg.contentMode=UIViewContentMode.ScaleAspectFit;
+        backimg.contentMode=UIViewContentMode.scaleAspectFit;
         bot.addSubview(backimg);
         self.view.addSubview(bot);
     }
     
     //Mètodo que oculta la barra en este viewcontroller
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden : Bool {
         return true
     }
     
@@ -282,5 +282,5 @@ class Calendario: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
+*/
 }

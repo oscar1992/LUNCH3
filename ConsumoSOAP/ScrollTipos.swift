@@ -33,12 +33,12 @@ class ScrollTipos: UIScrollView, UIScrollViewDelegate {
         }
         for tipo in DatosB.cont.listaLoncheras{
             
-            let frameVista = CGRectMake(0, alto*CGFloat(p), self.frame.width, alto);
+            let frameVista = CGRect(x: 0, y: alto*CGFloat(p), width: self.frame.width, height: alto);
             let vv = VistaTipo(frame: frameVista, lonc: tipo.0, cant: tipo.1, indi: p);
             self.addSubview(vv);
             p += 1;
         }
-        self.contentSize=CGSizeMake(self.frame.width, alto*CGFloat(p));
+        self.contentSize=CGSize(width: self.frame.width, height: alto*CGFloat(p));
     }
     
 }

@@ -19,7 +19,7 @@ class Caja2: UIButton {
         self.id=id;
         self.nombre=nombre;
         self.items=items;
-        self.addTarget(self, action: #selector(Caja2.llena), forControlEvents: .TouchDown);
+        self.addTarget(self, action: #selector(Caja2.llena), for: .touchDown);
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -28,15 +28,16 @@ class Caja2: UIButton {
     
     //Método que llena la lonchera con los items de la caja saludable
     func llena(){
-        //print("Llena: ", items.count);
+        print("Llena: ", items.count);
         var p = 1;
         DatosB.cont.home2.lonchera.limpia();
         for item in items{
-            //print("item: ", item.nombre);
+            print("item: ", item.nombre);
             if (self.accessibilityIdentifier=="Saludable"){
                 DatosB.cont.home2.lonchera.setCasilla(p, prod: item, salud: true);
             }
             if(self.accessibilityIdentifier=="Favorita"){
+                print("ItemF: ", item.nombre)
                 DatosB.cont.home2.lonchera.setCasilla(p, prod: item, salud: false);
             }
             

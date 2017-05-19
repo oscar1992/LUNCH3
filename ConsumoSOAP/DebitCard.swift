@@ -38,15 +38,15 @@ class DebitCard: NSObject , NSURLConnectionDelegate{
         uid = String(DatosD.contenedor.padre.id!);
         email = String(trataEmail(DatosD.contenedor.padre.email!));
         sesionId = "AwXytakRpysZKMW8PoWyB6F9FhYx6W";
-        timeStamp = String(Int(NSDate().timeIntervalSince1970));
+        timeStamp = String(Int(Date().timeIntervalSince1970));
     }
     
     //Método que cambia el @ forzado a su equivalente en UTF8 Encoded
-    func trataEmail(email: String)->String{
+    func trataEmail(_ email: String)->String{
         var retorna = email;
         for letra in email.characters{
             if(letra == "@"){
-                retorna.replaceRange(retorna.rangeOfString("@")!, with: "%40");
+                retorna.replaceSubrange(retorna.range(of: "@")!, with: "%40");
             }
             
         }
@@ -61,7 +61,7 @@ class DebitCard: NSObject , NSURLConnectionDelegate{
         cadenaSHA += "&email="+email+"&ip_address="+ip+"&product_amount="+String(cantidad)+".00";
         cadenaSHA += "&product_description="+descripcion+"&session_id="+sesionId;
         cadenaSHA += "&uid="+uid+"&vat="+vat+"&"+timeStamp+"&"+sesionId;
-        let datos = cadenaSHA.dataUsingEncoding(NSUTF8StringEncoding);
+        let datos = cadenaSHA.data(using: String.Encoding.utf8);
         print("Pre SHA: ", cadenaSHA);
         envia += "https://ccapi-stg.paymentez.com/api/cc/debit?";
         envia += "application_code="+aplicationCode;
@@ -77,11 +77,11 @@ class DebitCard: NSObject , NSURLConnectionDelegate{
         envia += "&auth_timestamp="+timeStamp;
         envia += "&auth_token="+String(sha256(datos!));
         print("ENVIA: ", envia);
-        let url = NSURL(string: envia);
+        let url = URL(string: envia);
         //print("Envia: ", url!);
-        let request = NSMutableURLRequest(URL: url!);
-        request.HTTPMethod = "POST";
-        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) {(response, data, error) in
+        let request = NSMutableURLRequest(url: url!);
+        request.httpMethod = "POST";
+        NSURLConnection.sendAsynchronousRequest(request as URLRequest, queue: OperationQueue.main) {(response, data, error) in
             //print(NSString(data: data!, encoding: NSUTF8StringEncoding));
             if(data != nil){
                 self.leeJSON(data!);
@@ -93,29 +93,32 @@ class DebitCard: NSObject , NSURLConnectionDelegate{
     }
     
     //Método que hashea una cadena de texto introducido a travez del encriptado SHA256
-    func sha256(data : NSData) -> String {
-        let res = NSMutableData(length: Int(CC_SHA256_DIGEST_LENGTH))
-        CC_SHA256(data.bytes, CC_LONG(data.length), UnsafeMutablePointer(res!.mutableBytes))
-        return limpia(String(res!));
+    func sha256(_ data : Data) -> String {
+        var res = NSMutableData(length: Int(CC_SHA256_DIGEST_LENGTH))
+        let mutableRaw = UnsafeMutableRawPointer(&res);
+        let pointerOpa = OpaquePointer(mutableRaw);
+        let contextPtr = UnsafeMutablePointer<UInt8>(pointerOpa)
+        CC_SHA256((data as NSData).bytes, CC_LONG(data.count), contextPtr)
+        return limpia(String(describing: res!));
     }
     
     //Método que quita espacios y simbolos del SHA generado
-    func limpia(num: String)->String{
+    func limpia(_ num: String)->String{
         var cambia = num;
         //var pos = [Range<String.Index>]();
         var p = 0;
         for letra in cambia.characters{
             if(letra == " "){
                 //pos.append(cambia.rangeOfString(" ")!);
-                cambia.replaceRange(cambia.rangeOfString(" ")!, with: "");
+                cambia.replaceSubrange(cambia.range(of: " ")!, with: "");
                 //print("Cambia: ", cambia);
             }
             if(letra == "<"){
-                cambia.replaceRange(cambia.rangeOfString("<")!, with: "");
+                cambia.replaceSubrange(cambia.range(of: "<")!, with: "");
                 //print("Cambia: ", cambia);
             }
             if(letra == ">"){
-                cambia.replaceRange(cambia.rangeOfString(">")!, with: "");
+                cambia.replaceSubrange(cambia.range(of: ">")!, with: "");
                 //print("Cambia: ", cambia);
             }
             p += 1;
@@ -133,9 +136,9 @@ class DebitCard: NSObject , NSURLConnectionDelegate{
     
     
     //Método que lee el JSON que llega
-    func leeJSON(data: NSData){
+    func leeJSON(_ data: Data){
         do{
-            let json = try NSJSONSerialization.JSONObjectWithData(data, options: []) as! NSDictionary;
+            let json = try JSONSerialization.jsonObject(with: data, options: []) as! NSDictionary;
             var estado = "";
             for ele in json{
                 //print("Ele: ", ele.key);
@@ -160,10 +163,10 @@ class DebitCard: NSObject , NSURLConnectionDelegate{
     }
     
     //Método que cambia el estado del pedido a exitoso
-    func cambiaEstado(estado: Bool){
+    func cambiaEstado(_ estado: Bool){
         let pedido = DatosC.contenedor.pedido;
         let confirma = ConfirmaPedido();
-        confirma.confirmaPedido(String(pedido!.id), idPadre: DatosD.contenedor.padre, fechaPedido: pedido!.fechaPedido, fechaEntrega: pedido!.fechaEntrega, horaEntrega: pedido!.horaEntrega, valor: pedido!.valor, cantidad: pedido!.cantidad, metodo: pedido!.metodo, aprobado: estado);
+        confirma.confirmaPedido(String(describing: pedido!.id), idPadre: DatosD.contenedor.padre, fechaPedido: pedido!.fechaPedido, fechaEntrega: pedido!.fechaEntrega, horaEntrega: pedido!.horaEntrega, valor: pedido!.valor, cantidad: pedido!.cantidad, metodo: pedido!.metodo, aprobado: estado);
     }
     
 }

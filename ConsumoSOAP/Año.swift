@@ -9,7 +9,7 @@
 import UIKit
 
 class An_o: UIView {
-    
+    /*
     
     var añoTit:UILabel?;
     var añoString:String?;
@@ -34,18 +34,18 @@ class An_o: UIView {
     }
     
     //Método que crea el espacio del año que contendrá 6 meses a partir de la fecha actual
-    func setAño(date: NSDate, espacio: CGRect)-> CGRect{
+    func setAño(_ date: Date, espacio: CGRect)-> CGRect{
         anchoMes = espacio.width * 1;
         tamaMes = espacio.height * 0.9;
         borde = espacio.height * 0.05;
         bordeAncho = espacio.width * 0.1;
-        let formateador:NSDateFormatter=NSDateFormatter();
-        formateador.locale = NSLocale.init(localeIdentifier: "es_CO");
+        let formateador:DateFormatter=DateFormatter();
+        formateador.locale = Locale.init(identifier: "es_CO");
         formateador.dateFormat="yyyy";
-        añoString = formateador.stringFromDate(date);
+        añoString = formateador.string(from: date);
         añoNumero = Int(añoString!);
         //añoTit=UILabel(frame: CGRectMake((self.frame.width/2)-25,(10), 100, 30));
-        añoTit = UILabel(frame: CGRectMake(0, 0, 100, 30));
+        añoTit = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 30));
         añoTit?.text=añoString;
         self.addSubview(añoTit!);
         var altoaño = CGFloat(0);
@@ -65,22 +65,22 @@ class An_o: UIView {
         //altoaño = ((((meses.last?.frame.height)!+desf)*CGFloat(meses.count)))+bordeAncho!;
         //print("alto final: ", altoaño);
         //altoaño += (desf*CGFloat(meses.count));
-        let frameAño = CGRectMake(0, 0, espacio.width, altoaño);
+        let frameAño = CGRect(x: 0, y: 0, width: espacio.width, height: altoaño);
         self.frame = frameAño;
         
         return frameAño;
     }
     
     //Método llamado de la funcion de setear el año actual, que incializa los objetos de los 6 meses contenidos
-    func setMeses(date: NSDate)-> ([Mes], CGFloat){
+    func setMeses(_ date: Date)-> ([Mes], CGFloat){
         var fechaManejo = date;
         var cambiaAño = false;
         var meses = [Mes]();
-        let calendar=NSCalendar.currentCalendar();
-        var mesActual=calendar.component(.Month, fromDate: date);
-        var AñoActual = calendar.component(.Year, fromDate: date);
-        let formateador:NSDateFormatter=NSDateFormatter();
-        formateador.locale = NSLocale.init(localeIdentifier: "es_CO");
+        let calendar=Calendar.current;
+        var mesActual=(calendar as NSCalendar).component(.month, from: date);
+        var AñoActual = (calendar as NSCalendar).component(.year, from: date);
+        let formateador:DateFormatter=DateFormatter();
+        formateador.locale = Locale.init(identifier: "es_CO");
         formateador.dateFormat="yyyyMMdd";
         var desfaz = CGFloat(0);
         var desfaz2 = CGFloat(0);
@@ -88,12 +88,12 @@ class An_o: UIView {
             if(mesActual > 6){
                 mesActual = mesActual - 12;
                 //Cambio de año
-                let fecha2 = NSDateComponents();
+                var fecha2 = DateComponents();
                 
                 AñoActual += 1;
                 fecha2.year = AñoActual;
                 fecha2.month = mesActual;
-                fechaManejo=NSCalendar.currentCalendar().dateFromComponents(fecha2)!;
+                fechaManejo=Calendar.current.date(from: fecha2)!;
                 cambiaAño = true;
                 print("Cambio de año: ", AñoActual);
                 //print("Fecha: ", formateador.stringFromDate(fechaManejo));
@@ -101,7 +101,7 @@ class An_o: UIView {
             }
             
             //print("Num mes: ", mesActual);
-            let frameMes = CGRectMake((bordeAncho!/2), (borde!+desfaz)+((CGFloat(nmes) * tamaMes!))+((CGFloat(nmes) * 0.05)), anchoMes!, tamaMes!);
+            let frameMes = CGRect(x: (bordeAncho!/2), y: (borde!+desfaz)+((CGFloat(nmes) * tamaMes!))+((CGFloat(nmes) * 0.05)), width: anchoMes!, height: tamaMes!);
             //print("frame: ", frameMes);
             //let mes = Mes(frame: frameMes, nmes: mesActual);
             //setDias(fechaManejo, nmes: mes);
@@ -125,16 +125,16 @@ class An_o: UIView {
     }
     
     //Método que inicia y valida los días dentro de un mes
-    func setDias(date: NSDate, nmes: Mes){
+    func setDias(_ date: Date, nmes: Mes){
         
-        let calendar = NSCalendar.currentCalendar();
-        let fechaComp = NSDateComponents();
-        let año = calendar.components(.Year, fromDate: date);
+        let calendar = Calendar.current;
+        var fechaComp = DateComponents();
+        let año = (calendar as NSCalendar).components(.year, from: date);
         //let mes = calendar.components(.Month, fromDate: date);
         
         
-        let formateador:NSDateFormatter=NSDateFormatter();
-        formateador.locale = NSLocale.init(localeIdentifier: "es_CO");
+        let formateador:DateFormatter=DateFormatter();
+        formateador.locale = Locale.init(identifier: "es_CO");
         formateador.dateFormat="yyyyMMdd";
         var sema: Int?
         var dias = [Dia]();
@@ -157,12 +157,12 @@ class An_o: UIView {
                 sdia = String(ndia);
             }
             
-            let fef = formateador.dateFromString(String(año.year)+smes+sdia)
+            let fef = formateador.date(from: String(describing: año.year)+smes+sdia)
             
             
-            if(fechaComp.isValidDateInCalendar(calendar)){
+            if(fechaComp.isValidDate(in: calendar)){
                 //print("FECHA: ", año.year, "/", nmes.NumeroMes, "/", ndia);
-                let nsemana = calendar.components(.WeekOfMonth, fromDate: fef!);
+                let nsemana = (calendar as NSCalendar).components(.weekOfMonth, from: fef!);
                 sema = nsemana.weekOfMonth;
                 //print("sema: " , sema, "--", ndia, "--", nsemana.weekOfMonth);
                 
@@ -194,7 +194,7 @@ class An_o: UIView {
     }
     
     //Mètodo que ubica los días del mes con el deafase de los dias en semanas extras o mayores a 4
-    func ubicaDias(mes: Mes, nmes: Int, cambiaAño: Bool)->CGFloat{
+    func ubicaDias(_ mes: Mes, nmes: Int, cambiaAño: Bool)->CGFloat{
         let alto = mes.frame.height / 4;
         let ancho = mes.frame.width / 7;
         //print("cambio año: ", cambiaAño);
@@ -239,7 +239,7 @@ class An_o: UIView {
                 //print("OX: ", OX);
             }
             auxY = OY;
-            let frame = CGRectMake(OX, OY, ancho, alto);
+            let frame = CGRect(x: OX, y: OY, width: ancho, height: alto);
             //print("dd: ", dia.numDia, " --: ",frame);
             dia.frame = frame;
             
@@ -278,11 +278,11 @@ class An_o: UIView {
     }
     
     //Método que bloquea todos los días
-    func BloqueaDias(bloquea: Bool){
+    func BloqueaDias(_ bloquea: Bool){
         for mes in self.meses{
             for dia in mes.dias{
                 //print("blo");
-                dia.userInteractionEnabled = !bloquea;
+                dia.isUserInteractionEnabled = !bloquea;
                 if(bloquea){
                     dia.setFondo2(2);
                 }else{
@@ -306,5 +306,5 @@ class An_o: UIView {
         // Drawing code
     }
     */
-
+*/
 }

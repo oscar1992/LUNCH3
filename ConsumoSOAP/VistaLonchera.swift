@@ -7,6 +7,30 @@
 //
 
 import UIKit
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func <= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l <= r
+  default:
+    return !(rhs < lhs)
+  }
+}
+
 
 class VistaLonchera: UIPageViewController, UIPageViewControllerDelegate, UIPageViewControllerDataSource {
     
@@ -39,17 +63,17 @@ class VistaLonchera: UIPageViewController, UIPageViewControllerDelegate, UIPageV
             print("Posee2: ",formateadpr.stringFromDate(fecha));
             */
             //print("p: ", p);
-            let lonchera=LoncheraO();
-            lonchera.inicia(Int(p));
-            lonchera.padre=self;
-            paginas.append(lonchera);
-            DatosC.contenedor.loncheras.append(lonchera);
+            //let lonchera=LoncheraO();
+            //lonchera.inicia(Int(p));
+            //lonchera.padre=self;
+            //paginas.append(lonchera);
+            //DatosC.contenedor.loncheras.append(lonchera);
             
             p+=1;
             
             //lonchera.view.backgroundColor=UIColor.init(red: (0+(0.2*p)), green: (1-(0.2*p)), blue: 1, alpha: 1);
         }
-        setViewControllers([paginas[0]], direction: UIPageViewControllerNavigationDirection.Forward , animated: false, completion: nil);
+        setViewControllers([paginas[0]], direction: UIPageViewControllerNavigationDirection.forward , animated: false, completion: nil);
         //control?.currentPage = 1;
         //DatosC.contenedor.iActual=0;
     }
@@ -60,7 +84,7 @@ class VistaLonchera: UIPageViewController, UIPageViewControllerDelegate, UIPageV
         // Dispose of any resources that can be recreated.
     }
     
-    func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         if(paginas.count==1){
             return nil;
         }else{
@@ -69,7 +93,7 @@ class VistaLonchera: UIPageViewController, UIPageViewControllerDelegate, UIPageV
             
             let actual = control?.currentPage;
             //print("acc: ", actual);
-            if(actual <= 0 || paginas[actual!] == NSNotFound){
+            if(actual! <= 0 || actual! > paginas.count){
                 //print("pre-reduce: ", actual);
                 previousIndex = paginas.count-1;
                 //print("reduce: ", previousIndex);
@@ -80,7 +104,7 @@ class VistaLonchera: UIPageViewController, UIPageViewControllerDelegate, UIPageV
 
     }
     
-    func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         //let currentIndex = paginas.indexOf(viewController as! LoncheraO)!;
         let currentIndex = control?.currentPage;
         //print("actualA: ", currentIndex);
@@ -96,29 +120,29 @@ class VistaLonchera: UIPageViewController, UIPageViewControllerDelegate, UIPageV
     
    
     
-    func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int {
+    func presentationCount(for pageViewController: UIPageViewController) -> Int {
         
         return paginas.count;
     }
     
-    func presentationIndexForPageViewController(pageViewController: UIPageViewController) -> Int {
+    func presentationIndex(for pageViewController: UIPageViewController) -> Int {
         
         return 0;
     }
     
     
     //Método que moverá el sroll a una lonchera indicada
-    func mueveAPosicion(pos: Int){
+    func mueveAPosicion(_ pos: Int){
         //var p=paginas.indexOf(lon)
         var pos2 = pos-1;
         if(pos2 < 0){
             pos2 = 0;
         }
         
-        self.setViewControllers([paginas[pos2]], direction: UIPageViewControllerNavigationDirection.Forward , animated: false, completion: nil);
+        self.setViewControllers([paginas[pos2]], direction: UIPageViewControllerNavigationDirection.forward , animated: false, completion: nil);
         control?.currentPage=pos2;
         DatosC.contenedor.iActual=pos2;
-        DatosC.contenedor.ninoActual?.cambiaLonchera(pos2+1);
+        //DatosC.contenedor.ninoActual?.cambiaLonchera(pos2+1);
         //quien = control!.currentPage;
         //print("quien: ", quien);
         //self.pageViewController(self, viewControllerAfterViewController: lon);
@@ -129,13 +153,13 @@ class VistaLonchera: UIPageViewController, UIPageViewControllerDelegate, UIPageV
         //print("FF", self.viewControllers?.last?.view.frame);
     }
     
-    func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         
         
         DatosC.contenedor.iActual = control!.currentPage;
         //print("ABC: ", DatosC.contenedor.iActual);
-        DatosC.contenedor.lonchera = paginas[(control?.currentPage)!];
-        DatosC.contenedor.ninoActual?.cambiaLonchera(DatosC.contenedor.iActual+1);
+        //DatosC.contenedor.lonchera = paginas[(control?.currentPage)!];
+        //DatosC.contenedor.ninoActual?.cambiaLonchera(DatosC.contenedor.iActual+1);
         //revisa();
         
     }
@@ -155,17 +179,17 @@ class VistaLonchera: UIPageViewController, UIPageViewControllerDelegate, UIPageV
                 //control?.pageIndicatorTintColor = UIColor.redColor();
                 //control?.currentPageIndicatorTintColor = UIColor.blackColor();
                 //print("pagecontrol: ", control?.currentPage);
-                subView.frame=CGRectZero;
-                control?.hidden=true;
+                subView.frame=CGRect.zero;
+                control?.isHidden=true;
                 
-                self.view.bringSubviewToFront(subView)
+                self.view.bringSubview(toFront: subView)
             }
         }
         super.viewDidLayoutSubviews()
     }
     
     //Método que reemplaza las loncheras
-    func reemplazaLonchera(lonchN : [LoncheraO], diaSemana: Int){
+    func reemplazaLonchera(_ lonchN : [LoncheraO], diaSemana: Int){
         self.paginas.removeAll();
         self.paginas = lonchN;
         var p = 0;
@@ -185,17 +209,17 @@ class VistaLonchera: UIPageViewController, UIPageViewControllerDelegate, UIPageV
         if(diaSemana == 0){
             pos = lonchN.count;
         }
-        setViewControllers([paginas[pos]], direction: UIPageViewControllerNavigationDirection.Forward , animated: false, completion: nil);
+        setViewControllers([paginas[pos]], direction: UIPageViewControllerNavigationDirection.forward , animated: false, completion: nil);
         control?.currentPage=pos;
         DatosC.contenedor.iActual=pos;
-        DatosC.contenedor.ninoActual?.cambiaLonchera(control!.currentPage+1);
+        //DatosC.contenedor.ninoActual?.cambiaLonchera(control!.currentPage+1);
         //revisa();
     }
     
     //Método que permite cambiar a una lonchera determinada
-    func rotaLonc(Iact: Int, siguiente: Bool){
+    func rotaLonc(_ Iact: Int, siguiente: Bool){
         var pos = 0;
-        var direction = UIPageViewControllerNavigationDirection.Forward;
+        var direction = UIPageViewControllerNavigationDirection.forward;
         if(siguiente){
             print("tot: ", paginas.count);
             print("trae : ", Iact);
@@ -211,13 +235,13 @@ class VistaLonchera: UIPageViewController, UIPageViewControllerDelegate, UIPageV
             }else{
                 pos = Iact-1;
             }
-            direction = UIPageViewControllerNavigationDirection.Reverse;
+            direction = UIPageViewControllerNavigationDirection.reverse;
         }
         print("Iact: ", pos);
         setViewControllers([paginas[pos]], direction: direction , animated: true, completion: nil);
         control?.currentPage=pos;
         DatosC.contenedor.iActual=pos;
-        DatosC.contenedor.ninoActual?.cambiaLonchera(control!.currentPage+1);
+        //DatosC.contenedor.ninoActual?.cambiaLonchera(control!.currentPage+1);
         quien=pos;
         //revisa();
     }

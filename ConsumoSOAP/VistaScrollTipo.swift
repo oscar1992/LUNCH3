@@ -35,8 +35,8 @@ class VistaScrollTipo: UIView {
         let OX1 = self.frame.width*0.05;
         let OY1 = self.frame.height*0.08;
         let OY2 = OY1+alto1+OY1;
-        let frame1 = CGRectMake(OX1, OY1, ancho1, alto1);
-        let frame2 = CGRectMake(OX1, OY2, ancho1, alto1);
+        let frame1 = CGRect(x: OX1, y: OY1, width: ancho1, height: alto1);
+        let frame2 = CGRect(x: OX1, y: OY2, width: ancho1, height: alto1);
         let Lab1 = UILabel(frame: frame1);
         let Lab2 = UILabel(frame: frame2);
         Lab1.text = "Lonchera "+String(idOrden);
@@ -57,7 +57,7 @@ class VistaScrollTipo: UIView {
         var p = CGFloat(0);
         for prod in tipo.1{
             let OY = (alto * p)+iniY;
-            let frame = CGRectMake(OX1, OY, ancho, alto);
+            let frame = CGRect(x: OX1, y: OY, width: ancho, height: alto);
             let prodNom = UILabel(frame: frame);
             prodNom.text = "·"+prod.nombre!;
             prodNom.font=UIFont(name: "Gotham Bold", size: alto/2);
@@ -71,10 +71,10 @@ class VistaScrollTipo: UIView {
         let alto = self.frame.height*0.1;
         let OX = self.frame.width*0.55;
         let OY = self.frame.height*0.08;
-        let frameBot = CGRectMake(OX, OY, ancho, alto);
+        let frameBot = CGRect(x: OX, y: OY, width: ancho, height: alto);
         let bot = UIButton(frame: frameBot);
         DatosB.cont.poneFondoTot(bot, fondoStr: "Boton AGREGAR", framePers: nil, identi: nil, scala: true);
-        bot.addTarget(self, action: #selector(VistaScrollTipo.agrega), forControlEvents: .TouchDown);
+        bot.addTarget(self, action: #selector(VistaScrollTipo.agrega), for: .touchDown);
         self.addSubview(bot);
         
     }
@@ -86,7 +86,7 @@ class VistaScrollTipo: UIView {
         }
         DatosB.cont.home2.lonchera.nombr = tipo.0.0;
         DatosB.cont.home2.anade();
-        DatosB.cont.tipos.performSegueWithIdentifier("Carrito2", sender: nil);
+        DatosB.cont.tipos.performSegue(withIdentifier: "Carrito2", sender: nil);
     }
     
     required init?(coder aDecoder: NSCoder) {

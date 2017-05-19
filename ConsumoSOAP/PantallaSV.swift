@@ -7,6 +7,30 @@
 //
 
 import UIKit
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 class PantallaSV: UIViewController, UITextFieldDelegate {
     
@@ -29,7 +53,7 @@ class PantallaSV: UIViewController, UITextFieldDelegate {
     var barraBusqueda : UIView?;
     var scrol : ScrollResultados?;
     var inputT:UITextField!;
-    var timer:NSTimer!;
+    var timer:Timer!;
     var btimer=false;
     
     override func viewDidLoad() {
@@ -39,7 +63,7 @@ class PantallaSV: UIViewController, UITextFieldDelegate {
         //print("IACT: ", DatosC.contenedor.iActual);
         iniciaEspacioIntercambio();
         DatosC.contenedor.pantallaSV=self;
-        PanelElementos!.frame=CGRectMake(0, LaBarra.frame.height, DatosC.contenedor.anchoP, (DatosC.contenedor.altoP));
+        PanelElementos!.frame=CGRect(x: 0, y: LaBarra.frame.height, width: DatosC.contenedor.anchoP, height: (DatosC.contenedor.altoP));
         lonch=DatosB.cont.home2.lonchera;
         //print("LONC ATT: ", lonch);
          if(lonch != nil){
@@ -54,19 +78,19 @@ class PantallaSV: UIViewController, UITextFieldDelegate {
         //Lonchera?.frame=CGRectMake(0, framePanelElementos.height, (DatosC.contenedor.anchoP-20),
         
         //DatosC.contenedor.casillasF=lonch.subVista!.casillas;
-        let volver = UIButton(frame: CGRectMake(0, (DatosC.contenedor.altoP*0.5), (DatosC.contenedor.anchoP*0.3), (DatosC.contenedor.altoP*0.07)));
-        volver.addTarget(self, action: #selector(PantallaSV.devuelve(_:)), forControlEvents: .TouchDown)
-        volver.setTitle("Volver", forState: .Normal);
-        volver.backgroundColor=UIColor.blueColor();
+        let volver = UIButton(frame: CGRect(x: 0, y: (DatosC.contenedor.altoP*0.5), width: (DatosC.contenedor.anchoP*0.3), height: (DatosC.contenedor.altoP*0.07)));
+        volver.addTarget(self, action: #selector(PantallaSV.devuelve(_:)), for: .touchDown)
+        volver.setTitle("Volver", for: UIControlState());
+        volver.backgroundColor=UIColor.blue;
         //self.view.bringSubviewToFront(PanelElementos);
         //self.view.addSubview(volver);
         
-        self.view.bringSubviewToFront(PanelElementos);
+        self.view.bringSubview(toFront: PanelElementos);
         //PanelElementos.bringSubviewToFront(contenedor);
         //PanelElementos.addSubview(lonch!.subVista!);
          //cargaElementos();
         //self.view.bringSubviewToFront(LaBarra);
-        self.view.sendSubviewToBack(LaBarra);
+        self.view.sendSubview(toBack: LaBarra);
         iniciaTutorial();
         
         
@@ -76,7 +100,7 @@ class PantallaSV: UIViewController, UITextFieldDelegate {
     func iniciaContenedor(){
         
         
-        let framePanelElementos = CGRectMake(0, 0, PanelElementos.frame.width, PanelElementos.frame.height);
+        let framePanelElementos = CGRect(x: 0, y: 0, width: PanelElementos.frame.width, height: PanelElementos.frame.height);
         contenedor=ContenedorProductos(frame: framePanelElementos);
         PanelElementos.addSubview(contenedor)
     }
@@ -86,7 +110,7 @@ class PantallaSV: UIViewController, UITextFieldDelegate {
             contenedor.removeFromSuperview();
         }
         print("cont");
-        let framePanelElementos = CGRectMake(0, 0, PanelElementos.frame.width, PanelElementos.frame.height);
+        let framePanelElementos = CGRect(x: 0, y: 0, width: PanelElementos.frame.width, height: PanelElementos.frame.height);
         contenedor=ContenedorProductos(frame: framePanelElementos);
         PanelElementos.addSubview(contenedor)
     }
@@ -133,41 +157,41 @@ class PantallaSV: UIViewController, UITextFieldDelegate {
         }
     }
     */
-    func boto(sender: UIButton){
+    func boto(_ sender: UIButton){
         //print("Boto")
     }
     
-    func devuelve(sender: UIButton){
+    func devuelve(_ sender: UIButton){
         
         actuaLonch(true);
         //self.dismissViewControllerAnimated(true, completion: nil);
     }
     
-    func actuaLonch(pasa: Bool){
+    func actuaLonch(_ pasa: Bool){
         
         if(pasa){
             
-            self.dismissViewControllerAnimated(true, completion: nil);
+            self.dismiss(animated: true, completion: nil);
         }else{
             
         }
     }
     
     
-    func bajaLonch()-> LoncheraO{
+    /*func bajaLonch()-> LoncheraO{
         return DatosC.contenedor.lonchera;
-    }
+    }*/
     
     
     //Método que se llama desde un producto para mostrar su información
-    func iniciaPanelInfo(prod: Producto){
+    func iniciaPanelInfo(_ prod: Producto){
         let bordeL = CGFloat(self.view.frame.width*0.1);
         let bordeA = CGFloat(self.view.frame.height*0.09);
         
         
-        let frame = CGRectMake(bordeL, bordeA, self.view.frame.width*0.79, self.view.frame.height*0.8);
+        let frame = CGRect(x: bordeL, y: bordeA, width: self.view.frame.width*0.79, height: self.view.frame.height*0.8);
         //0.77let frameImagen = CGRectMake(bordeA, bordeA, frame.width-(2*bordeA), frame.height*0.4);
-        _ = CGRectMake(0, frame.height*0.9, frame.width, frame.height*0.1);
+        _ = CGRect(x: 0, y: frame.height*0.9, width: frame.width, height: frame.height*0.1);
         //let frameInfo = CGRectMake(0, frameImagen.height+frame.origin.y, frame.width, frame.height*0.4);
         panelInfo=DetalleProducto(frame: frame, prdo: prod);
         /*
@@ -191,17 +215,17 @@ class PantallaSV: UIViewController, UITextFieldDelegate {
         panelInfo?.backgroundColor=UIColor.whiteColor();
         */
         self.view.addSubview(panelInfo!);
-        self.view.bringSubviewToFront(panelInfo!);
+        self.view.bringSubview(toFront: panelInfo!);
         //print("infoProd:");
     }
     
-    func cierraPanelInfo(sender: AnyObject){
+    func cierraPanelInfo(_ sender: AnyObject){
         panelInfo?.removeFromSuperview();
     }
     
     
     //Método que inicia las casillas, y pone la información encontrada del producto
-    func iniciaCasillasInfo(rec: UIView, prod: Producto){
+    func iniciaCasillasInfo(_ rec: UIView, prod: Producto){
         let ancho = rec.frame.width/3;
         let alto = rec.frame.height/2;
         var itera = 0;
@@ -209,13 +233,13 @@ class PantallaSV: UIViewController, UITextFieldDelegate {
             //print("Fila: ", fila);
             for columna in 0...2{
                 
-                let frameCasilla = CGRectMake((0+(ancho*CGFloat(columna))), (0+(alto*CGFloat(fila))), ancho, alto);
+                let frameCasilla = CGRect(x: (0+(ancho*CGFloat(columna))), y: (0+(alto*CGFloat(fila))), width: ancho, height: alto);
                 let casilla = UIView(frame: frameCasilla);
                 casilla.backgroundColor = UIColor.init(red: 1, green: CGFloat(columna)*0.3, blue: 1, alpha: 1);
                 rec.addSubview(casilla);
                 if(itera < prod.listaDatos.count){
-                    let tit = UILabel(frame: CGRectMake(0, 0, casilla.frame.width, (casilla.frame.height/2)));
-                    let val = UILabel(frame: CGRectMake(0, (casilla.frame.height/2), casilla.frame.width, (casilla.frame.height/2)));
+                    let tit = UILabel(frame: CGRect(x: 0, y: 0, width: casilla.frame.width, height: (casilla.frame.height/2)));
+                    let val = UILabel(frame: CGRect(x: 0, y: (casilla.frame.height/2), width: casilla.frame.width, height: (casilla.frame.height/2)));
                     tit.text = prod.listaDatos[itera].tipo;
                     val.text = String(prod.listaDatos[itera].valor);
                     casilla.addSubview(tit);
@@ -234,7 +258,7 @@ class PantallaSV: UIViewController, UITextFieldDelegate {
         let OX = CGFloat((DatosC.contenedor.anchoP/2)-(ancho/2));
         //let OY = (espacioIntercambio.frame.height/2)-(alto/2);
         let OY = (DatosC.contenedor.altoP*(1-0.733)/2)-(alto/2);
-        let frameCasilla = CGRectMake(OX, OY, ancho, alto);
+        let frameCasilla = CGRect(x: OX, y: OY, width: ancho, height: alto);
         casillaBaja.frame=frameCasilla;
         casillaBaja.tipo=DatosC.contenedor.tipo;
         casillaBaja.activo=false;
@@ -249,9 +273,9 @@ class PantallaSV: UIViewController, UITextFieldDelegate {
         let OY = DatosC.contenedor.altoP*0.733;
         let ancho = DatosC.contenedor.anchoP;
         let alto = DatosC.contenedor.altoP*(1-0.733);
-        let frame = CGRectMake(0, OY, ancho, alto);
+        let frame = CGRect(x: 0, y: OY, width: ancho, height: alto);
         espacioIntercambio = UIView(frame: frame);
-        espacioIntercambio.backgroundColor = UIColor.redColor();
+        espacioIntercambio.backgroundColor = UIColor.red;
         self.view.addSubview(espacioIntercambio);
         casillaBaja = Casilla();
         self.view.addSubview(casillaBaja);
@@ -269,17 +293,17 @@ class PantallaSV: UIViewController, UITextFieldDelegate {
         let OY = (espacioIntercambio.frame.height*0.5)-(alto/2);
         
         
-        let frame = CGRectMake(OX, OY, ancho, alto);
+        let frame = CGRect(x: OX, y: OY, width: ancho, height: alto);
         
         //print("LoncherActual: ", DatosC.contenedor.tipo);
         var color = "";
         var cant = "";
         var pos = "";
-        if(DatosC.contenedor.lonchera.saludable == true){
+        /*if(DatosC.contenedor.lonchera.saludable == true){
             color = "V";
         }else{
             color = "B";
-        }
+        }*/
         /*
         if(DatosC.contenedor.lonchera.color == nil){
             if(DatosC.contenedor.lonchera.saludable == true){
@@ -307,33 +331,34 @@ class PantallaSV: UIViewController, UITextFieldDelegate {
         }
         */
         cant = String(DatosB.cont.home2.lonchera.casillas.count);
-        pos = String(DatosC.contenedor.tipo!);
+        pos = String(DatosC.contenedor.tipo);
         
         let nomText = color+"-"+cant+"-"+pos;
         
-        //print("text: ", nomText);
+        
+        print("text: ", nomText);
         var imagen : UIImage;
-        imagen = UIImage(named: nomText)!;
+        //imagen = UIImage(named: nomText)!;
         
     
         //print("Tipo: ", frame);
         let referencia = UIImageView(frame: frame);
-        referencia.image = imagen;
+        //referencia.image = imagen;
         espacioIntercambio.addSubview(referencia);
-        espacioIntercambio.bringSubviewToFront(referencia);
+        espacioIntercambio.bringSubview(toFront: referencia);
     }
     
     //Método que pone el fondo de la casilla baja
-    func fondoCasilla(cas: Casilla){
+    func fondoCasilla(_ cas: Casilla){
         let imagen = UIImage(named: "CasillaBaja");
-        let frameF = CGRectMake(0, 0, cas.frame.width, cas.frame.height);
+        let frameF = CGRect(x: 0, y: 0, width: cas.frame.width, height: cas.frame.height);
         let backImg = UIImageView(frame: frameF);
         backImg.image = imagen;
         cas.addSubview(backImg);
-        cas.sendSubviewToBack(backImg);
+        cas.sendSubview(toBack: backImg);
     }
     //Mètodo que oculta la barra en este viewcontroller
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden : Bool {
         return true
     }
 
@@ -341,11 +366,11 @@ class PantallaSV: UIViewController, UITextFieldDelegate {
         let ancho = DatosC.contenedor.altoP * 0.0922;
         let centr = (ancho/2)-(ancho/4);
         let OX = DatosC.contenedor.anchoP-ancho;
-        let frameBoton = CGRectMake(OX, 0, ancho, ancho);
+        let frameBoton = CGRect(x: OX, y: 0, width: ancho, height: ancho);
         let buscar = UIButton(frame: frameBoton);
         //buscar.backgroundColor=UIColor.redColor();
-        buscar.addTarget(self, action: #selector(PantallaSV.productosTag(_:)), forControlEvents: .TouchDown);
-        let subFrame = CGRectMake(centr, centr, ancho/3, ancho/3);
+        buscar.addTarget(self, action: #selector(PantallaSV.productosTag(_:)), for: .touchDown);
+        let subFrame = CGRect(x: centr, y: centr, width: ancho/3, height: ancho/3);
         DatosB.cont.poneFondoTot(buscar, fondoStr: "Lupa", framePers: subFrame, identi: nil, scala: true);
         
         self.view.addSubview(buscar);
@@ -356,16 +381,16 @@ class PantallaSV: UIViewController, UITextFieldDelegate {
         let ancho = DatosC.contenedor.altoP * 0.0922;
         let ancho2 = ancho/3;
         let centr = (ancho/2)-(ancho2/2);
-        let frameBoton = CGRectMake(0, 0, ancho, ancho);
+        let frameBoton = CGRect(x: 0, y: 0, width: ancho, height: ancho);
         let volver = UIButton(frame: frameBoton);
-        volver.addTarget(self, action: #selector(PantallaSV.cierraPantallaSV(_:)), forControlEvents: .TouchDown);
-        let subFrame = CGRectMake(centr, centr, ancho2, ancho2);
+        volver.addTarget(self, action: #selector(PantallaSV.cierraPantallaSV(_:)), for: .touchDown);
+        let subFrame = CGRect(x: centr, y: centr, width: ancho2, height: ancho2);
         DatosB.cont.poneFondoTot(volver, fondoStr: "Volver", framePers: subFrame, identi: nil, scala: true);
         self.view.addSubview(volver);
     }
     
     //Método que se llama al tocar el botón de buscar
-    func productosTag(sender : AnyObject){
+    func productosTag(_ sender : AnyObject){
         //print("Busca");
         iniciaBarraBúsqueda();
         
@@ -373,37 +398,37 @@ class PantallaSV: UIViewController, UITextFieldDelegate {
     
     //Método que inicializa la barra de búsqueda y sus componentes
     func iniciaBarraBúsqueda(){
-        let frameBarra = CGRectMake(0, DatosC.contenedor.altoP*0.05, DatosC.contenedor.anchoP, DatosC.contenedor.altoP*0.05);
+        let frameBarra = CGRect(x: 0, y: DatosC.contenedor.altoP*0.05, width: DatosC.contenedor.anchoP, height: DatosC.contenedor.altoP*0.05);
         barraBusqueda = UIView(frame: frameBarra);
         //barraBusqueda?.backgroundColor=UIColor.blueColor();
-        let frameFondo = CGRectMake(0, 0, barraBusqueda!.frame.width, barraBusqueda!.frame.height);
+        let frameFondo = CGRect(x: 0, y: 0, width: barraBusqueda!.frame.width, height: barraBusqueda!.frame.height);
         let corimmiento = DatosC.contenedor.anchoP*0.1;
-        let frameTexto = CGRectMake(corimmiento, 0, frameBarra.width-(corimmiento), frameBarra.height);
+        let frameTexto = CGRect(x: corimmiento, y: 0, width: frameBarra.width-(corimmiento), height: frameBarra.height);
         inputT=UITextField(frame: frameTexto);
         //inputT.backgroundColor=UIColor.yellowColor();
         inputT.placeholder = "Buscar...";
         inputT.delegate=self;
-        inputT.addTarget(self, action: #selector(PantallaSV.busqueda), forControlEvents: .EditingChanged);
+        inputT.addTarget(self, action: #selector(PantallaSV.busqueda), for: .editingChanged);
         let imagen = UIImage(named: "CasillaBusqueda");
         let bacImg = UIImageView(frame: frameFondo);
         bacImg.image=imagen;
         //bacImg.contentMode=UIViewContentMode.ScaleAspectFit;
-        let frameCerrar = CGRectMake(DatosC.contenedor.anchoP*0.9, 0, DatosC.contenedor.anchoP*0.1, frameBarra.height);
+        let frameCerrar = CGRect(x: DatosC.contenedor.anchoP*0.9, y: 0, width: DatosC.contenedor.anchoP*0.1, height: frameBarra.height);
         let cierra = UIButton(frame: frameCerrar);
-        cierra.addTarget(self, action: #selector(PantallaSV.cierraBusqueda(_:)), forControlEvents: .TouchDown);
+        cierra.addTarget(self, action: #selector(PantallaSV.cierraBusqueda(_:)), for: .touchDown);
         DatosB.cont.poneFondoTot(cierra, fondoStr: "BotonCerrar", framePers: nil, identi: nil, scala: true);
         //cierra.backgroundColor=UIColor.redColor();
         barraBusqueda!.addSubview(bacImg);
         barraBusqueda!.addSubview(inputT);
         barraBusqueda!.addSubview(cierra);
-        self.view.bringSubviewToFront(cierra);
-        barraBusqueda!.sendSubviewToBack(bacImg);
+        self.view.bringSubview(toFront: cierra);
+        barraBusqueda!.sendSubview(toBack: bacImg);
         
         //barraBusqueda.backgroundColor=UIColor.orangeColor();
         self.view.addSubview(barraBusqueda!);
     }
     
-    func textFieldDidEndEditing(textField: UITextField) {
+    func textFieldDidEndEditing(_ textField: UITextField) {
         subeBusqueda();
     }
     
@@ -417,17 +442,17 @@ class PantallaSV: UIViewController, UITextFieldDelegate {
     }
     
     //Método que retorna una lista de productos que contienen una etiqueta
-    func busqueda(sender: UITextField){
+    func busqueda(_ sender: UITextField){
         //print("tt: ", sender.text);
         var lista = [Producto]();
         var busca = sender.text;
-        busca = busca?.lowercaseString;
+        busca = busca?.lowercased();
         iniciaContador();
         //print("busca: ", busca);
         //print("tama: ", DatosD.contenedor.tags.count);
         var anterior : Int?;
         for tag in DatosD.contenedor.tags{
-            let nombre = tag.nombreTag?.lowercaseString;
+            let nombre = tag.nombreTag?.lowercased();
             
             
             /*
@@ -435,7 +460,7 @@ class PantallaSV: UIViewController, UITextFieldDelegate {
              print("nom: ", tag.idProducto);
              print("nom: ", tag.idTag);
              */
-            if((nombre!.rangeOfString(busca!)) != nil){
+            if((nombre!.range(of: busca!)) != nil){
                 //print("Contiene: ", busca!);
                 for prod in DatosC.contenedor.productos{
                     
@@ -449,7 +474,7 @@ class PantallaSV: UIViewController, UITextFieldDelegate {
         }
         let OY = barraBusqueda!.frame.origin.y+barraBusqueda!.frame.height;
         let alto = DatosC.contenedor.altoP*0.3;
-        let frameScroll = CGRectMake(0, OY, DatosC.contenedor.anchoP, alto);
+        let frameScroll = CGRect(x: 0, y: OY, width: DatosC.contenedor.anchoP, height: alto);
         if(scrol != nil){
             scrol!.removeFromSuperview();
         }
@@ -463,7 +488,7 @@ class PantallaSV: UIViewController, UITextFieldDelegate {
         let altoB = DatosC.contenedor.altoP*0.05;
         for prod in lista{
             let OY2 = espaciado + (p*(altoB+espaciado));
-            let frameBoton = CGRectMake(0, OY2, DatosC.contenedor.anchoP, altoB);
+            let frameBoton = CGRect(x: 0, y: OY2, width: DatosC.contenedor.anchoP, height: altoB);
             //print("frame Bot: ", frameBoton);
             var pestañaBoton : PestanasProductos?;
             for pest in contenedor.pestanasA{
@@ -478,31 +503,31 @@ class PantallaSV: UIViewController, UITextFieldDelegate {
             }
             let bot=BotonResultado(frame: frameBoton, producto:  prod, pestañas: pestañaBoton!);
             
-            bot.backgroundColor=UIColor.whiteColor();
+            bot.backgroundColor=UIColor.white;
             //print("Prod: ",prod.nombre);
             scrol!.addSubview(bot);
             p += 1;
         }
-        scrol!.contentSize=CGSizeMake(DatosC.contenedor.anchoP, (altoB*p+(2*(espaciado))));
+        scrol!.contentSize=CGSize(width: DatosC.contenedor.anchoP, height: (altoB*p+(2*(espaciado))));
     }
     
     //Método que inicia el contador del input de la búsqueda
     func iniciaContador(){
         if(btimer == false){
-            timer = NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: #selector(PantallaSV.subeBusqueda), userInfo: nil, repeats: false);
+            timer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(PantallaSV.subeBusqueda), userInfo: nil, repeats: false);
             btimer=true;
         }
         
     }
     
     //Método que quita la barra de busqueda y el scroll de los resultados
-    func cierraBusqueda(sender: AnyObject){
+    func cierraBusqueda(_ sender: AnyObject){
         print("cierra");
         if(barraBusqueda != nil){
             scrol?.removeFromSuperview();
             barraBusqueda?.removeFromSuperview();
-            barraBusqueda?.userInteractionEnabled=false;
-            barraBusqueda?.frame=CGRectZero;
+            barraBusqueda?.isUserInteractionEnabled=false;
+            barraBusqueda?.frame=CGRect.zero;
         }
         
         if(scrol != nil){
@@ -512,20 +537,20 @@ class PantallaSV: UIViewController, UITextFieldDelegate {
     }
     
     //Método que cierra la alacenna
-    func cierraPantallaSV(sender: UIButton){
+    func cierraPantallaSV(_ sender: UIButton){
         
         DatosC.contenedor.pantallaSV.devuelve(sender);
     }
     
-    let tut = BaseImagenes2(transitionStyle: UIPageViewControllerTransitionStyle.Scroll,
-                           navigationOrientation: UIPageViewControllerNavigationOrientation.Horizontal,
+    let tut = BaseImagenes2(transitionStyle: UIPageViewControllerTransitionStyle.scroll,
+                           navigationOrientation: UIPageViewControllerNavigationOrientation.horizontal,
                            options: nil);
     
     //Método que inicia el tutorial, si es la primera vez que inicia la app
     func iniciaTutorial(){
         if(DatosD.contenedor.padre.primeraVez==true){
             self.view.addSubview(tut.view);
-            tut.view.frame=CGRectMake(0, 0, self.view.frame.width*1, self.view.frame.height/1);
+            tut.view.frame=CGRect(x: 0, y: 0, width: self.view.frame.width*1, height: self.view.frame.height/1);
             DatosD.contenedor.padre.primeraVez=false;
             let actuaP = ActualizaPadre();
             actuaP.actualizaPadre(DatosD.contenedor.padre);

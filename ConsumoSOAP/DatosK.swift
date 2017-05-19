@@ -22,13 +22,13 @@ class DatosK: NSObject {
     var origen: CGFloat!;
     
     
-    func subeVista(vista: UIView){
+    func subeVista(_ vista: UIView){
         
         if(vista.frame.origin.y>=0){
             //print("sube: ", vista.accessibilityIdentifier);
             //print("qq: ", vista, "tecladoFrame.height", tecladoFrame.height);
             //print("frameV: ", vista.frame);
-            let frameVista = CGRectMake(vista.frame.origin.x, (vista.frame.origin.y-tecladoFrame.height), vista.frame.width, vista.frame.height);
+            let frameVista = CGRect(x: vista.frame.origin.x, y: (vista.frame.origin.y-tecladoFrame.height), width: vista.frame.width, height: vista.frame.height);
             vista.frame=frameVista;
             //print("frameV: ", vista.frame);
             arriba=true;
@@ -36,11 +36,11 @@ class DatosK: NSObject {
         
     }
     
-    func bajaVista(vista: UIView){
+    func bajaVista(_ vista: UIView){
         print("baja");
         if(vista.frame.origin.y<0){
             //print("frameV: ", vista.frame);
-            let frameVista = CGRectMake(vista.frame.origin.x, 0, vista.frame.width, vista.frame.height);
+            let frameVista = CGRect(x: vista.frame.origin.x, y: 0, width: vista.frame.width, height: vista.frame.height);
             vista.frame=frameVista;
             //print("frameV: ", vista.frame);
             arriba=false;
@@ -48,29 +48,29 @@ class DatosK: NSObject {
         
     }
     
-    func subeVistaCreaUsuario(vista: UIView){
+    func subeVistaCreaUsuario(_ vista: UIView){
         if(vista.frame.origin.y>=0){
             //print("sube: ", vista.accessibilityIdentifier);
             //print("qq: ", vista, "tecladoFrame.height", tecladoFrame.height);
             //print("frameV: ", vista.frame);
-            let frameVista = CGRectMake(vista.frame.origin.x, -origen, vista.frame.width, vista.frame.height);
+            let frameVista = CGRect(x: vista.frame.origin.x, y: -origen, width: vista.frame.width, height: vista.frame.height);
             vista.frame=frameVista;
             //print("frameV: ", vista.frame);
             arriba=true;
         }
     }
     
-    func subeVistaCantidad(vista: UIView, cant: CGFloat){
+    func subeVistaCantidad(_ vista: UIView, cant: CGFloat){
         if(vista.frame.origin.y>=0){
-            let frameVista = CGRectMake(vista.frame.origin.x, (vista.frame.origin.y-cant), vista.frame.width, vista.frame.height);
+            let frameVista = CGRect(x: vista.frame.origin.x, y: (vista.frame.origin.y-cant), width: vista.frame.width, height: vista.frame.height);
             vista.frame=frameVista;
             arriba=true;
         }
     }
     
-    func bajaVistaCantidad(vista: UIView, cant: CGFloat){
+    func bajaVistaCantidad(_ vista: UIView, cant: CGFloat){
         if(vista.frame.origin.y<0){
-            let frameVista = CGRectMake(vista.frame.origin.x, 0, vista.frame.width, vista.frame.height);
+            let frameVista = CGRect(x: vista.frame.origin.x, y: 0, width: vista.frame.width, height: vista.frame.height);
             vista.frame=frameVista;
             arriba=false;
         }

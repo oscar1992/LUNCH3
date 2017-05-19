@@ -10,14 +10,14 @@ import UIKit
 
 class VistaMensaje: UIView {
     
-    var timer: NSTimer!;
+    var timer: Timer!;
     
     init(msg: String){
         let ancho = DatosC.contenedor.anchoP*0.8;
         let alto = DatosC.contenedor.altoP*0.4;
         let OX = (DatosC.contenedor.anchoP/2)-(ancho/2);
         let OY = (DatosC.contenedor.altoP/2)-(alto/2);
-        let frameMens = CGRectMake(OX, OY, ancho, alto);
+        let frameMens = CGRect(x: OX, y: OY, width: ancho, height: alto);
         super.init(frame: frameMens);
         fondo();
         mensaje(msg);
@@ -28,26 +28,26 @@ class VistaMensaje: UIView {
         DatosB.cont.poneFondoTot(self , fondoStr: "Base 2", framePers: nil, identi: nil, scala: true);
     }
     
-    func mensaje(mensaje: String){
+    func mensaje(_ mensaje: String){
         let ancho = self.frame.width*0.8;
         let alto = self.frame.height*0.4;
         let OX = (self.frame.width/2)-(ancho/2);
         let OY = (self.frame.height/2)-(alto/2);
-        let frameMSG = CGRectMake(OX, OY, ancho, alto);
+        let frameMSG = CGRect(x: OX, y: OY, width: ancho, height: alto);
         let msg = UILabel(frame: frameMSG);
         msg.text = mensaje;
-        msg.textAlignment=NSTextAlignment.Center;
+        msg.textAlignment=NSTextAlignment.center;
         msg.font=UIFont(name: "SansBeam Head", size: msg.frame.height);
         msg.adjustsFontSizeToFitWidth=true;
         self.addSubview(msg);
     }
     
     func autoDestruccion(){
-        timer = NSTimer.scheduledTimerWithTimeInterval(2.5, target: self, selector: #selector(VistaMensaje.destruye), userInfo: nil, repeats: false);
+        timer = Timer.scheduledTimer(timeInterval: 2.5, target: self, selector: #selector(VistaMensaje.destruye), userInfo: nil, repeats: false);
     }
     
     func destruye(){
-        self.hidden=true;
+        self.isHidden=true;
         self.removeFromSuperview();
     }
     

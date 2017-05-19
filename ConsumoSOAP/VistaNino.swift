@@ -7,8 +7,32 @@
 //
 
 import UIKit
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 class VistaNino: UIView {
-    
+    /*
     var titulo:UILabel!;
     var EspacioLoncheras:Predeterminadas!;
     var Lonchera:Contenedor!;
@@ -20,25 +44,25 @@ class VistaNino: UIView {
     required override init(frame: CGRect) {
         super.init(frame: frame);
         self.accessibilityIdentifier="VN";
-        titulo=UILabel(frame: CGRectMake(10, 10, 100, 20));
+        titulo=UILabel(frame: CGRect(x: 10, y: 10, width: 100, height: 20));
         //self.addSubview(titulo);
         titulo.text="Vista";
-        titulo.textColor=UIColor.blackColor();
-        EspacioLoncheras = Predeterminadas(frame: CGRectMake(0, 0, DatosC.contenedor.anchoP, (DatosC.contenedor.altoP*0.16866)));
-        EspacioLoncheras.backgroundColor = UIColor.clearColor().colorWithAlphaComponent(0.0);
+        titulo.textColor=UIColor.black;
+        EspacioLoncheras = Predeterminadas(frame: CGRect(x: 0, y: 0, width: DatosC.contenedor.anchoP, height: (DatosC.contenedor.altoP*0.16866)));
+        EspacioLoncheras.backgroundColor = UIColor.clear.withAlphaComponent(0.0);
         self.addSubview(EspacioLoncheras);
-        Lonchera=Contenedor(frame: CGRectMake(0, (EspacioLoncheras.frame.origin.y+EspacioLoncheras.frame.height), DatosC.contenedor.anchoP, (DatosC.contenedor.altoP*0.6391)));
-        Lonchera.backgroundColor=UIColor.clearColor().colorWithAlphaComponent(0.0);
+        Lonchera=Contenedor(frame: CGRect(x: 0, y: (EspacioLoncheras.frame.origin.y+EspacioLoncheras.frame.height), width: DatosC.contenedor.anchoP, height: (DatosC.contenedor.altoP*0.6391)));
+        Lonchera.backgroundColor=UIColor.clear.withAlphaComponent(0.0);
         self.addSubview(Lonchera);
-        let bot=UIButton(frame: CGRectMake(CGFloat(DatosC.contenedor.anchoP/2), (Lonchera.frame.height+Lonchera.frame.origin.y-20), 100, 30));
-        bot.backgroundColor=UIColor.blueColor();
-        bot.addTarget(self, action: #selector(VistaNino.lee(_:)), forControlEvents: .TouchDown)
+        let bot=UIButton(frame: CGRect(x: CGFloat(DatosC.contenedor.anchoP/2), y: (Lonchera.frame.height+Lonchera.frame.origin.y-20), width: 100, height: 30));
+        bot.backgroundColor=UIColor.blue;
+        bot.addTarget(self, action: #selector(VistaNino.lee(_:)), for: .touchDown)
         //self.addSubview(bot);
         //self.bringSubviewToFront(bot);
         iniciaBotCalendario();
         //self.frame = CGRectMake(0, 0, 300, 300);
         //self.backgroundColor = UIColor.blueColor();
-        self.backgroundColor = UIColor.clearColor().colorWithAlphaComponent(0.0);
+        self.backgroundColor = UIColor.clear.withAlphaComponent(0.0);
         barraDias();
         //poneSaludable();
     }
@@ -48,15 +72,16 @@ class VistaNino: UIView {
     }
     
     // Método que se usará con fines de leer una lonchrea (DEBUG)
-    func lee(sender: UIButton){
+    func lee(_ sender: UIButton){
         //var scroll = Lonchera.deslizador.mueveAPosicion(DatosC.contenedor.loncheras[DatosC.contenedor.iActual+3])
         print("iact: ", DatosC.contenedor.iActual);
-        let lonc = DatosC.contenedor.lonchera;
+        /*let lonc = DatosC.contenedor.lonchera;
         print("QUIEN: ",lonc.fechaVisible?.text);
         for cas in (lonc.subVista?.casillas)!{
             print("cas: ",cas.elemeto?.producto?.nombre);
             //print("FRrame: ", cas.superview?.superview?.frame);
         }
+ */
     }
     
     //Método de inicializaión de la barra de los días
@@ -66,13 +91,13 @@ class VistaNino: UIView {
         let OY = EspacioLoncheras.frame.height+DatosC.contenedor.altoP*0.0239;
         let OX = DatosC.contenedor.anchoP*0.3444;
         
-        let frameBarra = CGRectMake(OX, OY, ancho, alto);
+        let frameBarra = CGRect(x: OX, y: OY, width: ancho, height: alto);
         barraD = UIView(frame: frameBarra);
         let ancho2 = ancho/CGFloat(Lonchera.deslizador.paginas.count);
         var p = 1;//Día de inicio
         for _ in Lonchera.deslizador.paginas{
             let OX = CGFloat(p-1)*ancho2;
-            let frameBoton = CGRectMake(OX, 0, ancho2, barraD!.frame.height);
+            let frameBoton = CGRect(x: OX, y: 0, width: ancho2, height: barraD!.frame.height);
             //print("Frame: ", frameBoton);
             let dia = BotonDias(frame: frameBoton);
             dia.poneLetra(p);
@@ -86,7 +111,7 @@ class VistaNino: UIView {
     }
     
     //Método que cambiará a una lonchera indicada
-    func cambiaLonchera(qq: Int){
+    func cambiaLonchera(_ qq: Int){
         for dia in (barraD?.subviews as! [BotonDias]){
             if(dia.id == qq){
                 //print("aa");
@@ -100,11 +125,11 @@ class VistaNino: UIView {
         print("Quien: ", qq);
     }
     
-    func pasaCalendario(sender: AnyObject){
+    func pasaCalendario(_ sender: AnyObject){
         for lonc in DatosC.contenedor.Pantallap.botones{
             lonc.loncheras = lonc.panelNino.Lonchera.deslizador.paginas;
         }
-        DatosC.contenedor.Pantallap.performSegueWithIdentifier("Calendario", sender: nil);
+        DatosC.contenedor.Pantallap.performSegue(withIdentifier: "Calendario", sender: nil);
     }
     
     //Método que inicia el botón del calendario
@@ -112,24 +137,24 @@ class VistaNino: UIView {
         let ancho = DatosC.contenedor.anchoP*0.689;
         let OX = (DatosC.contenedor.anchoP/2)-(ancho/2);
         let alto = DatosC.contenedor.altoP*0.07;
-        let calendario = UIButton(frame: CGRectMake(OX, (Lonchera.frame.height+Lonchera.frame.origin.y), (ancho), alto));
-        calendario.addTarget(self, action: #selector(VistaNino.pasaCalendario(_:)), forControlEvents: .TouchDown);
+        let calendario = UIButton(frame: CGRect(x: OX, y: (Lonchera.frame.height+Lonchera.frame.origin.y), width: (ancho), height: alto));
+        calendario.addTarget(self, action: #selector(VistaNino.pasaCalendario(_:)), for: .touchDown);
         //calendario.setTitle("Calendario", forState: .Normal);
-        let frameTexto = CGRectMake(0, 0, ancho, alto);
+        let frameTexto = CGRect(x: 0, y: 0, width: ancho, height: alto);
         let texto = UILabel(frame: frameTexto);
-        texto.textAlignment = NSTextAlignment.Center;
-        texto.textColor = UIColor.whiteColor();
+        texto.textAlignment = NSTextAlignment.center;
+        texto.textColor = UIColor.white;
         texto.font = UIFont(name: "SansBeamBody-Heavy", size: 25);
         texto.text = "ORDENAR";
         //calendario.backgroundColor=UIColor.cyanColor();
         let fondo = UIImage(named: "BotonOrdenar");
-        let backImg = UIImageView(frame: CGRectMake(0,0,calendario.frame.width, calendario.frame.height));
-        backImg.contentMode = UIViewContentMode.ScaleAspectFit;
+        let backImg = UIImageView(frame: CGRect(x: 0,y: 0,width: calendario.frame.width, height: calendario.frame.height));
+        backImg.contentMode = UIViewContentMode.scaleAspectFit;
         backImg.image = fondo;
         
         calendario.addSubview(backImg);
         calendario.addSubview(texto);
-        self.sendSubviewToBack(backImg);
+        self.sendSubview(toBack: backImg);
         self.addSubview(calendario);
     }
     
@@ -162,5 +187,5 @@ class VistaNino: UIView {
             }
         }
     }
-    
+    */
 }

@@ -12,9 +12,9 @@ import SSZipArchive
 
 class CargaZip: NSObject {
     
-    let fileManager = NSFileManager.defaultManager();
-    let nsDocumentDirectory = NSSearchPathDirectory.DocumentDirectory;
-    let nsUserDomainMask = NSSearchPathDomainMask.UserDomainMask;
+    let fileManager = FileManager.default;
+    let nsDocumentDirectory = FileManager.SearchPathDirectory.documentDirectory;
+    let nsUserDomainMask = FileManager.SearchPathDomainMask.userDomainMask;
     var paths: String!;
     var entrada : String!;
     var salida : String!;
@@ -30,7 +30,7 @@ class CargaZip: NSObject {
         if(!existenImagenes()){// No existen las imágenes
             if(existeZip()){
                 for n in 0...9{
-                    let rutaEntrada = entrada.stringByAppendingString("/elzip"+String(n)+".zip");
+                    let rutaEntrada = entrada + ("/elzip"+String(n)+".zip");
                     descomprimir(rutaEntrada);
                 }
                 
@@ -47,16 +47,16 @@ class CargaZip: NSObject {
     //Método que establece las rutas de los directorios donde se descargará el zip y donde se descomprimian las Imagenes
     func rutas(){
         paths = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true).first;
-        self.entrada = (paths?.stringByAppendingString("/ZipI"))!;
-        self.salida = (paths?.stringByAppendingString("/Imagenes"))!;
+        self.entrada = ((paths)! + "/ZipI");
+        self.salida = ((paths)! + "/Imagenes");
     }
     
     //Método que comprueba que el archivo zip se encuentre en el directorio de descarga
     func existeZip()->Bool{
         var retorna = false;
         for n in 0...9{
-            let rutaEntrada = entrada.stringByAppendingString("/elzip"+String(n)+".zip");
-            if(fileManager.fileExistsAtPath(rutaEntrada)){
+            let rutaEntrada = entrada + ("/elzip"+String(n)+".zip");
+            if(fileManager.fileExists(atPath: rutaEntrada)){
                 retorna = true;
             }else{
                 retorna = false;
@@ -71,7 +71,7 @@ class CargaZip: NSObject {
     func existenImagenes()-> Bool{
         var retorna = false;
         do{
-            let lista = try fileManager.contentsOfDirectoryAtPath(salida);
+            let lista = try fileManager.contentsOfDirectory(atPath: salida);
             if(lista.count == 0){
                 retorna = false;
             }else{
@@ -84,12 +84,12 @@ class CargaZip: NSObject {
     }
     
     //Mñetodo que descomprime el archivo zip guardado
-    func descomprimir(ruta: String){
+    func descomprimir(_ ruta: String){
         //let rutaEntrada = entrada.stringByAppendingString("/elzip2.zip");
         //for n in 0...9{
             //let rutaEntrada = entrada.stringByAppendingString("/elzip"+String(n)+".zip");
             print("ruta: ", ruta);
-            if(SSZipArchive.unzipFileAtPath(ruta, toDestination: salida)){
+            if(SSZipArchive.unzipFile(atPath: ruta, toDestination: salida)){
                 print("OK descompresion zip: ");
                 agregaImagenes();
             }else{
@@ -115,16 +115,16 @@ class CargaZip: NSObject {
         if(existenImagenes()){
             var lista: [String];
             do{
-                lista = try fileManager.contentsOfDirectoryAtPath(self.salida);
+                lista = try fileManager.contentsOfDirectory(atPath: self.salida);
             }catch{
                 
             }
             for prod in DatosC.contenedor.productos{
-                self.salida = (paths?.stringByAppendingString("/Imagenes/"))!;
-                let ruta = self.salida.stringByAppendingString(prod.imagenString!);
+                self.salida = ((paths)! + "/Imagenes/");
+                let ruta = self.salida + prod.imagenString!;
                 
                 
-                    let data = NSData(contentsOfFile: ruta)
+                    let data = try? Data(contentsOf: URL(fileURLWithPath: ruta))
                 if(data != nil){
                     //print("ruta: ", ruta);
                     //print("prod: ", prod.imagenString);

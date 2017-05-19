@@ -33,6 +33,9 @@
 		A13603C81CAEFB3D0032A19A /* Producto.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13603C71CAEFB3D0032A19A /* Producto.swift */; };
 		A13603CF1CAF20770032A19A /* ProductoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13603CE1CAF20770032A19A /* ProductoView.swift */; };
 		A13603D11CB2C50D0032A19A /* Casilla.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13603D01CB2C50D0032A19A /* Casilla.swift */; };
+		A13970111EC2D67F00BEC878 /* sipnner.gif in Resources */ = {isa = PBXBuildFile; fileRef = A13970101EC2D67F00BEC878 /* sipnner.gif */; };
+		A13970131EC2D68D00BEC878 /* LoncheraP3.gif in Resources */ = {isa = PBXBuildFile; fileRef = A13970121EC2D68D00BEC878 /* LoncheraP3.gif */; };
+		A13970151EC2D6F000BEC878 /* Cargando.gif in Resources */ = {isa = PBXBuildFile; fileRef = A13970141EC2D6F000BEC878 /* Cargando.gif */; };
 		A139AB8B1CBE8C3900A32EFC /* CargaSecuencia.swift in Sources */ = {isa = PBXBuildFile; fileRef = A139AB8A1CBE8C3900A32EFC /* CargaSecuencia.swift */; };
 		A13A2BCD1D0717CC0008E22E /* ConsultaCategorias.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13A2BCC1D0717CC0008E22E /* ConsultaCategorias.swift */; };
 		A13A2BCF1D071ADC0008E22E /* Categoria.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13A2BCE1D071ADC0008E22E /* Categoria.swift */; };
@@ -81,7 +84,6 @@
 		A16BAFE11DA8392F007386ED /* ActualizaPadre.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16BAFE01DA8392D007386ED /* ActualizaPadre.swift */; };
 		A16EBC571D382AA2001D0B09 /* BusquedaProductos.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16EBC561D382AA0001D0B09 /* BusquedaProductos.swift */; };
 		A17083D31E43852A00085C46 /* SaludableInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17083D21E43852A00085C46 /* SaludableInfo.swift */; };
-		A17083D51E43B58E00085C46 /* spinner.gif in Resources */ = {isa = PBXBuildFile; fileRef = A17083D41E43B58E00085C46 /* spinner.gif */; };
 		A17344091D89E0E9003B467C /* ScrollTipos.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17344081D89E0E4003B467C /* ScrollTipos.swift */; };
 		A173440B1D89E3CB003B467C /* VistaTipo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A173440A1D89E3CB003B467C /* VistaTipo.swift */; };
 		A17344131D8AF9B5003B467C /* Sans-Beam-Body-Book.otf in Resources */ = {isa = PBXBuildFile; fileRef = A17344121D8AF9B5003B467C /* Sans-Beam-Body-Book.otf */; };
@@ -152,9 +154,7 @@
 		A1A605C31CC81BD000FE9AC7 /* PestanasProductos.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A605C21CC81BD000FE9AC7 /* PestanasProductos.swift */; };
 		A1A605C51CC8204900FE9AC7 /* VistaPestana.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A605C41CC8204900FE9AC7 /* VistaPestana.swift */; };
 		A1A605C71CC8264200FE9AC7 /* ContenedorProductos.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A605C61CC8264200FE9AC7 /* ContenedorProductos.swift */; };
-		A1A6421C1E3B971B00AFF572 /* Cargando.gif in Resources */ = {isa = PBXBuildFile; fileRef = A1A6421B1E3B971B00AFF572 /* Cargando.gif */; };
 		A1A6421E1E3B9EBE00AFF572 /* iOSDevCenters+GIF.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A6421D1E3B9EBE00AFF572 /* iOSDevCenters+GIF.swift */; };
-		A1A642201E3BEE6C00AFF572 /* LoncheraP3.gif in Resources */ = {isa = PBXBuildFile; fileRef = A1A6421F1E3BEE6C00AFF572 /* LoncheraP3.gif */; };
 		A1ABBFF91CE27ED30098D805 /* PantallaSV.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1ABBFF81CE27ED30098D805 /* PantallaSV.swift */; };
 		A1AEC8311DCD10A00094B945 /* CancelaPedido.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AEC8301DCD109F0094B945 /* CancelaPedido.swift */; };
 		A1AEC8331DCD19200094B945 /* VIstaDeseaCancelar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AEC8321DCD19200094B945 /* VIstaDeseaCancelar.swift */; };
@@ -254,6 +254,9 @@
 		A13603C71CAEFB3D0032A19A /* Producto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Producto.swift; sourceTree = "<group>"; };
 		A13603CE1CAF20770032A19A /* ProductoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductoView.swift; sourceTree = "<group>"; };
 		A13603D01CB2C50D0032A19A /* Casilla.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Casilla.swift; sourceTree = "<group>"; };
+		A13970101EC2D67F00BEC878 /* sipnner.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = sipnner.gif; sourceTree = "<group>"; };
+		A13970121EC2D68D00BEC878 /* LoncheraP3.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = LoncheraP3.gif; sourceTree = "<group>"; };
+		A13970141EC2D6F000BEC878 /* Cargando.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Cargando.gif; sourceTree = "<group>"; };
 		A139AB8A1CBE8C3900A32EFC /* CargaSecuencia.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CargaSecuencia.swift; sourceTree = "<group>"; };
 		A13A2BCC1D0717CC0008E22E /* ConsultaCategorias.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsultaCategorias.swift; sourceTree = "<group>"; };
 		A13A2BCE1D071ADC0008E22E /* Categoria.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Categoria.swift; sourceTree = "<group>"; };
@@ -303,7 +306,6 @@
 		A16BAFE01DA8392D007386ED /* ActualizaPadre.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActualizaPadre.swift; sourceTree = "<group>"; };
 		A16EBC561D382AA0001D0B09 /* BusquedaProductos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusquedaProductos.swift; sourceTree = "<group>"; };
 		A17083D21E43852A00085C46 /* SaludableInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaludableInfo.swift; sourceTree = "<group>"; };
-		A17083D41E43B58E00085C46 /* spinner.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = spinner.gif; path = ../../../../Documents/Lunch/LoncheraBaila/spinner.gif; sourceTree = "<group>"; };
 		A17344081D89E0E4003B467C /* ScrollTipos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollTipos.swift; sourceTree = "<group>"; };
 		A173440A1D89E3CB003B467C /* VistaTipo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VistaTipo.swift; sourceTree = "<group>"; };
 		A17344121D8AF9B5003B467C /* Sans-Beam-Body-Book.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Sans-Beam-Body-Book.otf"; path = "ConsumoSOAP/Resources/Fonts/Sans-Beam-Body-Book.otf"; sourceTree = "<group>"; };
@@ -374,9 +376,7 @@
 		A1A605C21CC81BD000FE9AC7 /* PestanasProductos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PestanasProductos.swift; sourceTree = "<group>"; };
 		A1A605C41CC8204900FE9AC7 /* VistaPestana.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VistaPestana.swift; sourceTree = "<group>"; };
 		A1A605C61CC8264200FE9AC7 /* ContenedorProductos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContenedorProductos.swift; sourceTree = "<group>"; };
-		A1A6421B1E3B971B00AFF572 /* Cargando.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = Cargando.gif; path = ../../../../Documents/Lunch/Cargando.gif; sourceTree = "<group>"; };
 		A1A6421D1E3B9EBE00AFF572 /* iOSDevCenters+GIF.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "iOSDevCenters+GIF.swift"; sourceTree = "<group>"; };
-		A1A6421F1E3BEE6C00AFF572 /* LoncheraP3.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = LoncheraP3.gif; path = ../../../../Documents/Lunch/LoncheraBaila/LoncheraP3.gif; sourceTree = "<group>"; };
 		A1ABBFF81CE27ED30098D805 /* PantallaSV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PantallaSV.swift; sourceTree = "<group>"; };
 		A1AEC8301DCD109F0094B945 /* CancelaPedido.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CancelaPedido.swift; sourceTree = "<group>"; };
 		A1AEC8321DCD19200094B945 /* VIstaDeseaCancelar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VIstaDeseaCancelar.swift; sourceTree = "<group>"; };
@@ -823,9 +823,9 @@
 		A1A6421A1E3B92D600AFF572 /* GifImagenes */ = {
 			isa = PBXGroup;
 			children = (
-				A17083D41E43B58E00085C46 /* spinner.gif */,
-				A1A6421F1E3BEE6C00AFF572 /* LoncheraP3.gif */,
-				A1A6421B1E3B971B00AFF572 /* Cargando.gif */,
+				A13970141EC2D6F000BEC878 /* Cargando.gif */,
+				A13970101EC2D67F00BEC878 /* sipnner.gif */,
+				A13970121EC2D68D00BEC878 /* LoncheraP3.gif */,
 				A1A6421D1E3B9EBE00AFF572 /* iOSDevCenters+GIF.swift */,
 			);
 			name = GifImagenes;
@@ -923,11 +923,13 @@
 					A102F6661CA9CCF7001359A5 = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = Y23ESKPWM9;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
 					A102F67A1CA9CCF8001359A5 = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = Y23ESKPWM9;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Manual;
 						TestTargetID = A102F6661CA9CCF7001359A5;
 					};
@@ -957,12 +959,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A13970111EC2D67F00BEC878 /* sipnner.gif in Resources */,
 				A19945171D99AB1400A7B8F9 /* Gotham-Medium_0.ttf in Resources */,
-				A1A642201E3BEE6C00AFF572 /* LoncheraP3.gif in Resources */,
 				A19945151D99A6AA00A7B8F9 /* Gotham-Ultra_0.ttf in Resources */,
-				A17083D51E43B58E00085C46 /* spinner.gif in Resources */,
 				A1C6DFDC1D92EB10008B659B /* Gotham-Bold_0.ttf in Resources */,
-				A1A6421C1E3B971B00AFF572 /* Cargando.gif in Resources */,
 				A1C6DFDD1D92EB10008B659B /* Gotham-Book_0.ttf in Resources */,
 				A17344131D8AF9B5003B467C /* Sans-Beam-Body-Book.otf in Resources */,
 				A14296261D230B7C00A0905B /* Sans Beam Head SemiBold.otf in Resources */,
@@ -972,6 +972,8 @@
 				A1F1F5711D19DA3B00B4BFBE /* Sans-Beam-Head-Medium.otf in Resources */,
 				A1F1F56D1D19D78E00B4BFBE /* Fonts in Resources */,
 				A15BBD0A1CB4452B0043CD9B /* Main.storyboard in Resources */,
+				A13970131EC2D68D00BEC878 /* LoncheraP3.gif in Resources */,
+				A13970151EC2D6F000BEC878 /* Cargando.gif in Resources */,
 				A102F6751CA9CCF7001359A5 /* LaunchScreen.storyboard in Resources */,
 				A102F6721CA9CCF7001359A5 /* Assets.xcassets in Resources */,
 			);
@@ -1402,6 +1404,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = Y23ESKPWM9;
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
 				INFOPLIST_FILE = ConsumoSOAP/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1410,7 +1413,7 @@
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = ConsumoSOAP/Header.h;
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1423,6 +1426,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = Y23ESKPWM9;
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
 				INFOPLIST_FILE = ConsumoSOAP/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1431,7 +1435,7 @@
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = ConsumoSOAP/Header.h;
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -1448,6 +1452,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lunch.ConsumoSOAPTests;
 				PRODUCT_NAME = "La Lonchera";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/La Lonchera.app/La Lonchera";
 			};
 			name = Debug;
@@ -1464,6 +1469,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lunch.ConsumoSOAPTests;
 				PRODUCT_NAME = "La Lonchera";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/La Lonchera.app/La Lonchera";
 			};
 			name = Release;

@@ -80,7 +80,7 @@
             startingLineNumber = "137"
             endingLineNumber = "137"
             landmarkName = "parser(_:didEndElement:namespaceURI:qualifiedName:)"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -95,7 +95,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "120"
             endingLineNumber = "120"
-            landmarkName = "parser(parser:didEndElement:namespaceURI:qualifiedName:)"
+            landmarkName = "parser(_:didEndElement:namespaceURI:qualifiedName:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -111,8 +111,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "71"
             endingLineNumber = "71"
-            landmarkName = "viewWillAppear(_:)"
-            landmarkType = "5">
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -128,7 +128,7 @@
             startingLineNumber = "99"
             endingLineNumber = "99"
             landmarkName = "viewWillAppear(_:)"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -143,7 +143,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "111"
             endingLineNumber = "111"
-            landmarkName = "parser(parser:foundCharacters:)"
+            landmarkName = "parser(_:foundCharacters:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -254,9 +254,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "24"
-            endingLineNumber = "24"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "7">
+            endingLineNumber = "24">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -272,7 +270,7 @@
             startingLineNumber = "80"
             endingLineNumber = "80"
             landmarkName = "crea()"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -282,11 +280,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ConsumoSOAP/ProductoView.swift"
-            timestampString = "493620062.145419"
+            timestampString = "516834607.095914"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "71"
-            endingLineNumber = "71"
+            startingLineNumber = "73"
+            endingLineNumber = "73"
             landmarkName = "ProductoView"
             landmarkType = "3">
          </BreakpointContent>
@@ -352,7 +350,7 @@
             startingLineNumber = "275"
             endingLineNumber = "275"
             landmarkName = "crea()"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -399,8 +397,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "120"
             endingLineNumber = "120"
-            landmarkName = "VistaPestana"
-            landmarkType = "3">
+            landmarkName = "presentationCount(for:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -415,8 +413,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "54"
             endingLineNumber = "54"
-            landmarkName = "muestra(_:)"
-            landmarkType = "5">
+            landmarkName = "CajaView"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -447,7 +445,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "36"
             endingLineNumber = "36"
-            landmarkName = "CargaTInfo(prody:)"
+            landmarkName = "CargaTInfo(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -464,7 +462,7 @@
             startingLineNumber = "35"
             endingLineNumber = "35"
             landmarkName = "init(frame:)"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -607,7 +605,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "125"
             endingLineNumber = "125"
-            landmarkName = "consulta(email:pass:)"
+            landmarkName = "consulta(_:pass:)"
             landmarkType = "7">
             <Locations>
                <Location
@@ -749,7 +747,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "71"
             endingLineNumber = "71"
-            landmarkName = "consulta(idPadre:cInicial:)"
+            landmarkName = "consulta(_:cInicial:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -828,8 +826,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "81"
             endingLineNumber = "81"
-            landmarkName = "cargaFavoritos()"
-            landmarkType = "5">
+            landmarkName = "Predeterminadas"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -861,7 +859,7 @@
             startingLineNumber = "66"
             endingLineNumber = "66"
             landmarkName = "envia(_:id:)"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -877,7 +875,7 @@
             startingLineNumber = "120"
             endingLineNumber = "120"
             landmarkName = "setMeses(_:)"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -892,8 +890,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "26"
             endingLineNumber = "26"
-            landmarkName = "init(frame:)"
-            landmarkType = "5">
+            landmarkName = "&gt;(_:_:)"
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -908,8 +906,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "56"
             endingLineNumber = "56"
-            landmarkName = "lee(_:)"
-            landmarkType = "5">
+            landmarkName = "init(frame:)"
+            landmarkType = "7">
             <Locations>
                <Location
                   shouldBeEnabled = "Yes"
@@ -973,7 +971,7 @@
             startingLineNumber = "103"
             endingLineNumber = "103"
             landmarkName = "crea()"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -989,7 +987,7 @@
             startingLineNumber = "357"
             endingLineNumber = "357"
             landmarkName = "crea()"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1036,7 +1034,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "327"
             endingLineNumber = "327"
-            landmarkName = "fondoCasilla(cas:)"
+            landmarkName = "iniciaLoncheraReferencia()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1052,7 +1050,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "328"
             endingLineNumber = "328"
-            landmarkName = "fondoCasilla(cas:)"
+            landmarkName = "iniciaLoncheraReferencia()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1068,7 +1066,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "590"
             endingLineNumber = "590"
-            landmarkName = "pintaEstante(fila:frameRef:vista:espaciado:)"
+            landmarkName = "panelInfo(_:salud:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1100,8 +1098,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "490"
             endingLineNumber = "490"
-            landmarkName = "CasillasColores(_:)"
-            landmarkType = "5">
+            landmarkName = "SubVista"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1132,7 +1130,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "193"
             endingLineNumber = "193"
-            landmarkName = "traeDia(a&#xf1;o:Mes:DiaN:)"
+            landmarkName = "cargaSemanaActual()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1148,7 +1146,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "204"
             endingLineNumber = "204"
-            landmarkName = "traeDia(a&#xf1;o:Mes:DiaN:)"
+            landmarkName = "cargaSemanaActual()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1165,7 +1163,7 @@
             startingLineNumber = "90"
             endingLineNumber = "90"
             landmarkName = "parser(_:foundCharacters:)"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1181,7 +1179,7 @@
             startingLineNumber = "29"
             endingLineNumber = "29"
             landmarkName = "elimina(_:)"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1212,8 +1210,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "374"
             endingLineNumber = "374"
-            landmarkName = "copiaLonchera(_:fuente:)"
-            landmarkType = "5">
+            landmarkName = "traeLoncheraSemanaActual()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1229,7 +1227,7 @@
             startingLineNumber = "384"
             endingLineNumber = "384"
             landmarkName = "copiaLonchera(_:fuente:)"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1244,8 +1242,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "563"
             endingLineNumber = "563"
-            landmarkName = "Dia"
-            landmarkType = "3">
+            landmarkName = "mesPartidoPosterior(_:fechaCompara2:calendar:p:anterior:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1261,7 +1259,7 @@
             startingLineNumber = "62"
             endingLineNumber = "62"
             landmarkName = "setA&#xf1;o(_:espacio:)"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1277,7 +1275,7 @@
             startingLineNumber = "118"
             endingLineNumber = "118"
             landmarkName = "volver(_:)"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1293,7 +1291,7 @@
             startingLineNumber = "186"
             endingLineNumber = "186"
             landmarkName = "iniciaDiasLab()"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1308,8 +1306,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "110"
             endingLineNumber = "110"
-            landmarkName = "AnoScroll"
-            landmarkType = "3">
+            landmarkName = "iniciaEspacioDias()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1324,8 +1322,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "36"
             endingLineNumber = "36"
-            landmarkName = "init(frame:nDia:mes:)"
-            landmarkType = "5">
+            landmarkName = "Dia"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1340,7 +1338,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "65"
             endingLineNumber = "65"
-            landmarkName = "rotaPesta&#xf1;a(pest:npest:)"
+            landmarkName = "rotaPesta&#xf1;a(_:npest:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1357,7 +1355,7 @@
             startingLineNumber = "65"
             endingLineNumber = "65"
             landmarkName = "iniciaDias()"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1371,9 +1369,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "11"
-            endingLineNumber = "11"
-            landmarkName = "VistaLonchera"
-            landmarkType = "3">
+            endingLineNumber = "11">
             <Locations>
                <Location
                   shouldBeEnabled = "Yes"
@@ -1435,8 +1431,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "49"
             endingLineNumber = "49"
-            landmarkName = "iniciaFecha(_:Mes:Dia:)"
-            landmarkType = "5">
+            landmarkName = "Dia"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1462,11 +1458,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ConsumoSOAP/Lonchera2.swift"
-            timestampString = "508803960.317253"
+            timestampString = "516849695.490042"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "328"
-            endingLineNumber = "328"
+            startingLineNumber = "338"
+            endingLineNumber = "338"
             landmarkName = "esFavorita()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1532,7 +1528,7 @@
             startingLineNumber = "25"
             endingLineNumber = "25"
             landmarkName = "init(frame:tipo:fecha:)"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1579,7 +1575,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "546"
             endingLineNumber = "546"
-            landmarkName = "imagePickerController(picker:didFinishPickingMediaWithInfo:)"
+            landmarkName = "dismissKeyboard()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1595,7 +1591,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "337"
             endingLineNumber = "337"
-            landmarkName = "sube()"
+            landmarkName = "iniciaBotonVolver()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1611,7 +1607,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "31"
             endingLineNumber = "31"
-            landmarkName = "consulta(direcc:padre:)"
+            landmarkName = "consulta(_:padre:)"
             landmarkType = "7">
             <Locations>
                <Location
@@ -1692,7 +1688,7 @@
             startingLineNumber = "30"
             endingLineNumber = "30"
             landmarkName = "cancelaPedido(_:)"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1708,7 +1704,7 @@
             startingLineNumber = "20"
             endingLineNumber = "20"
             landmarkName = "subeBusqueda(_:texto:)"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1739,7 +1735,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "128"
             endingLineNumber = "128"
-            landmarkName = "guarda(lista:tipo:)"
+            landmarkName = "guarda(_:tipo:)"
             landmarkType = "7">
             <Locations>
                <Location
@@ -1787,8 +1783,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "34"
             endingLineNumber = "34"
-            landmarkName = "encodeWithCoder(_:)"
-            landmarkType = "5">
+            landmarkName = "encode(with:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

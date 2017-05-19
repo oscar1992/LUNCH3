@@ -13,11 +13,11 @@ class MensajeCrea: UIView {
     var mensaje:String;
     var corazon :UIView!;
     var corazon2 : UIImageView!;
-    var timer: NSTimer!;
+    var timer: Timer!;
     var itera = 0;
     var nombresImgs = [UIImage]();
-    var timer2 : NSTimer!;
-    var timer3 : NSTimer!;
+    var timer2 : Timer!;
+    var timer3 : Timer!;
     var texto : UILabel!;
     var gif: Bool!;
 
@@ -43,14 +43,14 @@ class MensajeCrea: UIView {
         let altoIma = self.frame.height;
         let OXima = (self.frame.width/2)-(altoIma/2);
         let OYIma = CGFloat(0);
-        let imagenFrame = CGRectMake(OXima, OYIma, altoIma, altoIma);
+        let imagenFrame = CGRect(x: OXima, y: OYIma, width: altoIma, height: altoIma);
         corazon=UIView();
         corazon.frame=imagenFrame;
         if(gif == true){
             let imaGif = UIImage.gifImageWithName("LoncheraP3");
             corazon2 = UIImageView();
             corazon2.image = imaGif;
-            corazon2.contentMode = UIViewContentMode.ScaleAspectFit;
+            corazon2.contentMode = UIViewContentMode.scaleAspectFit;
             corazon2.frame=imagenFrame;
             print("Frame: ", corazon2.frame);
             self.addSubview(corazon2);
@@ -70,12 +70,12 @@ class MensajeCrea: UIView {
         let ancho = self.frame.width*0.8;
         let OX = (self.frame.width/2)-(ancho/2)
         let OY = (corazon.frame.height + corazon.frame.origin.y);
-        texto = UILabel(frame: CGRectMake(OX, OY, ancho, self.frame.height*0.5));
+        texto = UILabel(frame: CGRect(x: OX, y: OY, width: ancho, height: self.frame.height*0.5));
         print("msg: ", mensaje);
         texto.text = mensaje;
         texto.numberOfLines=5;
-        texto.textColor=UIColor.lightGrayColor();
-        texto.textAlignment=NSTextAlignment.Center;
+        texto.textColor=UIColor.lightGray;
+        texto.textAlignment=NSTextAlignment.center;
         texto.adjustsFontSizeToFitWidth=true;
         
         texto.font=UIFont(name: "SansBeam Head", size: (texto.frame.height));
@@ -87,7 +87,7 @@ class MensajeCrea: UIView {
         let altoIma = self.frame.width*0.2;
         let OXima = (self.frame.width/2)-(altoIma/2);
         let OYIma = self.frame.height*0.1;
-        let imagenFrame = CGRectMake(OXima, OYIma, altoIma, altoIma);
+        let imagenFrame = CGRect(x: OXima, y: OYIma, width: altoIma, height: altoIma);
         corazon = UIView(frame: imagenFrame);
         DatosB.cont.poneFondoTot(corazon, fondoStr: "ICO Advertencia", framePers: nil, identi: "ico", scala: true);
         self.addSubview(corazon);
@@ -98,7 +98,7 @@ class MensajeCrea: UIView {
         let altoIma = self.frame.width*0.2;
         let OXima = (self.frame.width/2)-(altoIma/2);
         let OYIma = self.frame.height*0.1;
-        let imagenFrame = CGRectMake(OXima, OYIma, altoIma, altoIma);
+        let imagenFrame = CGRect(x: OXima, y: OYIma, width: altoIma, height: altoIma);
         corazon = UIView(frame: imagenFrame);
         DatosB.cont.poneFondoTot(corazon, fondoStr: "ICO Feliz", framePers: nil, identi: "ico", scala: true);
         self.addSubview(corazon);
@@ -111,7 +111,7 @@ class MensajeCrea: UIView {
         iniciaImagen2();
         texto.removeFromSuperview();
         iniciaMensaje();
-        timer = NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: #selector(MensajeCrea.cierra), userInfo: nil, repeats: false);
+        timer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(MensajeCrea.cierra), userInfo: nil, repeats: false);
         
     }
     
@@ -125,13 +125,13 @@ class MensajeCrea: UIView {
     func fondo(){
         let OX = -((DatosC.contenedor.anchoP)-(self.frame.width))/2;
         let OY = -((DatosC.contenedor.altoP)-(self.frame.height))/2;
-        let frameB = CGRectMake(OX, OY, DatosC.contenedor.anchoP, DatosC.contenedor.altoP);
-        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Light);
+        let frameB = CGRect(x: OX, y: OY, width: DatosC.contenedor.anchoP, height: DatosC.contenedor.altoP);
+        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light);
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.frame=frameB;
         //blurEffectView.layer.zPosition=5;
         self.addSubview(blurEffectView);
-        self.sendSubviewToBack(blurEffectView);
+        self.sendSubview(toBack: blurEffectView);
     }
     
     func nombresImagenes(){
@@ -143,9 +143,9 @@ class MensajeCrea: UIView {
     
     func cambiaImagen(){
         print("Hilo Imagen")
-        let hiloImagen = DISPATCH_QUEUE_PRIORITY_DEFAULT;
-        dispatch_async(dispatch_get_global_queue(hiloImagen, 0)) {
-            self.timer2 = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: #selector(MensajeCrea.iteraImagen), userInfo: nil, repeats: true);
+        let hiloImagen = DispatchQueue.GlobalQueuePriority.default;
+        DispatchQueue.global(priority: hiloImagen).async {
+            self.timer2 = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(MensajeCrea.iteraImagen), userInfo: nil, repeats: true);
         };
         
     }

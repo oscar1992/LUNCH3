@@ -20,11 +20,11 @@ class BotonResultado: UIButton {
         self.nombre=producto.nombre;
         self.producto=producto;
         self.pestaña=pestañas;
-        let frameNombre = CGRectMake(0, 0, frame.width, frame.height);
+        let frameNombre = CGRect(x: 0, y: 0, width: frame.width, height: frame.height);
         let nom = UILabel(frame: frameNombre);
         nom.text=nombre;
         self.addSubview(nom);
-        self.addTarget(self, action: #selector(BotonResultado.cambiaPestaña(_:)), forControlEvents: .TouchUpInside);
+        self.addTarget(self, action: #selector(BotonResultado.cambiaPestaña(_:)), for: .touchUpInside);
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -32,7 +32,7 @@ class BotonResultado: UIButton {
     }
     
     //Método que cambia la pestala de acuerdo al tipo de producto contenido
-    func cambiaPestaña(sender: AnyObject){
+    func cambiaPestaña(_ sender: AnyObject){
         pestaña?.cambia(self);
         for pest in DatosC.contenedor.Pestanas{
             if(pest.activo==true){
@@ -62,8 +62,8 @@ class BotonResultado: UIButton {
     }
     
     //Método que permite cambiar la pestaña donde se aloja un producto
-    func rotaPestaña(pest: VistaPestana, npest: Int){
-        pest.setViewControllers([pest.paginas[npest]], direction: UIPageViewControllerNavigationDirection.Forward, animated: true, completion: nil);
+    func rotaPestaña(_ pest: VistaPestana, npest: Int){
+        pest.setViewControllers([pest.paginas[npest]], direction: UIPageViewControllerNavigationDirection.forward, animated: true, completion: nil);
         pest.control?.currentPage=npest;
     }
 

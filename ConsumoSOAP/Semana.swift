@@ -9,7 +9,7 @@
 import UIKit
 
 class Semana: UIView {
-    
+    /*
     var numSemanaMes:Int?;
     let pestana=CGFloat(30);
     var pos = [CGRect]();
@@ -17,11 +17,11 @@ class Semana: UIView {
     var mes: Mes?;
     var topsemana = 7;
     
-    var ultimaPosicion = CGPointMake(0, 0);
+    var ultimaPosicion = CGPoint(x: 0, y: 0);
     
     override required init(frame: CGRect) {
         super.init(frame: frame);
-        self.backgroundColor=UIColor.cyanColor();
+        self.backgroundColor=UIColor.cyan;
         
     }
     
@@ -29,12 +29,12 @@ class Semana: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func detecPan(recognizer: UIPanGestureRecognizer){
+    func detecPan(_ recognizer: UIPanGestureRecognizer){
         recognizer.delaysTouchesEnded=false;
         recognizer.cancelsTouchesInView=false;
         
-        let translation = recognizer.translationInView(self.superview);
-        ultimaPosicion=CGPointMake(ultimaPosicion.x+translation.x, ultimaPosicion.y+translation.y);
+        let translation = recognizer.translation(in: self.superview);
+        ultimaPosicion=CGPoint(x: ultimaPosicion.x+translation.x, y: ultimaPosicion.y+translation.y);
     }
     
 
@@ -43,13 +43,13 @@ class Semana: UIView {
         let anchoC=anchoM/CGFloat(topsemana);
         
         for p in 0..<topsemana{
-            let posi = CGRectMake((pestana+(anchoC*CGFloat(p))), 0, anchoC, self.frame.height);
+            let posi = CGRect(x: (pestana+(anchoC*CGFloat(p))), y: 0, width: anchoC, height: self.frame.height);
             pos.append(posi);
             //print("Posi: ",posi);
         }
     }
     
-    func addDia(dia: Dia){
+    func addDia(_ dia: Dia){
         print("dia: ", dia.diaSenama);
         dias.append(dia);
         dia.frame=pos[dia.diaSenama!-1];
@@ -59,15 +59,15 @@ class Semana: UIView {
     }
     
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         //print("Toca");
     }
     
-    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         
     }
     
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         
     }
     /*
@@ -77,5 +77,5 @@ class Semana: UIView {
         // Drawing code
     }
     */
-
+*/
 }

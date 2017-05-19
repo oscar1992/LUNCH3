@@ -10,7 +10,7 @@ import UIKit
 
 class ProductoView: UIButton {
     
-    var ultimaPosicion:CGPoint=CGPointMake(0,0);
+    var ultimaPosicion:CGPoint=CGPoint(x: 0,y: 0);
     //var imagen:UIImage!;
     var VistaGeneral:ViewController?;
     var padre:Casilla?; //BASE
@@ -31,11 +31,11 @@ class ProductoView: UIButton {
     var cc : CGRect?;
     var copiaExito: Bool = false;
     
-    var timer : NSTimer!;
+    var timer : Timer!;
     var bloqueo2 = false;
     var bloqueo3 = false;
-    var timer2 : NSTimer!;
-    var timer3 : NSTimer!;
+    var timer2 : Timer!;
+    var timer3 : Timer!;
     var moviendo = false;
     
     var bloqueo4 = false;
@@ -49,11 +49,13 @@ class ProductoView: UIButton {
         //self.imagenInterna=imagen;
         let panRecognizer = UIPanGestureRecognizer(target: self, action:#selector(ProductoView.detectPan(_:)));
         self.gestureRecognizers=[panRecognizer];
-        let vista=UIImageView(frame: CGRectMake(0, 0, self.frame.width, self.frame.height));
+        let vista=UIImageView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height));
         //print("bloq2: ", bloqueo2);
         vista.image=imagen;
-        vista.contentMode=UIViewContentMode.ScaleAspectFit;
+        vista.contentMode=UIViewContentMode.scaleAspectFit;
+        //print("imagen: ", vista.image);
         self.addSubview(vista);
+        self.bringSubview(toFront: vista);
         //self.backgroundColor=UIColor.clearColor().colorWithAlphaComponent(0.0);
         ultimaPosicion=self.center;
         bloqueo2=false;
@@ -61,7 +63,7 @@ class ProductoView: UIButton {
         espacioPadre=self.frame;
         bloquea=false;
         Natural=true;
-        acumula = CGPointZero;
+        acumula = CGPoint.zero;
         
         //print("tt: ",vista.frame.width," ee: ",vista.image);
         
@@ -76,23 +78,23 @@ class ProductoView: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func detectPan(recognizer: UIPanGestureRecognizer){
+    func detectPan(_ recognizer: UIPanGestureRecognizer){
         
         //importante cancelar los delays y los cancels para efecto inmediato de las funciones de soltar y de arrastrar
         recognizer.delaysTouchesEnded=false;
         recognizer.cancelsTouchesInView=false;
-        let translation=recognizer.translationInView(self.superview);
+        let translation=recognizer.translation(in: self.superview);
         if(bloqueo2==true){
             //print("Bloqq: ",bloqueo2);
             
             
-            self.center = CGPointMake(ultimaPosicion.x+translation.x, ultimaPosicion.y+translation.y);
+            self.center = CGPoint(x: ultimaPosicion.x+translation.x, y: ultimaPosicion.y+translation.y);
         }else{
             
             //retornaCasilla(padre!);
             self.center=ultimaPosicion;
         }
-        self.center = CGPointMake(ultimaPosicion.x+translation.x, ultimaPosicion.y+translation.y);
+        self.center = CGPoint(x: ultimaPosicion.x+translation.x, y: ultimaPosicion.y+translation.y);
         //ultimaPosicion=self.center;
     }
     
@@ -118,7 +120,7 @@ class ProductoView: UIButton {
     */
     
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         ultToque = touches.first;
         evaMov();
@@ -129,18 +131,18 @@ class ProductoView: UIButton {
         if(Panel2==nil && PanelOrigen==nil){ // Entra el touch en el panel Normal
             ultimaPosicion=self.center;
             //print("ult: ", ultimaPosicion);
-            self.superview?.superview!.superview!.superview!.bringSubviewToFront(self);
+            self.superview?.superview!.superview!.superview!.bringSubview(toFront: self);
             //print("Normal");
             //padre=self.superview;
             eva4();
             informacion();
         }else{
-            timer3 = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: #selector(evaMov3), userInfo: nil, repeats: false);
+            timer3 = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(evaMov3), userInfo: nil, repeats: false);
             
             ultimaPosicion=self.center;
-            print("pos: ", touches.first?.locationInView(espacio));
+            print("pos: ", touches.first?.location(in: espacio));
             
-            cc = convertRect(padre!.frame, toView: espacio!);
+            cc = convert(padre!.frame, to: espacio!);
             _ = true;
             _ = self.superview;
             self.layer.zPosition=1;
@@ -152,13 +154,13 @@ class ProductoView: UIButton {
         //VistaGeneral?.view.addSubview(self);
     }
     
-    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         acumula!.x = abs(ultimaPosicion.x-self.center.x);
         acumula!.y = abs(ultimaPosicion.y-self.center.y);
         //print("acu: ", acumula);
     }
     
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         //timer2 = NSTimer.scheduledTimerWithTimeInterval(0.4, target: self, selector: #selector(ProductoView.evaMov2), userInfo: nil, repeats: false);
         //evaMov2();
         moviendo = false;
@@ -169,7 +171,7 @@ class ProductoView: UIButton {
         if(Panel2==nil && PanelOrigen==nil){       // Sale del touch normal
             //print("Sale normal");
             //print("espacio P: ", espacioPadre, " centro: ", self.center);
-            if(CGRectContainsPoint(espacioPadre, self.center)){
+            if(espacioPadre.contains(self.center)){
                 //print("punto: ", self.center, tipo);
                 //print("Esta adentro", espacioPadre, self.center);
                 if(bloqueo4==false){
@@ -225,17 +227,17 @@ class ProductoView: UIButton {
              //Sale del touch en la selección de ítems
            //print("Sale SV");
             self.center=CGPoint(x: (self.center.x), y: (self.center.y-(padre!.frame.origin.y+espacio!.frame.origin.y+cc!.origin.y-50)));
-            let centroNatural=touches.first?.locationInView(espacio);
-            if(CGRectContainsPoint(espacioPadre, self.center)){
+            let centroNatural=touches.first?.location(in: espacio);
+            if(espacioPadre.contains(self.center)){
                 
                 //retornaCasilla(padre!);
                 //print("retorna");
             }else{
               
-                let no=CGRectMake((objetivo.frame.origin.x), ((objetivo.frame.origin.y+DatosC.contenedor.pantallaSV.espacioIntercambio.frame.origin.y+(DatosC.contenedor.pantallaSV.LaBarra.frame.height+DatosC.contenedor.pantallaSV.LaBarra.frame.origin.y))), objetivo.frame.width, objetivo.frame.height);
+                let no=CGRect(x: (objetivo?.frame.origin.x)!, y: (((objetivo?.frame.origin.y)!+DatosC.contenedor.pantallaSV.espacioIntercambio.frame.origin.y+(DatosC.contenedor.pantallaSV.LaBarra.frame.height+DatosC.contenedor.pantallaSV.LaBarra.frame.origin.y))), width: (objetivo?.frame.width)!, height: (objetivo?.frame.height)!);
                 //print("centro ima: ", centroNatural);
                 //print("Objetivo: ", objetivo.frame)
-                if(CGRectContainsPoint(no , centroNatural!)){
+                if(no.contains(centroNatural!)){
                     copiaExito=true;
                     
                 }
@@ -243,10 +245,10 @@ class ProductoView: UIButton {
                 
             }
             if(copiaExito == true && copia!.producto != nil){
-                self.frame = CGRectMake((objetivo.frame.width/2)-(self.frame.width/2), 0, objetivo.frame.width, objetivo.frame.height);
+                self.frame = CGRect(x: ((objetivo?.frame.width)!/2)-(self.frame.width/2), y: 0, width: (objetivo?.frame.width)!, height: (objetivo?.frame.height)!);
                 //print("---------x^x---------");
-                objetivo.seteaElemento(self, tipo: self.tipo!, ima: self.producto!.imagen!, prod: self.producto!);
-                copia!.frame=CGRectMake(0, 0, padre!.frame.width, padre!.frame.height);
+                objetivo?.seteaElemento(self, tipo: self.tipo!, ima: self.producto!.imagen!, prod: self.producto!);
+                copia!.frame=CGRect(x: 0, y: 0, width: padre!.frame.width, height: padre!.frame.height);
                 padre!.addSubview(copia!);
                 
                 /*
@@ -290,25 +292,25 @@ class ProductoView: UIButton {
         DatosB.cont.home2.chulo();
     }
     
-    func panelElementos(tipo: Int){
+    func panelElementos(_ tipo: Int){
         
         if(Natural==true){
             if(self.producto!.tipo != nil){
                 let tipo = self.tipo;
                 print("toca prod: ", self.producto?.tipo);
-                DatosC.contenedor.tipo=tipo
+                DatosC.contenedor.tipo=tipo!
             }else{
                 print("toca cas: ", tipo);
                 DatosC.contenedor.tipo=tipo;
             }
             print("iactu: ", DatosC.contenedor.tipo);
-            DatosB.cont.home2.performSegueWithIdentifier("Seleccion", sender: nil);
+            DatosB.cont.home2.performSegue(withIdentifier: "Seleccion", sender: nil);
             
         }
     }
     
     // Método que copia una vista a la casilla donde se origino la actual
-    func copiaCasilla(casi: Casilla){
+    func copiaCasilla(_ casi: Casilla){
         /*
         print("self: ", self);
         print("self tipo: ", self.tipo);
@@ -321,16 +323,16 @@ class ProductoView: UIButton {
         let ima = self.producto!.imagen;
         let prod = self.producto;
         casi.seteaElemento(prodV, tipo: tipo!, ima: ima!, prod: prod!);
-        casi.backgroundColor=UIColor.redColor();
+        casi.backgroundColor=UIColor.red;
         copiaExito = false;
         
     }
     //Método que permite devolver un vista soltada sin objetivo a su casilla original
-    func retornaCasilla(casi: Casilla){
+    func retornaCasilla(_ casi: Casilla){
         //self.tipo = 0;
         //casi.backgroundColor = UIColor.redColor();
         //print("devuelve: ",casi);
-        self.frame = CGRectMake(0, 0, casi.frame.width, casi.frame.height);
+        self.frame = CGRect(x: 0, y: 0, width: casi.frame.width, height: casi.frame.height);
         //copiaCasilla(casi);
         casi.addSubview(self);
         //self.removeFromSuperview();
@@ -370,7 +372,7 @@ class ProductoView: UIButton {
     }
     
     //Método que se ejecuta al final de la seleción de un producto y evalua si se cierra o no la alacena
-    func cierraAlacena(pasa: Bool){
+    func cierraAlacena(_ pasa: Bool){
         
         if(pasa){
             /*
@@ -393,10 +395,10 @@ class ProductoView: UIButton {
             poneChulo()
             print("iAct: ", DatosC.contenedor.tipo);
             
-            DatosB.cont.home2.lonchera.setCasilla(DatosC.contenedor.tipo!, prod: self.producto!, salud: false);
+            DatosB.cont.home2.lonchera.setCasilla(DatosC.contenedor.tipo, prod: self.producto!, salud: false);
             self.Natural=true;
             DatosB.cont.home2.lonchera.nombr="Personalizada";
-            DatosC.contenedor.lonchera.color = nil;
+            //DatosC.contenedor.lonchera.color = nil;
             //DatosC.contenedor.lonchera.contador?.actua();
             DatosC.contenedor.pantallaSV.actuaLonch(true);
             
@@ -433,7 +435,7 @@ class ProductoView: UIButton {
         //print("bloquea: ", ultimaPosicion);
         //print("Actual: ", self.center);
         bloqueo2 = false;
-        self.userInteractionEnabled=true;
+        self.isUserInteractionEnabled=true;
         //self.hidden=false;
         //print("Suelta: ", bloqueo2);
     }
@@ -441,7 +443,7 @@ class ProductoView: UIButton {
     //Método que evaluará si se aplica movimiento
     func evaMov3(){
         print("eva 3: ", ultToque.phase.rawValue);
-        if(CGRectContainsPoint(self.frame, ultToque.locationInView(self)) ){
+        if(self.frame.contains(ultToque.location(in: self)) ){
             if(ultToque.phase.rawValue==2){
                 print("Mueve");
                 bloqueo2 = true;

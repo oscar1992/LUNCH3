@@ -34,7 +34,7 @@ class VistaTipo: UIView {
         let ancho = self.frame.width*0.2;
         let alto = self.frame.height*0.7;
         borde = self.frame.width*0.06;
-        let frameVista = CGRectMake(borde, borde, ancho, alto);
+        let frameVista = CGRect(x: borde, y: borde, width: ancho, height: alto);
         let imagen : UIImage;
         
         lonch.actualizaContador();
@@ -51,7 +51,7 @@ class VistaTipo: UIView {
         
         let backImg = UIImageView(frame: frameVista);
         backImg.image=imagen;
-        backImg.contentMode=UIViewContentMode.ScaleAspectFit;
+        backImg.contentMode=UIViewContentMode.scaleAspectFit;
         self.addSubview(backImg);
     }
     
@@ -60,7 +60,7 @@ class VistaTipo: UIView {
         let OXnombre = self.frame.width*0.28;
         let alto = self.frame.height*0.2;
         let OYnombre = self.frame.height*0.1;
-        let frameNombre = CGRectMake(OXnombre, OYnombre, anchoNombre, alto);
+        let frameNombre = CGRect(x: OXnombre, y: OYnombre, width: anchoNombre, height: alto);
         let nombre = UILabel(frame: frameNombre);
         nombre.text=lonch.nombr;
         nombre.textColor=UIColor.init(red: 0, green: 0.5, blue: 0.15, alpha: 1);
@@ -71,7 +71,7 @@ class VistaTipo: UIView {
         var p = CGFloat(1);
         print("cass: ", lonch.casillas.count);
         for cas in lonch.casillas{
-            let frameEle = CGRectMake(OXnombre, (borde+10)+(OYele*p), anchoNombre, alto);
+            let frameEle = CGRect(x: OXnombre, y: (borde+10)+(OYele*p), width: anchoNombre, height: alto);
             let label = UILabel(frame: frameEle);
             print("ele: ", cas.elemeto?.producto?.nombre);
             if(cas.elemeto != nil){
@@ -90,17 +90,17 @@ class VistaTipo: UIView {
         let alto = self.frame.height*0.25;
         let OX = self.frame.width-ancho;
         let oy = borde;
-        let framePrecio=CGRectMake(OX, oy, ancho, alto);
+        let framePrecio=CGRect(x: OX, y: oy!, width: ancho, height: alto);
         let vistaPrecio = UIView(frame: framePrecio);
         //vistaPrecio.backgroundColor=UIColor.redColor();
         self.addSubview(vistaPrecio);
         DatosB.cont.poneFondoTot(vistaPrecio, fondoStr: "FondoPrecio", framePers: nil, identi: nil, scala: true);
-        let valor = UILabel(frame: CGRectMake(0, 0, ancho, alto));
+        let valor = UILabel(frame: CGRect(x: 0, y: 0, width: ancho, height: alto));
         lonch.actualizaContador();
         valor.text = lonch.contador.valor.text!;
-        valor.textAlignment=NSTextAlignment.Center;
+        valor.textAlignment=NSTextAlignment.center;
         vistaPrecio.addSubview(valor);
-        valor.textColor=UIColor.whiteColor();
+        valor.textColor=UIColor.white;
         valor.adjustsFontSizeToFitWidth=true;
         valor.font=UIFont(name: "Gotham Medium", size: (alto*0.5));
     }
@@ -112,9 +112,9 @@ class VistaTipo: UIView {
         let OX2 = OX1+ancho1;
         let OX3 = OX2+ancho2;
         let OY = self.frame.height*0.6;
-        let frame1=CGRectMake(OX1, OY, ancho1, ancho1);
-        let frame2=CGRectMake(OX2, OY, ancho2, ancho1);
-        let frame3=CGRectMake(OX3, OY, ancho1, ancho1);
+        let frame1=CGRect(x: OX1, y: OY, width: ancho1, height: ancho1);
+        let frame2=CGRect(x: OX2, y: OY, width: ancho2, height: ancho1);
+        let frame3=CGRect(x: OX3, y: OY, width: ancho1, height: ancho1);
         let bot1 = UIButton(frame: frame3);
         labC = UILabel(frame: frame2);
         let bot2 = UIButton(frame: frame1);
@@ -127,12 +127,12 @@ class VistaTipo: UIView {
         labC.textColor = UIColor.init(red: 0, green: 0.5, blue: 0.15, alpha: 1);
         labC.font=UIFont(name: "Gotham Medium", size: (labC.frame.height*0.6));
         //print("ff: ", labC.font.familyName);
-        labC.textAlignment=NSTextAlignment.Center;
+        labC.textAlignment=NSTextAlignment.center;
         self.addSubview(bot1);
         self.addSubview(bot2);
         self.addSubview(labC);
-        bot1.addTarget(self, action: #selector(VistaTipo.suma), forControlEvents: .TouchDown);
-        bot2.addTarget(self, action: #selector(VistaTipo.resta), forControlEvents: .TouchDown);
+        bot1.addTarget(self, action: #selector(VistaTipo.suma), for: .touchDown);
+        bot2.addTarget(self, action: #selector(VistaTipo.resta), for: .touchDown);
     }
     
     func suma(){
@@ -160,7 +160,7 @@ class VistaTipo: UIView {
             let ancho = DatosC.contenedor.anchoP*0.8
             let ox = (DatosC.contenedor.anchoP/2)-(ancho/2);
             let oy = (DatosC.contenedor.altoP/2)-(ancho/2);
-            let frameMsg = CGRectMake(ox, oy, ancho, ancho);
+            let frameMsg = CGRect(x: ox, y: oy, width: ancho, height: ancho);
             let msg = MensajeEliminaLonchera(frame: frameMsg, lonchera: lonch, id: indice);
             DatosB.cont.carrito.view.addSubview(msg);
             
@@ -189,9 +189,9 @@ class VistaTipo: UIView {
     }
     
     func inciaSeparador(){
-        let frameLinea = CGRectMake(0, self.frame.height-2, self.frame.width, 1);
+        let frameLinea = CGRect(x: 0, y: self.frame.height-2, width: self.frame.width, height: 1);
         let linea = UIView(frame: frameLinea);
-        linea.backgroundColor=UIColor.lightGrayColor();
+        linea.backgroundColor=UIColor.lightGray;
         linea.alpha=0.5;
         self.addSubview(linea);
     }

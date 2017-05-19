@@ -53,11 +53,11 @@ class Pred2: UIScrollView, UIScrollViewDelegate {
             for cajaS in DatosB.cont.saludables{
                 //print("nomb: ", cajaS.nombre);
                 let OX = (ancho) * p;
-                let frameCaja = CGRectMake(OX, 0, ancho, alto);
-                let frameNombre = CGRectMake(OX, alto, ancho, (ancho*0.2));
+                let frameCaja = CGRect(x: OX, y: 0, width: ancho, height: alto);
+                let frameNombre = CGRect(x: OX, y: alto, width: ancho, height: (ancho*0.2));
                 let nombre = UILabel(frame: frameNombre);
                 nombre.text=cajaS.nombre;
-                nombre.textAlignment=NSTextAlignment.Center;
+                nombre.textAlignment=NSTextAlignment.center;
                 nombre.textColor=UIColor.init(red: 0, green: 0.5, blue: 0, alpha: 1);
                 nombre.adjustsFontSizeToFitWidth=true;
                 nombre.font=UIFont(name: "Gotham Bold", size: nombre.frame.height*0.8);
@@ -87,11 +87,11 @@ class Pred2: UIScrollView, UIScrollViewDelegate {
             
             for favo in DatosB.cont.favoritos{
                 let OX = ((ancho) * p);
-                let frameCaja = CGRectMake(OX, 0, ancho, alto);
-                let frameNombre = CGRectMake(OX, alto, ancho, (ancho*0.2));
+                let frameCaja = CGRect(x: OX, y: 0, width: ancho, height: alto);
+                let frameNombre = CGRect(x: OX, y: alto, width: ancho, height: (ancho*0.2));
                 let nombre = UILabel(frame: frameNombre);
                 //print("framefvao:", frameCaja);
-                //print("cant: ", DatosB.cont.itemsFavo.count);
+                print("cant: ", DatosB.cont.itemsFavo.count);
                 //favo.items.removeAll();
                 /*
                 for titem in DatosB.cont.itemsFavo{
@@ -103,7 +103,7 @@ class Pred2: UIScrollView, UIScrollViewDelegate {
                 }*/
                 llenaFavorito(favo);
                 nombre.text=favo.nombre;
-                nombre.textAlignment=NSTextAlignment.Center;
+                nombre.textAlignment=NSTextAlignment.center;
                 nombre.textColor=UIColor.init(red: 0, green: 0, blue: 0.5, alpha: 1);
                 nombre.font=UIFont(name: "Gotham Bold", size: nombre.frame.height*0.8);
                 nombre.adjustsFontSizeToFitWidth=true;
@@ -124,25 +124,25 @@ class Pred2: UIScrollView, UIScrollViewDelegate {
                 for _ in 0..<cc{
                     let ultFrame = cajas.last?.frame;
                     let OX = ((ancho) * p);
-                    let frameN = CGRectMake(OX, 0, ancho, alto);
-                    let frameNombre = CGRectMake(OX, alto, ancho, (ancho*0.2));
+                    let frameN = CGRect(x: OX, y: 0, width: ancho, height: alto);
+                    let frameNombre = CGRect(x: OX, y: alto, width: ancho, height: (ancho*0.2));
                     let nombre = UILabel(frame: frameNombre);
                     nombre.text="Vacío";
-                    nombre.textAlignment=NSTextAlignment.Center;
-                    nombre.textColor=UIColor.whiteColor();
+                    nombre.textAlignment=NSTextAlignment.center;
+                    nombre.textColor=UIColor.white;
                     nombre.adjustsFontSizeToFitWidth=true;
                     nombre.font=UIFont(name: "Gotham Bold", size: nombre.frame.height*0.8);
                     let vacia = UIButton(frame: frameN);
                     DatosB.cont.poneFondoTot(vacia, fondoStr: "LoncheraGris2", framePers: nil, identi: "Caja", scala: true);
                     cajas.append(vacia);
-                    vacia.addTarget(self, action: #selector(Pred2.limipaLonchera), forControlEvents: .TouchDown);
+                    vacia.addTarget(self, action: #selector(Pred2.limipaLonchera), for: .touchDown);
                     self.addSubview(vacia);
                     self.addSubview(nombre);
                     p += 1;
                 }
             }
             //print("tot2: ", cajas.count);
-            self.contentSize = CGSizeMake(((ancho)*(CGFloat(10))), self.frame.height);
+            self.contentSize = CGSize(width: ((ancho)*(CGFloat(10))), height: self.frame.height);
             cini=false;
         }
         cargaSaludableInicial();
@@ -154,7 +154,7 @@ class Pred2: UIScrollView, UIScrollViewDelegate {
     }
     
     //Método que llena los productos de una caja favorita
-    func llenaFavorito(favo: Favoritos){
+    func llenaFavorito(_ favo: Favoritos){
         /*
         print("dispo");
         for items in DatosB.cont.itemsFavo{
@@ -162,9 +162,18 @@ class Pred2: UIScrollView, UIScrollViewDelegate {
         }
         */
         if(favo.items.isEmpty){
+            print("favorita vacia, inicia llenado")
             for items in DatosB.cont.itemsFavo{
+                //print("item id: ", items.id, " favo: ", favo.id);
                 if(favo.id == items.id){
-                    favo.items.append(items.productos!);
+                    //print("LLena: ", items.productos.imagen);
+                    for prod in DatosC.contenedor.productos{
+                        print("prod: ", prod.listaDatos.count);
+                            if(items.productos.id == prod.id){
+                                
+                                favo.items.append(prod);
+                            }
+                    }
                 }
             }
         }
@@ -184,9 +193,9 @@ class Pred2: UIScrollView, UIScrollViewDelegate {
         let alto = ancho * 0.2;
         let OX = CGFloat(0);
         let OY = ancho*0.09;
-        let frameNombregrande = CGRectMake(OX, OY, ancho, alto);
+        let frameNombregrande = CGRect(x: OX, y: OY, width: ancho, height: alto);
         let textoG = UILabel(frame: frameNombregrande);
-        textoG.textAlignment=NSTextAlignment.Center;
+        textoG.textAlignment=NSTextAlignment.center;
         textoG.textColor=UIColor.init(red: 0, green: 0.5, blue: 0, alpha: 1);
         textoG.adjustsFontSizeToFitWidth=true;
         textoG.font=UIFont(name: "Gotham Bold", size: textoG.frame.height*0.2);

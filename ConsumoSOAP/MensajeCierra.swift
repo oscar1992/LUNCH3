@@ -17,7 +17,7 @@ class MensajeCierra: UIView {
         let ancho = DatosC.contenedor.anchoP*0.8
         let ox = (DatosC.contenedor.anchoP/2)-(ancho/2);
         let oy = (DatosC.contenedor.altoP/2)-(ancho/2);
-        let frameLet = CGRectMake(ox, oy, ancho, ancho);
+        let frameLet = CGRect(x: ox, y: oy, width: ancho, height: ancho);
         super.init(frame: frameLet);
         //_ = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(MensajeChulo.cierraVista), userInfo: nil, repeats: false);
         iniciaFondo();
@@ -34,7 +34,7 @@ class MensajeCierra: UIView {
         let altoIma = self.frame.height*0.3;
         let OXima = (self.frame.height/2)-(altoIma/2);
         let OYIma = self.frame.height*0.1;
-        let imagenFrame = CGRectMake(OXima, OYIma, altoIma, altoIma);
+        let imagenFrame = CGRect(x: OXima, y: OYIma, width: altoIma, height: altoIma);
         icono = UIView(frame: imagenFrame);
         DatosB.cont.poneFondoTot(icono, fondoStr: "ICO Triste", framePers: nil, identi: nil, scala: true);
         self.addSubview(icono);
@@ -45,14 +45,14 @@ class MensajeCierra: UIView {
         let ancho = self.frame.width*0.6;
         let OX = (self.frame.width/2)-(ancho/2)
         let OY = (icono.frame.height + icono.frame.origin.y);
-        texto = UILabel(frame: CGRectMake(OX, OY, ancho, self.frame.height*0.25));
+        texto = UILabel(frame: CGRect(x: OX, y: OY, width: ancho, height: self.frame.height*0.25));
         texto.text = "¿De verdad quieres salir :( ? Te estaremos esperando!";
         //texto.lineBreakMode=NSLineBreakMode.ByWordWrapping;
         //texto.numberOfLines=2;
         texto.adjustsFontSizeToFitWidth=true;
-        texto.textColor=UIColor.lightGrayColor();
+        texto.textColor=UIColor.lightGray;
         texto.numberOfLines=0;
-        texto.textAlignment=NSTextAlignment.Center;
+        texto.textAlignment=NSTextAlignment.center;
         texto.font=UIFont(name: "SansBeam Head", size: (texto.frame.height/2));
         self.addSubview(texto);
     }
@@ -62,22 +62,22 @@ class MensajeCierra: UIView {
         let alto = self.frame.height*0.1;
         let OX = (self.frame.width/2)-((ancho))
         let OY = texto.frame.origin.y+texto.frame.height;
-        let frame1 = CGRectMake(OX, OY, ancho, alto);
-        let frame2 = CGRectMake((OX+frame1.width+5), OY, ancho, alto);
+        let frame1 = CGRect(x: OX, y: OY, width: ancho, height: alto);
+        let frame2 = CGRect(x: (OX+frame1.width+5), y: OY, width: ancho, height: alto);
         let bot1 = UIButton(frame: frame1);
         let bot2 = UIButton(frame: frame2);
         self.addSubview(bot1);
         self.addSubview(bot2);
         DatosB.cont.poneFondoTot(bot1, fondoStr: "Botón Aceptar", framePers: nil, identi: nil, scala: true);
         DatosB.cont.poneFondoTot(bot2, fondoStr: "Botón Cancelar", framePers: nil, identi: nil, scala: true);
-        bot1.addTarget(self, action: #selector(MensajeCierra.cierra), forControlEvents: .TouchDown);
-        bot2.addTarget(self, action: #selector(MensajeCierra.cierraVista), forControlEvents: .TouchDown);
+        bot1.addTarget(self, action: #selector(MensajeCierra.cierra), for: .touchDown);
+        bot2.addTarget(self, action: #selector(MensajeCierra.cierraVista), for: .touchDown);
     }
     
     func cierra(){
-        NSUserDefaults.standardUserDefaults().setObject(nil, forKey: "user");
-        NSUserDefaults.standardUserDefaults().setObject(nil, forKey: "pass");
-        DatosB.cont.home2.dismissViewControllerAnimated(false, completion: nil);
+        UserDefaults.standard.set(nil, forKey: "user");
+        UserDefaults.standard.set(nil, forKey: "pass");
+        DatosB.cont.home2.dismiss(animated: false, completion: nil);
     
         DatosB.cont.cargaProductos=true;
         if(DatosC.contenedor.pantallaSV.contenedor != nil){

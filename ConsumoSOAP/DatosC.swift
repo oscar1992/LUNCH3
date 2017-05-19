@@ -25,8 +25,8 @@ struct keysPrimarias {
     static let primera = false;
     static let tamaLonchera = CGRect();
     static let loncheras = [LoncheraO]();
-    static let lonchera = LoncheraO();
-    static let tipo = Int?();
+    //static let lonchera = LoncheraO();
+    static let tipo = 0;
     static let casillaF=CGRect();
     static let Pestanas=[PestanasProductos]();
     static let casillasF = [CGRect]();
@@ -56,8 +56,8 @@ class DatosC{
     var primera=false;
     var tamaLonchera = CGRect();
     var loncheras = [LoncheraO]();
-    var lonchera = LoncheraO();
-    var tipo = Int?();
+    //var lonchera = LoncheraO();
+    var tipo = 0;
     var casillaF=CGRect();
     var Pestanas=[PestanasProductos]();
     var casillasF = [Casilla]();
@@ -67,8 +67,8 @@ class DatosC{
     var pedido : Pedido?;
     
     init(){
-        self.anchoP=UIScreen.mainScreen().bounds.width;
-        self.altoP=UIScreen.mainScreen().bounds.height;
+        self.anchoP=UIScreen.main.bounds.width;
+        self.altoP=UIScreen.main.bounds.height;
     }
     
     static func elimina(){

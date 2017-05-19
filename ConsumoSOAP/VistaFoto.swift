@@ -13,7 +13,7 @@ class VistaFoto: UIView{
     let padre:CreaUsuario;
     var ico:UIButton!;
     var contiene=false;
-    var datos: NSData!;
+    var datos: Data!;
     
     init (frame: CGRect, padre: CreaUsuario){
         self.padre=padre;
@@ -28,7 +28,7 @@ class VistaFoto: UIView{
         let alto = self.frame.height;
         let OX = CGFloat(0);
         let OY = CGFloat(0);
-        let frameBarra = CGRectMake(OX, OY, ancho, alto);
+        let frameBarra = CGRect(x: OX, y: OY, width: ancho, height: alto);
         let barra = UIView(frame: frameBarra);
         DatosB.cont.poneFondoTot(barra, fondoStr: "Línea blanca vertical", framePers: nil, identi: nil, scala: true);
         self.addSubview(barra);
@@ -39,12 +39,12 @@ class VistaFoto: UIView{
         let alto = self.frame.height*0.8;
         let OX = self.frame.width*0.1;
         let OY = (self.frame.height/2)-(alto/2);
-        let frameLab=CGRectMake(OX, OY, ancho, alto);
+        let frameLab=CGRect(x: OX, y: OY, width: ancho, height: alto);
         let lab = UILabel(frame: frameLab);
         lab.text="Agrega una fotografía";
         lab.numberOfLines=3;
         lab.adjustsFontSizeToFitWidth=true;
-        lab.textColor=UIColor.whiteColor();
+        lab.textColor=UIColor.white;
         lab.font=UIFont(name: "Gotham Bold", size: alto);
         self.addSubview(lab);
     }
@@ -54,15 +54,15 @@ class VistaFoto: UIView{
         let alto = self.frame.height*0.8;
         let OX = self.frame.width*0.5;
         let OY = (self.frame.height/2)-(alto/2);
-        let frameIco=CGRectMake(OX, OY, ancho, alto);
+        let frameIco=CGRect(x: OX, y: OY, width: ancho, height: alto);
         ico = UIButton(frame: frameIco);
         //ico.addTarget(self, action: #selector(VistaFoto.iniciaPicker), forControlEvents: .TouchDown);
         DatosB.cont.poneFondoTot(ico, fondoStr: "Botón Agregar fotografía", framePers: nil, identi: nil, scala: true);
         self.addSubview(ico);
     }
     
-    func setFoto(foto: UIImage){
-        let ima = UIImageView(frame: CGRectMake((ico.frame.width/2)-(ico.frame.height/2), 0, ico.frame.height, ico.frame.height));
+    func setFoto(_ foto: UIImage){
+        let ima = UIImageView(frame: CGRect(x: (ico.frame.width/2)-(ico.frame.height/2), y: 0, width: ico.frame.height, height: ico.frame.height));
         let mask = UIImage(named: "mascara");
         ima.image = maskImage(foto, mask: mask!);
         ico.addSubview(ima);
@@ -78,26 +78,26 @@ class VistaFoto: UIView{
         padre.inciaPicker();
     }
     
-    func maskImage(image:UIImage, mask:(UIImage))->UIImage{
+    func maskImage(_ image:UIImage, mask:(UIImage))->UIImage{
         
-        let imageReference = image.CGImage
-        let maskReference = mask.CGImage
+        let imageReference = image.cgImage
+        let maskReference = mask.cgImage
         
-        let imageMask = CGImageMaskCreate(CGImageGetWidth(maskReference!),
-                                          CGImageGetHeight(maskReference!),
-                                          CGImageGetBitsPerComponent(maskReference!),
-                                          CGImageGetBitsPerPixel(maskReference!),
-                                          CGImageGetBytesPerRow(maskReference!),
-                                          CGImageGetDataProvider(maskReference!)!, nil, true)
+        let imageMask = CGImage(maskWidth: maskReference!.width,
+                                          height: maskReference!.height,
+                                          bitsPerComponent: maskReference!.bitsPerComponent,
+                                          bitsPerPixel: maskReference!.bitsPerPixel,
+                                          bytesPerRow: maskReference!.bytesPerRow,
+                                          provider: maskReference!.dataProvider!, decode: nil, shouldInterpolate: true)
         
-        let maskedReference = CGImageCreateWithMask(imageReference!, imageMask!)
+        let maskedReference = imageReference!.masking(imageMask!)
         
-        let maskedImage = UIImage(CGImage:maskedReference!)
+        let maskedImage = UIImage(cgImage:maskedReference!)
         
         return maskedImage
     }
     
-    func serImagen(imagen: UIImage){
+    func serImagen(_ imagen: UIImage){
         datos = UIImagePNGRepresentation(imagen)!;
     }
     /*

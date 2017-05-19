@@ -26,25 +26,25 @@ class Contador: UIView {
         cal2=UILabel();
         pre=UILabel();
         pre2=UILabel();
-        cal?.frame=CGRectMake(self.frame.width/2, 0, self.frame.width/4, self.frame.height);
-        cal2?.frame=CGRectMake(((cal?.frame.origin.x)!+(cal?.frame.width)!),0 , self.frame.width/4, self.frame.height);
-        pre?.frame=CGRectMake(borde, 0, self.frame.width/4, self.frame.height);
-        pre2?.frame=CGRectMake((pre!.frame.origin.x+pre!.frame.width
-            ), 0, self.frame.width/4, self.frame.height);
+        cal?.frame=CGRect(x: self.frame.width/2, y: 0, width: self.frame.width/4, height: self.frame.height);
+        cal2?.frame=CGRect(x: ((cal?.frame.origin.x)!+(cal?.frame.width)!),y: 0 , width: self.frame.width/4, height: self.frame.height);
+        pre?.frame=CGRect(x: borde, y: 0, width: self.frame.width/4, height: self.frame.height);
+        pre2?.frame=CGRect(x: (pre!.frame.origin.x+pre!.frame.width
+            ), y: 0, width: self.frame.width/4, height: self.frame.height);
         cal?.text="Calorías: ";
         pre?.text="Valor: $";
         cal?.font = UIFont(name: "SansBeam Body", size: self.frame.height*0.3);
-        cal?.textColor = UIColor.whiteColor();
+        cal?.textColor = UIColor.white;
         pre?.font = UIFont(name: "SansBeam Body", size: self.frame.height*0.3);
-        pre?.textColor = UIColor.whiteColor();
+        pre?.textColor = UIColor.white;
         cal2?.font = UIFont(name: "SansBeam Head", size: self.frame.height*0.5);
-        cal2?.textColor = UIColor.whiteColor();
+        cal2?.textColor = UIColor.white;
         pre2?.font = UIFont(name: "SansBeam Head", size: self.frame.height*0.5);
-        pre2?.textColor = UIColor.whiteColor();
-        cal?.textAlignment = NSTextAlignment.Center;
-        pre?.textAlignment = NSTextAlignment.Center;
-        cal2?.textAlignment = NSTextAlignment.Left;
-        pre2?.textAlignment = NSTextAlignment.Left;
+        pre2?.textColor = UIColor.white;
+        cal?.textAlignment = NSTextAlignment.center;
+        pre?.textAlignment = NSTextAlignment.center;
+        cal2?.textAlignment = NSTextAlignment.left;
+        pre2?.textAlignment = NSTextAlignment.left;
         
         self.addSubview(cal!);
         self.addSubview(pre!);
@@ -109,19 +109,19 @@ class Contador: UIView {
             }
             lonc.saludable=false;
         }
-        let formateadorPrecio = NSNumberFormatter();
-        formateadorPrecio.numberStyle = .CurrencyStyle;
-        formateadorPrecio.locale = NSLocale(localeIdentifier: "es_CO");
-        pre2?.text = String(formateadorPrecio.stringFromNumber(sum)!);
+        let formateadorPrecio = NumberFormatter();
+        formateadorPrecio.numberStyle = .currency;
+        formateadorPrecio.locale = Locale(identifier: "es_CO");
+        pre2?.text = String(formateadorPrecio.string(from: NSNumber(value: sum))!);
         //print("pre2: ", pre2?.text);
         cal2?.text = "  "+String(Int(sum2));
         //print("cal2: ", cal2?.text);
-        let num : Int?;
-        (esFavorita, num) = esfavorita();
+        let num : Int;
+        //(esFavorita?, num) = esfavorita();
         //print("eva: ", eva)
         if (esFavorita==true){
             fondoEstrella(lonc.botfavo!, esFavorito: true);
-            lonc.nfavorita = num;
+            //lonc.nfavorita = num;
         }else{
             //print("non");
             fondoEstrella(lonc.botfavo!, esFavorito: false);
@@ -145,24 +145,25 @@ class Contador: UIView {
     //Método que permite establece el fondo del contador
     func estableceFondo(){
         let fondo = UIImage(named: "BarraValor");
-        let backImg = UIImageView(frame: CGRectMake(0,0,self.frame.width,self.frame.height));
+        let backImg = UIImageView(frame: CGRect(x: 0,y: 0,width: self.frame.width,height: self.frame.height));
         //backImg.contentMode = UIViewContentMode.ScaleAspectFit;
         backImg.image = fondo;
         self.addSubview(backImg);
-        self.sendSubviewToBack(backImg);
+        self.sendSubview(toBack: backImg);
     }
     
+    /*
     //Método que evalua si la lonchera es favorita
-    func esfavorita()->(Bool!, Int?){
+    func esfavorita()->(Bool, Int){
         var ret = false;
-        var securet : Int?;
-        let lonc=DatosC.contenedor.lonchera;
+        var securet : Int;
+        let lonc=DatosC.contenedor.loncheras;
         var tot = 0;
-        for itt in lonc.subVista!.casillas{
+        /*for itt in lonc.subVista!.casillas{
             if(itt.elemeto != nil){
                 tot += 1;
             }
-        }
+        }*/
         var opcion1=[Secuencia]();
         
         //print("SECURET: ", securet);
@@ -192,14 +193,14 @@ class Contador: UIView {
                     var flag3 = true;
                     var itera3 = 0;
                     var suma = 0;
-            if(items.count==0){
+            if(items?.count==0){
                 //print("no posee");
             }
                     while(flag3){
                         //print("itera 3: ", itera3);
                         var itemasCas = lonc.subVista?.casillas;
                         if(itemasCas![itera3].elemeto?.producto?.id != nil){
-                            if((itemasCas![itera3].elemeto?.producto?.id)! == items[itera3].productos!.id){
+                            if((itemasCas![itera3].elemeto?.producto?.id)! == items?[itera3].productos!.id){
                                 //print("cass: ", itemasCas![itera3].elemeto?.producto?.nombre);
                                 //print("EQ: ", items[itera3].productos!.nombre);
                                 suma += 1;
@@ -216,7 +217,7 @@ class Contador: UIView {
                         itera3 += 1;
                         //print("Itera3 : ",itera3);
                         //print("Suma: ", suma, "itrems: ", items.count);
-                        if(suma == items.count){
+                        if(suma == items?.count){
                             flag3 = false;
                             securet = opcion1[itera1].id;
                             ret = true;
@@ -244,16 +245,16 @@ class Contador: UIView {
 
         //print("Es: ", ret, "sss", securet);
         return (ret, securet);
-    }
+    }*/
     
-    func fondoEstrella(favo: UIButton, esFavorito: Bool){
+    func fondoEstrella(_ favo: UIButton, esFavorito: Bool){
         for vista in favo.subviews{
             if vista is UIImageView{
                 vista.removeFromSuperview();
                 //print("remieve");
             }
         }
-        let frame = CGRectMake(0, 0, favo.frame.height, favo.frame.width);
+        let frame = CGRect(x: 0, y: 0, width: favo.frame.height, height: favo.frame.width);
         var imagen: UIImage;
         //print("esf: ",esFavorito)
         if (esFavorito){
@@ -263,7 +264,7 @@ class Contador: UIView {
             imagen = UIImage(named: "BotonF")!;
         }
         let backImg = UIImageView(frame: frame);
-        backImg.contentMode = UIViewContentMode.ScaleAspectFit;
+        backImg.contentMode = UIViewContentMode.scaleAspectFit;
         backImg.image = imagen;
         favo.addSubview(backImg);
         //favo.sendSubviewToBack(backImg);
