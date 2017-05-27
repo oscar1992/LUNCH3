@@ -76,12 +76,25 @@ class ListCard: NSObject, NSURLConnectionDelegate, UIWebViewDelegate{
     
     //Método que hashea una cadena de texto introducido a travez del encriptado SHA256
     func sha256(_ data : Data) -> String {
-        var res = NSMutableData(length: Int(CC_SHA256_DIGEST_LENGTH))
+        //guard let messageData = data.data(using:String.Encoding.utf8) else { return nil; }
+        var digestData = Data(count: Int(CC_SHA256_DIGEST_LENGTH))
+        print("count: ", data.count);
+        _ = digestData.withUnsafeMutableBytes {digestBytes in
+            data.withUnsafeBytes {messageBytes in
+                CC_SHA256(messageBytes, CC_LONG(data.count), digestBytes)
+            }
+        }
+        /*
         let mutableRaw = UnsafeMutableRawPointer(&res);
         let pointerOpa = OpaquePointer(mutableRaw);
         let contextPtr = UnsafeMutablePointer<UInt8>(pointerOpa)
         CC_SHA256((data as NSData).bytes, CC_LONG(data.count), contextPtr)
-        return limpia(String(describing: res!));
+        print("pre limpia: ", res);
+        var ret = limpia(String(describing: res));
+        print("shaL: ", ret);*/
+        //print("Pre limpia: ", digestData.map{ String(format: "%02hhx", $0)}.joined());
+        //return limpia(String(describing: digestData));
+        return digestData.map{ String(format: "%02hhx", $0)}.joined();
     }
     
     //Método que quita espacios y simbolos del SHA generado
@@ -105,6 +118,7 @@ class ListCard: NSObject, NSURLConnectionDelegate, UIWebViewDelegate{
             }
             p += 1;
         }
+        print("limpia: ", cambia)
         return cambia;
     }
     

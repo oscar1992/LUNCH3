@@ -23,7 +23,8 @@ class Carrito: UIViewController {
         iniciaSecciones();
         iniciaBotonVolver();
         iniciaFondo();
-        
+        let cargaFechas=CargaFechaEntrega();
+        cargaFechas.cargaFechaEntrega();
         // Do any additional setup after loading the view.
     }
 
@@ -119,15 +120,20 @@ class Carrito: UIViewController {
     
     //Mñetodo que cambia de ventana si el padre tiene datos o no tiene datos
     func pasa(){
-        if(evalua()){
+        /*if(evalua()){
             if(DatosB.cont.primeraVezCarrito){
-                let cargaFechas=CargaFechaEntrega();
-                cargaFechas.cargaFechaEntrega();
+                
             }else{
                 
-                self.performSegue(withIdentifier: "Datos", sender: nil);
             }
-        }
+        }*/
+        print("carga");
+        let ancho = DatosC.contenedor.anchoP*0.8
+        let ox = (DatosC.contenedor.anchoP/2)-(ancho/2);
+        let oy = (DatosC.contenedor.altoP/2)-(ancho/2);
+        let frameMsg = CGRect(x: ox, y: oy, width: ancho, height: ancho);
+        let msg = MensajeCiudad(frame: frameMsg, carr: self);
+        self.view.addSubview(msg);
     }
     
     //Método que evalua los datos del padre

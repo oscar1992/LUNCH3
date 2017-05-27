@@ -63,9 +63,12 @@ class CargaLista: NSObject, NSURLConnectionDelegate, XMLParserDelegate{
             self.parser.parse();
             DispatchQueue.main.async(execute: {
                 print("retorna: ", self.idTipo);
-                self.cargaT.agregaLista((self.idTipo, self.productos));
-                self.productos = [Producto]();
-                print("------fin tipolista-------");
+                if(self.idTipo != nil){
+                    self.cargaT.agregaLista((self.idTipo, self.productos));
+                    self.productos = [Producto]();
+                    print("------fin tipolista-------");
+                }
+                
             });
             
         })

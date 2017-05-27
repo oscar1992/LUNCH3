@@ -50,7 +50,7 @@ class CargaHoraEntrega: NSObject , NSURLConnectionDelegate, XMLParserDelegate{
             self.parser.parse();
             DispatchQueue.main.async(execute: {
                 DatosB.cont.primeraVezCarrito=false;
-                DatosB.cont.carrito.performSegue(withIdentifier: "Datos", sender: nil);
+                //DatosB.cont.carrito.performSegue(withIdentifier: "Datos", sender: nil);
                 print("Carga HOras Envio OK");
                 
             });

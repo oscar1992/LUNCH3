@@ -61,7 +61,8 @@ class SaludableInfo: UIViewController {
     }
     
     func fondoManzana(){
-        let ancho = DatosC.contenedor.anchoP*0.1;
+        let ancho = DatosC.contenedor.anchoP*0.2
+        ;
         let OX = DatosC.contenedor.anchoP*0.7;
         let OY = DatosC.contenedor.altoP*0.75;
         let frame = CGRect(x: OX, y: OY, width: ancho, height: ancho);
@@ -88,7 +89,7 @@ class SaludableInfo: UIViewController {
         let ancho = DatosC.contenedor.anchoP*0.9;
         let alto = DatosC.contenedor.altoP*0.3;
         let OX = DatosC.contenedor.anchoP*0.05;
-        let OY = OYI;
+        let OY = OYI + DatosC.contenedor.altoP*0.05;
         let frame = CGRect(x: OX, y: OY, width: ancho, height: alto);
         let texto = UILabel(frame: frame);
         texto.font=UIFont(name: "Gotham Bold", size: alto*0.1);
@@ -103,7 +104,7 @@ class SaludableInfo: UIViewController {
         let anchoTitulo = DatosC.contenedor.anchoP*0.8;
         let altoTitulo = DatosC.contenedor.anchoP*0.1;
         let OX = DatosC.contenedor.anchoP*0.05;
-        let OY = DatosC.contenedor.altoP*0.4;
+        let OY = DatosC.contenedor.altoP*0.45;
         let frame = CGRect(x: OX, y: OY, width: anchoTitulo, height: altoTitulo);
         let label1 = UILabel(frame: frame);
         label1.text="¿Qué es una lonchera saludable?";
@@ -117,7 +118,8 @@ class SaludableInfo: UIViewController {
         let ancho = DatosC.contenedor.anchoP*0.9;
         let alto = DatosC.contenedor.altoP*0.3;
         let OX = DatosC.contenedor.anchoP*0.05;
-        let OY = OYI+DatosC.contenedor.altoP*0.03;
+        let OY = OYI+DatosC.contenedor.altoP*0.03
+        ;
         let frame = CGRect(x: OX, y: OY, width: ancho, height: alto);
         let texto = UILabel(frame: frame);
         texto.font=UIFont(name: "Gotham Bold", size: alto*0.1);

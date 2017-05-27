@@ -35,23 +35,29 @@ class FechaEntrega: NSObject {
         fechaComp.year = nyear.year;
         fechaComp.month = nmes.month;
         fechaComp.weekOfMonth = nsemana.weekOfMonth!+1;
-        fechaComp.weekday = 1;
+        print("dia S: ", diasemana, " vs ", 1);
         fechaComp.day = ndia;
         print("Dia Semana: ", diasemana," Hora: ", hora);
-        if(diasemana == 7 && hora >= 18){
+        if(diasemana == 6 && hora >= 18){
             fechaComp.weekOfMonth = nsemana.weekOfMonth!+2;
+        }
+        if(fechaComp.day!>=23&&fechaComp.day!<=31){
+            print("pasa mes");
+            fechaComp.day = fechaComp.day! + (14-(diasemana-1));
+            //fechaComp.month = fechaComp.month! + 1;
+            if(fechaComp.month!>12){
+                fechaComp.month=1;
+                fechaComp.year = fechaComp.year! + 1;
+            }
+        }else{
+            print("retorno a domingo: ", (diasemana-1));
+            fechaComp.day = fechaComp.day! + (7-(diasemana-1));
         }
         
         print("pre fecha: ", fechaComp.day);
         let fechaa = calendar.date(from: fechaComp);
         print("pre fecha: ", fechaa);
-        if(fechaComp.day!>=23&&fechaComp.day!<=31){
-            fechaComp.month = fechaComp.month! + 1;
-            if(fechaComp.month!>12){
-                fechaComp.month=1;
-                fechaComp.year = fechaComp.year! + 1;
-            }
-        }
+        
         let fecha = calendar.date(from: fechaComp);
         
         let formateador:DateFormatter=DateFormatter();

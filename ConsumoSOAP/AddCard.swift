@@ -57,13 +57,14 @@ class AddCard: NSObject, NSURLConnectionDelegate{
     
     //Método que hashea una cadena de texto introducido a travez del encriptado SHA256
     func sha256(_ data : Data) -> String {
-        var res = NSMutableData(length: Int(CC_SHA256_DIGEST_LENGTH));
-        
-        let mutableRaw = UnsafeMutableRawPointer(&res);
-        let pointerOpa = OpaquePointer(mutableRaw);
-        let contextPtr = UnsafeMutablePointer<UInt8>(pointerOpa)
-        CC_SHA256((data as NSData).bytes, CC_LONG(data.count), contextPtr);
-        return limpia(String(describing: res!));
+        var digestData = Data(count: Int(CC_SHA256_DIGEST_LENGTH))
+        print("count: ", data.count);
+        _ = digestData.withUnsafeMutableBytes {digestBytes in
+            data.withUnsafeBytes {messageBytes in
+                CC_SHA256(messageBytes, CC_LONG(data.count), digestBytes)
+            }
+        }
+        return digestData.map{ String(format: "%02hhx", $0)}.joined();
     }
     
     //Método que quita espacios y simbolos del SHA generado

@@ -148,6 +148,7 @@
 		A1A0820D1CBD841A001C0AD2 /* Secuencia.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A0820C1CBD841A001C0AD2 /* Secuencia.swift */; };
 		A1A0820F1CBD845E001C0AD2 /* TItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A0820E1CBD845E001C0AD2 /* TItems.swift */; };
 		A1A082111CBD8F42001C0AD2 /* CargaTItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A082101CBD8F42001C0AD2 /* CargaTItems.swift */; };
+		A1A2D4EA1ED9349B00F6DDB4 /* MensajeCiudad.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A2D4E91ED9349A00F6DDB4 /* MensajeCiudad.swift */; };
 		A1A39A4A1D9E082100CA37BD /* CompruebaInternet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A39A491D9E082000CA37BD /* CompruebaInternet.swift */; };
 		A1A39A4C1D9E326100CA37BD /* MensajeConexion.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A39A4B1D9E326000CA37BD /* MensajeConexion.swift */; };
 		A1A39A501D9F08DC00CA37BD /* CreaUsuario.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A39A4F1D9F08DC00CA37BD /* CreaUsuario.swift */; };
@@ -370,6 +371,7 @@
 		A1A0820C1CBD841A001C0AD2 /* Secuencia.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secuencia.swift; sourceTree = "<group>"; };
 		A1A0820E1CBD845E001C0AD2 /* TItems.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TItems.swift; sourceTree = "<group>"; };
 		A1A082101CBD8F42001C0AD2 /* CargaTItems.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CargaTItems.swift; sourceTree = "<group>"; };
+		A1A2D4E91ED9349A00F6DDB4 /* MensajeCiudad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MensajeCiudad.swift; sourceTree = "<group>"; };
 		A1A39A491D9E082000CA37BD /* CompruebaInternet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompruebaInternet.swift; sourceTree = "<group>"; };
 		A1A39A4B1D9E326000CA37BD /* MensajeConexion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MensajeConexion.swift; sourceTree = "<group>"; };
 		A1A39A4F1D9F08DC00CA37BD /* CreaUsuario.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreaUsuario.swift; sourceTree = "<group>"; };
@@ -839,6 +841,7 @@
 				A173440A1D89E3CB003B467C /* VistaTipo.swift */,
 				A17344141D8AFD4A003B467C /* Sumador.swift */,
 				A19945121D95C37F00A7B8F9 /* MensajeEliminaLonchera.swift */,
+				A1A2D4E91ED9349A00F6DDB4 /* MensajeCiudad.swift */,
 			);
 			name = Carrito;
 			sourceTree = "<group>";
@@ -1262,6 +1265,7 @@
 				A12C04281D107EBB00BA72E1 /* NinoCalendarioBot.swift in Sources */,
 				A19227A91DCA3D4800E21C1A /* CargaPedidos.swift in Sources */,
 				A1111EA41E7724CE004510E5 /* ConfirmaPedido.swift in Sources */,
+				A1A2D4EA1ED9349B00F6DDB4 /* MensajeCiudad.swift in Sources */,
 				A1AEC8331DCD19200094B945 /* VIstaDeseaCancelar.swift in Sources */,
 				A18055BD1DC7F53E00D5D757 /* Historial.swift in Sources */,
 				A1CED9331DA2E22E004E090F /* SelectorTerminos.swift in Sources */,

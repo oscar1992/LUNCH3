@@ -132,7 +132,8 @@ class Pred2: UIScrollView, UIScrollViewDelegate {
                     nombre.textColor=UIColor.white;
                     nombre.adjustsFontSizeToFitWidth=true;
                     nombre.font=UIFont(name: "Gotham Bold", size: nombre.frame.height*0.8);
-                    let vacia = UIButton(frame: frameN);
+                    let vacia = Caja2(frame: frameN);
+                    vacia.accessibilityIdentifier="vacia";
                     DatosB.cont.poneFondoTot(vacia, fondoStr: "LoncheraGris2", framePers: nil, identi: "Caja", scala: true);
                     cajas.append(vacia);
                     vacia.addTarget(self, action: #selector(Pred2.limipaLonchera), for: .touchDown);

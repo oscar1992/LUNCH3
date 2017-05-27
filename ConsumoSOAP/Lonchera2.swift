@@ -128,7 +128,7 @@ class Lonchera2: UIView {
             let OX = (cas.frame.width/2)-(ancho/2);
             let OY = (cas.frame.height/2)-(alto/2);
             let imagenN = prod.imagen;
-            print("ima: ", prod.imagen!);
+            //print("ima: ", prod.imagen!);
             let prodN=ProductoView(frame: CGRect(x: OX, y: OY, width: ancho, height: alto), imagen: prod.imagen!);
             prodN.producto=prod;
             prodN.padre=cas;
@@ -137,7 +137,7 @@ class Lonchera2: UIView {
             prodN.Natural=true;
             prodN.PanelOrigen=nil;
             prodN.Panel2=nil;
-            print("cant: ", prodN.producto?.listaDatos.count);
+            //print("cant: ", prodN.producto?.listaDatos.count);
             //print("nombreima: ", prodN.producto?.imagenString);
             let ima = UIImageView(image: prod.imagen!);
             cas.elemeto=prodN;

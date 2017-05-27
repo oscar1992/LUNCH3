@@ -14,6 +14,11 @@ class Caja2: UIButton {
     var nombre: String!;
     var items = [Producto]();
     
+    override init(frame: CGRect){
+        super.init(frame: frame);
+        self.addTarget(self, action: #selector(Caja2.llena), for: .touchDown);
+    }
+    
     init(frame: CGRect, id: Int, nombre: String, items: [Producto]){
         super.init(frame: frame);
         self.id=id;
@@ -40,6 +45,10 @@ class Caja2: UIButton {
                 print("ItemF: ", item.nombre)
                 DatosB.cont.home2.lonchera.setCasilla(p, prod: item, salud: false);
             }
+            if(self.accessibilityIdentifier=="vacia"){
+                //print("ItemF: ", item.nombre)
+                
+            }
             
             p += 1;
         }
@@ -50,6 +59,9 @@ class Caja2: UIButton {
             if(caja is Caja2 && caja.accessibilityIdentifier=="Favorita"){
                 DatosB.cont.poneFondoTot(caja, fondoStr: "LoncheraAzul2", framePers: nil, identi: "Caja", scala: true);
             }
+            if(caja is Caja2 && caja.accessibilityIdentifier=="vacia"){
+                DatosB.cont.poneFondoTot(caja, fondoStr: "LoncheraGris2", framePers: nil, identi: "Caja", scala: true);
+            }
         }
         DatosB.cont.home2.lonchera.nombr=self.nombre;
         DatosB.cont.home2.lonchera.actualizaContador();
@@ -58,6 +70,10 @@ class Caja2: UIButton {
         }
         if(self.accessibilityIdentifier=="Favorita"){
             DatosB.cont.poneFondoTot(self, fondoStr: "Favorita(Activa)", framePers: nil, identi: "Caja", scala: true);
+        }
+        if(self.accessibilityIdentifier=="vacia"){
+            print("vacia");
+            DatosB.cont.poneFondoTot(self, fondoStr: "LoncheraGris3", framePers: nil, identi: "Caja", scala: true);
         }
     }
 
