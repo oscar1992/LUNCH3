@@ -54,9 +54,9 @@ class FechaEntrega: NSObject {
             fechaComp.day = fechaComp.day! + (7-(diasemana-1));
         }
         
-        print("pre fecha: ", fechaComp.day);
-        let fechaa = calendar.date(from: fechaComp);
-        print("pre fecha: ", fechaa);
+        //print("pre fecha: ", fechaComp.day);
+        _ = calendar.date(from: fechaComp);
+        //print("pre fecha: ", fechaa);
         
         let fecha = calendar.date(from: fechaComp);
         
@@ -64,7 +64,7 @@ class FechaEntrega: NSObject {
         
         formateador.locale = Locale.init(identifier: "es_CO");
         formateador.dateFormat="yyyy-MM-dd hh:mm:ss-";
-        var fecha1 = formateador.string(from: fecha!)+"04";
+        let fecha1 = formateador.string(from: fecha!)+"04";
         formateador.dateFormat="EEEE dd 'de' MMMM";
         fechaMuestra = formateador.string(from: fecha!);
         print("Fecha Siguiente: ", fecha1);

@@ -33,6 +33,16 @@ class ActualizaPadre: NSObject, NSURLConnectionDelegate, XMLParserDelegate {
         
         mensajeEnviado+="<terminoFecha>"+padre.terminoFecha!+"</terminoFecha>";
         
+        if(padre.adicional != nil){
+            mensajeEnviado+="<adicional>"+padre.adicional!+"</adicional>";
+        }
+        if(padre.barrio != nil){
+            mensajeEnviado+="<barrio>"+padre.barrio!+"</barrio>";
+        }
+        if(padre.ciudad != nil){
+            mensajeEnviado+="<ciudad>"+padre.ciudad!+"</ciudad>";
+        }
+        
         mensajeEnviado+="</padre></enp:actualizaPadre></soapenv:Body></soapenv:Envelope>";
         
         //print("Mensaje: ", mensajeEnviado);

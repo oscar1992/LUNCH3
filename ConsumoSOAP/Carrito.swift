@@ -136,6 +136,7 @@ class Carrito: UIViewController {
         self.view.addSubview(msg);
     }
     
+    /*
     //Método que evalua los datos del padre
     func evalua()->Bool{
         print("eva");
@@ -148,7 +149,7 @@ class Carrito: UIViewController {
         if(padre.email==nil){
             print("No tiene direccion");
         }else{
-            print("ema: ", padre.email);
+            print("ema: ", padre.email ?? <#default value#>);
         }
         if(padre.telefono==nil){
             print("No tiene teléfono");
@@ -161,7 +162,7 @@ class Carrito: UIViewController {
             return true;
         }
     }
-    
+    */
         /*
     // MARK: - Navigation
 

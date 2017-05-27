@@ -75,7 +75,7 @@ class CargaInicial2 : NSObject{
                     case is TipoInfo.Type:
                         let obj = (ele as! TipoInfo);
                         let rutaEle = (datosURL)! + ("/"+String(p));
-                        print("P: ", p);
+                        //print("P: ", p);
                         let contenido = NSKeyedArchiver.archivedData(withRootObject: obj);
                         fileManager.createFile(atPath: rutaEle, contents: contenido, attributes: nil);
                         p += 1;
@@ -190,31 +190,42 @@ class CargaInicial2 : NSObject{
             DatosC.contenedor.productos.removeAll();
             for ele in lista{
                 let rutaEle = ruta + ("/"+ele);
-                print("Ruta: ", rutaEle);
+                //print("Ruta: ", rutaEle);
                 if(fileManager.fileExists(atPath: rutaEle)){
-                    print("Existe: ", fileManager.contents(atPath: rutaEle)) ;
+                    //print("Existe: ", fileManager.contents(atPath: rutaEle)) ;
                     let data = fileManager.contents(atPath: rutaEle)!
                     
                     let prod = (NSKeyedUnarchiver.unarchiveObject(with: data));
                     //print("FECHA PROD: ",(prod as! Producto).id);
                     DatosC.contenedor.productos.append(prod as! Producto);
                 }else{
-                    print("NO existe")
+                    //print("NO existe")
                 }
                 
             }
             
             break;
         case is TipoInfo.Type:
-            DatosB.cont.listaTInfo.removeAll();
-            //print("TAMAINFO: ", lista.count);
+            print("TInfo Viejos Pre Borrado:", DatosB.cont.listaTInfo.count);
+            //DatosB.cont.listaTInfo.removeAll();
+            print("TAMAINFO: ", lista.count);
             for ele in lista{
                 let rutaEle = ruta + ("/"+ele);
                 let prod = (NSKeyedUnarchiver.unarchiveObject(with: fileManager.contents(atPath: rutaEle)!));
                 //print("TIPOINFO: ", (prod as! TipoInfo).valor);
                 DatosB.cont.listaTInfo.append(prod as! TipoInfo);
             }
-            
+            print("TInfo Viejos :", DatosB.cont.listaTInfo.count);
+            print("TInfo Nuevos :", DatosB.cont.listaTInfoNuevos.count);
+            /*if(DatosB.cont.listaTInfoNuevos.count > 0){
+                print("Agrega nuevos");
+                for tinfoN in DatosB.cont.listaTInfoNuevos{
+                    DatosB.cont.listaTInfo.append(tinfoN);
+                    
+                }
+                
+            }*/
+            guardaTinfoNUevo();
             break;
         case is Tag.Type:
             DatosD.contenedor.tags.removeAll();
@@ -245,7 +256,7 @@ class CargaInicial2 : NSObject{
             for ele in lista{
                 let rutaEle = ruta + ("/"+ele);
                 let prod = (NSKeyedUnarchiver.unarchiveObject(with: fileManager.contents(atPath: rutaEle)!));
-                print("item: ", prod);
+                //print("item: ", prod);
                 DatosB.cont.itemsFavo.append(prod as! TItems);
             }
             break;
@@ -270,13 +281,23 @@ class CargaInicial2 : NSObject{
             //print("Carga Imagenes");
             for ele in lista{
                 let rutaEle = ruta + ("/"+ele);
-                let ima = (NSKeyedUnarchiver.unarchiveObject(with: fileManager.contents(atPath: rutaEle)!));
-                for prod in DatosC.contenedor.productos{
-                    if(prod.id == Int(ele)){
-                        //print("Asigna: ", prod.nombre, "ele: ", ele, " tt: ", ima);
-                        prod.imagen=(ima as! UIImage);
+                print("rutaEle: ", rutaEle);
+                if(fileManager.fileExists(atPath: rutaEle)){
+                    do{
+                        var ima = try (NSKeyedUnarchiver.unarchiveObject(with: fileManager.contents(atPath: rutaEle)!));
+                        for prod in DatosC.contenedor.productos{
+                            if(prod.id == Int(ele)){
+                                //print("Asigna: ", prod.nombre, "ele: ", ele, " tt: ", ima);
+                                prod.imagen=(ima as! UIImage);
+                            }
+                        }
+                    }catch{
+                        
                     }
+                }else{
+                    
                 }
+                
             }
             break;
         default:
@@ -373,6 +394,34 @@ class CargaInicial2 : NSObject{
             }
         }
         lee(UIImage);
+    }
+    
+    //Método que guarda la información nutricional si llegan datos nuevos
+    func guardaTinfoNUevo(){
+        print("Guarda Nuevos: ", DatosB.cont.listaTInfo.count);
+        let paths = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true).first;
+        var datosURL : String!;
+        datosURL = ((paths)! + "/TipoInfo");
+        if(fileManager.fileExists(atPath: datosURL!)){
+            
+        }else{
+            print("Entra - No directorio");
+            do{
+                var p = DatosB.cont.listaTInfo.count-1;
+                print("Guarda Tinfo");
+                for tinfo in DatosB.cont.listaTInfoNuevos{
+                    print("info: ", p);
+                    try fileManager.createDirectory(atPath: datosURL!, withIntermediateDirectories: false, attributes: nil);
+                    let obj = (tinfo);
+                    let rutaEle = (datosURL)! + ("/"+String(p));
+                    let contenido = NSKeyedArchiver.archivedData(withRootObject: obj);
+                    fileManager.createFile(atPath: rutaEle, contents: contenido, attributes: nil);
+                    p += 1;
+                }
+            }catch{
+                print("Error en guardado TInfo nuevo");
+            }
+        }
     }
     
 }

@@ -109,6 +109,8 @@ class CargaFechaEntrega: NSObject , NSURLConnectionDelegate, XMLParserDelegate{
         if(elementName == "return"){
             //print("añade")
             let fechaEntrega = FechaEntrega(id: idf, nom: f, ndia: d);
+            DatosB.cont.FechasEntrega.removeAll();
+            
             DatosB.cont.FechasEntrega.append(fechaEntrega);
         }
     }

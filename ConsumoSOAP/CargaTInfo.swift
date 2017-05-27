@@ -13,7 +13,7 @@ class CargaTInfo: NSObject, NSURLConnectionDelegate, XMLParserDelegate{
     
     //MARK: Variables
     
-    var objs=[Producto]();
+    
     var mensajeEnviado:String="";
     var resp: Data! = nil
     var estado:NSMutableString!
@@ -24,7 +24,7 @@ class CargaTInfo: NSObject, NSURLConnectionDelegate, XMLParserDelegate{
 
     //MARK: Consulta
     
-    func CargaTInfo(_ prody: Producto){
+    func CargaTInfo(_ prody: Producto, cini3: CargaInicial3){
         let is_URL: String = "http://93.188.163.97:8080/Lunch2/adminEndpoint"
         
         let lobj_Request = NSMutableURLRequest(url: URL(string: is_URL)!)
@@ -50,6 +50,8 @@ class CargaTInfo: NSObject, NSURLConnectionDelegate, XMLParserDelegate{
             if(data == nil){
                 print("NULOOOO en TInfo");
             }else{
+                print("InfoItem nuevo: ", prody.nombre);
+                
                 let strData = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
                 self.resp=strData?.data(using: String.Encoding.utf8.rawValue)
                 //print(self.resp)
@@ -60,6 +62,14 @@ class CargaTInfo: NSObject, NSURLConnectionDelegate, XMLParserDelegate{
             
             DispatchQueue.main.async(execute: {
                 lobj_Request.setValue("Connection", forHTTPHeaderField: "close");
+                cini3.contadorHIlos += 1;
+                print("Hilo Tinfo = ", cini3.contadorHIlos);
+                if(cini3.contadorHIlos >= cini3.listaProductosSinImagen.count){
+                    print("Iguales");
+                    //cini3.guardaTInfo();
+                }else{
+                    print("Difiere HIlos: ", cini3.contadorHIlos," Llamados: ", cini3.listaProductosSinImagen.count);
+                }
                 //print("Carga Informacion de Productos");
             });
         })
@@ -147,7 +157,8 @@ class CargaTInfo: NSObject, NSURLConnectionDelegate, XMLParserDelegate{
     func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         if(elementName as NSString).isEqual(to: "return"){
             let tInfo = TipoInfo(id: id!, tipo: tipoNombre!, valor: valor!, idProducto: idProducto!);
-            prod!.listaDatos.append(tInfo);
+            //prod!.listaDatos.append(tInfo);
+            DatosB.cont.listaTInfoNuevos.append(tInfo);
             print("----------------");
         }
     }

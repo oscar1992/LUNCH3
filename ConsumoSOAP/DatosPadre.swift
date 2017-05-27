@@ -175,9 +175,23 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
         vista4.addSubview(direccion3);
         vista5.addSubview(direccion4);
         direccion1.text=DatosD.contenedor.padre.direccion;
-        direccion2.text="Edificio / Casa / Apartamento";
-        direccion3.text="Barrio";
-        direccion4.text="Ciudad v";
+        if(direccion2.text == nil){
+            direccion2.text="Edificio / Casa / Apartamento";
+        }else{
+            direccion2.text=DatosD.contenedor.padre.adicional;
+            print("Dire2: ", direccion2.text);
+        }
+        if(direccion3.text == nil){
+            direccion3.text="Barrio";
+        }else{
+            direccion3.text=DatosD.contenedor.padre.barrio;
+        }
+        if(direccion4.text == nil){
+            direccion4.text="Ciudad v";
+        }else{
+            direccion4.text=DatosD.contenedor.padre.ciudad;
+        }
+        
         direccion1.textColor=UIColor.gray;
         direccion2.textColor=UIColor.gray;
         direccion3.textColor=UIColor.gray;
@@ -230,7 +244,7 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
         for vista in sender.subviews{
             if vista is UILabel{
                 let lab = vista as! UILabel;
-                print("qq: ", lab.text);
+                print("qq: ", lab.text!);
                 direccion4.text=lab.text;
             }
         }
@@ -605,8 +619,6 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
                 if(num>0){
                     tiene=false;
                 }
-            }catch{
-                print("letra");
             }
             
             p += 1;
@@ -624,7 +636,7 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
         //print("hora: ", hora);
         hora="----";
         print("fecha: ", texto);
-        print("id padre: ", DatosD.contenedor.padre.id);
+        print("id padre: ", DatosD.contenedor.padre.id!);
         print("fecha actual: ", fechaActual());
         print("fecha entrega: ", fecha);
         print("valor", valor());
@@ -640,7 +652,10 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
         if(direccion4.text == "Ciudad v"){
             direccion4.text="";
         }
-        DatosD.contenedor.padre.direccion=(direccion1.text!+" "+direccion2.text!+" "+direccion3.text!+" "+direccion4.text!);
+        //DatosD.contenedor.padre.direccion=(direccion1.text!+" "+direccion2.text!+" "+direccion3.text!+" "+direccion4.text!);
+        DatosD.contenedor.padre.adicional=direccion2.text;
+        DatosD.contenedor.padre.barrio=direccion3.text;
+        DatosD.contenedor.padre.ciudad=direccion4.text;
         DatosD.contenedor.padre.telefono=telefono.text;
         actua.actualizaPadre(DatosD.contenedor.padre);
         var aprobado = false

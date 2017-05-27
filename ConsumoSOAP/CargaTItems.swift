@@ -11,7 +11,7 @@ import UIKit
 
 class CargaTItems: NSObject, NSURLConnectionDelegate, XMLParserDelegate{
     
-    var objs=[TItems]();
+    
     var mensajeEnviado:String="<soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/' xmlns:enp='http://enpoint.lunch.com.co/'><soapenv:Header/><soapenv:Body><enp:listaItemEntity/></soapenv:Body></soapenv:Envelope>";
     var resp: Data! = nil
     var estado:NSMutableString!

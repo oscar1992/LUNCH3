@@ -30,6 +30,7 @@ struct keysPrimariasB{
     static let tipos = Tipos();
     static let cargaProductos = false;
     static let listaTInfo = [TipoInfo]();
+    static let listaTInfoNuevos = [TipoInfo]();
     
 }
 
@@ -56,6 +57,7 @@ class DatosB: NSObject {
     var tipos = Tipos();
     var cargaProductos : Bool?;
     var listaTInfo = [TipoInfo]();
+    var listaTInfoNuevos = [TipoInfo]();
     
 
     static func elimina(){

@@ -61,7 +61,7 @@ class Producto: NSObject, NSCoding{
     
     func encode(with coder: NSCoder) {
         
-        if let id = id { coder.encode(id, forKey: "idd"); print("qq: "); }
+        if let id = id { coder.encode(id, forKey: "idd"); }
         //print("Guarda Prod: ", coder.decodeObject(forKey: "id"));
         if let nombre = nombre { coder.encode(nombre, forKey: "nombre") }
         if let precio = precio { coder.encode(precio, forKey: "precio") }

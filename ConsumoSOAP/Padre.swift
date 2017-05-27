@@ -21,12 +21,15 @@ class Padre: NSObject {
     var terminos:Bool?;
     var terminoFecha:String?;
     var genero:String?;
+    var ciudad: String?;
+    var barrio: String?;
+    var adicional: String?;
     
     init(id: Int, nombre: String, telefono: String, direccion: String, email: String, pass: String, primeraVez: Bool, numeroConf: String, terminos: Bool, terminoFecha: String, genero:String) {
         self.id=id;
         self.nombre=nombre;
         self.telefono=telefono;
-        self.direccion=direccion;
+        self.direccion=direccion
         self.email=email;
         self.pass=pass;
         self.primeraVez=primeraVez;
@@ -34,6 +37,7 @@ class Padre: NSObject {
         self.terminos=terminos;
         self.terminoFecha=terminoFecha;
         self.genero=genero;
+
     }
     
     override init() {

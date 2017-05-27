@@ -126,7 +126,7 @@ class CargaItemsFavoritos: NSObject, NSURLConnectionDelegate, XMLParserDelegate 
     func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         if(elementName == "return"){
             
-            print("UUU: ", DatosB.cont.itemsFavo.count);
+            //print("UUU: ", DatosB.cont.itemsFavo.count);
             for prod in DatosC.contenedor.productos{
                 //print("prod.id: ", prod.id, "producto: ", producto);
                 if(prod.id == producto){
@@ -135,7 +135,7 @@ class CargaItemsFavoritos: NSObject, NSURLConnectionDelegate, XMLParserDelegate 
                     item.padre = padre;
                     productos.append(prod);
                     items.append(item);
-                    print("añade item favorito");
+                    //print("añade item favorito");
                     DatosB.cont.itemsFavo.append(item);
                     
                     

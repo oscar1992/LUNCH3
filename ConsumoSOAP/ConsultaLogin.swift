@@ -154,6 +154,9 @@ class ConsultaLogin : NSObject, NSURLConnectionDelegate, XMLParserDelegate{
     var terminos=false;
     var terminoFecha=false;
     var genero = false;
+    var adicional = false;
+    var barrio = false;
+    var ciudad = false;
     
     var Pid:Int?;
     var Pnombre:String?;
@@ -166,6 +169,9 @@ class ConsultaLogin : NSObject, NSURLConnectionDelegate, XMLParserDelegate{
     var Pterminos:Bool?;
     var PterminoFecha:String?;
     var Pgenero:String?;
+    var Padicional:String?;
+    var Pbarrio:String?;
+    var Pciudad:String?;
     
     func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
         element=elementName as NSString;
@@ -208,6 +214,17 @@ class ConsultaLogin : NSObject, NSURLConnectionDelegate, XMLParserDelegate{
         case "genero":
             genero=true;
             break;
+        case "adicional":
+            adicional=true;
+            break;
+        case "barrio":
+            barrio=true;
+            break;
+        case "ciudad":
+            ciudad=true;
+            break;
+
+            
         default:
             break;
         }
@@ -276,12 +293,24 @@ class ConsultaLogin : NSObject, NSURLConnectionDelegate, XMLParserDelegate{
         }
         if(terminoFecha){
             PterminoFecha=string;
-            print("termino: ", PterminoFecha);
+            print("termino: ", PterminoFecha!);
             terminoFecha=false;
         }
         if(genero){
             Pgenero=string;
             genero=false;
+        }
+        if(adicional){
+            Padicional=string;
+            adicional=false;
+        }
+        if(barrio){
+            Pbarrio=string;
+            barrio=false;
+        }
+        if(ciudad){
+            Pciudad=string;
+            ciudad=false;
         }
     }
     
@@ -308,6 +337,10 @@ class ConsultaLogin : NSObject, NSURLConnectionDelegate, XMLParserDelegate{
                 print("nconf: ", PnumeroConfirmacion);
  */
                 let pad=Padre(id: Pid!, nombre: Pnombre!, telefono: Ptelefono!, direccion: Pdireccion!, email: Pemail!, pass: Ppass!, primeraVez: PprimeraVez!, numeroConf: PnumeroConfirmacion!, terminos: Pterminos!, terminoFecha: PterminoFecha!, genero: Pgenero!);
+                pad.ciudad=Pciudad;
+                pad.adicional=Padicional;
+                print("Padicio: ", Padicional);
+                pad.barrio=Pbarrio;
                 DatosD.contenedor.padre=pad;
                 aprueba=true;
             }
