@@ -36,7 +36,7 @@ class MensajeCiudad: UIView {
         let OYIma = self.frame.height*0.1;
         let imagenFrame = CGRect(x: OXima, y: OYIma, width: altoIma, height: altoIma);
         icono = UIView(frame: imagenFrame);
-        DatosB.cont.poneFondoTot(icono, fondoStr: "ICO Triste", framePers: nil, identi: nil, scala: true);
+        DatosB.cont.poneFondoTot(icono, fondoStr: "ICO Feliz", framePers: nil, identi: nil, scala: true);
         self.addSubview(icono);
         
     }
@@ -46,7 +46,7 @@ class MensajeCiudad: UIView {
         let OX = (self.frame.width/2)-(ancho/2)
         let OY = (icono.frame.height*1.2 + icono.frame.origin.y);
         texto = UILabel(frame: CGRect(x: OX, y: OY, width: ancho, height: self.frame.height*0.3));
-        texto.text = "¿Sólo entregamos en la ciudad de bogotá?";
+        texto.text = "Por ahora sólo entregamos en Bogotá, ¿Tu pedido es para la ciudad de Bogotá?";
         //texto.lineBreakMode=NSLineBreakMode.ByWordWrapping;
         //texto.numberOfLines=2;
         texto.adjustsFontSizeToFitWidth=true;

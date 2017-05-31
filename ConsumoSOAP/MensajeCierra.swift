@@ -46,7 +46,7 @@ class MensajeCierra: UIView {
         let OX = (self.frame.width/2)-(ancho/2)
         let OY = (icono.frame.height + icono.frame.origin.y);
         texto = UILabel(frame: CGRect(x: OX, y: OY, width: ancho, height: self.frame.height*0.25));
-        texto.text = "¿De verdad quieres salir :( ? Te estaremos esperando!";
+        texto.text = "¿De verdad quieres salir? ¡Te estaremos esperando!";
         //texto.lineBreakMode=NSLineBreakMode.ByWordWrapping;
         //texto.numberOfLines=2;
         texto.adjustsFontSizeToFitWidth=true;

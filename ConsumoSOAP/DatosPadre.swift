@@ -175,18 +175,18 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
         vista4.addSubview(direccion3);
         vista5.addSubview(direccion4);
         direccion1.text=DatosD.contenedor.padre.direccion;
-        if(direccion2.text == nil){
+        if(direccion2.text == ""){
             direccion2.text="Edificio / Casa / Apartamento";
         }else{
             direccion2.text=DatosD.contenedor.padre.adicional;
             print("Dire2: ", direccion2.text);
         }
-        if(direccion3.text == nil){
+        if(direccion3.text == ""){
             direccion3.text="Barrio";
         }else{
             direccion3.text=DatosD.contenedor.padre.barrio;
         }
-        if(direccion4.text == nil){
+        if(direccion4.text == ""){
             direccion4.text="Ciudad v";
         }else{
             direccion4.text=DatosD.contenedor.padre.ciudad;
@@ -506,7 +506,7 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
         if(direccion1.text?.characters.count<0){
             pasaDir=false;
             
-            info += "¿Donde quieres recibir Las Loncheras?";
+            info += "Dirección";
         }else{
             if(direccion1.text?.characters.count<5||tieneNumeros(direccion1.text!)==false){
                 info += "Dirección Inválida";
@@ -518,7 +518,7 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
             
         }
         if(telefono.text?.characters.count==0){
-            info += "\n¿Nos das tu teléfono?";
+            info += "\nTeléfono";
             pasaTel=false;
         }
         if(telefono.text?.characters.count<7||tieneLetras(telefono.text!)){
@@ -531,19 +531,19 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
             pasaHora=true;
         }else{
             pasaHora=false;
-            info += "\n*Hora de Entrega de tus loncheras";
+            info += "\n*Hora de Entrega";
         }
         if(fecha != nil){
             pasaFecha = true;
         }else{
             pasaFecha = false;
-            info += "\n*Fecha de entrega de tus loncheras";
+            info += "\nFecha de entrega";
         }
         if(metodoV != nil){
             pasaMetodo = true;
         }else{
             pasaMetodo = false;
-            info += "\n¿Cómo quieres pagar?";
+            info += "\nForma de pago";
         }
         print("Info: ", info);
         print("dir: ", pasaDir," tel: ", pasaTel);

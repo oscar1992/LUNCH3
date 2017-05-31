@@ -82,7 +82,10 @@ class VistaScrollTipo: UIView {
     func agrega(){
         DatosB.cont.home2.lonchera.limpia();
         for n in 1...DatosB.cont.home2.lonchera.casillas.count{
-            DatosB.cont.home2.lonchera.setCasilla(n, prod: tipo.1[n-1], salud: false);
+            if((n)<=tipo.1.count){
+                print("n: ",n," Items: ", tipo.1[n-1]);
+                DatosB.cont.home2.lonchera.setCasilla(n, prod: tipo.1[n-1], salud: false);
+            }
         }
         DatosB.cont.home2.lonchera.nombr = tipo.0.0;
         DatosB.cont.home2.anade();

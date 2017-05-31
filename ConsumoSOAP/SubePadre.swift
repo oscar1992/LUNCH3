@@ -69,7 +69,7 @@ class SubePadre: NSObject, NSURLConnectionDelegate, XMLParserDelegate{
                     if(genero=="M"){
                         gen="o";
                     }else{
-                        gen="a";
+                        gen="o";
                     }
                     padre.msgUsuarioExitoso("Bienvenid"+gen+" a La Lonchera !", adv: true);
                     

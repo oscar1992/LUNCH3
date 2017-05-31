@@ -23,8 +23,8 @@ class LoginView: UIViewController {
     override func viewDidLoad() {
         
         DatosB.cont.loginView=self;
-        if(UserDefaults.standard.object(forKey: "user")==nil||UserDefaults.standard.object(forKey: "pass")==nil){
-            
+        if(UserDefaults.standard.string(forKey: "user")==nil||UserDefaults.standard.string(forKey: "pass")==nil){
+            print("Login sin datos");
         }else{
             loginViejo();
         }
@@ -363,8 +363,8 @@ class LoginView: UIViewController {
             print("Vacio");
         }else{
             bloquea();
-            let user = UserDefaults.standard.object(forKey: "user") as! String;
-            let pass = UserDefaults.standard.object(forKey: "pass") as! String;
+            let user = UserDefaults.standard.string(forKey: "user");
+            let pass = UserDefaults.standard.string(forKey: "pass");
             if(DatosD.contenedor.padre.email != nil || DatosD.contenedor.padre.pass != nil){
                 //self.email.text=DatosD.contenedor.padre.email;
                 //self.pass.text=DatosD.contenedor.padre.pass;

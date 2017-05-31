@@ -203,12 +203,16 @@ class CreaUsuario: UIViewController, UITextFieldDelegate, UIImagePickerControlle
     
     func textFieldDidEndEditing(_ textField: UITextField){
         //print("fin: ", textField.text, " acc: ", textField.accessibilityIdentifier);
-        validaEmail(textField);
+        if(textField.accessibilityIdentifier=="email"){
+            validaEmail(textField);
+        }
+        if(textField.accessibilityIdentifier=="pass1"){
+            validaPass(textField);
+        }
     }
     
     func validaEmail(_ textField: UITextField){
-        if(textField.text != "" && textField.accessibilityIdentifier=="email"){
-            //print("comprueba");
+        if((textField.text?.characters.count)! > 6){
             if(compruebaPatron(textField.text!)){
                 let comp = CompruebaEmail();
                 comp.Comprueba(textField.text!, padre: self, restaura: nil);
@@ -225,24 +229,32 @@ class CreaUsuario: UIViewController, UITextFieldDelegate, UIImagePickerControlle
                 //bot.enabled=false;
                 emailValido=false;
             }
-            
+        }
+        
+        /*
+        if(textField.text != "" && textField.accessibilityIdentifier=="email"){
+            //print("comprueba");
         }else if(textField.accessibilityIdentifier=="pass1"){
-            print("largo?: ", textField.text?.characters.count);
-            if(textField.text?.characters.count<6 && textField.text?.characters.count != 0){
-                print("Menor");
-                let ancho = self.view.frame.width*0.8;
-                let alto = self.view.frame.height*0.4;
-                let OX = (self.view.frame.width/2)-(ancho/2);
-                let OY = (self.view.frame.height/2)-(alto/2);
-                let frameMens = CGRect(x: OX, y: OY, width: ancho, height: alto);
-                let msg = MensajeCrea(frame: frameMens, msg: "La clave debe contener minimo 6 caracteres" , gif: false);
-                msg.iniciaTimer();
-                self.view.addSubview(msg);
-                passValido=false;
-            }else{
-                print("pass ok");
-                passValido=true;
-            }
+            
+        }*/
+    }
+    
+    func validaPass(_ textField: UITextField){
+        print("largo?: ", textField.text?.characters.count);
+        if((textField.text?.characters.count)!<6 && (textField.text?.characters.count)! > 0){
+            print("Menor");
+            let ancho = self.view.frame.width*0.8;
+            let alto = self.view.frame.height*0.4;
+            let OX = (self.view.frame.width/2)-(ancho/2);
+            let OY = (self.view.frame.height/2)-(alto/2);
+            let frameMens = CGRect(x: OX, y: OY, width: ancho, height: alto);
+            let msg = MensajeCrea(frame: frameMens, msg: "La clave debe contener minimo 6 caracteres" , gif: false);
+            msg.iniciaTimer();
+            self.view.addSubview(msg);
+            passValido=false;
+        }else{
+            print("pass ok");
+            passValido=true;
         }
     }
     
@@ -434,12 +446,13 @@ class CreaUsuario: UIViewController, UITextFieldDelegate, UIImagePickerControlle
         if(pass2 == ""){
             print("Pass2 Vacio")
         }
-        if(pass != "" && pass2 != ""){
+        if(pass != "" && pass2 != "" && (self.pass.text?.characters.count)! > 0){
+            print("Tamaño contraseña: ", self.pass.text?.characters.count);
             if(pass == pass2){
-                //print("OK pass");
+                print("OK pass");
                 bpass=true;
             }else{
-                //print("Contraseñas no concuerdan");
+                print("Contraseñas no concuerdan");
             }
         }
         if(genero == nil){
@@ -471,22 +484,21 @@ class CreaUsuario: UIViewController, UITextFieldDelegate, UIImagePickerControlle
             if(bema==false){
                 msgT = msgT + "\nEmail Vacio";
             }
-            if(bpass==false){
+            if(pass != pass2){
                 msgT = msgT + "\nUps! las contraseñas no son iguales! Trata de nuevo.";
             }
-           
             
             if(bgene==false){
                 msgT = msgT + "\nNo nos dijiste si eres hombre o mujer.";
             }
       
-            if(bterm==false){
+            if(bterm==false && pass != ""){
                 msgT = msgT + "\nSe te olvidó seleccionar los términos y condiciones";
             }
             if(!emailValido){
                 msgT = msgT + "\nTu correo electrónico no es válido";
             }
-            if(passValido==false){
+            if(passValido==false && pass != ""){
                 msgT = msgT + "\nPreferimos una contraseña de minimo 6 caracteres por seguridad!";
             }
             if(emailExistente==true){
@@ -494,10 +506,12 @@ class CreaUsuario: UIViewController, UITextFieldDelegate, UIImagePickerControlle
                 msgT = msgT + "\nEste correo ya existe! Seguro ya creaste un usuario!";
             }
             //print("msg: ", msgT);
+            if(msgT != ""){
+                let msg = MensajeCrea(frame: frameMens, msg: msgT, gif: false);
+                msg.iniciaTimer();
+                self.view.addSubview(msg);
+            }
             
-            let msg = MensajeCrea(frame: frameMens, msg: msgT, gif: false);
-            msg.iniciaTimer();
-            self.view.addSubview(msg);
             
         }else{
             pasa = true;

@@ -152,6 +152,7 @@ class Lonchera2: UIView {
     //Método que evalua los valores de los productos y el color de la lonchera
     func actualizaContador(){
         print("actua")
+        
         valor=0;
         var valor2=0;
         var calorias:Int=0;
@@ -161,6 +162,7 @@ class Lonchera2: UIView {
         for cas in casillas{
             if(cas.elemeto != nil){
                 print("ele?: ", cas.elemeto?.producto?.listaDatos.count);
+                ajustaTInfo(prod: cas.elemeto!.producto!);
                 for dato in (cas.elemeto?.producto?.listaDatos)!{
                     print("dato: ", dato.id);
                     switch dato.id {
@@ -211,6 +213,47 @@ class Lonchera2: UIView {
         cambiaFavorita();
         //print("favorita?: ", favorita);
         //print("salud: ", salud);
+    }
+    
+    func ajustaTInfo(prod: Producto){
+        if(prod.listaDatos.count > 6){
+            var aux = [TipoInfo]();
+            var s1 = false;
+            var s2 = false;
+            var s3 = false;
+            var s4 = false;
+            var s5 = false;
+            var s6 = false;
+            
+            for item in prod.listaDatos{
+                if(s1 == false && item.id == 1){
+                    s1 = true;
+                    aux.append(item);
+                }
+                if(s2 == false && item.id == 2){
+                    s2 = true;
+                    aux.append(item);
+                }
+                if(s3 == false && item.id == 3){
+                    s3 = true;
+                    aux.append(item);
+                }
+                if(s4 == false && item.id == 4){
+                    s4 = true;
+                    aux.append(item);
+                }
+                if(s5 == false && item.id == 5){
+                    s5 = true;
+                    aux.append(item);
+                }
+                if(s6 == false && item.id == 6){
+                    s6 = true;
+                    aux.append(item);
+                }
+            }
+            prod.listaDatos.removeAll();
+            prod.listaDatos = aux;
+        }
     }
     
     //Método que cambia el color de la lonchera de verde a blanco

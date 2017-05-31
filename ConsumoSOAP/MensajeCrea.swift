@@ -31,7 +31,7 @@ class MensajeCrea: UIView {
         iniciaMensaje();
         self.accessibilityIdentifier="msg";
         fondo();
-        cambiaImagen();
+        //cambiaImagen();
     }
     
     required init?(coder aDecoder: NSCoder) {
