@@ -26,7 +26,7 @@ class DeleteCard: NSObject, NSURLConnectionDelegate{
         aplicationCode = "LONCH";
         uid = String(DatosD.contenedor.padre.id!);
         email = String(trataEmail(DatosD.contenedor.padre.email!));
-        sesionId = "AwXytakRpysZKMW8PoWyB6F9FhYx6W";
+        sesionId = "9rDozxAmJ6nvK1LBNGms2786ol5CtO";
         timeStamp = String(Int(Date().timeIntervalSince1970));
         
     }
@@ -47,7 +47,7 @@ class DeleteCard: NSObject, NSURLConnectionDelegate{
         let cadenaSHA = "application_code="+aplicationCode+"&card_reference="+tarjeta.referencia+"&uid="+uid+"&"+timeStamp+"&"+sesionId;
         let datos = cadenaSHA.data(using: String.Encoding.utf8);
         print("Pre SHA: ", cadenaSHA);
-        envia += "https://ccapi-stg.paymentez.com/api/cc/delete?";
+        envia += "https://ccapi.paymentez.com/api/cc/delete?";
         envia += "card_reference="+tarjeta.referencia;
         envia += "&application_code="+aplicationCode;
         envia += "&uid="+uid;

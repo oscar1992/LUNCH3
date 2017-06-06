@@ -24,13 +24,13 @@ class AddCard: NSObject, NSURLConnectionDelegate{
         aplicationCode = "LONCH";
         uid = String(DatosD.contenedor.padre.id!);
         email = String(trataEmail(DatosD.contenedor.padre.email!));
-        sesionId = "AwXytakRpysZKMW8PoWyB6F9FhYx6W";
+        sesionId = "9rDozxAmJ6nvK1LBNGms2786ol5CtO";
         timeStamp = String(Int(Date().timeIntervalSince1970));
         
     }
     
     func add()->URLRequest{
-        envia += "https://ccapi-stg.paymentez.com/api/cc/add?";
+        envia += "https://ccapi.paymentez.com/api/cc/add?";
         envia += "application_code="+aplicationCode;
         envia += "&email="+email;
         envia += "&session_id="+sesionId;

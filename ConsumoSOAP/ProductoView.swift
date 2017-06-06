@@ -281,10 +281,14 @@ class ProductoView: UIButton {
         
         if(padre != nil){
             padre!.elemeto = nil;
+        }else{
+            
         }
-        //DatosB.cont.home2.lonchera.actualizaContador();
+        //padre!.setFondo((DatosB.cont.home2.lonchera.salud)!);
         self.removeFromSuperview();
-        padre?.setFondo((DatosB.cont.home2.lonchera.salud)!);
+        
+        //DatosB.cont.home2.lonchera.actualizaContador();
+        
     }
     
     //Método que llama al home y inicia el Pop Up del chulo

@@ -184,7 +184,9 @@ class Pred2: UIScrollView, UIScrollViewDelegate {
     
     //Método que pone uan lonchera saludable pre-cargada
     func cargaSaludableInicial(){
-        (cajas.first as! Caja2).llena();
+        if(cini){
+            (cajas.first as! Caja2).llena();
+        }
         
     }
     

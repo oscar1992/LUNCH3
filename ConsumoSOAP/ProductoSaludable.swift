@@ -24,7 +24,7 @@ class ProductoSaludable: NSObject, NSCoding {
     
     required convenience init(coder decoder: NSCoder) {
         self.init();
-        self.id = decoder.decodeObject(forKey: "id") as! Int;
+        self.id = decoder.decodeInteger(forKey: "id");
         self.salu = decoder.decodeObject(forKey: "salu") as! Saludable;
         self.produ = decoder.decodeObject(forKey: "produ") as! Producto;
         self.ultimaActualizacion = decoder.decodeObject(forKey: "ultimaActualizacion") as! Date;

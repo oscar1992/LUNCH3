@@ -1458,11 +1458,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ConsumoSOAP/Lonchera2.swift"
-            timestampString = "517884083.354977"
+            timestampString = "518432200.835197"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "381"
-            endingLineNumber = "381"
+            startingLineNumber = "397"
+            endingLineNumber = "397"
             landmarkName = "esFavorita()"
             landmarkType = "7">
          </BreakpointContent>

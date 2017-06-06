@@ -499,7 +499,7 @@ class CreaUsuario: UIViewController, UITextFieldDelegate, UIImagePickerControlle
                 msgT = msgT + "\nTu correo electrónico no es válido";
             }
             if(passValido==false && pass != ""){
-                msgT = msgT + "\nPreferimos una contraseña de minimo 6 caracteres por seguridad!";
+                msgT = msgT + "\nPreferimos una contraseña de mínimo 6 caracteres por seguridad!";
             }
             if(emailExistente==true){
                 bot.isEnabled=true;

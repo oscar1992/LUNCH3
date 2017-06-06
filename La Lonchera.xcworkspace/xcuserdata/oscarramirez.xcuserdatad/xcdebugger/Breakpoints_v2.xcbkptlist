@@ -202,11 +202,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ConsumoSOAP/DatosPadre.swift"
-            timestampString = "517268377.747952"
+            timestampString = "518134815.739734"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "628"
-            endingLineNumber = "628"
+            startingLineNumber = "639"
+            endingLineNumber = "639"
             landmarkName = "tieneLetras(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -384,6 +384,22 @@
             startingLineNumber = "179"
             endingLineNumber = "179"
             landmarkName = "guardaImagenes(prod:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ConsumoSOAP/DatosPadre.swift"
+            timestampString = "518134815.739734"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "526"
+            endingLineNumber = "526"
+            landmarkName = "valida()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

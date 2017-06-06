@@ -75,6 +75,7 @@ class Caja2: UIButton {
             print("vacia");
             DatosB.cont.poneFondoTot(self, fondoStr: "LoncheraGris3", framePers: nil, identi: "Caja", scala: true);
         }
+        print("fin llena");
     }
 
     /*

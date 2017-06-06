@@ -143,15 +143,19 @@ class CargaProductoSalud: NSObject ,NSURLConnectionDelegate, XMLParserDelegate{
             bsalu=false;
         }
         if(bUltimaActualizacion){
+            print("pre fecha: ", string);
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat="yyyy-MM-dd'T'hh:mm:ss.SSSZZ";
-            ultimaActualizacion = dateFormatter.date(from: string);   
+            ultimaActualizacion = dateFormatter.date(from: string);
+            print("pre fecha2: ", ultimaActualizacion);
+            bUltimaActualizacion = false;
         }
         
     }
     func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         if(elementName == "return"){
             //print("saluWS: ", self.produ.nombre);
+            print("fecha prsa: ", ultimaActualizacion);
             let prodSalud=ProductoSaludable(id: id, salu: salu, produ: produ, ultimaActualizacion: (ultimaActualizacion as! NSDate) as Date);
             //print("ProdSa: ", prodSalud.produ.nombre);
             DatosB.cont.prodSaludables.append(prodSalud);

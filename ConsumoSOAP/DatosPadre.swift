@@ -517,6 +517,16 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
             }
             
         }
+        if(direccion2.text?.characters.count<1 || direccion2.text == "Edificio / Casa / Apartamento"){
+                info += "\nEdificio, Casa, Apartamento";
+                pasaDir=false;
+            
+            
+        }
+        if(direccion3.text?.characters.count<1 || direccion3.text == "Barrio"){
+            info += "\nBarrio";
+            pasaDir=false;
+        }
         if(telefono.text?.characters.count==0){
             info += "\nTeléfono";
             pasaTel=false;
@@ -574,6 +584,7 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
                 precio += lonch.0.valor;
             }
             precio += Int(DatosB.cont.envia);
+            tipos = tipos.replacingOccurrences(of: " ", with: "");
             print("TT: ", tipos);
             let debita = DebitCard(tarjeta: tarjeta, cantidad: String(precio), descripcion: tipos, referencia: String(idReferencia), vat: "0.00");
             //debita.debita(String(precio), descripcion: tipos, referencia: String(idReferencia), vat: "0.00");

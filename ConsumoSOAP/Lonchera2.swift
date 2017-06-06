@@ -82,9 +82,11 @@ class Lonchera2: UIView {
     //Método que permite poner un elemento en una casilla
     func setCasilla(_ tipo: Int, prod: Producto, salud: Bool){
         if(salud){
+            var tipoT = tipo;
             for cas in casillas{
-                //print("tipo: ", prod.tipo);
-                if (cas.tipo == prod.tipo){
+                print("tipo: ", tipoT);
+                print("nombre: ", prod.nombre);
+                if (cas.tipo == tipoT){
                     //print("castipo: ", cas.tipo);
                     if(cas.elemeto != nil){
                         cas.elemeto?.elimina();
@@ -114,36 +116,42 @@ class Lonchera2: UIView {
                 }
             }
         }else{
-            //print("Tipo: ", tipo);
-            let cas = casillas[tipo-1];
-            if(cas.elemeto != nil){
-                cas.elemeto?.elimina();
+            
+            var tipoT = tipo - 1;
+            
+            if(tipoT<4){
+                let cas = casillas[tipoT];
+                //print("Tipo: ", tipoT);
+                if(cas.elemeto != nil){
+                    cas.elemeto?.elimina();
+                }
+                //cas.seteaElemento(prod, tipo: cas.tipo!, ima: (prod.producto?.imagen)!, prod: prod.producto!);
+                
+                cas.elemeto?.espacioPadre=cas.frame;
+                let reductor = CGFloat(0.8);
+                let ancho = cas.frame.width*reductor;
+                let alto = cas.frame.height*reductor;
+                let OX = (cas.frame.width/2)-(ancho/2);
+                let OY = (cas.frame.height/2)-(alto/2);
+                let imagenN = prod.imagen;
+                //print("ima: ", prod.imagen!);
+                let prodN=ProductoView(frame: CGRect(x: OX, y: OY, width: ancho, height: alto), imagen: prod.imagen!);
+                prodN.producto=prod;
+                prodN.padre=cas;
+                prodN.espacioPadre=CGRect(x: OX, y: OY, width: ancho, height: alto);
+                prodN.tipo=cas.tipo;
+                prodN.Natural=true;
+                prodN.PanelOrigen=nil;
+                prodN.Panel2=nil;
+                //print("cant: ", prodN.producto?.listaDatos.count);
+                //print("nombreima: ", prodN.producto?.imagenString);
+                let ima = UIImageView(image: prod.imagen!);
+                cas.elemeto=prodN;
+                //cas.elemeto!.imagen=ima;
+                
+                cas.addSubview(prodN);
             }
-            //cas.seteaElemento(prod, tipo: cas.tipo!, ima: (prod.producto?.imagen)!, prod: prod.producto!);
             
-            cas.elemeto?.espacioPadre=cas.frame;
-            let reductor = CGFloat(0.8);
-            let ancho = cas.frame.width*reductor;
-            let alto = cas.frame.height*reductor;
-            let OX = (cas.frame.width/2)-(ancho/2);
-            let OY = (cas.frame.height/2)-(alto/2);
-            let imagenN = prod.imagen;
-            //print("ima: ", prod.imagen!);
-            let prodN=ProductoView(frame: CGRect(x: OX, y: OY, width: ancho, height: alto), imagen: prod.imagen!);
-            prodN.producto=prod;
-            prodN.padre=cas;
-            prodN.espacioPadre=CGRect(x: OX, y: OY, width: ancho, height: alto);
-            prodN.tipo=cas.tipo;
-            prodN.Natural=true;
-            prodN.PanelOrigen=nil;
-            prodN.Panel2=nil;
-            //print("cant: ", prodN.producto?.listaDatos.count);
-            //print("nombreima: ", prodN.producto?.imagenString);
-            let ima = UIImageView(image: prod.imagen!);
-            cas.elemeto=prodN;
-            //cas.elemeto!.imagen=ima;
-            
-            cas.addSubview(prodN);
         }
         
         //actualizaContador();
@@ -160,8 +168,10 @@ class Lonchera2: UIView {
         var proteina:Int=0;
         salud = true;
         for cas in casillas{
+            print("ele: ", cas.elemeto?.producto?.nombre);
             if(cas.elemeto != nil){
                 print("ele?: ", cas.elemeto?.producto?.listaDatos.count);
+                
                 ajustaTInfo(prod: cas.elemeto!.producto!);
                 for dato in (cas.elemeto?.producto?.listaDatos)!{
                     print("dato: ", dato.id);
@@ -253,6 +263,12 @@ class Lonchera2: UIView {
             }
             prod.listaDatos.removeAll();
             prod.listaDatos = aux;
+        }else if(prod.listaDatos.isEmpty){
+            for prod2 in DatosC.contenedor.productos{
+                if(prod2.id == prod.id){
+                    prod.listaDatos=prod2.listaDatos;
+                }
+            }
         }
     }
     

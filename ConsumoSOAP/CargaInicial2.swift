@@ -281,7 +281,7 @@ class CargaInicial2 : NSObject{
             //print("Carga Imagenes");
             for ele in lista{
                 let rutaEle = ruta + ("/"+ele);
-                print("rutaEle: ", rutaEle);
+                //print("rutaEle: ", rutaEle);
                 if(fileManager.fileExists(atPath: rutaEle)){
                     do{
                         var ima = try (NSKeyedUnarchiver.unarchiveObject(with: fileManager.contents(atPath: rutaEle)!));

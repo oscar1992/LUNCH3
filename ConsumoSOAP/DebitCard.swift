@@ -37,7 +37,7 @@ class DebitCard: NSObject , NSURLConnectionDelegate{
         aplicationCode = "LONCH";
         uid = String(DatosD.contenedor.padre.id!);
         email = String(trataEmail(DatosD.contenedor.padre.email!));
-        sesionId = "AwXytakRpysZKMW8PoWyB6F9FhYx6W";
+        sesionId = "9rDozxAmJ6nvK1LBNGms2786ol5CtO";
         timeStamp = String(Int(Date().timeIntervalSince1970));
     }
     
@@ -62,23 +62,24 @@ class DebitCard: NSObject , NSURLConnectionDelegate{
         cadenaSHA += "&product_description="+descripcion+"&session_id="+sesionId;
         cadenaSHA += "&uid="+uid+"&vat="+vat+"&"+timeStamp+"&"+sesionId;
         let datos = cadenaSHA.data(using: String.Encoding.utf8);
-        print("Pre SHA: ", cadenaSHA);
-        envia += "https://ccapi-stg.paymentez.com/api/cc/debit?";
-        envia += "application_code="+aplicationCode;
+        //print("Pre SHA: ", cadenaSHA);
+        envia += "https://ccapi.paymentez.com/api/cc/debit?";
+        envia = envia.appending("application_code="+aplicationCode);
         envia += "&card_reference="+tarjeta.referencia;
         envia += "&dev_reference="+referencia;
         envia += "&email="+email;
         envia += "&ip_address="+ip;
         envia += "&product_amount="+String(cantidad)+".00";
-        envia += "&product_description="+descripcion;
+        envia = envia.appending("&product_description="+descripcion);
         envia += "&vat="+vat;
         envia += "&session_id="+sesionId;
         envia += "&uid="+uid;
         envia += "&auth_timestamp="+timeStamp;
         envia += "&auth_token="+String(sha256(datos!));
+ 
         print("ENVIA: ", envia);
         let url = URL(string: envia);
-        //print("Envia: ", url!);
+        print("Envia: ", url!);
         let request = NSMutableURLRequest(url: url!);
         request.httpMethod = "POST";
         NSURLConnection.sendAsynchronousRequest(request as URLRequest, queue: OperationQueue.main) {(response, data, error) in

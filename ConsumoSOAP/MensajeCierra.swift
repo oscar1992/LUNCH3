@@ -84,6 +84,7 @@ class MensajeCierra: UIView {
             DatosC.contenedor.pantallaSV.contenedor.removeFromSuperview();
         }
         DatosB.cont.favoritos=[Favoritos]();
+        DatosB.cont.itemsFavo=[TItems]();
         DatosB.cont.saludables=[Saludable]();
         DatosD.contenedor.categorias.removeAll();
         DatosC();
