@@ -60,30 +60,30 @@ class CargaInicial3: NSObject {
     
     func cambiaProductosNuevos(_ traeNuevos:[Producto]){
         for prodN in traeNuevos{
-            print("Nuevos: ", prodN.id, " - ", prodN.nombre, " - ", prodN.disponible);
+            //print("Nuevos: ", prodN.id, " - ", prodN.nombre, " - ", prodN.disponible);
             var i = 0;
              for prodV in DatosC.contenedor.productos{
                  i += 1;
                 if(prodV.disponible == false){
                     let indiceV = DatosC.contenedor.productos.index(of: prodV);
                     DatosC.contenedor.productos.remove(at: indiceV!);
-                    print("Elimina: ", prodV.nombre);
+                    //print("Elimina: ", prodV.nombre);
                 }
                 if(prodV.id == prodN.id){
-                    print("Reemplaza: ", prodV.nombre, "disp: ", prodN.disponible);
+                    //print("Reemplaza: ", prodV.nombre, "disp: ", prodN.disponible);
                     let indiceV = DatosC.contenedor.productos.index(of: prodV);
                     DatosC.contenedor.productos.remove(at: indiceV!);
                     DatosC.contenedor.productos.append(prodN);
                     prodN.ultimaActualizacion = NSDate() as Date!;
                     listaProductosSinImagen.append(prodN);
-                    print("NuevoV: ", prodN.nombre);
-                    print("ViejoFecha: ", prodV.ultimaActualizacion);
-                    print("NuevoVFecha: ", prodN.ultimaActualizacion);
+                    //print("NuevoV: ", prodN.nombre);
+                    //print("ViejoFecha: ", prodV.ultimaActualizacion);
+                    //print("NuevoVFecha: ", prodN.ultimaActualizacion);
                 }else if(existeProducto(DatosC.contenedor.productos, idProd: prodN.id) == false){
                     if(prodN.disponible == false){
                         //print("No entra: ", prodN.nombre);
                     }else{
-                        print("Nuevo-NuevoV: ", prodN.nombre);
+                        //print("Nuevo-NuevoV: ", prodN.nombre);
                         DatosC.contenedor.productos.append(prodN);
                         listaProductosSinImagen.append(prodN);
                     }
@@ -232,20 +232,76 @@ class CargaInicial3: NSObject {
     }
  
     func cambiaProductosSaludablesNuevos(_ traeNuevos: [ProductoSaludable]){
+        print("PSaludables Nuevos: ", traeNuevos.count);
+        print("PSAludables Viejos: ", DatosB.cont.prodSaludables.count);
+        print("Lista Nuevo")
+        for ps in traeNuevos{
+            print("ItemPS: ", ps.produ.nombre, "tipo: ", ps.produ.tipo);
+        }
+        for psNuevos in traeNuevos{
+            reemplazaPS(cajaId: psNuevos.salu.idSalud, tipoId: psNuevos.produ.tipo, psN: psNuevos);
+        }
+        /*
         for prodSN in traeNuevos{
             for prodSV in DatosB.cont.prodSaludables{
+                //print("Indice: ", retornaIndcicePSaludable(listaPS: DatosB.cont.prodSaludables, elemento: prodSV));
                 if(prodSV.id == prodSN.id){
-                    //print("Reemplaza: ", prodSV.produ.nombre);
-                    let indiceV = DatosB.cont.prodSaludables.index(of: prodSV);
-                    DatosB.cont.prodSaludables.remove(at: indiceV!);
+                    print("Reemplaza: ", prodSV.produ.nombre);
+                    let indiceV = retornaIndcicePSaludable(listaPS: DatosB.cont.prodSaludables, elemento: prodSV);
+                    print("Indice: ", indiceV);
+                    DatosB.cont.prodSaludables.remove(at: indiceV);
+                    prodSN.ultimaActualizacion = NSDate() as Date;
                     DatosB.cont.prodSaludables.append(prodSN);
+                    
                     print("NuevoSV: ", prodSV.produ.nombre);
+                }else{
+                    print("PSaludable nuevo: ", prodSN.produ.id);
+                    
+                    //DatosB.cont.prodSaludables.remove(at: retornaIndcicePSaludable(listaPS: DatosB.cont.prodSaludables, elemento: prodSV));
+                    //print("PSaludable caja: ", prodSN.salu.idSalud);
+                    prodSN.ultimaActualizacion = NSDate() as Date;
+                    DatosB.cont.prodSaludables.append(prodSN);
                 }
             }
+        }*/
+        print("Lista final")
+        for ps in DatosB.cont.prodSaludables{
+            print("ItemPS: ", ps.produ.nombre);
         }
         eliminaProductosSaludables();
         persisteProdutosSaludables();
        self.cIni.iniciaEvaluacion();
+    }
+    
+    func reemplazaPS(cajaId: Int, tipoId: Int, psN: ProductoSaludable){
+        
+        for ps in DatosB.cont.prodSaludables{
+            
+            if(ps.salu.idSalud == cajaId && ps.produ.tipo == tipoId){
+                print("Encuentra caja: ", ps.salu.idSalud, " tipo: ", ps.produ.tipo);
+                print("Busca caja: ", cajaId, " tipo: ", tipoId);
+                DatosB.cont.prodSaludables.remove(at: retornaIndcicePSaludable(listaPS: DatosB.cont.prodSaludables, elemento: ps));
+                DatosB.cont.prodSaludables.append(psN);
+                
+                print("Reemplazo");
+            }
+        }
+    }
+    
+    func retornaIndcicePSaludable(listaPS: [ProductoSaludable], elemento: ProductoSaludable)->Int{
+        var indice = -1;
+        var bandera = true;
+        while(bandera){
+            indice += 1;
+            if(indice >= listaPS.count){
+                bandera = false
+                indice = -1;
+            }else if(elemento.id == listaPS[indice].id){
+                bandera = false;
+            }
+            
+        }
+        return indice;
     }
     
     func terminaYpersisteP(){

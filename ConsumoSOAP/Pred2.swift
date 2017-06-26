@@ -169,7 +169,7 @@ class Pred2: UIScrollView, UIScrollViewDelegate {
                 if(favo.id == items.id){
                     //print("LLena: ", items.productos.imagen);
                     for prod in DatosC.contenedor.productos{
-                        print("prod: ", prod.listaDatos.count);
+                        //print("prod: ", prod.listaDatos.count);
                             if(items.productos.id == prod.id){
                                 
                                 favo.items.append(prod);

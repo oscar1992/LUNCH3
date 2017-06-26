@@ -17,6 +17,12 @@ class ActualizaPadre: NSObject, NSURLConnectionDelegate, XMLParserDelegate {
     var element=NSString()
     var vista:Olvida2?;
     func actualizaPadre(_ padre: Padre){
+        
+        print("d1: ", padre.direccion);
+        print("d2: ", padre.adicional);
+        print("d3: ", padre.barrio);
+        print("d4: ", padre.ciudad);
+        
         var mensajeEnviado:String = "<soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/' xmlns:enp='http://enpoint.lunch.com.co/'><soapenv:Header/><soapenv:Body><enp:actualizaPadre><padre><contrasena>"+padre.pass!+"</contrasena>";
         
         mensajeEnviado+="<direccion>"+padre.direccion!+"</direccion><email>"+padre.email!+"</email>"

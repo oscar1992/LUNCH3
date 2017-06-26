@@ -28,7 +28,7 @@ class SubePedido: NSObject, NSURLConnectionDelegate, XMLParserDelegate{
         mensajeEnviado += "<idPedido>?</idPedido>";
         mensajeEnviado += "<padre><idPadre>"+String(idPadre.id!)+"</idPadre>";
         mensajeEnviado += "<terminoFecha>"+idPadre.terminoFecha!+"</terminoFecha></padre>";
-        mensajeEnviado += "<valor>"+String(valor)+"</valor>";
+        mensajeEnviado += "<valor>"+String(Int(valor))+"</valor>";
         mensajeEnviado += "<metodo>"+metodo+"</metodo>";
         
         mensajeEnviado += "</Pedido></enp:ingresaPedido></soapenv:Body></soapenv:Envelope>";
@@ -117,7 +117,7 @@ class SubePedido: NSObject, NSURLConnectionDelegate, XMLParserDelegate{
     func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         if(elementName == "return"){
             idReferencia = Int(id);
-            //print("idPedido: ", self.id);
+            print("idPedido: ", self.id);
         }
     }
     

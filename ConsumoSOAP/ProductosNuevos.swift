@@ -25,7 +25,7 @@ class ProductosNuevos: NSObject, NSURLConnectionDelegate, XMLParserDelegate{
         mensajeEnviado = "<soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/' xmlns:enp='http://enpoint.lunch.com.co/'><soapenv:Header/><soapenv:Body><enp:productosNuevos>";
         var p = 0;
         for id in ids{
-            print("ProdNNNNN: ", id);
+            //print("ProdNNNNN: ", id);
             mensajeEnviado.append("<ids>"+String(id)+"</ids>");
             mensajeEnviado.append("<fecha>"+String(describing: fechas[p])+"</fecha>");
             p += 1;
@@ -59,7 +59,7 @@ class ProductosNuevos: NSObject, NSURLConnectionDelegate, XMLParserDelegate{
             self.task.priority=1.0;
             var nulo = false;
             if(data == nil){
-                print("tama: ", self.task.countOfBytesReceived, "Estado Previo: ", self.task.state.rawValue);
+                //print("tama: ", self.task.countOfBytesReceived, "Estado Previo: ", self.task.state.rawValue);
                 self.task.cancel();
                 print("NULOOOO en productosNuevos: ", self.profundidad, "Estado: ", self.task.state.rawValue);
                 nulo = true;

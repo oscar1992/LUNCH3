@@ -156,7 +156,10 @@ class CargaProductoSalud: NSObject ,NSURLConnectionDelegate, XMLParserDelegate{
         if(elementName == "return"){
             //print("saluWS: ", self.produ.nombre);
             print("fecha prsa: ", ultimaActualizacion);
-            let prodSalud=ProductoSaludable(id: id, salu: salu, produ: produ, ultimaActualizacion: (ultimaActualizacion as! NSDate) as Date);
+            if(ultimaActualizacion == nil){
+                ultimaActualizacion = NSDate() as Date!;
+            }
+            let prodSalud=ProductoSaludable(id: id, salu: salu, produ: produ, ultimaActualizacion: (ultimaActualizacion! as NSDate) as Date);
             //print("ProdSa: ", prodSalud.produ.nombre);
             DatosB.cont.prodSaludables.append(prodSalud);
         }

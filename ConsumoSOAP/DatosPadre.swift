@@ -175,18 +175,22 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
         vista4.addSubview(direccion3);
         vista5.addSubview(direccion4);
         direccion1.text=DatosD.contenedor.padre.direccion;
-        if(direccion2.text == ""){
+        print("d1: ", DatosD.contenedor.padre.direccion);
+        print("d2: ", DatosD.contenedor.padre.adicional);
+        print("d3: ", DatosD.contenedor.padre.barrio);
+        print("d4: ", DatosD.contenedor.padre.ciudad);
+        if(DatosD.contenedor.padre.adicional == ""){
             direccion2.text="Edificio / Casa / Apartamento";
         }else{
             direccion2.text=DatosD.contenedor.padre.adicional;
             print("Dire2: ", direccion2.text);
         }
-        if(direccion3.text == ""){
+        if(DatosD.contenedor.padre.barrio == ""){
             direccion3.text="Barrio";
         }else{
             direccion3.text=DatosD.contenedor.padre.barrio;
         }
-        if(direccion4.text == ""){
+        if(DatosD.contenedor.padre.ciudad == ""){
             direccion4.text="Ciudad v";
         }else{
             direccion4.text=DatosD.contenedor.padre.ciudad;
@@ -557,7 +561,7 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
         }
         print("Info: ", info);
         print("dir: ", pasaDir," tel: ", pasaTel);
-        if(pasaTel==false||pasaDir==false||pasaHora==false||pasaMetodo==false){
+        if(pasaTel==false||pasaDir==false||pasaHora==false||pasaMetodo==false||pasaFecha==false){
             let msg = ValidaPedido(texto: info);
             self.view.addSubview(msg);
         }else{
@@ -664,13 +668,14 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
             direccion4.text="";
         }
         //DatosD.contenedor.padre.direccion=(direccion1.text!+" "+direccion2.text!+" "+direccion3.text!+" "+direccion4.text!);
+        DatosD.contenedor.padre.direccion=direccion1.text;
         DatosD.contenedor.padre.adicional=direccion2.text;
         DatosD.contenedor.padre.barrio=direccion3.text;
         DatosD.contenedor.padre.ciudad=direccion4.text;
         DatosD.contenedor.padre.telefono=telefono.text;
         actua.actualizaPadre(DatosD.contenedor.padre);
         var aprobado = false
-        print("MétodoV: ", metodoV);
+        //print("MétodoV: ", metodoV);
         if(metodoV == "Efectivo"){
             aprobado = true;
         }
@@ -679,11 +684,43 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
     }
     
     func muestraMensajeExito(){
+        print("env: ", DatosB.cont.envia);
+        _ = CorreoCompra(valor: String(valor()), detalle: armaDetalle(), fechaPedido: fechaActual(), fechaEntrga: fecha);
         let msgExito = VistaSubidaExito();
         self.view.addSubview(msgExito);
         //performSegueWithIdentifier("Regresa", sender: nil);
         
         //(self.superview as Carrito).dismissViewControllerAnimated(true, completion: nil);
+    }
+    
+    func armaDetalle()->String{
+        var lista = [Int: (Int, String, Int)]();
+        
+        for lonchera in DatosB.cont.listaLoncheras{
+            for casilla in lonchera.0.casillas{
+                if(casilla.elemeto != nil){
+                    //print("ele: ", casilla.elemeto?.producto?.nombre," * ", lonchera.1);
+                    var cant = lista[(casilla.elemeto?.producto?.id)!];
+                    
+                    if(cant != nil){
+                        var previo = cant!.0;
+                        var previoPrecio = cant!.2;
+                        //print("cant: ", previo);
+                        lista[(casilla.elemeto?.producto?.id)!] = ((1*lonchera.1)+previo, casilla.elemeto!.producto!.nombre, (((casilla.elemeto?.producto?.precio)!*lonchera.1)+previoPrecio));
+                    }else{
+                        lista[(casilla.elemeto?.producto?.id)!] = ((1*lonchera.1), casilla.elemeto!.producto!.nombre, ((casilla.elemeto?.producto?.precio)!*lonchera.1));
+                    }
+                }
+            }
+        }
+        var devuelve = "";
+        for ele in lista{
+            devuelve+=String(ele.value.0)+"-";
+            devuelve+=String(ele.value.1)+"-"+String(ele.value.2)+";";
+            //print("Ele: ", ele.value.0, " cant ", ele.value.1, " Precio: ", ele.value.2);
+        }
+        //print("dev: ", devuelve);
+        return devuelve;
     }
     
     func cierraPadre(){

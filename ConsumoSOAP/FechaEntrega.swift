@@ -38,12 +38,18 @@ class FechaEntrega: NSObject {
         print("dia S: ", diasemana, " vs ", 1);
         fechaComp.day = ndia;
         print("Dia Semana: ", diasemana," Hora: ", hora);
-        if(diasemana == 6 && hora >= 18){
+        if(diasemana >= 6 && hora >= 18){
             fechaComp.weekOfMonth = nsemana.weekOfMonth!+2;
         }
         if(fechaComp.day!>=23&&fechaComp.day!<=31){
-            print("pasa mes");
-            fechaComp.day = fechaComp.day! + (14-(diasemana-1));
+            let ultimoDia = (calendar as NSCalendar).component(.day, from: endOfMonth());
+            print("pasa mes: ", ultimoDia);
+            if(ultimoDia>30){
+                fechaComp.day = fechaComp.day! + (14-(diasemana-1));
+            }else{
+                fechaComp.day = fechaComp.day! + (14-(diasemana-1));
+            }
+            
             //fechaComp.month = fechaComp.month! + 1;
             if(fechaComp.month!>12){
                 fechaComp.month=1;
@@ -73,6 +79,13 @@ class FechaEntrega: NSObject {
         
     }
     
+    func startOfMonth() -> Date {
+        return Calendar.current.date(from: Calendar.current.dateComponents([.year, .month], from: Calendar.current.startOfDay(for: NSDate() as Date)))!
+    }
+    
+    func endOfMonth() -> Date {
+        return Calendar.current.date(byAdding: DateComponents(month: 1, day: -1), to: self.startOfMonth())!
+    }
 
     
 }

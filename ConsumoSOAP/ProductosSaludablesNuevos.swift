@@ -129,7 +129,7 @@ class ProductosSaludablesNuevos: NSObject ,NSURLConnectionDelegate, XMLParserDel
         }
         if(bprodu){
             let idp=Int(string);
-            print("Prod in saluWS: ", DatosC.contenedor.productos.count);
+            //print("Prod in saluWS: ", DatosC.contenedor.productos.count);
             for produ in DatosC.contenedor.productos{
                 if(produ.id==idp){
                     print("produ: ", produ.nombre);
@@ -140,13 +140,13 @@ class ProductosSaludablesNuevos: NSObject ,NSURLConnectionDelegate, XMLParserDel
         }
         if(bsalu){
             let idS=Int(string);
-            print("Salu tama: ", DatosB.cont.saludables.count);
+            //print("Salu tama: ", DatosB.cont.saludables.count);
             for salu in DatosB.cont.saludables{
-                print("idS: ", idS, "item salu: ", salu.idSalud);
+                //print("idS: ", idS, "item salu: ", salu.idSalud);
                 if(salu.idSalud==idS){
                     self.salu=salu;
                 }else{
-                    print("vacio: ", salu);
+                    //print("vacio: ", salu);
                 }
             }
             bsalu=false;
@@ -155,12 +155,18 @@ class ProductosSaludablesNuevos: NSObject ,NSURLConnectionDelegate, XMLParserDel
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat="yyyy-MM-dd'T'hh:mm:ss.SSSZZ";
             ultimaActualizacion = dateFormatter.date(from: string);
+            //print("Sultima: ", string);
+            print("Dultima: ", ultimaActualizacion);
+            if(ultimaActualizacion == nil){
+                ultimaActualizacion = NSDate() as Date;
+            }
+            bUltimaActualizacion = false;
         }
         
     }
     func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         if(elementName == "return"){
-            print("saluWS: ", self.produ.nombre);
+            //print("saluWS: ", self.produ.nombre);
             //print("ultima: ", ultimaActualizacion);
             let prodSalud=ProductoSaludable(id: id, salu: salu, produ: produ, ultimaActualizacion: (ultimaActualizacion as! NSDate) as Date);
             //print("ProdSa: ", prodSalud.produ.nombre);

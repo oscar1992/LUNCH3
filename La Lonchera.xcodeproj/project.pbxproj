@@ -120,6 +120,7 @@
 		A18878B61CBC055700737085 /* BotonNino.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18878B51CBC055700737085 /* BotonNino.swift */; };
 		A18878B81CBC266600737085 /* CreaNino.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18878B71CBC266600737085 /* CreaNino.swift */; };
 		A18A1B091DB6BB5D009C4950 /* NodoMapa.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18A1B081DB6BB5D009C4950 /* NodoMapa.swift */; };
+		A18C6D4E1EFC789000864948 /* CorreoCompra.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18C6D4D1EFC789000864948 /* CorreoCompra.swift */; };
 		A19180D31CF609C6000FBD31 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19180D21CF609C5000FBD31 /* LoginView.swift */; };
 		A19180D51CF60AAE000FBD31 /* ConsultaLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19180D41CF60AAE000FBD31 /* ConsultaLogin.swift */; };
 		A19180D71CF65021000FBD31 /* ConsultaNinos.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19180D61CF65021000FBD31 /* ConsultaNinos.swift */; };
@@ -271,6 +272,7 @@
 		A13EC13F1E4BAB5300B1C5F2 /* VistaTut.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VistaTut.swift; sourceTree = "<group>"; };
 		A13EC1411E4BB46E00B1C5F2 /* BaseImagenes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseImagenes.swift; sourceTree = "<group>"; };
 		A13EF2BD1E6E2D2F00947C03 /* VistaWeb2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VistaWeb2.swift; sourceTree = "<group>"; };
+		A13F9FD81EF0640100CB693F /* La Lonchera.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "La Lonchera.entitlements"; sourceTree = "<group>"; };
 		A14296231D23064100A0905B /* Sans-Beam-Body-Heavy.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Sans-Beam-Body-Heavy.otf"; path = "ConsumoSOAP/Resources/Fonts/Sans-Beam-Body-Heavy.otf"; sourceTree = "<group>"; };
 		A14296251D230B7C00A0905B /* Sans Beam Head SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Sans Beam Head SemiBold.otf"; path = "ConsumoSOAP/Resources/Fonts/Sans Beam Head SemiBold.otf"; sourceTree = "<group>"; };
 		A14296271D2580C100A0905B /* SubeNino.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubeNino.swift; sourceTree = "<group>"; };
@@ -343,6 +345,7 @@
 		A18878B51CBC055700737085 /* BotonNino.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BotonNino.swift; sourceTree = "<group>"; };
 		A18878B71CBC266600737085 /* CreaNino.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreaNino.swift; sourceTree = "<group>"; };
 		A18A1B081DB6BB5D009C4950 /* NodoMapa.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NodoMapa.swift; sourceTree = "<group>"; };
+		A18C6D4D1EFC789000864948 /* CorreoCompra.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CorreoCompra.swift; sourceTree = "<group>"; };
 		A19180D21CF609C5000FBD31 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		A19180D41CF60AAE000FBD31 /* ConsultaLogin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsultaLogin.swift; sourceTree = "<group>"; };
 		A19180D61CF65021000FBD31 /* ConsultaNinos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsultaNinos.swift; sourceTree = "<group>"; };
@@ -463,6 +466,7 @@
 		A102F65E1CA9CCF7001359A5 = {
 			isa = PBXGroup;
 			children = (
+				A13F9FD81EF0640100CB693F /* La Lonchera.entitlements */,
 				A19945161D99AB1400A7B8F9 /* Gotham-Medium_0.ttf */,
 				A19945141D99A6A800A7B8F9 /* Gotham-Ultra_0.ttf */,
 				A1C6DFDA1D92EB10008B659B /* Gotham-Bold_0.ttf */,
@@ -748,6 +752,7 @@
 				A1521C0F1DBFC2FE00342E93 /* VistaHora.swift */,
 				A1521C111DBFC3C600342E93 /* BotHoraEntrega.swift */,
 				A18055B21DC3B0CC00D5D757 /* VistaSubidaExito.swift */,
+				A18C6D4D1EFC789000864948 /* CorreoCompra.swift */,
 			);
 			name = Padre;
 			sourceTree = "<group>";
@@ -928,6 +933,11 @@
 						DevelopmentTeam = Y23ESKPWM9;
 						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					A102F67A1CA9CCF8001359A5 = {
 						CreatedOnToolsVersion = 7.3;
@@ -1092,6 +1102,7 @@
 				A17788441CBFF0C400BEF5A5 /* Contenedor.swift in Sources */,
 				A1A0820D1CBD841A001C0AD2 /* Secuencia.swift in Sources */,
 				A16710A31D79C545004CB71D /* CargaSalud.swift in Sources */,
+				A18C6D4E1EFC789000864948 /* CorreoCompra.swift in Sources */,
 				A1521C181DC29BA900342E93 /* SubeListaProds.swift in Sources */,
 				A13A2BD31D08C2590008E22E /* CargaItemsFavoritos.swift in Sources */,
 				A1A39A4C1D9E326100CA37BD /* MensajeConexion.swift in Sources */,
@@ -1405,6 +1416,7 @@
 			baseConfigurationReference = 6EB8A70CC01221AB32DA64F9 /* Pods-La Lonchera.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "La Lonchera.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = Y23ESKPWM9;
@@ -1427,6 +1439,7 @@
 			baseConfigurationReference = 61B8252123BE2A4434500DAE /* Pods-La Lonchera.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "La Lonchera.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = Y23ESKPWM9;

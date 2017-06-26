@@ -133,22 +133,22 @@ class CargaTInfo: NSObject, NSURLConnectionDelegate, XMLParserDelegate{
     func parser(_ parser: XMLParser, foundCharacters string: String) {
         
         if(flagid){
-            print("Id: ",string);
+            //print("Id: ",string);
             id=Int(string);
             flagid=false;
         }
         if(flagtipo){
-            print("Tipo: ",string);
+            //print("Tipo: ",string);
             tipoNombre=string;
             flagtipo=false;
         }
         if(flagValor){
-            print("Valor: ",string);
+            //print("Valor: ",string);
             valor=Float(string);
             flagValor=false;
         }
         if(flagIdproducto){
-            print("IDProducto: ",string);
+            //print("IDProducto: ",string);
             idProducto=Int(string);
             flagIdproducto=false;
         }
@@ -159,7 +159,7 @@ class CargaTInfo: NSObject, NSURLConnectionDelegate, XMLParserDelegate{
             let tInfo = TipoInfo(id: id!, tipo: tipoNombre!, valor: valor!, idProducto: idProducto!);
             //prod!.listaDatos.append(tInfo);
             DatosB.cont.listaTInfoNuevos.append(tInfo);
-            print("----------------");
+            //print("----------------");
         }
     }
 }

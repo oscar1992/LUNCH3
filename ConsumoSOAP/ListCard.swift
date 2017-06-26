@@ -32,6 +32,7 @@ class ListCard: NSObject, NSURLConnectionDelegate, UIWebViewDelegate{
         uid = String(DatosD.contenedor.padre.id!);
         email = String(trataEmail(DatosD.contenedor.padre.email!));
         sesionId = "9rDozxAmJ6nvK1LBNGms2786ol5CtO";
+        //sesionId = "AwXytakRpysZKMW8PoWyB6F9FhYx6W";
         timeStamp = String(Int(Date().timeIntervalSince1970));
     
     }
@@ -142,6 +143,7 @@ class ListCard: NSObject, NSURLConnectionDelegate, UIWebViewDelegate{
                         termi = sele.value as! String;
                         break;
                     case "type":
+                        print("sele: ", sele.value);
                         switch sele.value as! String{
                         case "vi":
                             tipo = "Visa";
@@ -151,6 +153,9 @@ class ListCard: NSObject, NSURLConnectionDelegate, UIWebViewDelegate{
                             break;
                         case "di":
                             tipo = "Dinners";
+                            break;
+                        case "ax":
+                            tipo = "Amex"
                             break;
                         default:
                             break;

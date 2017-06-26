@@ -38,6 +38,7 @@ class DebitCard: NSObject , NSURLConnectionDelegate{
         uid = String(DatosD.contenedor.padre.id!);
         email = String(trataEmail(DatosD.contenedor.padre.email!));
         sesionId = "9rDozxAmJ6nvK1LBNGms2786ol5CtO";
+        //sesionId = "AwXytakRpysZKMW8PoWyB6F9FhYx6W";
         timeStamp = String(Int(Date().timeIntervalSince1970));
     }
     
