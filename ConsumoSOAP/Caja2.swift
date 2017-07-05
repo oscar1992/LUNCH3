@@ -39,10 +39,10 @@ class Caja2: UIButton {
         for item in items{
             print("item: ", item.nombre);
             if (self.accessibilityIdentifier=="Saludable"){
-                DatosB.cont.home2.lonchera.setCasilla(p, prod: item, salud: true);
+                DatosB.cont.home2.lonchera.setCasilla(item.tipo, prod: item, salud: true);
             }
             if(self.accessibilityIdentifier=="Favorita"){
-                print("ItemF: ", item.nombre)
+                //print("ItemF: ", item.nombre)
                 DatosB.cont.home2.lonchera.setCasilla(p, prod: item, salud: false);
             }
             if(self.accessibilityIdentifier=="vacia"){
