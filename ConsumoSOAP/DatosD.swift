@@ -18,6 +18,7 @@ struct keysPrimarias2 {
     static let calendario = Calendario();
     static let tags = [Tag]();
     static let  diasCopia = [Dia]();
+    static let fechas = [FechasEntrega]();
     
 }
 
@@ -34,6 +35,7 @@ class DatosD {
     var calendario = Calendario();
     var tags = [Tag]();
     var diasCopia = [Dia]();
+    var fechas = [FechasEntrega]();
     
     static func elimina(){
         contenedor = DatosD();

@@ -14,17 +14,19 @@ class BotFechaEntrega: UIButton {
     var texto: String;
     var text2: String;
     var id: Int;
+    var fecha: FechasEntrega!;
     
-    init(frame: CGRect, texto: String, texto2: String, id: Int) {
+    init(frame: CGRect, texto: String, texto2: String, id: Int, fecha: FechasEntrega) {
         self.text2=texto2;
         self.texto=texto;
         self.id=id;
+        self.fecha=fecha;
         super.init(frame: frame);
         let frameLab = CGRect(x: 0, y: 0, width: frame.width, height: frame.height);
         let label = UILabel(frame:frameLab);
-        label.text=texto;
+        label.text=texto+"         $"+String(fecha.valor);
         label.textAlignment=NSTextAlignment.center;
-        label.font=UIFont(name: "SansBeam Head", size: label.frame.height);
+        label.font=UIFont(name: "SansBeam Head", size: label.frame.height/3);
         self.addTarget(self, action: #selector(BotFechaEntrega.poneMetodoTimer(_:)), for: .touchDown);
         label.isUserInteractionEnabled=false;
         label.adjustsFontSizeToFitWidth=true;
@@ -41,6 +43,14 @@ class BotFechaEntrega: UIButton {
         DatosB.cont.datosPadre.texto.text=self.texto;
         DatosB.cont.datosPadre.fecha=self.text2;
         DatosB.cont.datosPadre.idFecha=self.id;
+        DatosB.cont.datosPadre.fechaSeleccionada=self.fecha;
+        DatosB.cont.datosPadre.envio?.text="Domicilio:      "+String(fecha.valor);
+        var precio = 0;
+        for lonch in DatosB.cont.listaLoncheras{
+            precio += lonch.0.valor;
+        }
+        DatosB.cont.datosPadre.total.text="Valor Pedido:     "+String((precio+fecha.valor));
+        //DatosB.cont.datosPadre.listaDesplegable2();
         self.superview?.removeFromSuperview();
         DatosB.cont.datosPadre.desbloqueador();
     }

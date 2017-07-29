@@ -326,16 +326,19 @@ class ConsultaLogin : NSObject, NSURLConnectionDelegate, XMLParserDelegate{
                     Ptelefono = "--";
                 }
                 print("Si")
-                /*
+                
                 print("id: ", Pid);
                 print("nombre: ", Pnombre);
                 print("tel: ", Ptelefono);
                 print("dir: ", Pdireccion);
+                print("adicional: ", Padicional);
+                print("barrio: ", Pbarrio);
+                print("ciudad: ", Pciudad);
                 print("ema: ", Pemail);
                 print("pass: ", Ppass);
                 print("prim: ", PprimeraVez);
                 print("nconf: ", PnumeroConfirmacion);
- */
+ 
                 let pad=Padre(id: Pid!, nombre: Pnombre!, telefono: Ptelefono!, direccion: Pdireccion!, email: Pemail!, pass: Ppass!, primeraVez: PprimeraVez!, numeroConf: PnumeroConfirmacion!, terminos: Pterminos!, terminoFecha: PterminoFecha!, genero: Pgenero!);
                 pad.ciudad=Pciudad;
                 pad.adicional=Padicional;

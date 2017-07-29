@@ -24,7 +24,8 @@ class Carrito: UIViewController {
         iniciaBotonVolver();
         iniciaFondo();
         let cargaFechas=CargaFechaEntrega();
-        cargaFechas.cargaFechaEntrega();
+        //cargaFechas.cargaFechaEntrega();
+        let cargaF = CargaFechas();
         // Do any additional setup after loading the view.
     }
 

@@ -1,16 +1,17 @@
 //
-//  VistaFecha.swift
-//  Lunch1
+//  VistaCiudad.swift
+//  La Lonchera
 //
-//  Created by Oscar Ramirez on 25/10/16.
-//  Copyright © 2016 Edumedio. All rights reserved.
+//  Created by Oscar Ramirez on 07/27/17.
+//  Copyright © 2017 Edumedio. All rights reserved.
 //
 
+import Foundation
 import UIKit
 
-class VistaFecha: UIView {
-
-    init(opciones: [(String, String, Int, FechasEntrega)]){
+class VistaCiudad: UIView {
+    
+    init(opciones: [(String)]){
         let ancho = DatosC.contenedor.anchoP*0.8;
         let alto = DatosC.contenedor.altoP*0.4;
         let OX = (DatosC.contenedor.anchoP/2)-(ancho/2);
@@ -23,7 +24,7 @@ class VistaFecha: UIView {
         cierraBot();
     }
     
-    func iniciaOpciones(_ opciones: [(String, String, Int, FechasEntrega)]){
+    func iniciaOpciones(_ opciones: [(String)]){
         let ancho = self.frame.width;
         let alto = self.frame.height/6;
         let OX = CGFloat(0);
@@ -32,7 +33,7 @@ class VistaFecha: UIView {
         for opc in opciones{
             let OY = alto*p+(self.frame.height/2)-((alto*CGFloat(opciones.count))/2);
             let frameBot = CGRect(x: OX, y: OY, width: ancho, height: alto);
-            let bot=BotFechaEntrega(frame: frameBot, texto: opc.0, texto2: opc.1, id: opc.2, fecha: opc.3);
+            let bot=BotCiudad(frame: frameBot, texto: opc);
             self.addSubview(bot);
             p += 1;
         }

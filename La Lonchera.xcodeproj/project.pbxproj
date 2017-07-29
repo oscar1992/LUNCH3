@@ -25,6 +25,8 @@
 		A11278AF1D8C707200015B61 /* CargaEnvio.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11278AE1D8C707200015B61 /* CargaEnvio.swift */; };
 		A11838B71D8206C100201A96 /* SubeFavorito.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11838B61D8206B900201A96 /* SubeFavorito.swift */; };
 		A12371291DD23CBE00532E6C /* CargaInicial.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12371281DD23CBD00532E6C /* CargaInicial.swift */; };
+		A12BC7001F14787300BE11DB /* CargaFechas.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12BC6FF1F14787300BE11DB /* CargaFechas.swift */; };
+		A12BC7021F148B5300BE11DB /* FechasEntrega.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12BC7011F148B5300BE11DB /* FechasEntrega.swift */; };
 		A12C04261D106B9700BA72E1 /* CalendarioNinos.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12C04251D106B9700BA72E1 /* CalendarioNinos.swift */; };
 		A12C04281D107EBB00BA72E1 /* NinoCalendarioBot.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12C04271D107EBB00BA72E1 /* NinoCalendarioBot.swift */; };
 		A12C042A1D109E3500BA72E1 /* AnoScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12C04291D109E3500BA72E1 /* AnoScroll.swift */; };
@@ -121,6 +123,8 @@
 		A18878B81CBC266600737085 /* CreaNino.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18878B71CBC266600737085 /* CreaNino.swift */; };
 		A18A1B091DB6BB5D009C4950 /* NodoMapa.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18A1B081DB6BB5D009C4950 /* NodoMapa.swift */; };
 		A18C6D4E1EFC789000864948 /* CorreoCompra.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18C6D4D1EFC789000864948 /* CorreoCompra.swift */; };
+		A18C8DB61F2AF574004AB104 /* VistaCiudad.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18C8DB51F2AF574004AB104 /* VistaCiudad.swift */; };
+		A18C8DB81F2AF71B004AB104 /* BotCiudad.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18C8DB71F2AF71B004AB104 /* BotCiudad.swift */; };
 		A19180D31CF609C6000FBD31 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19180D21CF609C5000FBD31 /* LoginView.swift */; };
 		A19180D51CF60AAE000FBD31 /* ConsultaLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19180D41CF60AAE000FBD31 /* ConsultaLogin.swift */; };
 		A19180D71CF65021000FBD31 /* ConsultaNinos.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19180D61CF65021000FBD31 /* ConsultaNinos.swift */; };
@@ -248,6 +252,8 @@
 		A11278AE1D8C707200015B61 /* CargaEnvio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CargaEnvio.swift; sourceTree = "<group>"; };
 		A11838B61D8206B900201A96 /* SubeFavorito.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubeFavorito.swift; sourceTree = "<group>"; };
 		A12371281DD23CBD00532E6C /* CargaInicial.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CargaInicial.swift; sourceTree = "<group>"; };
+		A12BC6FF1F14787300BE11DB /* CargaFechas.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CargaFechas.swift; sourceTree = "<group>"; };
+		A12BC7011F148B5300BE11DB /* FechasEntrega.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FechasEntrega.swift; sourceTree = "<group>"; };
 		A12C04251D106B9700BA72E1 /* CalendarioNinos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarioNinos.swift; sourceTree = "<group>"; };
 		A12C04271D107EBB00BA72E1 /* NinoCalendarioBot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NinoCalendarioBot.swift; sourceTree = "<group>"; };
 		A12C04291D109E3500BA72E1 /* AnoScroll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnoScroll.swift; sourceTree = "<group>"; };
@@ -346,6 +352,8 @@
 		A18878B71CBC266600737085 /* CreaNino.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreaNino.swift; sourceTree = "<group>"; };
 		A18A1B081DB6BB5D009C4950 /* NodoMapa.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NodoMapa.swift; sourceTree = "<group>"; };
 		A18C6D4D1EFC789000864948 /* CorreoCompra.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CorreoCompra.swift; sourceTree = "<group>"; };
+		A18C8DB51F2AF574004AB104 /* VistaCiudad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VistaCiudad.swift; sourceTree = "<group>"; };
+		A18C8DB71F2AF71B004AB104 /* BotCiudad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BotCiudad.swift; sourceTree = "<group>"; };
 		A19180D21CF609C5000FBD31 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		A19180D41CF60AAE000FBD31 /* ConsultaLogin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsultaLogin.swift; sourceTree = "<group>"; };
 		A19180D61CF65021000FBD31 /* ConsultaNinos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsultaNinos.swift; sourceTree = "<group>"; };
@@ -497,6 +505,7 @@
 		A102F6691CA9CCF7001359A5 /* ConsumoSOAP */ = {
 			isa = PBXGroup;
 			children = (
+				A12BC6FE1F14781200BE11DB /* Fechas */,
 				A14724871E4E1FFB00EAA851 /* Tarjetas */,
 				A13EC13C1E4B62E500B1C5F2 /* TutorialHome */,
 				A1A6421A1E3B92D600AFF572 /* GifImagenes */,
@@ -623,6 +632,7 @@
 				A1C6DFC61D908ABE008B659B /* FechaEntrega.swift */,
 				A1C6DFC81D908CEF008B659B /* HoraEntrega.swift */,
 				A1521C131DBFE65000342E93 /* Pedido.swift */,
+				A12BC7011F148B5300BE11DB /* FechasEntrega.swift */,
 			);
 			name = ClasesDatos;
 			sourceTree = "<group>";
@@ -677,6 +687,14 @@
 				A1AF82441D59994D00085408 /* Año2.swift */,
 			);
 			name = Calendario;
+			sourceTree = "<group>";
+		};
+		A12BC6FE1F14781200BE11DB /* Fechas */ = {
+			isa = PBXGroup;
+			children = (
+				A12BC6FF1F14787300BE11DB /* CargaFechas.swift */,
+			);
+			name = Fechas;
 			sourceTree = "<group>";
 		};
 		A13EC13C1E4B62E500B1C5F2 /* TutorialHome */ = {
@@ -753,6 +771,8 @@
 				A1521C111DBFC3C600342E93 /* BotHoraEntrega.swift */,
 				A18055B21DC3B0CC00D5D757 /* VistaSubidaExito.swift */,
 				A18C6D4D1EFC789000864948 /* CorreoCompra.swift */,
+				A18C8DB51F2AF574004AB104 /* VistaCiudad.swift */,
+				A18C8DB71F2AF71B004AB104 /* BotCiudad.swift */,
 			);
 			name = Padre;
 			sourceTree = "<group>";
@@ -1110,6 +1130,7 @@
 				A19945131D95C38100A7B8F9 /* MensajeEliminaLonchera.swift in Sources */,
 				A19180D51CF60AAE000FBD31 /* ConsultaLogin.swift in Sources */,
 				A14324961DE771D9001C6614 /* MensajeCierra.swift in Sources */,
+				A18C8DB61F2AF574004AB104 /* VistaCiudad.swift in Sources */,
 				A16EBC571D382AA2001D0B09 /* BusquedaProductos.swift in Sources */,
 				A19945111D947CFD00A7B8F9 /* LetreroAgregar.swift in Sources */,
 				A1A605C71CC8264200FE9AC7 /* ContenedorProductos.swift in Sources */,
@@ -1169,6 +1190,7 @@
 				A1521C0A1DBEB54300342E93 /* VistaMetodos.swift in Sources */,
 				A1C6DFCB1D90989E008B659B /* CargaHoraEntrega.swift in Sources */,
 				A10B16BD1E1C093600EA1CBA /* ConsultaZip.swift in Sources */,
+				A12BC7021F148B5300BE11DB /* FechasEntrega.swift in Sources */,
 				A10671E11D398AD900D0F0B5 /* Tag.swift in Sources */,
 				A1CD96531DF7137000ADD84B /* CargaTinfo2.swift in Sources */,
 				A1857DEC1CE287DF00D6966D /* Calendario.swift in Sources */,
@@ -1177,6 +1199,7 @@
 				A1521C161DBFE92800342E93 /* SubePedido.swift in Sources */,
 				A17B556F1CE3A0BB00FA2353 /* Semana.swift in Sources */,
 				A12371291DD23CBE00532E6C /* CargaInicial.swift in Sources */,
+				A12BC7001F14787300BE11DB /* CargaFechas.swift in Sources */,
 				A17344181D8B321D003B467C /* DatosPadre.swift in Sources */,
 				A19FDD411CEE33E100CCB1F1 /* DiaNino.swift in Sources */,
 				A1D877941D7F4814000DA798 /* Caja2.swift in Sources */,
@@ -1229,6 +1252,7 @@
 				A102F66B1CA9CCF7001359A5 /* AppDelegate.swift in Sources */,
 				A13EC1401E4BAB5300B1C5F2 /* VistaTut.swift in Sources */,
 				A1A6421E1E3B9EBE00AFF572 /* iOSDevCenters+GIF.swift in Sources */,
+				A18C8DB81F2AF71B004AB104 /* BotCiudad.swift in Sources */,
 				A13EC1421E4BB46F00B1C5F2 /* BaseImagenes.swift in Sources */,
 				A10A368D1E71B5580055AA6A /* VistaMensaje.swift in Sources */,
 				A1CED93D1DA43CD1004E090F /* PideRestauracion.swift in Sources */,

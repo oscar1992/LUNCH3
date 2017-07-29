@@ -48,29 +48,35 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
     var direccion3:UITextField!;
     var direccion4:UILabel!;
     var vista5:UIButton!;
-    var vistaCiudad: UIView!;
+    var vistaCiudad: UIButton!;
     var telefono:UITextField!;
     var metodo:UILabel!;
     var boton : UIButton!;
     var carrito: Carrito!;
     var bloq:UIView!;
     var tarjeta: TarjetaEntidad!;
-    var idReferencia : Int!; //Referencia para las compras con tarjeta de crédito
+    var idReferencia : Int!;
+    //Referencia para las compras con tarjeta de crédito
+    var fechaSeleccionada: FechasEntrega?;
+    var deslizador: UIScrollView!;
+    var envio: UILabel?;
+    var total: UILabel!;
     
     var vistaDir: VistaDirecciones!;
     
     override func viewDidLoad() {
+        self.deslizador = iniciaDeslizador();
         super.viewDidLoad();
         self.hideKeyboardWhenTappedAround()
         borde=DatosC.contenedor.altoP*0.02;
         iniciaNombre();
         iniciaBotonVolver();
         iniciaFondo()
-        poliogono();
+        //poliogono();
         NotificationCenter.default.addObserver(self, selector: #selector(DatosPadre.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil);
         carrito=DatosB.cont.carrito;
         DatosB.cont.datosPadre=self;
-        listaCiudad();
+        //listaCiudad();
         
         // Do any additional setup after loading the view.
     }
@@ -118,15 +124,14 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
         let ancho = DatosC.contenedor.anchoP*0.8;
         let alto = DatosC.contenedor.anchoP*0.05;
         let OX = (DatosC.contenedor.anchoP/2)-(ancho/2);
-        let OY = DatosC.contenedor.altoP*0.15
-        ;
+        let OY = DatosC.contenedor.altoP*0.15;
         let frameNomb = CGRect(x: OX, y: OY, width: ancho, height: alto);
         let nom = UILabel(frame: frameNomb);
         nom.text=DatosD.contenedor.padre.nombre;
         nom.font=UIFont(name: "SansBeamBody-Heavy", size: nom.frame.height);
         nom.textAlignment=NSTextAlignment.center;
         nom.textColor=UIColor.init(red: 0.51, green: 0.77, blue: 0.25, alpha: 1);
-        self.view.addSubview(nom);
+        self.deslizador.addSubview(nom);
         let ancho2 = DatosC.contenedor.anchoP*0.8;
         let OX2=(DatosC.contenedor.anchoP/2)-(ancho2/2);
         let frame2 = CGRect(x: OX2, y: OY+alto, width: ancho2, height: alto);
@@ -134,30 +139,59 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
         text.text="Confírmanos tus datos de entrega:";
         text.textAlignment=NSTextAlignment.center;
         text.adjustsFontSizeToFitWidth=true;
-        self.view.addSubview(text);
+        self.deslizador.addSubview(text);
         iniciaTabDireccion((text.frame.height+text.frame.origin.y));
+    }
+    
+    //Método que pone el dezlizador del formulario
+    func iniciaDeslizador()->UIScrollView{
+        var scroll = UIScrollView(frame: self.view.frame);
+        scroll.contentSize = CGSize(width: self.view.frame.width, height: (self.view.frame.height*1.5))
+        //scroll.backgroundColor=UIColor.yellow;
+        self.view.addSubview(scroll);
+        return scroll;
     }
     
     //Método que inicia la tabla de los datos de la dirreción
     func iniciaTabDireccion(_ yini: CGFloat){
         let ancho = DatosC.contenedor.anchoP;
-        let bordeTxt = (ancho*0.02);
-        let alto = DatosC.contenedor.anchoP*0.06;
-        let frameBarra = CGRect(x: 0, y: (yini+borde), width: ancho, height: alto);
-        let vista = UIView(frame: frameBarra);
-        let frameText = CGRect(x: bordeTxt, y: 0, width: ancho, height: alto);
-        let texto = UILabel(frame: frameText);
+        let bordeTxt = (ancho*0.05);
+        let alto = DatosC.contenedor.anchoP*0.2;
+        let frame1 = CGRect(x: 0, y: (yini), width: ancho, height: alto);//Frame de direccion
+        let frame2 = CGRect(x: 0, y: (frame1.origin.y+alto), width: ancho, height: alto);//Frame de direccion
+        let frame3 = CGRect(x: 0, y: (frame2.origin.y+alto), width: ancho, height: alto);//Frame de direccion
+        let frame4 = CGRect(x: 0, y: (frame3.origin.y+alto), width: ancho, height: alto);//Frame de direccion
+        let frame5 = CGRect(x: 0, y: (frame4.origin.y+alto), width: ancho, height: alto);//Frame de direccion
+        let frame6 = CGRect(x: 0, y: (frame5.origin.y+alto), width: ancho, height: alto);//Frame de direccion
+        let frame7 = CGRect(x: 0, y: (frame6.origin.y+alto), width: ancho, height: alto);//Frame de direccion
+        let frame8 = CGRect(x: 0, y: (frame7.origin.y+alto), width: ancho, height: alto*1.3333);//Frame de direccion
+        paresCasilla(frameI: frame1, vistaP: deslizador, quien: 1);
+        paresCasilla(frameI: frame2, vistaP: deslizador, quien: 2);
+        paresCasilla(frameI: frame3, vistaP: deslizador, quien: 3);
+        paresCasilla(frameI: frame4, vistaP: deslizador, quien: 4);
+        paresCasilla(frameI: frame5, vistaP: deslizador, quien: 5);
+        paresCasilla(frameI: frame6, vistaP: deslizador, quien: 6);
+        paresCasilla(frameI: frame7, vistaP: deslizador, quien: 7);
+        sumador(frameI: frame8, vistaP: deslizador);
+        /*
+        //let frameText = CGRect(x: bordeTxt, y: (yini+borde), width: ancho, height: alto);//FRAME titulo Dirrecion
+        //let frameVista2=CGRect(x: 0, y: (frameText.origin.y+alto), width: ancho, height: alto);//FRAME Campo Dirrecion
+        
+        let frameVista3=CGRect(x: 50, y: (frame1.origin.y+alto), width: ancho, height: alto);
+        
+        let texto = UILabel(frame: frame1);
         texto.text="Dirección";
         texto.font=UIFont(name: "SansBeamBody-Book", size: texto.frame.height/2);
-        vista.addSubview(texto);
-        vista.backgroundColor=UIColor.init(red: 0.51, green: 0.77, blue: 0.25, alpha: 1);
-        let frameVista2=CGRect(x: 0, y: (frameBarra.origin.y+alto), width: ancho, height: alto);
-        let frameVista3=CGRect(x: 0, y: (frameVista2.origin.y+alto), width: ancho, height: alto);
+        //vista.addSubview(texto);
+        //vista.backgroundColor=UIColor.init(red: 0.51, green: 0.77, blue: 0.25, alpha: 1);
+        
+        
         let frameVista4=CGRect(x: 0, y: (frameVista3.origin.y+alto), width: ancho*0.5, height: alto);
         let frameVista5=CGRect(x: ancho*0.5, y: (frameVista3.origin.y+alto), width: ancho*0.5, height: alto);
-        let vista2 = UIView(frame: frameVista2);
+        let vista2 = UIView(frame: frameVista3);
         let vista3 = UIView(frame: frameVista3);
         let vista4 = UIView(frame: frameVista4);
+        
         vista5 = UIButton(frame: frameVista5);
         vista5.addTarget(self, action: #selector(DatosPadre.muestraCiudad), for: .touchDown);
         vista2.backgroundColor=UIColor.white;
@@ -166,35 +200,24 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
         vista5.backgroundColor=UIColor.white;
         let frameText2=CGRect(x: bordeTxt, y: 0, width: ancho, height: alto);
         
-        direccion1 = UITextField(frame: frameText2);
-        direccion2 = UITextField(frame: frameText2);
-        direccion3 = UITextField(frame: frameText2);
-        direccion4 = UILabel(frame: frameText2);
+        //direccion1 = UITextField(frame: frameText2);
+        //direccion2 = UITextField(frame: frameText2);
+        //direccion3 = UITextField(frame: frameText2);
+        //direccion4 = UILabel(frame: frameText2);
+        
         vista2.addSubview(direccion1);
         vista3.addSubview(direccion2);
         vista4.addSubview(direccion3);
         vista5.addSubview(direccion4);
-        direccion1.text=DatosD.contenedor.padre.direccion;
+        //direccion1.text=DatosD.contenedor.padre.direccion;
         print("d1: ", DatosD.contenedor.padre.direccion);
         print("d2: ", DatosD.contenedor.padre.adicional);
         print("d3: ", DatosD.contenedor.padre.barrio);
         print("d4: ", DatosD.contenedor.padre.ciudad);
-        if(DatosD.contenedor.padre.adicional == ""){
-            direccion2.text="Edificio / Casa / Apartamento";
-        }else{
-            direccion2.text=DatosD.contenedor.padre.adicional;
-            print("Dire2: ", direccion2.text);
-        }
-        if(DatosD.contenedor.padre.barrio == ""){
-            direccion3.text="Barrio";
-        }else{
-            direccion3.text=DatosD.contenedor.padre.barrio;
-        }
-        if(DatosD.contenedor.padre.ciudad == ""){
-            direccion4.text="Ciudad v";
-        }else{
-            direccion4.text=DatosD.contenedor.padre.ciudad;
-        }
+        
+        
+        
+        
         
         direccion1.textColor=UIColor.gray;
         direccion2.textColor=UIColor.gray;
@@ -204,24 +227,161 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
         direccion2.delegate=self;
         direccion3.delegate=self;
         //direccion4.delegate=self;
-        self.view.addSubview(vista);
-        self.view.addSubview(vista2);
-        self.view.addSubview(vista3);
-        self.view.addSubview(vista4);
-        self.view.addSubview(vista5);
+        //self.view.addSubview(texto);
+        //self.view.addSubview(vista2);
+        //self.view.addSubview(vista3);
+        //self.view.addSubview(vista4);
+        //self.view.addSubview(vista5);
+        */
+        //iniciaTabTelefono((vista2.frame.height+vista2.frame.origin.y+vista3.frame.height+vista5.frame.height));
+    }
+    
+    func paresCasilla(frameI: CGRect, vistaP: UIView, quien: Int){
+        let ancho = DatosC.contenedor.anchoP;
+        let bordeTxt = (ancho*0.05);
+        let frameTitulo = CGRect(x: bordeTxt, y: 0, width: frameI.width, height: frameI.height/2);
+        let frameCasilla = CGRect(x: 0, y: frameI.height/2, width: frameI.width, height: frameI.height/2);
+        let frameCampo = CGRect(x: bordeTxt, y: frameI.height/2, width: frameI.width, height: frameI.height/2);
+        let frameGeneral = CGRect(x: 0, y: frameI.origin.y, width: frameI.width, height: frameI.height);
+        let titulo = UILabel(frame: frameTitulo);
+        let Campo = UIView(frame: frameCasilla);
+        //Campo.backgroundColor=UIColor.green;
+        let vistaGeneral = UIView(frame: frameGeneral);
+        vistaGeneral.addSubview(titulo);
+        vistaGeneral.addSubview(Campo);
+        switch quien {
+        case 1:
+            titulo.text = "Dirección";
+            direccion1 = UITextField(frame: frameCampo);
+            direccion1.backgroundColor=UIColor.white;
+            if(DatosD.contenedor.padre.direccion == "--"){
+                direccion1.text="Dirección";
+            }else{
+                direccion1.text=DatosD.contenedor.padre.direccion;
+            }
+            vistaGeneral.addSubview(direccion1);
+            break;
+        case 2:
+            titulo.text = "Adicional";
+            direccion2 = UITextField(frame: frameCampo);
+            direccion2.backgroundColor=UIColor.white;
+            if(DatosD.contenedor.padre.adicional == nil){
+                direccion2.text="Edificio / Casa / Apartamento";
+            }else{
+                direccion2.text=DatosD.contenedor.padre.adicional;
+                print("Dire2: ", direccion2.text);
+            }
+            vistaGeneral.addSubview(direccion2);
+            break;
+        case 3:
+            titulo.text = "Barrio";
+            direccion3 = UITextField(frame: frameCampo);
+            direccion3.backgroundColor=UIColor.white;
+            if(DatosD.contenedor.padre.barrio == nil){
+                direccion3.text="Barrio";
+            }else{
+                direccion3.text=DatosD.contenedor.padre.barrio;
+            }
+            vistaGeneral.addSubview(direccion3);
+            break;
+        case 5:
+            titulo.text = "Telefono";
+            telefono = UITextField(frame: frameCampo);
+            telefono.backgroundColor=UIColor.white;
+            if(DatosD.contenedor.padre.telefono == "--"){
+                telefono.text="Teléfono / Celular";
+            }else{
+                telefono.text=DatosD.contenedor.padre.telefono;
+            }
+            vistaGeneral.addSubview(telefono);
+            break;
+        case 4:
+            titulo.text = "Ciudad";
+            vistaCiudad = UIButton(frame: frameCampo);
+            vistaCiudad.addTarget(self, action: #selector(DatosPadre.listDesplegable3), for: .touchDown);
+            vistaCiudad.backgroundColor=UIColor.white;
+            vistaGeneral.addSubview(vistaCiudad);
+            direccion4 = UILabel(frame: frameCampo);
+            if(DatosD.contenedor.padre.ciudad == nil){
+                direccion4.text="Ciudad v";
+            }else{
+                direccion4.text=DatosD.contenedor.padre.ciudad;
+            }
+            vistaGeneral.addSubview(direccion4);
+            break;
+        case 6:
+            titulo.text = "Programa tu entrega";
+            let frameSubCampo1 = CGRect(x: bordeTxt, y: frameI.height/2, width: frameI.width/3, height: frameI.height/2);
+            let frameSubCampo2 = CGRect(x: (frameI.width/2+bordeTxt), y: frameI.height/2, width: frameI.width/3, height: frameI.height/2);
+            let vista2 = UIButton(frame: frameSubCampo1);
+            let vista3 = UIButton(frame: frameSubCampo2);
+            texto = UILabel(frame: frameSubCampo1);
+            texto2 = UILabel(frame: frameSubCampo2);
+            texto.text="Fecha de entrega";
+            texto2.text="Hora de entrega";
+            vista2.addTarget(self, action: #selector(DatosPadre.listaDesplegable1(_:)), for: .touchDown);
+            vista3.addTarget(self, action: #selector(DatosPadre.listaDesplegable2), for: .touchDown);
+            vista2.backgroundColor=UIColor.white;
+            vista3.backgroundColor=UIColor.white;
+            vistaGeneral.addSubview(vista2);
+            vistaGeneral.addSubview(texto);
+            vistaGeneral.addSubview(vista3);
+            vistaGeneral.addSubview(texto2);
+            break;
+        case 7:
+            titulo.text = "Método de Pago";
+            let vista2 = UIButton(frame: frameCampo);
+            metodo = UILabel(frame: frameCampo);
+            metodo.text = "Selecciona el método de pago";
+            vista2.backgroundColor=UIColor.white;
+            vista2.addTarget(self, action: #selector(DatosPadre.iniciaListaDesplegableMetodo(_:)), for: .touchDown);
+            vistaGeneral.addSubview(vista2);
+            vistaGeneral.addSubview(metodo);
+            break;
         
-        iniciaTabTelefono((vista2.frame.height+vista2.frame.origin.y+vista3.frame.height+vista5.frame.height));
+        default:
+            break;
+        }
+        
+        vistaP.addSubview(vistaGeneral);
+    }
+    
+    func sumador(frameI: CGRect, vistaP: UIView){
+        let ancho = DatosC.contenedor.anchoP;
+        let bordeTxt = (ancho*0.05);
+        let frameSubtotal = CGRect(x: bordeTxt, y: 0, width: frameI.width, height: frameI.height/2);
+        let frameEnvio = CGRect(x: bordeTxt, y: frameI.height/2, width: frameI.width, height: frameI.height/2);
+        let frameTotal = CGRect(x: bordeTxt, y: frameI.height, width: frameI.width, height: frameI.height/2);
+        let frameGeneral = CGRect(x: 0, y: frameI.origin.y, width: frameI.width, height: frameI.height);
+        let vistaGeneral = UIView(frame: frameGeneral);
+        let subtotal = UILabel(frame: frameSubtotal);
+        envio = UILabel(frame: frameEnvio);
+        total = UILabel(frame: frameTotal);
+        var precio = 0;
+        for lonch in DatosB.cont.listaLoncheras{
+            precio += lonch.0.valor;
+        }
+        subtotal.text="Subtotal:     "+String(precio);
+        envio?.text="Domicilio:      ";
+        total.text="Valor Pedido:     ";
+        vistaGeneral.addSubview(envio!);
+        vistaGeneral.addSubview(subtotal);
+        vistaGeneral.addSubview(total);
+        vistaP.addSubview(vistaGeneral);
+        iniciabotonPedido(frameGeneral.origin.y+frameGeneral.height+frameTotal.height);
     }
     
     func muestraCiudad(){
         vistaCiudad.isHidden=false;
     }
     
+    /*
     func listaCiudad(){
         print("lista");
+        
         let lista = ["Bogotá"];
         let frame = CGRect(x: vista5.frame.origin.x, y: vista5.frame.origin.y+vista5.frame.height, width: vista5.frame.width, height: vista5.frame.height*CGFloat(lista.count));
-        vistaCiudad = UIView(frame: frame);
+        vistaCiudad = UIView(frame: frame) as! UIButton;
         vistaCiudad.isHidden=true;
         var n = 0;
         for bott in lista{
@@ -240,8 +400,10 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
         }
         
         vistaCiudad.backgroundColor=UIColor.white;
-        self.view.addSubview(vistaCiudad);
+        self.deslizador.addSubview(vistaCiudad);
+        
     }
+ 
     
     func botCiudad(_ sender: UIButton){
         vistaCiudad.isHidden=true;
@@ -254,6 +416,7 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
         }
         //print("Bot: ", sender);
     }
+ 
     
     //Método que inicia la tabla de la direccion
     func iniciaTabTelefono(_ yini: CGFloat){
@@ -274,11 +437,14 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
         let frameText2=CGRect(x: bordeTxt, y: 0, width: ancho, height: alto);
         telefono = UITextField(frame: frameText2);
         vista2.addSubview(telefono);
-        telefono.text=DatosD.contenedor.padre.telefono;
-        self.view.addSubview(vista);
-        self.view.addSubview(vista2);
+        
+
+        //telefono.text=DatosD.contenedor.padre.telefono;
+        self.deslizador.addSubview(vista);
+        self.deslizador.addSubview(vista2);
         iniciaTabFechaEntrega((vista2.frame.height+vista2.frame.origin.y));
     }
+ 
     
     //Método que inicia la tabla de la fecha de netrega
     func iniciaTabFechaEntrega(_ yini: CGFloat){
@@ -303,12 +469,12 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
         self.texto.text="Selecciona la Fecha";
         vista2.addSubview(self.texto);
         
-        self.view.addSubview(vista);
-        self.view.addSubview(vista2);
+        self.deslizador.addSubview(vista);
+        self.deslizador.addSubview(vista2);
         iniciaTabHoraEntrega((vista2.frame.height+vista2.frame.origin.y));
     }
     
-    //Método que inicia la tabla de la fecha de netrega
+    //Método que inicia la tabla de la hora de netrega
     func iniciaTabHoraEntrega(_ yini: CGFloat){
         let ancho = DatosC.contenedor.anchoP;
         let bordeTxt = (ancho*0.02);
@@ -323,19 +489,20 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
         vista.backgroundColor=UIColor.init(red: 0.51, green: 0.77, blue: 0.25, alpha: 1);
         let frameVista2=CGRect(x: 0, y: (frameBarra.origin.y+alto), width: ancho, height: alto);
         let vista2 = UIButton(frame: frameVista2);
-        //vista2.addTarget(self, action: #selector(DatosPadre.listaDesplegable2(_:)), forControlEvents: .TouchDown);
+        vista2.addTarget(self, action: #selector(DatosPadre.listaDesplegable2), for: .touchDown);
         vista2.backgroundColor=UIColor.init(red: 0.51, green: 0.77, blue: 0.25, alpha: 1);
         let frameText2=CGRect(x: bordeTxt, y: 0, width: ancho, height: alto);
         self.texto2 = UILabel(frame: frameText2);
         vista2.addSubview(self.texto2);
         self.texto2.text="Te entregaremos el pedido durante el día";
         self.texto2.adjustsFontSizeToFitWidth=true;
-        self.view.addSubview(vista);
-        self.view.addSubview(vista2);
+        self.deslizador.addSubview(vista);
+        self.deslizador.addSubview(vista2);
         iniciaTabMetodo((vista2.frame.height+vista2.frame.origin.y));
     }
+ 
     
-    //Método que inicia la tabla de la fecha de netrega
+    //Método que inicia la tabla de la forma de pago
     func iniciaTabMetodo(_ yini: CGFloat){
         let ancho = DatosC.contenedor.anchoP;
         let bordeTxt = (ancho*0.02);
@@ -356,17 +523,18 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
         metodo = UILabel(frame: frameText2);
         vista2.addSubview(metodo);
         metodo.text="Selecciona tu forma de pago";
-        self.view.addSubview(vista);
-        self.view.addSubview(vista2);
+        self.deslizador.addSubview(vista);
+        self.deslizador.addSubview(vista2);
         iniciabotonPedido(vista2.frame.origin.y+vista2.frame.height);
     }
+     */
     
     func iniciaListaDesplegableMetodo(_ sender: UIButton){
         bloqueador();
         let Datos = ["Crédito"];
         let despliega = VistaMetodos(opciones: Datos);
         
-        self.view.addSubview(despliega);
+        self.deslizador.addSubview(despliega);
         //DatosK.cont.subeVista(self.view);
     }
     
@@ -380,73 +548,55 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
         boton = UIButton(frame: frameBarra);
         DatosB.cont.poneFondoTot(boton, fondoStr: "Botón Hacer pedido", framePers: nil, identi: nil, scala: true);
         boton.addTarget(self, action: #selector(DatosPadre.valida), for: .touchDown);
-        self.view.addSubview(boton);
+        self.deslizador.addSubview(boton);
         
     }
    
     func listaDesplegable1(_ vistai: UIView){
         bloqueador();
-            print("Vista");
-            var opc = [(String, String, Int)]();
-            for fecha in DatosB.cont.FechasEntrega{
+            //print("Vista");
+            var opc = [(String, String, Int, FechasEntrega)]();
+            var id = 0;
+        
+            for fecha in DatosD.contenedor.fechas{
+                opc.append((fecha.fechaMuestra!, String(describing: fecha.fechaEntrega), id, fecha));
+                id += 1;
+            }
+            /*for fecha in DatosB.cont.FechasEntrega{
                 opc.append((fecha.fechaMuestra, fecha.fechaSiguiente, fecha.idFecha));
-            }
+            }*/
             let vistafecha = VistaFecha(opciones: opc);
-            self.view.addSubview(vistafecha);
+            self.deslizador.addSubview(vistafecha);
         
-        
-        
-        /*self.view.bringSubviewToFront(vistai);
-        for vista in self.view.subviews{
-            if vista.accessibilityIdentifier=="despliega"{
-                vista.removeFromSuperview();
-            }
-        }
-        let frameScroll = CGRectMake(0, (vistai.frame.origin.y+vistai.frame.height), vistai.frame.width, (vistai.frame.height));
-        let despliega = Despliega(frame: frameScroll, tipo: FechaEntrega.classForCoder(), fecha: nil);
-        despliega.accessibilityIdentifier="despliega";
-        despliega.padre=self;
-        despliega.alto=vistai.frame.height;
-        
-        self.view.bringSubviewToFront(despliega);
-        self.view.addSubview(despliega);
-        */
     }
     
-    func listaDesplegable2(_ vistai: UIView){
-        
+    func listaDesplegable2(){
+
         print("Vista");
         if(idFecha != nil){
             var opc = [String]();
-            for hora in DatosB.cont.HorasEntrega{
-                if(hora.fechaEntrega.idFecha == idFecha){
-                    opc.append(hora.horaInicial+" - "+hora.horaFinal);
+            if(fechaSeleccionada != nil){
+                for hora in (fechaSeleccionada?.horas)!{
+                    opc.append((String(hora)+":00"));
+                    
                 }
+                let vistaHora = VistaHora(opciones: opc);
+                bloqueador();
+                self.deslizador.addSubview(vistaHora);
+
             }
-            let vistaHora = VistaHora(opciones: opc);
-            bloqueador();
-            self.view.addSubview(vistaHora);
         }
         
-        /*
-        self.view.bringSubviewToFront(vistai);
-        for vista in self.view.subviews{
-            if vista.accessibilityIdentifier=="despliega"{
-                vista.removeFromSuperview();
-            }
-        }
-        let frameScroll = CGRectMake(0, (vistai.frame.origin.y+vistai.frame.height), vistai.frame.width, (vistai.frame.height));
-        let despliega = Despliega(frame: frameScroll, tipo: HoraEntrega.classForCoder(), fecha: fecha);
-        despliega.accessibilityIdentifier="despliega";
-        despliega.padre=self;
-        //despliega.alto=vistai.frame.height;
-        self.view.bringSubviewToFront(despliega);
-        self.view.addSubview(despliega);
-         */
     }
     
+    func listDesplegable3(){
+        var opc = [String]();
+        opc.append("Bogota");
+        let vistaCiudad = VistaCiudad(opciones: opc);
+        self.deslizador.addSubview(vistaCiudad);
+    }
     
-        func hideKeyboardWhenTappedAround() {
+    func hideKeyboardWhenTappedAround() {
             let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
             view.addGestureRecognizer(tap)
             for vista in self.view.subviews{
@@ -510,10 +660,10 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
         if(direccion1.text?.characters.count<0){
             pasaDir=false;
             
-            info += "Dirección";
+            info += "\nDirección";
         }else{
             if(direccion1.text?.characters.count<5||tieneNumeros(direccion1.text!)==false){
-                info += "Dirección Inválida";
+                info += "\nDirección Inválida";
                 pasaDir=false;
             }else{
                 
@@ -522,7 +672,7 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
             
         }
         if(direccion2.text?.characters.count<1 || direccion2.text == "Edificio / Casa / Apartamento"){
-                info += "\nEdificio, Casa, Apartamento";
+                info += "\n Edificio, \nCasa, Apartamento";
                 pasaDir=false;
             
             
@@ -563,7 +713,7 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
         print("dir: ", pasaDir," tel: ", pasaTel);
         if(pasaTel==false||pasaDir==false||pasaHora==false||pasaMetodo==false||pasaFecha==false){
             let msg = ValidaPedido(texto: info);
-            self.view.addSubview(msg);
+            self.deslizador.addSubview(msg);
         }else{
             print("lonchs")
             for tipos in DatosB.cont.listaLoncheras{
@@ -687,7 +837,7 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
         print("env: ", DatosB.cont.envia);
         _ = CorreoCompra(valor: String(valor()), detalle: armaDetalle(), fechaPedido: fechaActual(), fechaEntrga: fecha);
         let msgExito = VistaSubidaExito();
-        self.view.addSubview(msgExito);
+        self.deslizador.addSubview(msgExito);
         //performSegueWithIdentifier("Regresa", sender: nil);
         
         //(self.superview as Carrito).dismissViewControllerAnimated(true, completion: nil);
@@ -760,11 +910,11 @@ class DatosPadre: UIViewController, UITextFieldDelegate, UIImagePickerController
     }
     
     func bloqueador(){
-        let ancho = self.view.frame.width;
-        let alto = self.view.frame.height;
+        let ancho = self.deslizador.frame.width;
+        let alto = self.deslizador.contentSize.height*1.5;
         let frameB = CGRect(x: 0, y: 0, width: ancho, height: alto);
         bloq = UIView(frame: frameB);
-        self.view.addSubview(bloq);
+        self.deslizador.addSubview(bloq);
         bloq.backgroundColor=UIColor.clear;
     }
     

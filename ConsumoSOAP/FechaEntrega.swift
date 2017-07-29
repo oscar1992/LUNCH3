@@ -36,15 +36,15 @@ class FechaEntrega: NSObject {
         fechaComp.year = nyear.year;
         fechaComp.month = nmes.month;
         fechaComp.weekOfMonth = nsemana.weekOfMonth!+1;
-        //print("dia S: ", diasemana, " vs ", 1);
+        ////print("dia S: ", diasemana, " vs ", 1);
         fechaComp.day = ndia;
-        //print("Dia Semana: ", diasemana," Hora: ", hora);
+        ////print("Dia Semana: ", diasemana," Hora: ", hora);
         if(diasemana >= 6 && hora >= 18){
             fechaComp.weekOfMonth = nsemana.weekOfMonth!+2;
         }
         if(fechaComp.day!>=23&&fechaComp.day!<=31){
             let ultimoDia = (calendar as NSCalendar).component(.day, from: endOfMonth());
-            //print("pasa mes: ", ultimoDia);
+            ////print("pasa mes: ", ultimoDia);
             if(ultimoDia>30){
                 fechaComp.day = fechaComp.day! + (7-(diasemana-1));
             }else{
@@ -57,13 +57,13 @@ class FechaEntrega: NSObject {
                 fechaComp.year = fechaComp.year! + 1;
             }
         }else{
-            //print("retorno a domingo: ", (diasemana-1));
+            ////print("retorno a domingo: ", (diasemana-1));
             fechaComp.day = fechaComp.day! + (7-(diasemana-1));
         }
         
-        //print("pre fecha: ", fechaComp.day);
+        ////print("pre fecha: ", fechaComp.day);
         _ = calendar.date(from: fechaComp);
-        //print("pre fecha: ", fechaa);
+        ////print("pre fecha: ", fechaa);
         
         
         //let fecha = calendar.date(from: fechaComp);
@@ -76,8 +76,8 @@ class FechaEntrega: NSObject {
         let fecha1 = formateador.string(from: fecha)+"04";
         formateador.dateFormat="EEEE dd 'de' MMMM";
         fechaMuestra = formateador.string(from: fecha);
-        //print("Fecha Siguiente: ", fecha1);
-        //print("Fecha Siguiente2: ", fechaMuestra);
+        ////print("Fecha Siguiente: ", fecha1);
+        ////print("Fecha Siguiente2: ", fechaMuestra);
         return fecha1;
         
     }
@@ -93,13 +93,13 @@ class FechaEntrega: NSObject {
         fechaComp.year = nyear.year;
         fechaComp.month = nmes.month;
         var sabados = [Date]();
-        print("Hoy semana: ", hoySemana," hora: ", hoyHora);
+        //print("Hoy semana: ", hoySemana," hora: ", hoyHora);
         var finMes = 31;
         if(hoySemana >= 6 && hoyHora >= 14){
-            print("Pre hoy: ", hoy);
+            //print("Pre hoy: ", hoy);
             hoy.day = hoy.day! + 7;
             finMes += 14;
-            print("Hoy: ", hoy);
+            //print("Hoy: ", hoy);
         }
         for d in 1...finMes{
             fechaComp.day = d;
@@ -107,7 +107,7 @@ class FechaEntrega: NSObject {
             let diasemana = (calendar as NSCalendar).component(.weekday, from: fecha!);
             
             if(diasemana == 1){
-                //print("sabados: ", fecha);
+                ////print("sabados: ", fecha);
                 sabados.append(fecha!);
             }
         }
@@ -115,12 +115,12 @@ class FechaEntrega: NSObject {
         var ret = Date();
         var mes = (calendar as NSCalendar).components(.month, from: sabados.first!);
         for sabado in sabados{
-            print("mesAnt: ", mes, " actual: ", (calendar as NSCalendar).components(.month, from: sabado));
+            //print("mesAnt: ", mes, " actual: ", (calendar as NSCalendar).components(.month, from: sabado));
             if(mes.month! < ((calendar as NSCalendar).components(.month, from: sabado)).month!){
                 hoy.day = hoy.day! - ((calendar as NSCalendar).components(.day, from: endOfMonth())).day!;
             }
             let diaS = (calendar as NSCalendar).components(.day, from: sabado);
-            print("domingo: ", sabado);
+            //print("domingo: ", sabado);
 
             if(hoy.day! < diaS.day!){
                 ret = sabados[i];
@@ -128,7 +128,7 @@ class FechaEntrega: NSObject {
             }
             i += 1;
         }
-        print("elección: ", ret);
+        //print("elección: ", ret);
         return ret;
     }
     

@@ -39,7 +39,7 @@ class ValidaPedido: UIView {
         let ancho = self.frame.width*0.8;
         let OX = (self.frame.width/2)-(ancho/2)
         let OY = (corazon.frame.height + corazon.frame.origin.y);
-        let texto = UILabel(frame: CGRect(x: OX, y: OY, width: ancho, height: self.frame.height*0.5));
+        let texto = UILabel(frame: CGRect(x: OX, y: OY, width: ancho, height: self.frame.height));
         //print("msg: ", mensaje);
         texto.text = mensaje;
         texto.numberOfLines=5;
